@@ -258,8 +258,7 @@ if (session.getAttribute("id") == null) {
 			<c:set var="startBlock" value="${requestScope.startBlock}"></c:set>
 			<c:set var="endBlock" value="${requestScope.endBlock}"></c:set>
 			<c:set var="totalPage" value="${requestScope.totalPage}"></c:set>
-		<%-- 	<c:set var="search" value="${requestScope.search}"></c:set>
-			<c:set var="txtsearch" value="${requestScope.txtsearch}"></c:set> --%>
+			<c:set var="search" value="${requestScope.search}"></c:set>
 
 			<c:forEach var="item" items="${list}">
 				<ul class="jgboardContent">
@@ -300,7 +299,7 @@ if (session.getAttribute("id") == null) {
 				<c:if test="${currPage!=i}">
 					<%-- <a href="main.jsp?page=jg_board/jglist.jsp?curr=${i}">${i} </a> --%>
 						<div class="pagingbtn">
-					<a href="jglist.do?curr=${i}">${i}</a>
+					<a href="jglist.do?curr=${i}&search=${search}">${i}</a>
 					</div>
 				</c:if>
 			</c:forEach>
@@ -333,7 +332,7 @@ if (session.getAttribute("id") == null) {
 
 			<div class="botsearch">
 				<form method="post" action="jglist.do" class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search"
+					<input class="form-control mr-sm-2" type="search" name="search" id="search"
 						placeholder="게시글 검색" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form>

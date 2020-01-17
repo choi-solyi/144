@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
-import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
 import com.lol.comm.DBConn;
 import com.sy.dao.JGBoardDAO;
@@ -20,7 +19,7 @@ public class JGBoardService {
 		return service;
 	}
 	private JGBoardService() {}
-	public List<JGBoardDTO> list(int startRow, int endRow){
+	public List<JGBoardDTO> list(int startRow, int endRow, String search){
 		DBConn db = DBConn.getDB();
 		
 		Connection conn = null;
@@ -31,7 +30,7 @@ public class JGBoardService {
 			
 			JGBoardDAO dao = JGBoardDAO.getDAO();
 			
-			list = dao.list(conn, startRow, endRow);	
+			list = dao.list(conn, startRow, endRow, search);	
 			System.out.println("servicelist:" + list);
 			
 			conn.commit();
@@ -172,7 +171,7 @@ public class JGBoardService {
 		
 		return list;
 	}
-	public int totalCount() {
+	public int totalCount(String search) {
 		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		int totalCount = 0;
@@ -182,7 +181,7 @@ public class JGBoardService {
 			
 			JGBoardDAO dao = JGBoardDAO.getDAO();
 			
-			totalCount = dao.getTotalCount(conn);
+			totalCount = dao.getTotalCount(conn, search);
 			conn.commit();
 			
 		}catch(NamingException|SQLException e) {
