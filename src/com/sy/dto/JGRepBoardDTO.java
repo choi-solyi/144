@@ -6,6 +6,8 @@ public class JGRepBoardDTO {
 	private String rwritedate;
 	private int bno;
 	private String id;
+	
+	
 	public int getRepno() {
 		return repno;
 	}

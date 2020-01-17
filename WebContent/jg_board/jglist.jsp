@@ -42,17 +42,17 @@
 	padding: -3px;
 	width: 33.6%;
 	height: 400px;
-	background-image: url(http://choisolyi.dothome.co.kr/lol/img/jg1_2.jfif);
+	background-image:url(http://choisolyi.dothome.co.kr/lol/img/jg1_1.png);
 	background-repeat: no-repeat;
-	background-position: right center;
+	background-position: center top;
 }
 
 #bgimg2 {
 	padding: -3px;
 	width: 33.6%;
 	height: 400px;
-	background-image:
-		url('http://choisolyi.dothome.co.kr/lol/img/jg1_1.png');
+	
+	background-image: url(http://choisolyi.dothome.co.kr/lol/img/jg1_4.jpg);
 	background-repeat: no-repeat;
 	background-position: top;
 
@@ -63,8 +63,7 @@
 	padding: -3px;
 	width: 33.6%;
 	height: 400px;
-	background-image:
-		url("http://choisolyi.dothome.co.kr/lol/img/jg1_3.jfif");
+	background-image:url(http://choisolyi.dothome.co.kr/lol/img/jg1_3.jfif);
 	background-repeat: no-repeat;
 	background-position: top;
 }

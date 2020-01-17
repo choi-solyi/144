@@ -21,7 +21,7 @@ public class JGBoardService {
 	}
 	private JGBoardService() {}
 	public List<JGBoardDTO> list(int startRow, int endRow){
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		
 		Connection conn = null;
 		List<JGBoardDTO> list = null;
@@ -45,10 +45,8 @@ public class JGBoardService {
 		return list;
 	}
 	
-	
-	
 	public void insert(JGBoardDTO dto) {
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		
 		try {
@@ -67,7 +65,7 @@ public class JGBoardService {
 		}
 	}
 	public JGBoardDTO detail(int bno) {
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		JGBoardDTO dto = new JGBoardDTO();
 		try {
@@ -94,7 +92,7 @@ public class JGBoardService {
 	//return °ª ¾ø¾îµÎ´ï
 	public JGBoardDTO update(JGBoardDTO dto, int bno) {
 
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		
 		try {
@@ -115,7 +113,7 @@ public class JGBoardService {
 		return dto;
 	}
 	public void delete(int bno) {
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		try {
 			conn = db.getConn();
@@ -135,7 +133,7 @@ public class JGBoardService {
 	}
 	//´ñ±Û Ãß°¡
 	public void addRep(int bno, JGRepBoardDTO rdto) {
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		try {
 			conn = db.getConn();
@@ -153,7 +151,7 @@ public class JGBoardService {
 		}
 	}
 	public List<JGRepBoardDTO> listReq(int bno) {
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		List<JGRepBoardDTO> list = new ArrayList<>();
 		try {
@@ -175,7 +173,7 @@ public class JGBoardService {
 		return list;
 	}
 	public int totalCount() {
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		int totalCount = 0;
 		try {

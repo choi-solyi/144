@@ -31,19 +31,18 @@
 
 #bgimg1 {
 	padding: -3px;
-	width: 33.6%;
+	width: 30.6%;
 	height: 400px;
-	background-image: url(http://choisolyi.dothome.co.kr/lol/img/jg1_2.jfif);
+	background-image: url(http://choisolyi.dothome.co.kr/lol/img/jg3_44.jpg);
 	background-repeat: no-repeat;
-	background-position: right center;
+	background-position: top;
 }
 
 #bgimg2 {
 	padding: -3px;
-	width: 33.6%;
+	width: 39.6%;
 	height: 400px;
-	background-image:
-		url('http://choisolyi.dothome.co.kr/lol/img/jg1_1.png');
+	background-image:url(http://choisolyi.dothome.co.kr/lol/img/jg3_11.jpg);
 	background-repeat: no-repeat;
 	background-position: top;
 
@@ -52,12 +51,11 @@
 
 #bgimg3 {
 	padding: -3px;
-	width: 33.6%;
+	width: 30.6%;
 	height: 400px;
-	background-image:
-		url("http://choisolyi.dothome.co.kr/lol/img/jg1_3.jfif");
+	background-image:url(http://choisolyi.dothome.co.kr/lol/img/jg3_33.jpg);
 	background-repeat: no-repeat;
-	background-position: top;
+	background-position: right;
 }
 
 .imglinetop {
@@ -73,6 +71,9 @@
 	padding: 1px 0px 0px 0px;
 	font-size: 6em;
 	font-weight: 900;
+		text-shadow: 0 0 30px #000000;
+	
+	
 }
 
 .imglines {
@@ -86,6 +87,8 @@
 	bottom: 150px;
 	border-radius: 10px;
 	padding: 1px 0px 0px 0px;
+	
+	
 }
 
 .gesipan {
@@ -175,9 +178,6 @@ function send(){
 	
 		
 }
-$(document).ready(function() {
-	
-});
 </script>
 
 
@@ -195,7 +195,7 @@ $(document).ready(function() {
 
 		<p class="imglinetop">J U N G L E</p>
 		<p class="imglines">
-			<I> "이제 고통을 안겨줄 새로운 녀석을 찾아야겠군."</I>
+			<I>"이 여왕님의 지배를 받는 무한한 영광을 내려주지."</I>
 		</p>
 
 		<div class="gesipantitle">

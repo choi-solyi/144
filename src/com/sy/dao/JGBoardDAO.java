@@ -105,7 +105,11 @@ public class JGBoardDAO {
 				dto.setBcontent(rs.getString("bcontent"));
 				dto.setBwritedate(rs.getString("bwritedate"));
 				dto.setBhit(rs.getInt("bhit"));
+				
+				
 			}
+			System.out.println("dto-detail-tes : t" + dto.getBcontent());
+			
 
 		}finally {
 			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
@@ -156,7 +160,7 @@ public class JGBoardDAO {
 	public void upHit(Connection conn, int bno) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" update jgboard ");
-		sql.append(" set bhit = nvl(bhit, 0) + 1 ");
+		sql.append(" set bhit = IFNULL(bhit, 0) + 1 ");
 		sql.append(" where bno = ? ");
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());){
@@ -169,8 +173,8 @@ public class JGBoardDAO {
 		PreparedStatement pstmt=null;
 		StringBuilder sql = new StringBuilder();
 		sql.append(" insert into jgrepboard(repno, rcontent, rwritedate, bno, id) ");
-		sql.append(" values(jgrepboard_seq.nextval, ?, sysdate, ?, 'nickname' ) ");
-		
+		sql.append(" values(NULL, ?, now(), ?, 'challenger') ");
+
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			
@@ -183,6 +187,7 @@ public class JGBoardDAO {
 			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
 		}
 	}
+	//댓글 리스트 보기
 	public List<JGRepBoardDTO> ListRep(Connection conn, int bno) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select repno, rcontent, rwritedate, bno, id	 ");
@@ -193,7 +198,6 @@ public class JGBoardDAO {
 		List<JGRepBoardDTO> list = new ArrayList<>();
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			
 			pstmt.setInt(1, bno);
 			rs = pstmt.executeQuery();
 			
@@ -234,23 +238,15 @@ public class JGBoardDAO {
 	public List<JGBoardDTO> list(Connection conn, int startRow, int endRow) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		System.out.println("list 5555555555555555555555555555");
-		sql.append(" select * from jgboard  ");
-	/*	sql.append(" select *  							");
-		sql.append(" from ( select rownum as rnum, b.* 	");
-		sql.append(" 		from ( select *			 	");
-		sql.append("  			   from jgboard			");
-		sql.append("  			   order by bno desc	");
-		sql.append("  			 ) b	)				");
-		sql.append(" where rnum >= ?  and rnum <= ?	 	");*/
+		sql.append(" select * from jgboard order by bno desc limit ?,?  ");
 		ResultSet rs = null;
 
-		
 		List<JGBoardDTO> list = new ArrayList<>();
 
 		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());
 				) {
-/*			pstmt.setInt(1, 0);
-			pstmt.setInt(2, 23);*/
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rs = pstmt.executeQuery();
 			System.out.println("rs" + rs);
