@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+#dy_bgimg{
+    border: 1px solid black;
+    width: 100%; height: 450px;
+    background-image: ;
+    text-align: center;
+}
+#dy_bgimg p{
+    
+}
+
+#dy_champwords{
+    text-align: center;
+    font-size: 40px;
+    margin: 10px;
+}
+
+#bhitlist{
+    margin: 0px auto;
+    border: 1px solid black;
+    width: 500px; height: 100px;
+}
+
+#writebtn{
+    
+}
+
+
+#dy_mainboard{
+    border: 1px solid black;
+     width: 1020px;
+    height: 50px;
+    margin: 0px auto;
+    text-align: center;
+    
+}
+#dy_mainboard div{
+    display :inline-block;
+    margin-top: 15px;
+   
+}
+.dy_bno{
+    width: 10%;
+}
+.dy_btitle{
+    width: 40%;
+}
+.dy_nick{
+    width: 20%;
+}
+.dy_bwritedate{
+    width: 10%;
+}
+.dy_bhit{
+    width: 10%;
+}
+
