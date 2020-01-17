@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource name="jdbc/jinwoo" auth="Container"
+		type="javax.sql.DataSource" maxTotal="20" maxIdle="10"
+		maxWaitMillis="10000" username="jinwoo" password="jinwoo2619!"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://jinwoo.clwsj46gvpjl.ap-northeast-2.rds.amazonaws.com:3306/mydb" />
+</Context>
