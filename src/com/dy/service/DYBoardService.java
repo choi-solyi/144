@@ -7,7 +7,7 @@ import java.util.List;
 import javax.naming.NamingException;
 
 
-import com.dy.comm.DYDBConn;
+import com.lol.comm.DBConn;
 import com.dy.dao.DYBoardDAO;
 import com.dy.dto.DYBoardDTO;
 
@@ -23,12 +23,12 @@ public class DYBoardService {
 	public List<DYBoardDTO> dylist() {
 		// TODO Auto-generated method stub
 		
-		DYDBConn dbconn = DYDBConn.dygetDB();
+		DBConn dbconn = DBConn.getDB();
 		Connection conn= null;
 		List<DYBoardDTO> list =null;
 		
 		try {
-			conn=dbconn.dygetConn();
+			conn=dbconn.getConn();
 			conn.setAutoCommit(false);
 			
 			DYBoardDAO dao = DYBoardDAO.getdao();

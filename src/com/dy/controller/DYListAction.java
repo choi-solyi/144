@@ -7,15 +7,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dy.comm.DYAction;
-import com.dy.comm.DYForwardAction;
+import com.lol.comm.Action;
+import com.lol.comm.ForwardAction;
 import com.dy.dto.DYBoardDTO;
 import com.dy.service.DYBoardService;
 
-public class DYListAction implements DYAction {
+public class DYListAction implements Action {
 
 	@Override
-	public DYForwardAction dyexecute(HttpServletRequest request, HttpServletResponse response)
+	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -29,7 +29,7 @@ public class DYListAction implements DYAction {
 		
 		request.setAttribute("list", list);
 		
-		DYForwardAction forward = new DYForwardAction();
+		ForwardAction forward = new ForwardAction();
 		forward.setForward(true); //forward로 값을 넘긴다.
 		//forward.setUrl("/WEB-INF/dyboard/list.jsp");
 		forward.setUrl("main.jsp?page=dyboard/list.jsp");
