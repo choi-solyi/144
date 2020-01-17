@@ -67,7 +67,7 @@ public class JGBoardDAO {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append(" insert into jgboard(bno, bcategory, btitle, bcontent, bwritedate, 	bhit, id) ");
-		sql.append(" values(jgboard_seq.nextval, ?, ?, 	?, 	sysdate, 2,	0, 'id') ");
+		sql.append(" values(null, ?, ?,	?, 	now(), 0, 'challenger') ");
 		//조회수-제목-내용-날짜-카테고리-댓글수,조회수
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
@@ -237,7 +237,6 @@ public class JGBoardDAO {
 	
 	public List<JGBoardDTO> list(Connection conn, int startRow, int endRow) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		System.out.println("list 5555555555555555555555555555");
 		sql.append(" select * from jgboard order by bno desc limit ?,?  ");
 		ResultSet rs = null;
 
@@ -245,8 +244,9 @@ public class JGBoardDAO {
 
 		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());
 				) {
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+		
+			pstmt.setInt(1, startRow-1);
+			pstmt.setInt(2, 10);
 			
 			rs = pstmt.executeQuery();
 			System.out.println("rs" + rs);

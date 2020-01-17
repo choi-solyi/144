@@ -215,7 +215,15 @@
 </head>
 <body>
 
+<%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
+System.out.println("abcabc");
+String abc = (String)session.getAttribute("id");
+System.out.println("세션아이디: " + 	abc);
 
+if (session.getAttribute("id") == null) {
+    response.sendRedirect("../index.jsp");
+}
+%>
 	<!-- 상단이미지 -->
 
 	<article id="articlesoly">
