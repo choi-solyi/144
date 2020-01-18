@@ -10,6 +10,11 @@ public class CalBoardDTO {
 	private String bimg;
 	private String id;
 	
+	@Override
+	public String toString() {
+		return "CalBoardDTO [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bcaldate=" + bcaldate
+				+ ", bhit=" + bhit + ", bup=" + bup + ", bimg=" + bimg + ", id=" + id + "]";
+	}
 	public int getBno() {
 		return bno;
 	}
