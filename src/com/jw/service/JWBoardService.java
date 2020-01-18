@@ -86,4 +86,21 @@ public class JWBoardService {
 			if(conn!=null) try{conn.close();} catch(SQLException e) {}
 		}
 	}
+	public void Update(JWBoardDTO dto) {
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		try {
+			conn = DBC.getConn();
+			conn.setAutoCommit(false);
+			dao.Update(conn, dto);
+			conn.commit();
+		}catch(SQLException | NamingException e) 
+		{
+			System.out.println(e);
+			try{conn.rollback();} catch(SQLException rollback) {System.out.println(rollback);}
+		}finally {
+			if(conn!=null) try{conn.close();} catch(SQLException e) {}
+		}
+	}
 }

@@ -97,5 +97,23 @@ public class JWBoardDAO {
 			pstmt.setString(1, bno);
 			pstmt.executeUpdate();
 		}
+	}
+	
+	public void Update(Connection conn, JWBoardDTO dto) throws SQLException
+	{
+		System.out.println(dto);
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update adboard          ");
+		sql.append("   set btitle    = ?     ");
+		sql.append("      ,bcontent  = ?     ");
+		sql.append("      ,bcategory = ?     ");
+		sql.append("   where bno     = ?     ");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			pstmt.setString(1, dto.getBtitle());
+			pstmt.setString(2, dto.getBcontent());
+			pstmt.setString(3, dto.getBcategory());
+			pstmt.setInt(4, dto.getBno());
+			pstmt.executeUpdate();
+		}
 	};
 }
