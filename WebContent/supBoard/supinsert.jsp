@@ -25,7 +25,7 @@
 	<!-- Example single danger button -->
 	<form method="post" action="sbinsertresult.do" name="frm" > <!-- enctype="multipart/form-data" -->
 		 <div class="container">
-			<select class="custom-select custom-select-sm subin subin1" name="bcategory" id="bcategory">
+			<select class="custom-select custom-select-sm subin subin1" name="bcategory" id="bcategory" required="required">
 				<option value="카테고리">카테고리</option>
 				<option value="일반">일반</option>
 				<option value="질문">질문</option>
@@ -37,7 +37,7 @@
 					<span class="input-group-text" id="inputGroup-sizing-default">제목</span>
 					<input type="text" class="form-control"
 						aria-label="Sizing example input"
-						aria-describedby="inputGroup-sizing-default" name="btitle" id="btitle">
+						aria-describedby="inputGroup-sizing-default" name="btitle" id="btitle" required="required">
 				</div>
 
 			</div>
@@ -45,7 +45,7 @@
 			<div class="input-group">
 
 				<textarea class="form-control textwidth" aria-label="With textarea"
-					 rows="15" name="bcontent" id="bcontent"></textarea>
+					 rows="15" name="bcontent" id="bcontent" required="required"></textarea>
 			</div>
 		
 

@@ -83,7 +83,7 @@ public class SUPBoardService {
 			conn.setAutoCommit(false);
 			SUPBoardDAO dao = SUPBoardDAO.sbGetBoardDAO();
 			dto=dao.sbDetail(conn,bno);
-			
+			dao.sbUpHit(conn, bno);
 			conn.commit();
 			
 		}catch(SQLException| NamingException e) {

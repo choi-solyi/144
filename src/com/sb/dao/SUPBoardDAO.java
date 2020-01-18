@@ -158,5 +158,16 @@ public class SUPBoardDAO {
 			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
 		}
 	}
+	public void sbUpHit(Connection conn, int bno) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update supboard ");
+		sql.append(" set bhit = IFNULL(bhit, 0) + 1 ");
+		sql.append(" where bno = ? ");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());){
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+		}
+	}
 	
 }
