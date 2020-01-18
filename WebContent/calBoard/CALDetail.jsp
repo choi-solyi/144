@@ -1,0 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%-- ${dto.bno}
+	${dto.bcaldate}
+	${dto.btitle}
+	${dto.bhit}
+	${dto.bup} --%>
+</body>
+</html>
