@@ -91,7 +91,7 @@
 							class="dropdown-item" href="#">AD</a> <a class="dropdown-item"
 							href="#">SUP</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">로그아웃</a>
+						<a class="dropdown-item" href="logout.jsp">로그아웃</a>
 					</div></li>
 				<!--  
                 <li class="nav-item">
@@ -129,10 +129,6 @@
 			</ul>
 		</div>
 	</nav>
-
-
-
-
 </body>
 
 </html>

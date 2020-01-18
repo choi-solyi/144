@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
-import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
 import com.lol.comm.DBConn;
 import com.sy.dao.JGBoardDAO;
@@ -20,8 +19,8 @@ public class JGBoardService {
 		return service;
 	}
 	private JGBoardService() {}
-	public List<JGBoardDTO> list(int startRow, int endRow){
-		DBConn db = DBConn.getinstance();
+	public List<JGBoardDTO> list(int startRow, int endRow, String search){
+		DBConn db = DBConn.getDB();
 		
 		Connection conn = null;
 		List<JGBoardDTO> list = null;
@@ -31,7 +30,7 @@ public class JGBoardService {
 			
 			JGBoardDAO dao = JGBoardDAO.getDAO();
 			
-			list = dao.list(conn, startRow, endRow);	
+			list = dao.list(conn, startRow, endRow, search);	
 			System.out.println("servicelist:" + list);
 			
 			conn.commit();
@@ -45,10 +44,8 @@ public class JGBoardService {
 		return list;
 	}
 	
-	
-	
 	public void insert(JGBoardDTO dto) {
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		
 		try {
@@ -67,7 +64,7 @@ public class JGBoardService {
 		}
 	}
 	public JGBoardDTO detail(int bno) {
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		JGBoardDTO dto = new JGBoardDTO();
 		try {
@@ -94,7 +91,7 @@ public class JGBoardService {
 	//return °ª ¾ø¾îµÎ´ï
 	public JGBoardDTO update(JGBoardDTO dto, int bno) {
 
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		
 		try {
@@ -115,7 +112,7 @@ public class JGBoardService {
 		return dto;
 	}
 	public void delete(int bno) {
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		try {
 			conn = db.getConn();
@@ -135,7 +132,7 @@ public class JGBoardService {
 	}
 	//´ñ±Û Ãß°¡
 	public void addRep(int bno, JGRepBoardDTO rdto) {
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		try {
 			conn = db.getConn();
@@ -153,7 +150,7 @@ public class JGBoardService {
 		}
 	}
 	public List<JGRepBoardDTO> listReq(int bno) {
-		DBConn db = DBConn.getinstance();
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		List<JGRepBoardDTO> list = new ArrayList<>();
 		try {
@@ -174,8 +171,8 @@ public class JGBoardService {
 		
 		return list;
 	}
-	public int totalCount() {
-		DBConn db = DBConn.getinstance();
+	public int totalCount(String search) {
+		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		int totalCount = 0;
 		try {
@@ -184,7 +181,7 @@ public class JGBoardService {
 			
 			JGBoardDAO dao = JGBoardDAO.getDAO();
 			
-			totalCount = dao.getTotalCount(conn);
+			totalCount = dao.getTotalCount(conn, search);
 			conn.commit();
 			
 		}catch(NamingException|SQLException e) {

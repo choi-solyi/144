@@ -19,24 +19,35 @@ public class JGBoardDAO {
 
 
 
-	// 목록보기
-	public List<JGBoardDTO> list(Connection conn) throws SQLException {
+	// 목록보기ddddddddddddddddddddddddddddddddddddddddd
+/*	public List<JGBoardDTO> list(Connection conn, int startRow, int endRow, String search) throws SQLException {
 
 		System.out.println("test dao");
 
 		PreparedStatement pstmt = null;
 		StringBuilder sql = new StringBuilder();
-		/*<!-- 글번호-카테-제목[count]-닉네임-작성일-조회수 -->*/
+		<!-- 글번호-카테-제목[count]-닉네임-작성일-조회수 -->
 
 		sql.append(" select bno, bcategory, btitle, bwritedate, bhit ");
 		sql.append(" from jgboard 													  ");
 		sql.append(" order by bno desc ");
+		if(!search.equals("")) {
+			sql.append(" where concat(btitle, bcontent) regexp #?#");
+			
+		}
 
 		List<JGBoardDTO> list = new ArrayList<JGBoardDTO>();
 		ResultSet rs = null;
 
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
+			
+			if(!search.equals("")) {
+				pstmt.setString(1, search);
+			}
+
+			
+			
 			rs = pstmt.executeQuery();
 
 			System.out.println("pstmt : " + pstmt);
@@ -60,14 +71,14 @@ public class JGBoardDAO {
 			if(pstmt!=null) try { pstmt.close(); } catch(SQLException e) {}
 		}
 		return list;
-	}
+	}*/
 	//글쓰기
 	public void insert(Connection conn, JGBoardDTO dto) throws SQLException {
 		PreparedStatement pstmt = null;
 		StringBuilder sql = new StringBuilder();
 
 		sql.append(" insert into jgboard(bno, bcategory, btitle, bcontent, bwritedate, 	bhit, id) ");
-		sql.append(" values(jgboard_seq.nextval, ?, ?, 	?, 	sysdate, 2,	0, 'id') ");
+		sql.append(" values(null, ?, ?,	?, 	now(), 0, 'challenger') ");
 		//조회수-제목-내용-날짜-카테고리-댓글수,조회수
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
@@ -105,7 +116,11 @@ public class JGBoardDAO {
 				dto.setBcontent(rs.getString("bcontent"));
 				dto.setBwritedate(rs.getString("bwritedate"));
 				dto.setBhit(rs.getInt("bhit"));
+				
+				
 			}
+			System.out.println("dto-detail-tes : t" + dto.getBcontent());
+			
 
 		}finally {
 			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
@@ -156,7 +171,7 @@ public class JGBoardDAO {
 	public void upHit(Connection conn, int bno) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" update jgboard ");
-		sql.append(" set bhit = nvl(bhit, 0) + 1 ");
+		sql.append(" set bhit = IFNULL(bhit, 0) + 1 ");
 		sql.append(" where bno = ? ");
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());){
@@ -169,8 +184,8 @@ public class JGBoardDAO {
 		PreparedStatement pstmt=null;
 		StringBuilder sql = new StringBuilder();
 		sql.append(" insert into jgrepboard(repno, rcontent, rwritedate, bno, id) ");
-		sql.append(" values(jgrepboard_seq.nextval, ?, sysdate, ?, 'nickname' ) ");
-		
+		sql.append(" values(NULL, ?, now(), ?, 'challenger') ");
+
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			
@@ -183,6 +198,7 @@ public class JGBoardDAO {
 			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
 		}
 	}
+	//댓글 리스트 보기
 	public List<JGRepBoardDTO> ListRep(Connection conn, int bno) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select repno, rcontent, rwritedate, bno, id	 ");
@@ -193,7 +209,6 @@ public class JGBoardDAO {
 		List<JGRepBoardDTO> list = new ArrayList<>();
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			
 			pstmt.setInt(1, bno);
 			rs = pstmt.executeQuery();
 			
@@ -216,12 +231,19 @@ public class JGBoardDAO {
 		return list;
 
 	}
-	public int getTotalCount(Connection conn) throws SQLException {
+	public int getTotalCount(Connection conn, String search) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select count(*) from jgboard ");
+		sql.append(" where concat(btitle, bcontent) regexp #?# ");
 		int totalCount = 0;
-		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
-				ResultSet rs = pstmt.executeQuery();){
+		ResultSet rs = null;
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());){
+			
+			if(!search.equals("")) {
+				pstmt.setString(1, search);
+			}
+			
+			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				totalCount = rs.getInt(1);
 			}
@@ -231,27 +253,31 @@ public class JGBoardDAO {
 	
 	
 	
-	public List<JGBoardDTO> list(Connection conn, int startRow, int endRow) throws SQLException {
+	public List<JGBoardDTO> list(Connection conn, int startRow, int endRow, String search) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		System.out.println("list 5555555555555555555555555555");
-		sql.append(" select * from jgboard  ");
-	/*	sql.append(" select *  							");
-		sql.append(" from ( select rownum as rnum, b.* 	");
-		sql.append(" 		from ( select *			 	");
-		sql.append("  			   from jgboard			");
-		sql.append("  			   order by bno desc	");
-		sql.append("  			 ) b	)				");
-		sql.append(" where rnum >= ?  and rnum <= ?	 	");*/
-		ResultSet rs = null;
-
+		sql.append(" select * from jgboard   ");
 		
-		List<JGBoardDTO> list = new ArrayList<>();
+		if(!search.equals("")) {
+			sql.append(" where concat(btitle, bcontent) regexp #?#");
+		}
+		
+		sql.append("  order by bno desc  limit ? , ?");
 
+		ResultSet rs = null;
+		List<JGBoardDTO> list = new ArrayList<>();
 		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());
 				) {
-/*			pstmt.setInt(1, 0);
-			pstmt.setInt(2, 23);*/
 			
+			if(!search.equals("")) {
+				pstmt.setString(1, search);
+				pstmt.setInt(2, startRow-1);
+				pstmt.setInt(3, 10);
+			}else {
+
+				pstmt.setInt(1, startRow-1);
+				pstmt.setInt(2, 10);
+			}
+
 			rs = pstmt.executeQuery();
 			System.out.println("rs" + rs);
 			while(rs.next()) {

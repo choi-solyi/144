@@ -28,18 +28,19 @@ public class SYListAction implements Action {
 
 		request.setAttribute("list", list);*/
 		
+
+
+
 //////////////Search
-		String search = request.getParameter("search");
-		if(search==null) search="";
-		
-		request.setAttribute("search", search);
-		
-
-
+	String search = request.getParameter("search");
+	if(search==null) {search="";}
+	
+	request.setAttribute("search", search);
+			
 //////////////paging
 
 		//전체 자료수
-		int totalCount = service.totalCount();
+		int totalCount = service.totalCount(search);
 
 		//페이지당 갯수
 		int sizePerPage = 10;
@@ -71,16 +72,24 @@ public class SYListAction implements Action {
 		if(endBlock > totalPage) {
 			endBlock = totalPage;
 		}
-
+;
+		
+		
+	
+		
+		
+		
+		//
 		List<JGBoardDTO> list =null;
-		list = service.list(startRow, endRow);
-		System.out.println(list+"333333333333333333333");
+		list = service.list(startRow, endRow, search);
 		request.setAttribute("list", list);
 		request.setAttribute("currPage", currPage);
 		request.setAttribute("startBlock", startBlock);
 		request.setAttribute("endBlock", endBlock);
 		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("search", search);
 
+		System.out.println("search 값 ?????????????????????????????????? " + search);
 	
 		ForwardAction f = new ForwardAction();
 		f.setForward(true);

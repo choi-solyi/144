@@ -42,17 +42,17 @@
 	padding: -3px;
 	width: 33.6%;
 	height: 400px;
-	background-image: url(http://choisolyi.dothome.co.kr/lol/img/jg1_2.jfif);
+	background-image:url(http://choisolyi.dothome.co.kr/lol/img/jg1_1.png);
 	background-repeat: no-repeat;
-	background-position: right center;
+	background-position: center top;
 }
 
 #bgimg2 {
 	padding: -3px;
 	width: 33.6%;
 	height: 400px;
-	background-image:
-		url('http://choisolyi.dothome.co.kr/lol/img/jg1_1.png');
+	
+	background-image: url(http://choisolyi.dothome.co.kr/lol/img/jg1_4.jpg);
 	background-repeat: no-repeat;
 	background-position: top;
 
@@ -63,8 +63,7 @@
 	padding: -3px;
 	width: 33.6%;
 	height: 400px;
-	background-image:
-		url("http://choisolyi.dothome.co.kr/lol/img/jg1_3.jfif");
+	background-image:url(http://choisolyi.dothome.co.kr/lol/img/jg1_3.jfif);
 	background-repeat: no-repeat;
 	background-position: top;
 }
@@ -216,7 +215,15 @@
 </head>
 <body>
 
+<%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
+System.out.println("abcabc");
+String abc = (String)session.getAttribute("id");
+System.out.println("세션아이디: " + 	abc);
 
+if (session.getAttribute("id") == null) {
+    response.sendRedirect("../index.jsp");
+}
+%>
 	<!-- 상단이미지 -->
 
 	<article id="articlesoly">
@@ -251,8 +258,7 @@
 			<c:set var="startBlock" value="${requestScope.startBlock}"></c:set>
 			<c:set var="endBlock" value="${requestScope.endBlock}"></c:set>
 			<c:set var="totalPage" value="${requestScope.totalPage}"></c:set>
-		<%-- 	<c:set var="search" value="${requestScope.search}"></c:set>
-			<c:set var="txtsearch" value="${requestScope.txtsearch}"></c:set> --%>
+			<c:set var="search" value="${requestScope.search}"></c:set>
 
 			<c:forEach var="item" items="${list}">
 				<ul class="jgboardContent">
@@ -293,7 +299,7 @@
 				<c:if test="${currPage!=i}">
 					<%-- <a href="main.jsp?page=jg_board/jglist.jsp?curr=${i}">${i} </a> --%>
 						<div class="pagingbtn">
-					<a href="jglist.do?curr=${i}">${i}</a>
+					<a href="jglist.do?curr=${i}&search=${search}">${i}</a>
 					</div>
 				</c:if>
 			</c:forEach>
@@ -326,7 +332,7 @@
 
 			<div class="botsearch">
 				<form method="post" action="jglist.do" class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search"
+					<input class="form-control mr-sm-2" type="search" name="search" id="search"
 						placeholder="게시글 검색" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form>
