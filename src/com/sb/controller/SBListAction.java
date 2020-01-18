@@ -38,7 +38,7 @@ public class SBListAction implements Action{
 		 int endrow=startrow+pagepercount-1;
 		 if(endrow> totalcount) endrow=totalcount;
 		 
-		 int blockcount=5;
+		 int blockcount=3;
 		 int startblock=(currpage-1)/blockcount*blockcount+1;
 		 int endblock=startblock+blockcount-1;
 		 if(endblock>totalpage) endblock=totalpage;

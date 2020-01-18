@@ -9,6 +9,7 @@ import javax.naming.NamingException;
 import com.lol.comm.DBConn;
 import com.sb.dao.SUPBoardDAO;
 import com.sb.dto.SUPBoardDTO;
+import com.sb.dto.SUPRepBoardDTO;
 
 
 public class SUPBoardService {
@@ -158,6 +159,27 @@ public class SUPBoardService {
 	    	if(conn!=null) try { conn.close();} catch(SQLException e) {}
 	    }
 	    return count;
+	}
+
+	public void sbRepAdd(SUPRepBoardDTO rdto) {
+		DBConn db = DBConn.getDB();
+		Connection conn=null;
+		
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			SUPBoardDAO dao = SUPBoardDAO.sbGetBoardDAO();
+			dao.sbAddRep(conn,rdto);
+			
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(Exception e2) {}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+	
+		
 	}
 	
 	

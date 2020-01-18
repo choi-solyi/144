@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sb.dto.SUPBoardDTO;
+import com.sb.dto.SUPRepBoardDTO;
 
 public class SUPBoardDAO {
 	private static SUPBoardDAO instance = new SUPBoardDAO();
@@ -49,12 +50,12 @@ public class SUPBoardDAO {
 			if(!search.equals("") && !txtsearch.equals("")) 
 			{
 				pstmt.setString(1, "%"+txtsearch+"%");
-				pstmt.setInt(2, startrow);
+				pstmt.setInt(2, startrow-1);
 				
 			}
 			else {
 				
-				pstmt.setInt(1, startrow);
+				pstmt.setInt(1, startrow-1);
 			}
 			rs= pstmt.executeQuery();
 			
@@ -227,6 +228,25 @@ public class SUPBoardDAO {
 			if(rs!=null) try { rs.close();} catch(SQLException e) {}
 		}
 		return count;
+	}
+
+	public void sbAddRep(Connection conn, SUPRepBoardDTO rdto) throws SQLException {
+		
+		StringBuilder sql= new StringBuilder();
+		sql.append(" insert into suprepboard(repno,rcontent,id,rwritedate,bno) ");
+		sql.append(" values(null,?,?,now(),?) ");
+		PreparedStatement pstmt = null;
+		try {
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setString(1, rdto.getRcontent());
+			pstmt.setString(2, rdto.getId());
+			pstmt.setInt(3, rdto.getBno());
+			
+			pstmt.executeUpdate();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
+		}
+		
 	}
 
 }
