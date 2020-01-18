@@ -62,10 +62,12 @@ public class SYListRep extends HttpServlet {
 		
 		for(JGRepBoardDTO dto :list) {
 			JSONObject o = new JSONObject();
-
-			o.put("bno", dto.getBno());
-			o.put("rcontent", dto.getRcontent());
 			
+			o.put("repno" ,dto.getRepno());
+			o.put("rcontent", dto.getRcontent());
+			o.put("rwritedate", dto.getRwritedate());
+			o.put("bno", dto.getBno());
+			o.put("id", dto.getId());
 			arr.add(o);
 			
 		}

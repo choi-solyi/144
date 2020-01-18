@@ -19,6 +19,7 @@ public class SYAddRepAction implements Action {
 		
 		request.setCharacterEncoding("utf-8");
 		int bno = Integer.parseInt(request.getParameter("bno"));
+
 		String rcontent = request.getParameter("rcontent");
 /*		String nick = request.getParameter("nick");
 */		

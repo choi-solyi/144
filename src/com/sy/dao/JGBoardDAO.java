@@ -288,4 +288,26 @@ public class JGBoardDAO {
 		}
 		return list;
 	}
+	public void delRep(Connection conn, int repno) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" delete from jgrepboard ");
+		sql.append(" where repno=? 	");
+		
+		PreparedStatement pstmt = null;
+		System.out.println("3333333333333333333333"+repno);
+
+			try {
+				pstmt = conn.prepareStatement(sql.toString());
+				pstmt.setInt(1, repno);
+				
+
+			int r=	pstmt.executeUpdate();
+			System.out.println("r==="+r);
+			}finally {
+				if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
+
+			
+		}
+		
+	}
 }
