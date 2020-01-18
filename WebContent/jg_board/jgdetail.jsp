@@ -169,17 +169,33 @@
 .inlineblockcontent {
 	display: inline-block;
 }
+
+.btndel, .btnupd{
+	padding :0px;
+	margin: 0px 3px;
+	float: right;
+
+}
 </style>
 
 <script>
 function send(){
 	if(document.frm.title.value!="")
 		document.frm.submit();
-	
-		
 }
-</script>
 
+function update(){
+	location.href="syupdaterep.do?repno"+repno+"&bno="+bno;
+
+};
+function delete(){
+	console.log(sno);
+	location.href="sydelrep.do?repno"+repno+"&bno="+bno;
+}
+
+
+</script>
+ 
 
 </head>
 <body>
@@ -290,86 +306,10 @@ function send(){
 
 	<!-- 댓글 목록 보기 -->
 	<div id="replist" style="margin: 10px auto;	width: 1220px; padding: 5px;"></div>
-
-
- 
-	<!-- <div class="replist2">
-		<div class="card border-success mb-3 botrep" style="max-width: 18rem;">
-			<div class="card-header">댓글</div>
-			<div class="card-body text-success">
-				<h5 class="card-title">제목</h5>
-				<p class="card-text">댓글내용ㅇㄹㅇ 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용
-					댓글내용</p>
-
-			</div>
-		</div>
-		<div class="card border-info mb-3 botrep" style="max-width: 18rem;">
-			<div class="card-header">댓글</div>
-			<div class="card-body text-info">
-				<h5 class="card-title">제ㅔㅔㅔㅔㅔㅔ목</h5>
-				<p class="card-text">댓글내용 댓글내용 댓글내용 댓글내용 댓글댓글내용 댓글내용 댓글내용 댓글내용
-					댓글내용 댓글내용 댓글내용 댓글내용</p>
-			</div>
-		</div>
-		<div class="card border-dark mb-3 botrep" style="max-width: 18rem;">
-			<div class="card-header">Header</div>
-			<div class="card-body text-dark">
-				<h5 class="card-title">Dark card title</h5>
-				<p class="card-text">댓글내용 댓댓글내용 댓ㅇㅇㅇㅇㅇㅇㅇㅇㅇ ㅇㅇㅇㅇㅇㅇㅇ ㅇㅇㅇㅇ
-					ㅇㅇㅇㅇㅇㅇ글내용 댓글내용 댓글글내용 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용</p>
-
-			</div>
-		</div>
-		<div class="card border-success mb-3 botrep" style="max-width: 18rem;">
-			<div class="card-header">댓글</div>
-			<div class="card-body text-success">
-				<h5 class="card-title">제목</h5>
-				<p class="card-text">댓글내용ㅇㄹㅇ 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용
-					댓글내용</p>
-
-			</div>
-		</div>
-
-	</div>
-
-	<div class="replist">
-		<div class="card border-success mb-3 botrep" style="max-width: 18rem;">
-			<div class="card-header">댓글</div>
-			<div class="card-body text-success">
-				<h5 class="card-title">제목</h5>
-				<p class="card-text">댓글내용ㅇㄹㅇ 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용
-					댓글내용</p>
-
-			</div>
-		</div>
-		<div class="card border-info mb-3 botrep" style="max-width: 18rem;">
-			<div class="card-header">댓글</div>
-			<div class="card-body text-info">
-				<h5 class="card-title">제ㅔㅔㅔㅔㅔㅔ목</h5>
-				<p class="card-text">댓글내용 댓글내용 댓글내용 댓글내용 댓글댓글내용 댓글내용 댓글내용 댓글내용
-					댓글내용 댓글내용 댓글내용 댓글내용</p>
-			</div>
-		</div>
-		<div class="card border-dark mb-3 botrep" style="max-width: 18rem;">
-			<div class="card-header">Header</div>
-			<div class="card-body text-dark">
-				<h5 class="card-title">Dark card title</h5>
-				<p class="card-text">댓내용 댓글내용</p>
-
-			</div>
-		</div>
-		<div class="card border-success mb-3 botrep" style="max-width: 18rem;">
-			<div class="card-header">댓글</div>
-			<div class="card-body text-success">
-				<h5 class="card-title">제목</h5>
-				<p class="card-text">댓글내용ㅇㄹㅇ 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용 댓글내용
-					댓글내용</p>
-
-			</div>
-		</div>
-
-	</div>
+<!-- 	<input type="submit" onclick="update();" class="btn btn-success" value="수정">
+	<input type="submit" onclick="delete();" class="btn btn-success" value="삭제"> 
   -->
+
  <script>
     let bno = ${dto.bno};
 	
@@ -386,27 +326,33 @@ function send(){
 			$.each(data, function(index, item) {
 					console.log(index);
 					if(index%3==0){
-						let rep ="<div class='card border-success mb-3 botrep' style='max-width: 18rem;'>"	;
-						rep+= "<div class='card-header'>댓글</div>"											;
-						rep+= "<div class='card-body text-success'>"										;
-						rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"			; 
-						
-						$('#replist').append(rep);
+let rep ="<div class='card border-success mb-3 botrep' style='max-width: 18rem;'>"	;
+
+
+rep+= '<div class="card-header"> 댓글<input type="submit" onclick="delete();" class="btn btn-success btndel" value="삭제"> <input type="submit" onclick="update();" class="btn btn-success btnupd" value="수정"></div>'	;
+
+rep+= "<div class='card-body text-success'>"										;
+rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"			; 
+
+$('#replist').append(rep);
 
 					}else if(index%2==0){
-						let rep ="<div class='card border-info mb-3 botrep' style='max-width: 18rem;'>"	;
-						rep+= "<div class='card-header'>댓글</div>"											;
-						rep+= "<div class='card-body text-info'>"										;
-						rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"			; 
-						
-						$('#replist').append(rep);
+let rep ="<div class='card border-info mb-3 botrep' style='max-width: 18rem;'>"	;
+rep+= '<div class="card-header"> 댓글<input type="submit" onclick="delete();" class="btn btn-info btndel" value="삭제"> <input type="submit" onclick="update();" class="btn btn-info btnupd" value="수정"></div>'	;
+
+rep+= "<div class='card-body text-info'>"										;
+rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"			; 
+
+$('#replist').append(rep);
+
 					}else{
-						let rep ="<div class='card border-dark mb-3 botrep' style='max-width: 18rem;'>"	;
-						rep+= "<div class='card-header'>댓글</div>"											;
-						rep+= "<div class='card-body text-dark'>"										;
-						rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"			; 
-						
-						$('#replist').append(rep);
+let rep ="<div class='card border-dark mb-3 botrep' style='max-width: 18rem;'>"	;
+rep+= '<div class="card-header"> 댓글<input type="submit" onclick="delete();" class="btn btn-dark btndel" value="삭제"> <input type="submit" onclick="update();" class="btn btn-dark btnupd" value="수정"></div>'	;
+
+rep+= "<div class='card-body text-dark'>"										;
+rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"			; 
+
+$('#replist').append(rep);
 					}
 				});
 	

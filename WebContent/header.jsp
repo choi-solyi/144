@@ -87,7 +87,7 @@
 					aria-expanded="false" style="color: white;"> POSITION </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="#">TOP</a> <a class="dropdown-item"
-							href="#">JUNGLE</a> <a class="dropdown-item" href="#">MID</a> <a
+							href="jglist.do">JUNGLE</a> <a class="dropdown-item" href="#">MID</a> <a
 							class="dropdown-item" href="#">AD</a> <a class="dropdown-item"
 							href="#">SUP</a>
 						<div class="dropdown-divider"></div>
