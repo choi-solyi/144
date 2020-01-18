@@ -21,18 +21,41 @@ public class SUPBoardDAO {
 		
 	}
 	
-	public List<SUPBoardDTO> sbList(Connection conn) throws SQLException{
+	public List<SUPBoardDTO> sbList(Connection conn, int startrow, int endrow, String search, String txtsearch) throws SQLException{
 		
 		StringBuilder sql =new StringBuilder();
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<SUPBoardDTO> list =new ArrayList<SUPBoardDTO>();
-		sql.append(" select bno,bcategory,btitle,id,bwritedate,bhit ");
-		sql.append(" from supboard ");
+		sql.append(" select * from supboard ");
+		if(!search.equals("") && !txtsearch.equals(""))
+		{
+		  if(search.equals("btitle"))
+			 sql.append("                where btitle  like ?      ");
+		  else if(search.equals("bcontent"))
+			 sql.append("                where bcontent like ?       ");
+		  else if(search.equals("id"))
+			 sql.append("                where id like  ?       ");
+		  
+		}
 		sql.append(" order by bno desc ");
+		sql.append(" limit ?,10 ");
+		
+		
 		
 		try {
+			
 			pstmt= conn.prepareStatement(sql.toString());
+			if(!search.equals("") && !txtsearch.equals("")) 
+			{
+				pstmt.setString(1, "%"+txtsearch+"%");
+				pstmt.setInt(2, startrow);
+				
+			}
+			else {
+				
+				pstmt.setInt(1, startrow);
+			}
 			rs= pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -40,6 +63,7 @@ public class SUPBoardDAO {
 				dto.setBno(rs.getInt("bno"));
 				dto.setBcategory(rs.getString("bcategory"));
 				dto.setBtitle(rs.getString("btitle"));
+				dto.setBcontent(rs.getString("bcontent"));
 				dto.setId(rs.getString("id"));
 				dto.setBwritedate(rs.getString("bwritedate"));
 				dto.setBhit(rs.getInt("bhit"));
@@ -169,5 +193,40 @@ public class SUPBoardDAO {
 			pstmt.executeUpdate();
 		}
 	}
-	
+
+	public int sbGetCount(Connection conn, String search, String txtsearch) throws SQLException {
+		StringBuilder sql=new StringBuilder();
+		sql.append(" select  count(*)        ");
+		sql.append(" from  supboard             ");
+		if(!search.equals("")  && !txtsearch.equals("") )
+		{
+			if(search.equals("btitle"))
+				sql.append(" where btitle like    ?   ");
+			else if(search.equals("bcontent"))
+				sql.append(" where bcontent like  ?   ");
+			else if(search.equals("id"))
+				sql.append(" where id like   ?   ");
+		}
+
+		ResultSet rs=null;
+		int count=0;
+		try(
+				PreparedStatement pstmt=conn.prepareStatement(sql.toString());
+				) {
+			if(!search.equals("")&& !txtsearch.equals(""))
+			{
+				pstmt.setString(1, "%"+txtsearch+"%");    
+			}
+			rs=pstmt.executeQuery();
+			if(rs.next())
+			{
+				count=rs.getInt(1);
+			}
+
+		} finally {
+			if(rs!=null) try { rs.close();} catch(SQLException e) {}
+		}
+		return count;
+	}
+
 }

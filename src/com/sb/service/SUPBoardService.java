@@ -26,7 +26,7 @@ public class SUPBoardService {
 		
 	}
 	
-	public List<SUPBoardDTO> sbList(){
+	public List<SUPBoardDTO> sbList(int startrow, int endrow, String search, String txtsearch){
 		DBConn db = DBConn.getDB();
 		Connection conn=null;
 		List<SUPBoardDTO> list = null;
@@ -34,7 +34,7 @@ public class SUPBoardService {
 			conn=db.getConn();
 			conn.setAutoCommit(false);
 			SUPBoardDAO dao = SUPBoardDAO.sbGetBoardDAO();
-			list=dao.sbList(conn);
+			list=dao.sbList(conn,startrow, endrow,search, txtsearch);
 			
 			conn.commit();
 			
@@ -138,6 +138,26 @@ public class SUPBoardService {
 		}
 	
 		
+	}
+
+	public int sbGetCount(String search, String txtsearch) {
+		DBConn  db=   DBConn.getDB();
+	    Connection conn=null;
+	    int count=0;
+	    try {
+	    	  conn=db.getConn();
+	    	  conn.setAutoCommit(false);
+	    	  SUPBoardDAO dao=SUPBoardDAO.sbGetBoardDAO();
+	    	  count=dao.sbGetCount(conn, search, txtsearch);
+	    	  conn.commit();
+	    }catch(NamingException|SQLException e)
+	    {
+	    	System.out.println(e);
+	       try {conn.rollback();} catch(Exception e2) {}
+	    }finally {
+	    	if(conn!=null) try { conn.close();} catch(SQLException e) {}
+	    }
+	    return count;
 	}
 	
 	
