@@ -32,7 +32,7 @@ public class EBUpdateResultAction implements Action {
 		
 		ForwardAction forward=new ForwardAction();
 		forward.setForward(false);
-		forward.setUrl("EBdetail.do?bno=${dto.bno}");
+		forward.setUrl("EBdetail.do?bno="+bno);
 		return forward;
 	}
 
