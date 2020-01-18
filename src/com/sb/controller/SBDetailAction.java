@@ -30,7 +30,7 @@ public class SBDetailAction implements Action {
 		
 		ForwardAction f = new ForwardAction();
 		f.setForward(true);
-		f.setUrl("main.jsp?page=supBoard/detail.jsp");
+		f.setUrl("main.jsp?page=supBoard/supdetail.jsp");
 		
 		
 		return f;

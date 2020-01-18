@@ -20,7 +20,7 @@ public class SBInsertAction implements Action {
 		
 		ForwardAction f = new ForwardAction();
 		f.setForward(true);
-		f.setUrl("main.jsp?page=supBoard/insert.jsp");
+		f.setUrl("main.jsp?page=supBoard/supinsert.jsp");
 		
 		return f;
 	}

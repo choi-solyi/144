@@ -27,7 +27,7 @@ public class SBListAction implements Action{
 		
 		ForwardAction f = new ForwardAction();
 		f.setForward(true);
-		f.setUrl("main.jsp?page=supBoard/list.jsp");
+		f.setUrl("main.jsp?page=supBoard/suplist.jsp");
 		
 		return f;
 	}
