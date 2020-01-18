@@ -38,8 +38,8 @@ public class FrontController extends HttpServlet {
       String path = config.getInitParameter("init");
       String propath = config.getServletContext().getRealPath(path);
       Properties properties = new Properties();
-      System.out.println(path);
-      System.out.println(propath);
+      System.out.println("path:"+path);
+      System.out.println("propath:"+propath);
       try{
          properties.load(new FileReader(propath));
          Enumeration enu = properties.keys();
@@ -47,12 +47,12 @@ public class FrontController extends HttpServlet {
          {
             String key = (String)enu.nextElement();
             String value = properties.getProperty(key);
-            System.out.println(key);
-            System.out.println(value);
+            System.out.println("key:"+key);
+            System.out.println("value:"+value);
             Class c = Class.forName(value);
             Action act = (Action)c.newInstance();
-            System.out.println(key);
-            System.out.println(act);
+            System.out.println("key:"+key);
+            System.out.println("act:"+act);
             hm.put(key, act);
          }
       }catch(Exception  e)
@@ -81,8 +81,8 @@ public class FrontController extends HttpServlet {
       String path = request.getServletPath();
       Action act = null;
       act = hm.get(path);
-      System.out.println(path);
-      System.out.println(act);
+      System.out.println("path:"+path);
+      System.out.println("act:"+act);
       ForwardAction f = act.execute(request, response);
       if(f.isForward())
       {
