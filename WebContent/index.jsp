@@ -84,7 +84,7 @@ body {
 				<!--카카오로그인이나 네이버 로그인-->
 			</div>
 			<div>
-				<a href="#" style="color: white; font-size: 0.9em;">신규가입</a>
+				<a href="join.jsp" style="color: white; font-size: 0.9em;">신규가입</a>
 			</div>
 
 		</form>
