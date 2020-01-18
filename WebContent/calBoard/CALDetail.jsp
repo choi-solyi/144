@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%-- ${dto.bno}
-	${dto.bcaldate}
-	${dto.btitle}
-	${dto.bhit}
-	${dto.bup} --%>
+	<div>${dto.bno}</div>
+	<div>${dto.bcaldate}</div>
+	<div>${dto.btitle}</div>
+	<div>${dto.bhit}</div>
+	<div>${dto.bup}</div>
 </body>
 </html>

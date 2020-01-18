@@ -1,4 +1,4 @@
-package com.eb.action;
+package com.eb.controller;
 
 import java.io.IOException;
 
