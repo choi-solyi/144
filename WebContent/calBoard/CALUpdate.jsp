@@ -8,11 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form method="post" action="EBupdatetresult.do">
+<form method="post" action="EBupdateresult.do">
 		<div>
 			<div>
 			<label for="bno">글번호</label>
-			<input type="text" name="btitle" id="btitle" value="${dto.bno}" readonly="readonly"></div>
+			<input type="text" name="bno" id="bno" value="${dto.bno}" readonly="readonly"></div>
 			<div>
 			<label for="btitle">제목</label>
 			<input type="text" name="btitle" id="btitle" value="${dto.btitle}"></div>
