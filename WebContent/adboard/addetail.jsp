@@ -10,7 +10,7 @@
 	<div class="container">
 	<ul class="list-group-item list-group-flush mt-3">
 		<li class="list-group-item list-group-item-dark mb-3">${dto.id}, ${dto.bwritedate}, ${dto.bhit}, ${dto.bhit}</li>
-		<li class="list-group-item"><h2>${dto.bcategory}, ${dto.btitle}</h2><br>
+		<li class="list-group-item"><h2>[${dto.bcategory}] ${dto.btitle}</h2><br>
 		<pre>${dto.bcontent}</pre>
 		</li>
 		<li class="list-group-item">

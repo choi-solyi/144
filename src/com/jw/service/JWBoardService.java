@@ -18,14 +18,14 @@ public class JWBoardService {
 		return service;
 	}
 
-	public List<JWBoardDTO> List() {
+	public List<JWBoardDTO> List(int startrow, int endrow, String search, String searchtxt) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
 		Connection conn = null; 
 		List<JWBoardDTO> list = new ArrayList<>();
 		try {
 			conn = DBC.getConn();
-			list = dao.List(conn);
+			list = dao.List(conn, startrow, endrow, search, searchtxt);
 		}catch(SQLException | NamingException e) {
 			System.out.println(e);
 		}finally {
@@ -102,5 +102,21 @@ public class JWBoardService {
 		}finally {
 			if(conn!=null) try{conn.close();} catch(SQLException e) {}
 		}
+	}
+	public int Totalcount(String search, String searchtxt) {
+		int Totalcount = 0;
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		try {
+			conn = DBC.getConn();
+			Totalcount = dao.Totalcount(conn, search, searchtxt);
+		}catch(SQLException | NamingException e) 
+		{
+			System.out.println(e);
+		}finally {
+			if(conn!=null) try{conn.close();} catch(SQLException e) {}
+		}
+		return Totalcount;
 	}
 }
