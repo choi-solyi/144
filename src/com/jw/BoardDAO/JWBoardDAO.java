@@ -86,5 +86,16 @@ public class JWBoardDAO {
 		}
 		System.out.println(dto);
 		return dto;
+	}
+	
+	public void Delete(Connection conn, String bno) throws SQLException
+	{
+		StringBuilder sql = new StringBuilder();
+		sql.append(" delete from adboard    ");
+		sql.append("      where bno = ?     ");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			pstmt.setString(1, bno);
+			pstmt.executeUpdate();
+		}
 	};
 }

@@ -69,4 +69,21 @@ public class JWBoardService {
 		}
 		return dto;
 	}
+	public void Delete(String bno) {
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		try {
+			conn = DBC.getConn();
+			conn.setAutoCommit(false);
+			dao.Delete(conn, bno);
+			conn.commit();
+		}catch(SQLException | NamingException e) 
+		{
+			System.out.println(e);
+			try{conn.rollback();} catch(SQLException rollback) {System.out.println(rollback);}
+		}finally {
+			if(conn!=null) try{conn.close();} catch(SQLException e) {}
+		}
+	}
 }

@@ -15,6 +15,7 @@
 		</li>
 		<li class="list-group-item">
 		<a class="btn btn-secondary" href="JWlist.do">목록</a>
+		<a class="btn btn-secondary" href="JWupdate.do?bno=${dto.bno}">수정</a>
 		<a class="btn btn-secondary" href="JWdelete.do?bno=${dto.bno}">삭제</a>
 		</li>
 	</ul>
