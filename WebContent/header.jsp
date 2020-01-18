@@ -86,10 +86,16 @@
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false" style="color: white;"> POSITION </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">TOP</a> <a class="dropdown-item"
-							href="jglist.do">JUNGLE</a> <a class="dropdown-item" href="#">MID</a> <a
-							class="dropdown-item" href="#">AD</a> <a class="dropdown-item"
-							href="#">SUP</a>
+						
+						
+						<a class="dropdown-item" href="toplist.do">TOP</a> 
+						
+						<a class="dropdown-item" href="jglist.do">JUNGLE</a> 
+							
+							<a class="dropdown-item" href="dylist.do">MID</a> <a
+							class="dropdown-item" href="JWlist.do">AD</a> 
+							
+							<a class="dropdown-item" href="sblist.do">SUP</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="logout.jsp">로그아웃</a>
 					</div></li>
@@ -109,7 +115,7 @@
                 </li>-->
 			</ul>
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#"
+				<li class="nav-item"><a class="nav-link" href="EBlist.do"
 					style="color: white;"> 대회 일정</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"
 					style="color: white;">쇼핑</a></li>

@@ -184,10 +184,10 @@ function send(){
 		document.frm.submit();
 }
 
-function update(){
+/* function update(){
 	location.href="jgupdatrep.do?repno"+repno+"&bno="+bno;
 
-};
+}; */
 function delrep(repno, bno){
 	console.log("-------------------");
 	console.log(repno);
@@ -345,6 +345,7 @@ $('#replist').append(rep);
 					}else if(index%2==0){
 let rep ="<div class='card border-info mb-3 botrep' style='max-width: 18rem;'>"	;
 rep+= '<div class="card-header"> 댓글 <input type="submit" onclick=delrep('+ item.repno  +','+  item.bno  +'); class="btn btn-success btndel" value="삭제"> <input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정"></div>'	;
+
 rep+= "<div class='card-body text-info'>"										;
 rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"			; 
 
@@ -353,6 +354,7 @@ $('#replist').append(rep);
 					}else{
 let rep ="<div class='card border-dark mb-3 botrep' style='max-width: 18rem;'>"	;
 rep+= '<div class="card-header"> 댓글 <input type="submit" onclick=delrep('+ item.repno  +','+  item.bno  +'); class="btn btn-success btndel" value="삭제"> <input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정"></div>'	;
+
 rep+= "<div class='card-body text-dark'>"										;
 rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"			; 
 
