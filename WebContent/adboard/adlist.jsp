@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	${startpage}
+	${endpage}
+	${param.curr}
 	<div class="container">
 		<ul class="list-group-item list-group-flush mt-3">
 			<li class="list-group-item list-group-item-dark">[카테고리] 글번호,
@@ -20,15 +23,17 @@
 			<li class="list-group-item">
 				<div class="row justify-content-center mb-3">
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
+					
+						<li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+					<c:forEach var="index" begin="${startpage}" end="${endpage}" step="${1}">
+						<c:if test="${param.curr ne index}">
+						<li class="page-item"><a class="page-link" href="JWlist.do?curr=${index}">${index}</a></li>
+						</c:if>
+						<c:if test="${param.curr eq index}">
+						<li class="page-item active"><a class="page-link" href="JWlist.do?curr=${index}">${index}</a></li>
+						</c:if>
+					</c:forEach>		
+						<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
 					</ul>
 				</div>
 				<form method="post" action="JWlist.do">
@@ -47,8 +52,8 @@
 							<input class="btn btn-secondary" type="submit" value="검색">
 						</div>
 					</div>
-				</form> <a class="btn btn-secondary" href="JWlist.do">목록</a> <a
-				class="btn btn-secondary" href="JWinsert.do">글쓰기</a>
+				</form> <a class="btn btn-secondary" href="JWlist.do">목록</a> 
+				<a class="btn btn-secondary" href="JWinsert.do">글쓰기</a>
 			</li>
 		</ul>
 	</div>

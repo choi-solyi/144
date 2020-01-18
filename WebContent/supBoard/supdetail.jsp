@@ -55,7 +55,7 @@ ul li {
 					style="padding: 5px 20px;">댓글</a>
 				<div></div>
 			</div>
-			<div style="margin-top: 20px; text-align:right; margin-right:10px;">
+			<div style="margin-top: 20px; text-align: right; margin-right: 10px;">
 
 				<a href="sbinsert.do" class="btn btn-primary btn-lg active"
 					role="button" aria-pressed="true"
@@ -63,9 +63,18 @@ ul li {
 
 			</div>
 
+			</div>
+			<form method="post" action="sbaddrep.do" name="frm">
+
+				<input type="hidden" name="bno" value="${dto.bno}">
+				<textarea rows="3" cols="20" name="rcontent"></textarea>
+				<br> <input type="hidden" id="id" name="id" value="${dto.id}}"> 
+				<input type="button" onclick="send()" value="추가">
+					
 
 
-
+			</form>
+		
 
 
 
