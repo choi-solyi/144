@@ -27,6 +27,7 @@
 			<label>내용</label>
 			<textarea name="bcontent" id="bcontent" rows="10" cols="50">${dto.bcontent}</textarea>
 			</div>
+			<div>
 			<input type="submit" value="확인">
 			<input type="reset" value="취소">
 			</div>
