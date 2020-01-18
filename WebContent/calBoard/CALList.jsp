@@ -14,18 +14,36 @@
 
 </head>
 <body>
-	<ul>
+<div class="container mt-5">
+
+		<div class="jumbotron">
+			<h2>대회 일정</h2>
+		</div>
+		
+  <div class="row">
+    <div class="col">번호</div>
+    <div class="col">날짜</div>
+    <div class="col">제목</div>
+    <div class="col">조회수</div>
+    <div class="col">추천</div>
+  </div>
+		
+		
+	<div>
 	 <c:forEach items="${requestScope.list}" var="index"> 
-		<li>
+		<div>
 		<a href="EBdetail.do?bno=${index.bno}">${index.bno}</a>
 		<a href="EBdetail.do?bno=${index.bno}">${index.bcaldate}</a>
 		<a href="EBdetail.do?bno=${index.bno}">${index.btitle}</a>
 		${index.bhit}
 		${index.bup}
-		</li>
+		</div>
 	 </c:forEach>
-	</ul>
-	<a href="EBinsert.do">글 작성</a>
+	</div>
+	<div class="col-sm-12 text-left mb-5">
+	<a href="EBinsert.do" class="btn btn-primary">글 작성</a>
+	</div>
+	</div>
 </body>
 
 </html>
