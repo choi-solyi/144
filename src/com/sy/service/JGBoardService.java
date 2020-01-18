@@ -194,4 +194,25 @@ public class JGBoardService {
 		return totalCount;
 		
 	}
+	public void delrep(int repno) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			
+			JGBoardDAO dao = JGBoardDAO.getDAO();
+			dao.delRep(conn, repno);
+			System.out.println("22222222222222222222"+repno);
+
+			conn.commit();
+			
+		}catch(NamingException|SQLException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(Exception e2) {}
+		}finally {
+			if(conn!=null) try { conn.close(); } catch(SQLException e) {}
+		}
+		
+	}
 }
