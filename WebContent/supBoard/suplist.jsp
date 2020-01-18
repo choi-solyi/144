@@ -29,12 +29,12 @@
 		<table class="table">
 			<thead class="thead-dark">
 				<tr>
-					<th scope="col">번호</th>
-					<th scope="col">카테고리</th>
-					<th scope="col">제목</th>
-					<th scope="col">닉네임</th>
-					<th scope="col">작성일</th>
-					<th scope="col">조회수</th>
+					<th scope="col" style="width: 100px;">번호</th>
+					<th scope="col" style="width: 150px;">카테고리</th>
+					<th scope="col" style="width: 250px;">제목</th>
+					<th scope="col" style="width: 150px;">닉네임</th>
+					<th scope="col" style="width: 150px;">작성일</th>
+					<th scope="col" style="width: 150px;">조회수</th>
 				</tr>
 			</thead>
 
@@ -51,16 +51,29 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<c:if test="${startblock>1}">
+					
 
+					<a href="sblist.do?curr=${startblock-1}">이전</a>
+
+		</c:if>
+	
 		<c:forEach var="i" begin="${startblock}" end="${endblock }" step="1">
 			<c:if test="${currpage==i}">
 				<c:out value="${i}" />
 			</c:if>
 			<c:if test="${currpage!=i}">
-				<a href="sblist.do?curr=${i}&search=${search}&txtsearch=${txtsearch}">${i}</a>
+				<a
+					href="sblist.do?curr=${i}&search=${search}&txtsearch=${txtsearch}">${i}</a>
 			</c:if>
 
 		</c:forEach>
+		<c:if test="${endblock < totalpage}">
+					
+
+			<a href="sblist.do?curr=${endblock+1}">다음</a>
+
+		</c:if>
 
 
 		<form method="get" action="sblist.do">
@@ -88,6 +101,7 @@
 			<button class="btn btn-default" type="button">전적검색</button>
 		</div>
 	</div>
+	
 	<!-- /input-group -->
 
 
