@@ -38,22 +38,23 @@ public class JWListAction implements Action{
 		
 		int totalcount = service.Totalcount(search, searchtxt);
 		int pagesize = 5;
-		int startrow = (currpage-1)*pagesize+1;
+		int startrow = (currpage-1)*pagesize;
 		int endrow = startrow+pagesize-1;
 		if(endrow>totalcount)
 			endrow=totalcount;
 		
 		int pagecount = (int)Math.ceil((float)totalcount/pagesize);
 		int pageblock = 5;
-		int startpage = (currpage-1)/pageblock+1;
+		int startpage = (currpage-1)/pageblock*pageblock+1;
 		int endpage = startpage+pageblock-1;
+
 		if(endpage>pagecount)
 			endpage=pagecount;
-		
+
 		request.setAttribute("startpage", startpage);
 		request.setAttribute("endpage", endpage);
 		
-		List<JWBoardDTO> list = service.List(startrow, endrow, search, searchtxt);
+		List<JWBoardDTO> list = service.List(startrow, pagesize, search, searchtxt);
 		request.setAttribute("list", list);
 		
 		f.setForward(true);
