@@ -13,19 +13,31 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
+
 <style>
-	#left{
-		background-image:
+#left {
+	background-image:
 		url('http://choisolyi.dothome.co.kr/lol/img/main_img.jpg');
-		
-	}
-</style>	
+	background-attachment: fixed;
+	background-size: cover;
+	min-height: 160px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	color: white;
+}
+</style>
 </head>
 <body>
-		<div class="row">
-			<div id ="left" class="col-6"></div>
-			<div class="col-6"></div>
+	<div class="row align-items-center">
+		<div id="left" class="col-6 vh-100 vw-100">123</div>
+		<div class="col-6 vh-100 vw-100">
+			123
+			<div class="row">
+				<div class="col">456</div>
+			</div>
 		</div>
+	</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
 		crossorigin="anonymous"></script>
