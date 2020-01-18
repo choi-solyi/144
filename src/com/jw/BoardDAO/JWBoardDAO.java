@@ -16,7 +16,8 @@ public class JWBoardDAO {
 	}
 	private JWBoardDAO() {}
 	
-	public List<JWBoardDTO> List(Connection conn) throws SQLException{	
+	public List<JWBoardDTO> List(Connection conn) throws SQLException
+	{	
 		List<JWBoardDTO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		ResultSet rs = null;
@@ -44,7 +45,8 @@ public class JWBoardDAO {
 	}
 	
 	public void Insert(Connection conn, JWBoardDTO dto) throws SQLException 
-	{	StringBuilder sql = new StringBuilder();
+	{	
+		StringBuilder sql = new StringBuilder();
 		sql.append(" insert into adboard     ");
 		sql.append(" values(null, ?, ?       ");
 		sql.append("        , now(), ?, 0    ");
@@ -56,5 +58,33 @@ public class JWBoardDAO {
 				pstmt.setString(4, dto.getBimg());
 				pstmt.executeUpdate();
 			}
+	}
+	
+	public JWBoardDTO Detail(Connection conn, String bno) throws SQLException
+	{
+		JWBoardDTO dto = new JWBoardDTO();
+		StringBuilder sql = new StringBuilder();
+		ResultSet rs = null;
+		sql.append(" select * from adboard     ");
+		sql.append("   where bno = ?           ");
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			pstmt.setString(1, bno);
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				dto.setBno(rs.getInt("bno"));
+				dto.setBtitle(rs.getString("btitle"));
+				dto.setBcontent(rs.getString("bcontent"));
+				dto.setBwritedate(rs.getString("bwritedate"));
+				dto.setBcategory(rs.getString("bcategory"));
+				dto.setBhit(rs.getInt("bhit"));
+				dto.setBup(rs.getInt("bup"));
+				dto.setBimg(rs.getString("bimg"));
+				dto.setId(rs.getString("id"));
+			}
+		}
+		System.out.println(dto);
+		return dto;
 	};
 }

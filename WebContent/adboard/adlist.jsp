@@ -13,8 +13,9 @@
 		<li class="list-group-item list-group-item-dark">카테고리, 글번호, 글제목,
 			글작성일, 글조회수, 추천수, 작성자</li>
 		<c:forEach var="i" items="${arr}">
-			<li class="list-group-item list-group-item-action">${i.bcategory},${i.bno},
-				${i.btitle}, ${i.bwritedate}, ${i.bhit}, ${i.bup}, ${i.id}</li>
+			<li class="list-group-item list-group-item-action">
+			<a href="JWdetail.do?bno=${i.bno}">${i.bcategory}, ${i.bno}, ${i.btitle}, ${i.bwritedate}, ${i.bhit}, ${i.bup}, ${i.id}</a>
+			</li>
 		</c:forEach>
 		<li class="list-group-item"><a class="btn btn-secondary" href="JWinsert.do">글작성</a></li>
 	</ul>

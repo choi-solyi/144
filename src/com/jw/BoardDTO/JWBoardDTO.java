@@ -64,4 +64,10 @@ public class JWBoardDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
+	@Override
+	public String toString() {
+		return "JWBoardDTO [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bwritedate=" + bwritedate
+				+ ", bcategory=" + bcategory + ", bhit=" + bhit + ", bup=" + bup + ", bimg=" + bimg + ", id=" + id
+				+ "]";
+	}
 }
