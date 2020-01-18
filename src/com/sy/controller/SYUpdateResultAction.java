@@ -1,8 +1,6 @@
 package com.sy.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
-import com.sy.dao.JGBoardDAO;
 import com.sy.dto.JGBoardDTO;
 import com.sy.service.JGBoardService;
 

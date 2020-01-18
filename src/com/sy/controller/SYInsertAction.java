@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
-import com.sy.dto.JGBoardDTO;
-import com.sy.service.JGBoardService;
 
 public class SYInsertAction implements Action {
 
