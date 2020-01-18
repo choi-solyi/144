@@ -9,16 +9,21 @@
 
 <title>롤 링</title>
 <style>
-	.insertsub{
-		text-align: right;
-		margin-bottom: 10px;
-		margin-top:15px;
-	}
+.insertsub {
+	text-align: right;
+	margin-bottom: 10px;
+	margin-top: 15px;
+}
 </style>
 </head>
 <body>
 	<c:set var="list" value="${requestScope.list }" />
-
+	<c:set var="currpage" value="${requestScope.currpage}"></c:set>
+	<c:set var="startblock" value="${requestScope.startblock}"></c:set>
+	<c:set var="endblock" value="${requestScope.endblock}"></c:set>
+	<c:set var="totalpage" value="${requestScope.totalpage}"></c:set>
+	<c:set var="search" value="${requestScope.search}"></c:set>
+	<c:set var="txtsearch" value="${requestScope.txtsearch}"></c:set>
 	<div class="container">
 
 		<table class="table">
@@ -29,40 +34,63 @@
 					<th scope="col">제목</th>
 					<th scope="col">닉네임</th>
 					<th scope="col">작성일</th>
-					<th scope="col">조회수</th>	
+					<th scope="col">조회수</th>
 				</tr>
 			</thead>
-			
+
 			<tbody>
-			  <c:forEach var="item" items="${list}">
-				<tr>
-					<td scope="row">${ item.bno}</td>
-					<td>${item.bcategory}</td>
-					<td><a href="sbdetail.do?bno=${item.bno}">${item.btitle}</a></td>
-					<td>${item.id}</td>
-					<td>${item.bwritedate}</td>
-					<td>${item.bhit}</td>
-				</tr>
-			  </c:forEach>
+				<c:forEach var="item" items="${list}">
+					<tr>
+						<td scope="row">${ item.bno}</td>
+						<td>${item.bcategory}</td>
+						<td><a href="sbdetail.do?bno=${item.bno}">${item.btitle}</a></td>
+						<td>${item.id}</td>
+						<td>${item.bwritedate}</td>
+						<td>${item.bhit}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 
+		<c:forEach var="i" begin="${startblock}" end="${endblock }" step="1">
+			<c:if test="${currpage==i}">
+				<c:out value="${i}" />
+			</c:if>
+			<c:if test="${currpage!=i}">
+				<a href="sblist.do?curr=${i}&search=${search}&txtsearch=${txtsearch}">${i}</a>
+			</c:if>
 
-		<%-- <c:forEach var="item" items="${list}">
-		<ul>
-		<li>${item.bno}</li>
-			<li>${item.bcategory}</li>
-			<li><a href="sbdetail.do?bno=${item.bno}">${item.btitle}</a></li>
-			<li>${item.id}</li>
-			<li>${item.bwritedate}</li>
-			<li>${item.bhit}</li>
-		</ul>
+		</c:forEach>
 
-	</c:forEach> --%>
+
+		<form method="get" action="sblist.do">
+			<select name="search">
+				<option value="btitle">글제목</option>
+				<option value="bcontent">내용</option>
+				<option value="id">작성자</option>
+			</select> <input type="text" name="txtsearch"> <input type="submit"
+				value="검색">
+		</form>
+
+
+
+
+
 		<div class="insertsub">
-		<a href="sbinsert.do" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" style="width:200px; background-color: silver; border:3px solid silver; color:black;">글쓰기</a>
+			<a href="sbinsert.do" class="btn btn-primary btn-lg active"
+				role="button" aria-pressed="true"
+				style="width: 200px; background-color: silver; border: 3px solid silver; color: black;">글쓰기</a>
 		</div>
 	</div>
+	<div class="input-group">
+		<input type="text" class="form-control" placeholder="소환사명을 입력하세요">
+		<div class="input-group-btn">
+			<button class="btn btn-default" type="button">전적검색</button>
+		</div>
+	</div>
+	<!-- /input-group -->
+
+
 
 </body>
 </html>

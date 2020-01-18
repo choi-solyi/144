@@ -29,7 +29,7 @@ public class SBUpdateAction implements Action {
 		
 		ForwardAction f= new ForwardAction();
 		f.setForward(true);
-		f.setUrl("main.jsp?page=SUP_Board/supupdate.jsp");
+		f.setUrl("main.jsp?page=supBoard/supupdate.jsp");
 		
 		return f;
 	}

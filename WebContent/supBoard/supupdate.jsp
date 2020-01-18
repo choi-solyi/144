@@ -54,13 +54,15 @@
 			<label for="exampleFormControlFile1"></label> <input type="file"
 				class="form-control-file" id="exampleFormControlFile1">
 		</div>
+		<div >
+			<a class="btn btn-secondary btn-sm" href="sblist.do" role="button" style="padding: 5px 15px;">목록</a>
+		</div>
 
+		<div style="text-align: right; margin-right:30px;">
+		<input type="submit" value="작성완료" class="btn btn-secondary btn-lg" style="padding:10px 30px;">
+		</div>
 
-		<input type="submit" value="작성" class="btn btn-primary">
-
-		<p>
-			전적이 궁금하신가요?<br> 소환사명을 입력하세요!
-		</p>
+		
 		<div class="col-lg-6">
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="소환사명을 입력하세요" >
