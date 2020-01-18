@@ -13,5 +13,6 @@
 	<div>${dto.btitle}</div>
 	<div>${dto.bhit}</div>
 	<div>${dto.bup}</div>
+	<a href="EB.do">글 작성</a>
 </body>
 </html>
