@@ -15,14 +15,33 @@ public class JWBoardDAO {
 		return dao;
 	}
 	private JWBoardDAO() {}
-	
-	public List<JWBoardDTO> List(Connection conn) throws SQLException
+
+	public List<JWBoardDTO> List(Connection conn, int startrow, int endrow, String search, String searchtxt) throws SQLException
 	{	
 		List<JWBoardDTO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		ResultSet rs = null;
 		sql.append(" select * from adboard ");
+		if(!(search.equals(""))&&!(searchtxt.equals("")))
+		{
+			if(search.equals("btitle"))
+				sql.append(" where btitle like ? ");
+			else if(search.equals("bcontent"))
+				sql.append(" where bcontent like ? ");
+			else if(search.equals("id"))
+				sql.append(" where id like ? ");
+		}
+		sql.append(" order by bno             ");
+		sql.append(" limit ?, ?               ");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+			if(!(search.equals(""))&&!(searchtxt.equals("")))
+			{
+				pstmt.setString(1, "%"+searchtxt+"%");
+				pstmt.setInt(2, startrow);
+				pstmt.setInt(3, endrow);
+			}
+			pstmt.setInt(1, startrow);
+			pstmt.setInt(2, endrow);
 			rs = pstmt.executeQuery();
 			while(rs.next())
 			{
@@ -43,7 +62,7 @@ public class JWBoardDAO {
 		}
 		return list;
 	}
-	
+
 	public void Insert(Connection conn, JWBoardDTO dto) throws SQLException 
 	{	
 		StringBuilder sql = new StringBuilder();
@@ -51,15 +70,15 @@ public class JWBoardDAO {
 		sql.append(" values(null, ?, ?       ");
 		sql.append("        , now(), ?, 0    ");
 		sql.append("        , 0, ?,'master') ");
-			try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
-				pstmt.setString(1, dto.getBtitle());
-				pstmt.setString(2, dto.getBcontent());
-				pstmt.setString(3, dto.getBcategory());
-				pstmt.setString(4, dto.getBimg());
-				pstmt.executeUpdate();
-			}
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			pstmt.setString(1, dto.getBtitle());
+			pstmt.setString(2, dto.getBcontent());
+			pstmt.setString(3, dto.getBcategory());
+			pstmt.setString(4, dto.getBimg());
+			pstmt.executeUpdate();
+		}
 	}
-	
+
 	public JWBoardDTO Detail(Connection conn, String bno) throws SQLException
 	{
 		JWBoardDTO dto = new JWBoardDTO();
@@ -67,7 +86,7 @@ public class JWBoardDAO {
 		ResultSet rs = null;
 		sql.append(" select * from adboard     ");
 		sql.append("   where bno = ?           ");
-		
+
 		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
 			pstmt.setString(1, bno);
 			rs = pstmt.executeQuery();
@@ -87,7 +106,7 @@ public class JWBoardDAO {
 		System.out.println(dto);
 		return dto;
 	}
-	
+
 	public void Delete(Connection conn, String bno) throws SQLException
 	{
 		StringBuilder sql = new StringBuilder();
@@ -98,7 +117,7 @@ public class JWBoardDAO {
 			pstmt.executeUpdate();
 		}
 	}
-	
+
 	public void Update(Connection conn, JWBoardDTO dto) throws SQLException
 	{
 		System.out.println(dto);
@@ -115,5 +134,36 @@ public class JWBoardDAO {
 			pstmt.setInt(4, dto.getBno());
 			pstmt.executeUpdate();
 		}
+	}
+	
+	public int Totalcount(Connection conn, String search, String searchtxt) throws SQLException{
+		int Totalcount = 0;
+		StringBuilder sql = new StringBuilder();
+		ResultSet rs = null;
+		sql.append(" select count(*) from adboard     ");
+		if(!(search.equals(""))&&!(searchtxt.equals("")))
+		{
+			if(search.equals("btitle"))
+				sql.append(" where btitle like ? ");
+			else if(search.equals("bcontent"))
+				sql.append(" where bcontent like ? ");
+			else if(search.equals("id"))
+				sql.append(" where id like ? ");
+		}
+		//sql.append("   where bno = ?           ");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			//pstmt.setString(1, bno);
+			if(!(search.equals(""))&&!(searchtxt.equals("")))
+			{
+				pstmt.setString(1, "%"+searchtxt+"%");
+			}
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				Totalcount = rs.getInt(1);
+			}
+		}
+		System.out.println(Totalcount);
+		return Totalcount;
 	};
 }
