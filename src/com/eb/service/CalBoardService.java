@@ -73,10 +73,24 @@ public class CalBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
+	
 	public void Delete(int bno) {
-		// TODO Auto-generated method stub
-		
+		DBConn db=DBConn.getDB();
+		Connection conn=null;
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
+			dao.Delete(conn, bno);
+			conn.commit();
+		}catch(SQLException|NamingException e){
+			try {conn.rollback();} catch (SQLException e1) {}
+			System.out.println(e);
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
 	}
+	
 }
 
 	

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.eb.dto.CalBoardDTO;
+import com.lol.comm.DBConn;
 
 public class CalBoardDAO {
 
@@ -88,6 +89,17 @@ public class CalBoardDAO {
 			pstmt.executeUpdate();
 		} finally {
 			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
+		}
+	}
+
+	public void Delete(Connection conn, int bno) throws SQLException {
+		StringBuilder sql=new StringBuilder();
+		sql.append("    delete from calboard      ");
+		sql.append("    where bno = ?             ");
+		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());
+			){
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
 		}
 	}
 
