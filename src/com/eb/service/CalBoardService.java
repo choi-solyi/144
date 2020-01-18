@@ -91,6 +91,23 @@ public class CalBoardService {
 		}
 	}
 	
+	public void update(CalBoardDTO dto) {
+		DBConn db=DBConn.getDB();
+		Connection conn=null;
+		try{
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
+			dao.Update(conn, dto);
+			conn.commit();
+		}catch(SQLException|NamingException e) {
+			try {conn.rollback();} catch (SQLException e1) {}
+			System.out.println(e);
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+	}
+	
 }
 
 	

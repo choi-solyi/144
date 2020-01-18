@@ -8,30 +8,28 @@
 </head>
 <body>
 	<form method="post" action="EBinsertresult.do">
-		<ul>
-			<li>
-				<label for="btitle">제목</label>
-				<input type="text" name="btitle" id="btitle" required="required">
-			</li>
-			<li>
-				<label for="bcaldate">날짜</label> 
-				<input type="date" name="bcaldate" id="bcaldate" required="required">
-			</li>
+		<div>
+			<div>
+			<label for="btitle">제목</label>
+			<input type="text" name="btitle" id="btitle" required="required">
+			</div>
+			<div>
+			<label for="bcaldate">날짜</label>
+			<input type="date" name="bcaldate" id="bcaldate" required="required">
+			</div>
 <!-- 			
-			<li>
-				<label for="bimg">파일첨부</label>
-				<input type="file" name="bimg" id="bimg">
-			</li>
- -->
-			<li>
-				<label>내용</label>
-				<textarea name="bcontent" id="bcontent" rows="10" cols="50"></textarea>
-			</li>
-			<li>
-				<input type="submit" value="입력">
-			    <input type="reset" value="취소">
-			</li>
-		</ul>
+			<li><label for="bimg">파일첨부</label>
+				<input type="file" name="bimg" id="bimg"></li>
+-->
+			<div>
+			<label>내용</label>
+			<textarea name="bcontent" id="bcontent" rows="10" cols="50"></textarea>
+			</div>
+			<div>
+			<input type="submit" value="입력">
+			<input type="reset" value="취소">
+			</div>
+		</div>
 	</form>
 </body>
 </html>

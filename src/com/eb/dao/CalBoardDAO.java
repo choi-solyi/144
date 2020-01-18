@@ -63,6 +63,7 @@ public class CalBoardDAO {
 				dto.setBtitle(rs.getString("btitle"));
 				dto.setBhit(rs.getInt("bhit"));
 				dto.setBup(rs.getInt("bup"));
+				dto.setBcontent(rs.getString("bcontent"));
 			}
 		}finally {
 			if(rs!=null) try {rs.close();} catch(SQLException e) {}
@@ -83,8 +84,8 @@ public class CalBoardDAO {
 		try {
 			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setString(1, dto.getBtitle());
-			pstmt.setString(2, dto.getBcontent());
-			pstmt.setString(3, dto.getBcaldate());
+			pstmt.setString(2, dto.getBcaldate());
+			pstmt.setString(3, dto.getBcontent());
 			pstmt.setString(4, dto.getId());
 			pstmt.executeUpdate();
 		} finally {
@@ -101,6 +102,27 @@ public class CalBoardDAO {
 			pstmt.setInt(1, bno);
 			pstmt.executeUpdate();
 		}
+	}
+
+	public void Update(Connection conn, CalBoardDTO dto) throws SQLException {
+		StringBuilder sql=new StringBuilder();
+		sql.append(" update calboard set                ");
+		sql.append("	       btitle = ?               ");
+		sql.append("         , bcaldate = ?             ");
+		sql.append("	     , bcontent = ?             ");
+		sql.append("  where bno = ?                     ");
+		PreparedStatement pstmt=null;
+		try {
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setString(1, dto.getBtitle());
+			pstmt.setString(2, dto.getBcaldate());
+			pstmt.setString(3, dto.getBcontent());
+			pstmt.setInt(4, dto.getBno());
+			pstmt.executeUpdate();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
+		}
+		
 	}
 
 }

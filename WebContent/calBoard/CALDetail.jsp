@@ -8,11 +8,22 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div>
+	<div>글번호</div>
 	<div>${dto.bno}</div>
+	<div>날짜</div>
 	<div>${dto.bcaldate}</div>
+	<div>제목</div>
 	<div>${dto.btitle}</div>
+	<div>조회수</div>
 	<div>${dto.bhit}</div>
+	<div>추천</div>
 	<div>${dto.bup}</div>
-	<a href="EB.do">글 작성</a>
+	<div>내용</div>
+	<div>${dto.bcontent}</div>
+	</div>
+	<a href="EBinsert.do">새 글 작성</a>
+	<a href="EBupdate.do?bno=${dto.bno}">수정</a>
+	<a href="EBdelete.do?bno=${dto.bno}">삭제</a>
 </body>
 </html>
