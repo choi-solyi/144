@@ -39,9 +39,10 @@ public class JWBoardDAO {
 				pstmt.setString(1, "%"+searchtxt+"%");
 				pstmt.setInt(2, startrow);
 				pstmt.setInt(3, endrow);
-			}
+			}else {
 			pstmt.setInt(1, startrow);
 			pstmt.setInt(2, endrow);
+			}
 			rs = pstmt.executeQuery();
 			while(rs.next())
 			{
@@ -150,9 +151,7 @@ public class JWBoardDAO {
 			else if(search.equals("id"))
 				sql.append(" where id like ? ");
 		}
-		//sql.append("   where bno = ?           ");
 		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
-			//pstmt.setString(1, bno);
 			if(!(search.equals(""))&&!(searchtxt.equals("")))
 			{
 				pstmt.setString(1, "%"+searchtxt+"%");

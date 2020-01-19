@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sb.dto.SUPBoardDTO;
+import com.sb.dto.SUPRepBoardDTO;
 
 public class SUPBoardDAO {
 	private static SUPBoardDAO instance = new SUPBoardDAO();
@@ -49,12 +50,12 @@ public class SUPBoardDAO {
 			if(!search.equals("") && !txtsearch.equals("")) 
 			{
 				pstmt.setString(1, "%"+txtsearch+"%");
-				pstmt.setInt(2, startrow);
+				pstmt.setInt(2, startrow-1);
 				
 			}
 			else {
 				
-				pstmt.setInt(1, startrow);
+				pstmt.setInt(1, startrow-1);
 			}
 			rs= pstmt.executeQuery();
 			
@@ -227,6 +228,69 @@ public class SUPBoardDAO {
 			if(rs!=null) try { rs.close();} catch(SQLException e) {}
 		}
 		return count;
+	}
+
+	public void sbRepAdd(Connection conn, SUPRepBoardDTO rdto) throws SQLException {
+		StringBuilder sql= new StringBuilder();
+		sql.append(" insert into suprepboard(repno,rcontent,id,rwritedate,bno) ");
+		sql.append(" values(null,?,'general',now(),?) ");
+		PreparedStatement pstmt = null;
+		try {
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setString(1, rdto.getRcontent());
+			pstmt.setInt(2, rdto.getBno());
+			
+			pstmt.executeUpdate();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
+		}
+		
+	}
+
+	public List<SUPRepBoardDTO> sbDetailRep(Connection conn, int bno) throws SQLException {
+		ResultSet rs =null;
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select repno,rcontent,id,rwritedate,bno ");
+		sql.append(" from suprepboard ");
+		sql.append(" where bno=? ");
+		sql.append(" order by repno desc ");
+		List<SUPRepBoardDTO> list = new ArrayList<>();
+		
+		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString())){
+			pstmt.setInt(1, bno);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				SUPRepBoardDTO rdto = new SUPRepBoardDTO();
+				rdto.setRepno(rs.getInt("repno"));
+				rdto.setRcontent(rs.getString("rcontent"));
+				rdto.setId(rs.getString("id"));
+				rdto.setRwritedate(rs.getString("rwritedate"));
+				rdto.setBno(rs.getInt("bno"));
+				list.add(rdto);
+			}
+			
+		}finally {
+			if(rs!=null) try {rs.close();} catch(SQLException e) {}
+		}
+		return list;
+	}
+
+	public void sbDeleteRep(Connection conn, int repno, int bno) throws SQLException{
+		StringBuilder sql= new StringBuilder();
+		PreparedStatement pstmt =null;
+		sql.append(" delete ");
+		sql.append(" from suprepboard ");
+		sql.append(" where repno=? ");
+		try {
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, repno);
+			pstmt.executeUpdate();
+		}finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
+		}
+		
 	}
 
 }

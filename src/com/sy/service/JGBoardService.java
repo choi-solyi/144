@@ -12,6 +12,7 @@ import com.lol.comm.DBConn;
 import com.sy.dao.JGBoardDAO;
 import com.sy.dto.JGBoardDTO;
 import com.sy.dto.JGRepBoardDTO;
+import com.user.comm.UserDTO;
 
 public class JGBoardService {
 	private static JGBoardService service = new JGBoardService();
@@ -214,5 +215,45 @@ public class JGBoardService {
 			if(conn!=null) try { conn.close(); } catch(SQLException e) {}
 		}
 		
+	}
+/*	public void history(String sname) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			
+	
+			conn.commit();
+			
+		}catch(NamingException|SQLException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(Exception e2) {}
+		}finally {
+			if(conn!=null) try { conn.close(); } catch(SQLException e) {}
+		}		
+	}*/
+	public int login(String id, String pw) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		
+		int result = 0;
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			
+			JGBoardDAO dao = JGBoardDAO.getDAO();
+			result = dao.login(conn, id,pw);
+	
+			conn.commit();
+			
+		}catch(NamingException|SQLException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(Exception e2) {}
+		}finally {
+			if(conn!=null) try { conn.close(); } catch(SQLException e) {}
+		}		
+		
+		return result;
 	}
 }

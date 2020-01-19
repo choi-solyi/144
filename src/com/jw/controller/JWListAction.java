@@ -25,7 +25,7 @@ public class JWListAction implements Action{
 		
 		String search = request.getParameter("search");
 		String searchtxt = request.getParameter("searchtxt");
-		
+
 		if(search==null)
 			search="";
 		if(searchtxt==null)
@@ -45,14 +45,17 @@ public class JWListAction implements Action{
 		
 		int pagecount = (int)Math.ceil((float)totalcount/pagesize);
 		int pageblock = 5;
-		int startpage = (currpage-1)/pageblock+1;
+		int startpage = (currpage-1)/pageblock*pageblock+1;
 		int endpage = startpage+pageblock-1;
 		if(endpage>pagecount)
 			endpage=pagecount;
-		
+		System.out.println(pagecount);
 		request.setAttribute("startpage", startpage);
 		request.setAttribute("endpage", endpage);
-		
+		request.setAttribute("pageblock", pageblock);
+		request.setAttribute("pagecount", pagecount);
+		request.setAttribute("search",search);
+		request.setAttribute("searchtxt",searchtxt);
 		List<JWBoardDTO> list = service.List(startrow, pagesize, search, searchtxt);
 		request.setAttribute("list", list);
 		

@@ -9,6 +9,7 @@ import javax.naming.NamingException;
 import com.lol.comm.DBConn;
 import com.sb.dao.SUPBoardDAO;
 import com.sb.dto.SUPBoardDTO;
+import com.sb.dto.SUPRepBoardDTO;
 
 
 public class SUPBoardService {
@@ -159,7 +160,72 @@ public class SUPBoardService {
 	    }
 	    return count;
 	}
+
+	public void sbRepAdd(SUPRepBoardDTO rdto) {
+		DBConn db = DBConn.getDB();
+		Connection conn=null;
+		
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			SUPBoardDAO dao = SUPBoardDAO.sbGetBoardDAO();
+			dao.sbRepAdd(conn,rdto);
+			
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(Exception e2) {}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		
+	}
+
+	public List<SUPRepBoardDTO> sbDetailRep(int bno) {
+		DBConn db = DBConn.getDB();
+		Connection conn=null;
+		List<SUPRepBoardDTO> list = null;
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			SUPBoardDAO dao= SUPBoardDAO.sbGetBoardDAO();
+			list=dao.sbDetailRep(conn,bno);
+			
+			conn.commit();
+			
+		}catch(SQLException | NamingException e) {
+			System.out.println();
+			try {conn.rollback();} catch(Exception e2) {}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		
+		return list;
+	}
+
+	public void sbDeleteRep(int repno, int bno) {
+		DBConn db = DBConn.getDB();
+		Connection conn=null;
+		
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			SUPBoardDAO dao= SUPBoardDAO.sbGetBoardDAO();
+			dao.sbDeleteRep(conn,repno,bno);
+			conn.commit();
+			
+		}catch(SQLException | NamingException e) {
+			
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		
+		
+	}
+		
 	
+
+
 	
 	
 }
