@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.protocol.Resultset;
 import com.sy.dto.JGBoardDTO;
 import com.sy.dto.JGRepBoardDTO;
+import com.user.comm.UserDTO;
 
 public class JGBoardDAO {
 	private static JGBoardDAO dao = new JGBoardDAO();
@@ -310,5 +312,31 @@ public class JGBoardDAO {
 		}
 		
 	}
-	
+	public int login(Connection conn, String id, String pw) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select pw			 	");
+		sql.append(" from userinfo 			");
+		sql.append(" where id = ?			");
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, id);
+
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				rs.getString(1).equals(pw);
+				return 1;
+			}else {
+				return 0;
+			}
+			
+		}finally {
+			if( rs!=null ) try { rs.close(); } catch(SQLException e) {}
+			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
+
+		}
+	}
 }

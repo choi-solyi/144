@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
+import com.sy.service.JGBoardService;
 
 public class LoginResultAction implements Action {
 
@@ -20,17 +21,23 @@ public class LoginResultAction implements Action {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 
+		
+		JGBoardService service = JGBoardService.getService();
+		
+
+		int result = service.login(id,pw);
+		
 		ForwardAction f = new ForwardAction();
 		
-		if(id.equals("admin") && pw.equals("admin")) {
+		if(result == 1) {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(60*5); //5min.
 			
 			f.setForward(true);
 			f.setUrl("jglist.do");
-			
-		}else {
+					
+		}else{
 			f.setForward(false);
 			f.setUrl("index.jsp");
 			
