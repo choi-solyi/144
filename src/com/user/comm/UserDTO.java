@@ -6,6 +6,13 @@ public class UserDTO {
 	private String nick;
 	private String name;
 	private String salt;
+	private String line;
+	public String getLine() {
+		return line;
+	}
+	public void setLine(String line) {
+		this.line = line;
+	}
 	private String email;
 	private String tel;
 	public String getId() {
