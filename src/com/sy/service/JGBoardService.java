@@ -32,7 +32,6 @@ public class JGBoardService {
 			JGBoardDAO dao = JGBoardDAO.getDAO();
 			
 			list = dao.list(conn, startRow, endRow, search);	
-			System.out.println("servicelist:" + list);
 			
 			conn.commit();
 		}catch(NamingException|SQLException e) {
@@ -41,7 +40,6 @@ public class JGBoardService {
 		}finally {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
-		System.out.println(list+"4444444444444444");
 		return list;
 	}
 	
