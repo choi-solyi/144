@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import com.mysql.cj.Session;
 import com.sy.dto.JGRepBoardDTO;
 import com.sy.service.JGBoardService;
 
@@ -59,7 +61,6 @@ public class SYListRep extends HttpServlet {
 		
 		JSONArray arr = new JSONArray();
 
-		
 		for(JGRepBoardDTO dto :list) {
 			JSONObject o = new JSONObject();
 			
@@ -68,6 +69,8 @@ public class SYListRep extends HttpServlet {
 			o.put("rwritedate", dto.getRwritedate());
 			o.put("bno", dto.getBno());
 			o.put("id", dto.getId());
+			o.put("nick", dto.getNick());
+			
 			arr.add(o);
 			
 		}

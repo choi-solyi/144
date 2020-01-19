@@ -23,12 +23,17 @@ public class SYInsertResultAciton implements Action {
 		String btitle = request.getParameter("btitle");
 		String bcategory = request.getParameter("bcategory");
 		String bcontent = request.getParameter("bcontent");
+		String id = request.getParameter("id");
 	
+		
+		System.out.println(id);
+		System.out.println("------- ----------     -----------------");
 		JGBoardDTO dto = new JGBoardDTO();
 		
 		dto.setBtitle(btitle);
 		dto.setBcategory(bcategory);
 		dto.setBcontent(bcontent);
+		dto.setId(id);
 		
 		JGBoardService service = JGBoardService.getService();
 		service.insert(dto);
