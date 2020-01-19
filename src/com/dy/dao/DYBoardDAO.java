@@ -54,6 +54,33 @@ public class DYBoardDAO {
 		
 		return list;
 	}
+	public void dyinsert(Connection conn, DYBoardDTO dto) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" insert into midboard ( btitle                 ");
+		sql.append("                       ,bcontent               ");
+		sql.append("                       ,bwritedate             ");
+		sql.append("                       ,bhit                   ");
+		sql.append("                       ,bup                    ");
+		sql.append("                       ,bimg                   ");
+		sql.append("                       ,id )                   ");
+		sql.append(" values ( ?, ?, now(), 0, 0, 'null', 'planet') ");
+	
+		
+		try(
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				
+		){
+			pstmt.setString(1, dto.getBtitle());
+			pstmt.setString(2, dto.getBcontent());
+			//pstmt.setString(3, 'img°æ·Î');
+			
+			pstmt.executeUpdate();
+			
+		}
+		
+	}
 	
 	
 	

@@ -32,22 +32,26 @@
 </head>
 <body>
 	<div id="dywritewrap">
-	<form action="insertresult.do" method="post" id="dyinsertform">
+	<form action="dyinsertresult.do" method="post" id="dyinsertform">
 		<ul>
-			<li><label for="category">카테고리</label>
-				<select>
-					<option value="1">옵션1</option>
+			<li><label for="dybcategory">카테고리</label>
+				<select id="dybcategory" name="bcategory">
+					<option value="1" selected>옵션1</option>
 					<option value="2">옵션2</option>
 					<option value="3">옵션3</option>
 				</select>
 			</li>
-			<li><label>제목</label>
-				<input type="text" name="btitle" id="btitle" value="내용을 입력하세요">
+			<li><label for="dybtitle">제목</label>
+				<input type="text" name="btitle" id="dybtitle" value="제목을 입력하세요" required>
 				<!-- 파일 업로드 코드 작성  -->
 			</li>
 			<li>
-				<textarea rows="20" cols="100" id="dybcontent" name="bcontent">내용을 입력하세요</textarea>
+				<textarea rows="20" cols="100" id="dybcontent" name="bcontent" required>내용을 입력하세요</textarea>
 			</li>
+			<li>
+				<input type="submit" value="등록">
+				<input type="reset" value="취소">
+ 			</li>
 		</ul>
 	</form>
 	</div>

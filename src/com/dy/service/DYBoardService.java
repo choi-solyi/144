@@ -44,6 +44,27 @@ public class DYBoardService {
 		
 		return list;
 	}
+	public void dyinsert(DYBoardDTO dto) {
+		// TODO Auto-generated method stub
+		
+		DBConn dbconn= DBConn.getDB();
+		Connection conn= null;
+		try {
+			conn=dbconn.getConn();
+			conn.setAutoCommit(false);
+			
+			DYBoardDAO dao = DYBoardDAO.getdao();
+			dao.dyinsert(conn,dto);
+			
+			conn.commit();
+		}catch(NamingException | SQLException e) {
+			System.out.println(e);
+			try {conn.rollback();}catch(SQLException e2) {}
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}
+		}
+		
+	}
 	
 	
 }
