@@ -143,12 +143,19 @@
 		</div>
 
 <!-- 상단이미지 끝  -->
-<%  %>
+<%String id = (String)session.getAttribute("id");
+	System.out.println(id);
+	System.out.println("여기는 insert.jsp의 id");
+	
+	%>
 
 	<form action="jginsertresult.do" method="post" class="formsize">
 		<div class="form-group">
-			<label for="nick">작성자</label> <input type="text"
-				class="form-control" name="nick" id="nick" value="<!-- 닉네임으로 세션 묶기-->" readonly="readonly">
+		
+		
+		
+			<label for="nick">작성자</label> 
+			<input type="text" class="form-control" name="nick" id="nick" value="변경 불가" readonly="readonly">
 		</div>
 	
 		<div class="form-group">
@@ -171,6 +178,8 @@
 			<label for="bcontent">내용</label>
 			<textarea class="form-control" id="bcontent" name="bcontent"
 				rows="15"></textarea>
+				
+				<input type="hidden" name="id" id="id" value="<%=id%>">
 		</div>
 
 		<div>

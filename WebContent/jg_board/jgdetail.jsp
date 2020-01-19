@@ -1,4 +1,5 @@
 
+<%@page import="com.sy.dto.JGBoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -235,7 +236,7 @@ function delrep(repno, bno){
 	<div class="jgcontent">
 		<div class="card-header">
 
-			글번호 ${dto.bno } / ${dto.bcategory } / 조회수 ${dto.bhit } / 작성자 <!-- 작성자 -->
+			글번호 ${dto.bno } / ${dto.bcategory } / 조회수 ${dto.bhit } / 작성자 ${dto.nick } <!-- 작성자 -->
 			<%-- 		글번호  <%=dto.getBno()%>
 			[<%=dto.getBcategory()%>] / 조회수
 			<%=dto.getBhit()%>
@@ -249,11 +250,22 @@ function delrep(repno, bno){
 			<p class="card-text">${dto.bcontent}<%-- <%=dto.getBcontent()%> --%>
 			</p>
 
-			<a href="jglist.do" class="btn btn-success btnsol">목록 보기</a> <a
-				href="jgupdate.do?bno=${dto.bno}<%-- <%=dto.getBno()%> --%>"
-				class="btn btn-success btnsol">수정</a> <a
-				href="jgdelete.do?bno=${dto.bno}<%-- <%=dto.getBno()%> --%>"
-				class="btn btn-success btnsol">삭제</a>
+			<a href="jglist.do" class="btn btn-success btnsol">목록 보기</a> 
+			
+			
+			<!-- 본인일 경우에만 !!!!! -->
+			
+			<c:if test="${sessionScope.id == dto.id}">
+			
+				<a href="jgupdate.do?bno=${dto.bno}"
+						class="btn btn-success btnsol">수정</a>
+
+				<a href="jgdelete.do?bno=${dto.bno}"
+					class="btn btn-success btnsol">삭제</a>
+			
+			</c:if> 
+			
+			
 		</div>
 	</div>
 

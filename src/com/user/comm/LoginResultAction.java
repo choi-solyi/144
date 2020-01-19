@@ -33,7 +33,6 @@ public class LoginResultAction implements Action {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(60*5); //5min.
-			
 			f.setForward(true);
 			f.setUrl("toplist.do");
 					
@@ -41,6 +40,8 @@ public class LoginResultAction implements Action {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(60*5); //5min.
+
+			System.out.println(session.getAttribute("id"));
 			
 			f.setForward(true);
 			f.setUrl("jglist.do");

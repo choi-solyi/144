@@ -80,13 +80,14 @@ public class JGBoardDAO {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append(" insert into jgboard(bno, bcategory, btitle, bcontent, bwritedate, 	bhit, id) ");
-		sql.append(" values(null, ?, ?,	?, 	now(), 0, 'challenger') ");
+		sql.append(" values(null, ?, ?,	?, 	now(), 0, ?) ");
 		//조회수-제목-내용-날짜-카테고리-댓글수,조회수
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, dto.getBcategory());
 			pstmt.setString(2, dto.getBtitle());
 			pstmt.setString(3, dto.getBcontent());
+			pstmt.setString(4, dto.getId());
 
 			pstmt.executeUpdate();		
 
@@ -99,9 +100,9 @@ public class JGBoardDAO {
 	public JGBoardDTO detail(Connection conn, int bno) throws SQLException {
 		PreparedStatement pstmt = null;
 		StringBuilder sql = new StringBuilder();
-		sql.append(" select bno, bcategory, btitle, bcontent, bwritedate, bhit, id  				");
-		sql.append(" from jgboard																	");
-		sql.append(" where bno = ? 																	");
+		sql.append(" select bno, bcategory, btitle, bcontent, bwritedate, bhit, jb.id, us.nick  	");
+		sql.append(" from jgboard as jb join userinfo as us on jb.id = us.id			");
+		sql.append(" where bno = ? 														");
 		ResultSet rs =null;
 
 		JGBoardDTO dto = new JGBoardDTO();
@@ -118,6 +119,8 @@ public class JGBoardDAO {
 				dto.setBcontent(rs.getString("bcontent"));
 				dto.setBwritedate(rs.getString("bwritedate"));
 				dto.setBhit(rs.getInt("bhit"));
+				dto.setId(rs.getString("id"));
+				dto.setNick(rs.getString("nick"));
 				
 				
 			}
@@ -203,7 +206,7 @@ public class JGBoardDAO {
 	//댓글 리스트 보기
 	public List<JGRepBoardDTO> ListRep(Connection conn, int bno) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		sql.append(" select repno, rcontent, rwritedate, bno, id	 ");
+		sql.append(" select repno, rcontent, rwritedate, bno, id 	 ");
 		sql.append(" from jgrepboard						 ");
 		sql.append(" where bno = ?					 ");
 		sql.append(" order by repno desc ");
@@ -257,9 +260,9 @@ public class JGBoardDAO {
 	
 	public List<JGBoardDTO> list(Connection conn, int startRow, int endRow, String search) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		sql.append(" select * from jgboard   ");
-		
-		sql.append("  order by bno desc  limit ? , ?");
+		sql.append(" select bno, btitle, bcontent, bwritedate, bcategory, bhit, jb.id, us.nick 	");
+		sql.append(" from jgboard as jb join userinfo as us on jb.id = us.id					");
+		sql.append(" order by bno desc  limit ? , ?												");
 
 		ResultSet rs = null;
 		List<JGBoardDTO> list = new ArrayList<>();
@@ -279,6 +282,7 @@ public class JGBoardDAO {
 				dto.setBwritedate(rs.getString("bwritedate"));
 				dto.setBhit(rs.getInt("bhit"));
 				dto.setId(rs.getString("id"));
+				dto.setNick(rs.getString("nick"));
 				list.add(dto);
 				
 				System.out.println("dao-bno: "+ rs.getInt("bno"));
