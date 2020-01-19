@@ -26,7 +26,7 @@
 	<c:set var="txtsearch" value="${requestScope.txtsearch}"></c:set>
 	<div class="container">
 
-		<table class="table">
+		<table class="table table-hover">
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col" style="width: 100px;">번호</th>

@@ -65,6 +65,51 @@ public class DYBoardService {
 		}
 		
 	}
+	public DYBoardDTO dydetail(int bno) {
+		// TODO Auto-generated method stub
+		
+		DBConn dbconn = DBConn.getDB();
+		Connection conn=null;
+		
+		DYBoardDTO dto= null;
+		try {
+			conn=dbconn.getConn();
+			conn.setAutoCommit(false);
+			
+			DYBoardDAO dao = DYBoardDAO.getdao();
+			dto = dao.dydetail(conn,bno);
+			
+			conn.commit();		
+		}catch(NamingException | SQLException e) {
+			System.out.println(e);
+			try{conn.rollback();}catch(SQLException e2) {}
+			
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}  
+		}
+		
+		return dto;
+	}
+	public void dydelete(int bno) {
+		// TODO Auto-generated method stub
+		
+		DBConn dbconn = DBConn.getDB();
+		Connection conn=null;
+		try {
+			conn=dbconn.getConn();
+			conn.setAutoCommit(false);
+			
+			DYBoardDAO dao = DYBoardDAO.getdao();
+			dao.dydelete(conn,bno);
+			
+			conn.commit();
+		}catch(NamingException | SQLException e) {
+			System.out.println(e);
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}
+		}
+	}
 	
 	
 }
+

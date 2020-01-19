@@ -81,6 +81,56 @@ public class DYBoardDAO {
 		}
 		
 	}
+	public DYBoardDTO dydetail(Connection conn, int bno) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select nick                       ");
+		sql.append("       ,bcategory                  ");
+		sql.append("       ,btitle                     ");
+		sql.append("       ,bhit                       ");
+		sql.append("       ,bcontent                   ");
+		sql.append(" from midboard join userinfo       ");
+		sql.append(" on midboard.id = userinfo.id      ");
+		sql.append(" where bno = ?                     ");
+		
+		ResultSet rs =null;
+		DYBoardDTO dto = new DYBoardDTO();
+		try (
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				){
+				pstmt.setInt(1, bno);
+				rs=pstmt.executeQuery();
+				
+				if(rs.next())
+				{
+					dto.setBwritedate(rs.getString("nick"));
+					dto.setBcategory(rs.getString("bcategory"));
+					dto.setBtitle(rs.getString("btitle"));
+					dto.setBhit(rs.getInt("bhit")+1);
+					dto.setBcontent(rs.getString("bcontent"));
+					
+				}
+			
+		}finally {
+			if(rs!=null)try {rs.close();}catch(SQLException e) {}
+		}
+		
+		return dto;
+	}
+	public void dydelete(Connection conn, int bno) throws SQLException {
+		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append(" delete from midboard     ");
+		sql.append(" where bno = ?            ");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) 
+		{
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();	
+		}
+	}
 	
 	
 	

@@ -124,9 +124,9 @@
                 </li>-->
 
 				<li class="nav-item">
-					<form class="form-inline my-2 my-lg-0">
+					<form method="post" action="search.do" class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search"
-							placeholder="소환사명 입력" aria-label="Search">
+							placeholder="소환사명 입력" aria-label="Search" name="summoner" id="summoner">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
 				</li>

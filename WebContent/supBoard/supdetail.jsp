@@ -13,6 +13,17 @@ ul li {
 	padding: 0px 120px;
 }
 </style>
+
+<script>
+	function send() {
+		if (document.frm.rcontent.value != "") {
+			document.frm.submit();
+		}
+	}
+
+	
+</script>
+
 </head>
 <body>
 	<c:set var="dto" value="${requestScope.dto}" />
@@ -51,7 +62,7 @@ ul li {
 			<div style="display: inline-block; margin-left: 900px;">
 				<a class="btn btn-secondary btn-sm" href="sblist.do" role="button"
 					style="padding: 5px 20px;">목록</a> <a
-					class="btn btn-secondary btn-sm" href="#" role="button"
+					class="btn btn-secondary btn-sm" href="#represult" role="button"
 					style="padding: 5px 20px;">댓글</a>
 				<div></div>
 			</div>
@@ -63,33 +74,72 @@ ul li {
 
 			</div>
 
-			</div>
-			<form method="post" action="sbaddrep.do" name="frm">
+		</div>
 
-				<input type="hidden" name="bno" value="${dto.bno}">
-				<textarea rows="3" cols="20" name="rcontent"></textarea>
-				<br> <input type="hidden" id="id" name="id" value="${dto.id}}"> 
-				<input type="button" onclick="send()" value="추가">
-					
+	
+		<script>
+	
 
-
-			</form>
+		let bno = ${dto.bno}
 		
 
+		$.ajax({
+			url:'sbdetailrep.do'
+			,data: {'bno':bno}
+			,dataType:'json'
+			,method:'post'
+			,success:function(data){
+				
+				$.each(data,function(index,item){
+					let result= "<tr>";
+					result+= "<th>"+item.id+"("+item.rwritedate+")"+"</th>";
+					result+= "<th>"+"<a href="+"sbdeleterep.do?repno="+item.repno+"&bno="+item.bno;
+					result+= ">"+"삭제</a></th>";
+					result+= "</tr>";
+					result+= "<tr><th>"+item.rcontent+"</th>";
+					result+= "</tr>";
+					
+					$('#represult').append(result);
+				});
+				
+			}
+			,error:function(data){
+				console.log('error',data);
+			}
+			
+		});
+
+	
+	
+	</script>
 
 
 
 
-			<%-- <ul>
-			<li>${dto.id}</li>
-			<li>${dto.bwritedate}</li>
-			<li>${dto.bhit}</li>
-			<li>${dto.bcategory}</li>
-			<li>${dto.btitle}</li>
-			<li>${dto.bcontent}</li>
-		</ul> --%>
+		<table class="table" style="margin: 0 auto;">
+			<thead id="represult">
+
+			</thead>
+
+		</table>
+			<form method="post" action="sbaddrep.do" name="frm">
+
+			<div class="input-group" style=" margin:0 auto;">
+				<div class="input-group-prepend" >
+					<span class="input-group-text">댓글</span>
+				</div>
+				<input type="hidden" name="bno" value="${dto.bno}">
+				<input type="hidden" name="id" value="${dto.id }">
+				<textarea class="form-control" aria-label="With textarea" name="rcontent" rows="3"></textarea>
+				<input type="button" onclick="send()" value="등록">
+				
+			</div>
 
 
-		</div>
+		</form>
+
+	</div>
+
+
 </body>
 </html>

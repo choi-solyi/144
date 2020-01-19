@@ -92,10 +92,11 @@
 		
 		<c:forEach var="list" items="${list }" >
 			<div class="dy_bno"><c:out value="${list.bno }"/></div>
-			<div class="dy_btitle"><c:out value="${list.btitle }"/></div>
+			<div class="dy_btitle"><a href="dydetail.do?bno=${list.bno}"><c:out value="${list.btitle }"/></a></div>
 			<div class="dy_nick"><c:out value="${list.nick }"/></div>
 			<div class="dy_bwritedate"><c:out value="${list.bwritedate }"/></div>
 			<div class="dy_bhit"><c:out value="${list.bhit }"/></div>
+			<div><a href="dydelete.do?bno=${list.bno }"> <input type="button" value="삭제"></a></div>
 		</c:forEach>
 	
 		</div>
