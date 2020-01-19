@@ -18,12 +18,36 @@ public class EBListAction implements Action {
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html; chartset=utf-8");
-
-		CalBoardService service=CalBoardService.getService();
-		List<CalBoardDTO> list=service.list();
+		int currpage=1;
+		String curr=request.getParameter("curr");
+		if(curr!=null)
+			currpage=Integer.parseInt(curr);
 		
+			
+		CalBoardService service=CalBoardService.getService();
+		int pagepersize=10;
+		int totalcount=service.Totalcount();
+		int totalpage=(int)Math.ceil((float)totalcount/pagepersize);
+	
+		
+		int startrow=(currpage-1)*pagepersize;
+		int endrow=startrow+pagepersize-1;
+			if(endrow>totalcount)
+			endrow=totalcount;
+		
+		int pageblocksize=5; 
+	    int startblock=(currpage-1)/pageblocksize*pageblocksize+1;   
+	    int endblock= startblock+pageblocksize-1;
+	    if(endblock>totalpage)
+	         endblock=totalpage;
+			
+		
+		
+		List<CalBoardDTO> list=service.list(startrow, pagepersize);
+		
+		request.setAttribute("startblock", startblock);
+		request.setAttribute("endblock", endblock);
+		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("list", list);
 	
 		ForwardAction forward=new ForwardAction();

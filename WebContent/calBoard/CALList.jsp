@@ -28,6 +28,9 @@
     <div class="col">추천</div>
   </div>
 		
+	 ${startblock}
+	 ${endblock}
+	
 		
 	<div>
 	 <c:forEach items="${requestScope.list}" var="index"> 
@@ -40,6 +43,14 @@
 		</div>
 	 </c:forEach>
 	</div>
+	<c:if test="${startblock>1}"><a href="EBlist.do?curr=${startblock-1}">이전</a></c:if>
+	
+	<c:forEach var="index" begin="${startblock}" end="${endblock}" step="1">
+		<a href="EBlist.do?curr=${index}">${index}</a>
+	</c:forEach>
+	
+	<c:if test="${endblock<totalpage}"><a href="EBlist.do?curr=${endblock+1}">다음</a></c:if>
+	
 	<div class="col-sm-12 text-left mb-5">
 	<a href="EBinsert.do" class="btn btn-primary">글 작성</a>
 	</div>

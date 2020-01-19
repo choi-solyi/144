@@ -18,7 +18,7 @@ public class CalBoardService {
 	}
 	private CalBoardService() {}
 	
-	public List<CalBoardDTO> list() {
+	public List<CalBoardDTO> list(int startrow, int endrow) {
 		DBConn db=DBConn.getDB();
 		Connection conn=null;
 		List<CalBoardDTO> list=null;
@@ -26,7 +26,7 @@ public class CalBoardService {
 			conn=db.getConn();
 			conn.setAutoCommit(false);
 				CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
-				list=dao.List(conn);
+				list=dao.List(conn, startrow, endrow);
 			conn.commit();
 		} catch (SQLException | NamingException e) {
 			try {conn.rollback();} catch (SQLException e1) {}
@@ -108,6 +108,24 @@ public class CalBoardService {
 		}
 	}
 	
+	public int Totalcount() {
+		DBConn db=DBConn.getDB();
+		Connection conn=null;
+		int totalcount=0;
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
+			totalcount=dao.getTotalCount(conn);
+			conn.commit();
+		}catch(SQLException|NamingException e) {
+			try {conn.rollback();} catch (SQLException e1) {}
+			System.out.println(e);
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		return totalcount;
+	}
 }
 
 	
