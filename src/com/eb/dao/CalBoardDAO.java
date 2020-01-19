@@ -18,9 +18,11 @@ public class CalBoardDAO {
 		return dao;
 	}
 
-	private CalBoardDAO() {};
+	private CalBoardDAO() {
+	};
 
-	public List<CalBoardDTO> List(Connection conn, int startrow, int endrow) throws SQLException {
+	public List<CalBoardDTO> List(Connection conn, int startrow, int endrow, String search, String searchtxt)
+			throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append("   select            ");
 		sql.append("          bno        ");
@@ -29,13 +31,24 @@ public class CalBoardDAO {
 		sql.append("        , bhit       ");
 		sql.append("        , bup        ");
 		sql.append("   from calboard     ");
+		if (!(search.equals("")) && !(searchtxt.equals(""))) {
+			if (search.equals("btitle"))
+				sql.append(" where btitle like ? ");
+			else if (search.equals("bcontent"))
+				sql.append(" where bcontent like ? ");
+		}
 		sql.append("   limit ?, ?        ");
-		ResultSet rs=null;
+		ResultSet rs = null;
 		List<CalBoardDTO> list = new ArrayList<CalBoardDTO>();
-		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 				
-				) {
-			pstmt.setInt(1, startrow);
-			pstmt.setInt(2, endrow);
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			if (!(search.equals("")) && !(searchtxt.equals(""))) {
+				pstmt.setString(1, "%" + searchtxt + "%");
+				pstmt.setInt(2, startrow);
+				pstmt.setInt(3, endrow);
+			} else {
+				pstmt.setInt(1, startrow);
+				pstmt.setInt(2, endrow);
+			}
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				CalBoardDTO dto = new CalBoardDTO();
@@ -46,7 +59,6 @@ public class CalBoardDAO {
 				dto.setBup(rs.getInt("bup"));
 				list.add(dto);
 			}
-			
 		}
 		return list;
 	}
@@ -58,8 +70,7 @@ public class CalBoardDAO {
 		sql.append(" from calboard         ");
 		sql.append(" where bno = ?         ");
 		CalBoardDTO dto = new CalBoardDTO();
-		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 	
-		) {
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 			pstmt.setInt(1, bno);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -70,14 +81,13 @@ public class CalBoardDAO {
 				dto.setBup(rs.getInt("bup"));
 				dto.setBcontent(rs.getString("bcontent"));
 			}
-		}finally {
-			if(rs!=null) try {rs.close();} catch(SQLException e) {}
+		} finally {	if (rs != null) try {rs.close();} catch (SQLException e) {}
 		}
 		return dto;
 	}
 
 	public void Insert(Connection conn, CalBoardDTO dto) throws SQLException {
-		StringBuilder sql=new StringBuilder();
+		StringBuilder sql = new StringBuilder();
 		sql.append(" insert into calboard(         ");
 		sql.append("                bno            ");
 		sql.append("              , btitle         ");
@@ -85,64 +95,71 @@ public class CalBoardDAO {
 		sql.append("              , bcontent       ");
 		sql.append("              , id)            ");
 		sql.append("  values( null ,? ,? ,? ,? )   ");
-		PreparedStatement pstmt=null;
+		PreparedStatement pstmt = null;
 		try {
-			pstmt=conn.prepareStatement(sql.toString());
+			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, dto.getBtitle());
 			pstmt.setString(2, dto.getBcaldate());
 			pstmt.setString(3, dto.getBcontent());
 			pstmt.setString(4, dto.getId());
 			pstmt.executeUpdate();
 		} finally {
-			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
+			if (pstmt != null)
+				try {pstmt.close();} catch (SQLException e) {}
 		}
 	}
 
 	public void Delete(Connection conn, int bno) throws SQLException {
-		StringBuilder sql=new StringBuilder();
+		StringBuilder sql = new StringBuilder();
 		sql.append("    delete from calboard      ");
 		sql.append("    where bno = ?             ");
-		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());
-			){
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 			pstmt.setInt(1, bno);
 			pstmt.executeUpdate();
 		}
 	}
 
 	public void Update(Connection conn, CalBoardDTO dto) throws SQLException {
-		StringBuilder sql=new StringBuilder();
+		StringBuilder sql = new StringBuilder();
 		sql.append(" update calboard set                ");
 		sql.append("	       btitle = ?               ");
 		sql.append("         , bcaldate = ?             ");
 		sql.append("	     , bcontent = ?             ");
 		sql.append("  where bno = ?                     ");
-		PreparedStatement pstmt=null;
+		PreparedStatement pstmt = null;
 		try {
-			pstmt=conn.prepareStatement(sql.toString());
+			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, dto.getBtitle());
 			pstmt.setString(2, dto.getBcaldate());
 			pstmt.setString(3, dto.getBcontent());
 			pstmt.setInt(4, dto.getBno());
 			pstmt.executeUpdate();
-		}finally {
-			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
+		} finally {
+			if (pstmt != null)
+				try {pstmt.close();} catch (SQLException e) {}
 		}
-		
 	}
 
-	public int getTotalCount(Connection conn) throws SQLException{
-		StringBuilder sql=new StringBuilder();
-		ResultSet rs=null;
+	public int getTotalCount(Connection conn, String search, String searchtxt) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		ResultSet rs = null;
 		sql.append(" select count(*) from calboard   ");
-		int totalcount=0;
-		try (
-		PreparedStatement pstmt=conn.prepareStatement(sql.toString());
-		){
-			rs=pstmt.executeQuery(); 
+		if (!(search.equals("")) && !(searchtxt.equals(""))) {
+			if (search.equals("btitle"))
+				sql.append(" where btitle like ? ");
+			else if (search.equals("bcontent"))
+				sql.append(" where bcontent like ? ");
+		}
+		int totalcount = 0;
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			if (!(search.equals("")) && !(searchtxt.equals(""))) {
+				pstmt.setString(1, "%" + searchtxt + "%");
+			rs = pstmt.executeQuery();
 			rs.next();
-			totalcount=rs.getInt(1);
+			totalcount = rs.getInt(1);
 		}
 		return totalcount;
+	}
 	}
 
 }
