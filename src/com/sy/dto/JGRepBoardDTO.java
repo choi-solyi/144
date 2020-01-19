@@ -6,8 +6,15 @@ public class JGRepBoardDTO {
 	private String rwritedate;
 	private int bno;
 	private String id;
+	private String nick;
 	
 	
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	public int getRepno() {
 		return repno;
 	}
@@ -38,6 +45,7 @@ public class JGRepBoardDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 
 	
 	

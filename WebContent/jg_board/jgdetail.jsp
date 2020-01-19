@@ -291,8 +291,8 @@ function delrep(repno, bno){
 			class="was-validated">
 			<div class="form-group">
 				<label for="disabledTextInput">닉네임</label> <input type="text"
-					id="id" class="form-control" name="id" placeholder="이블린"
-					value="닉네임" readonly="readonly">
+					id="id" class="form-control" name="id" placeholder="자동 입력"
+					value="${dto.id }" readonly="readonly">
 			</div>
 
 
@@ -327,8 +327,10 @@ function delrep(repno, bno){
 
  <script>
     let bno = ${dto.bno};
-	
+	let ssid = '<%=(String)session.getAttribute("id")%>';
 	console.log(bno);
+	console.log('세션아이디');
+	console.log(ssid);
 	
 	$.ajax({
 		url : 'listreq.do',
@@ -343,35 +345,38 @@ function delrep(repno, bno){
 					console.log(item);
 					
 					console.log(item.repno);
-					if(index%3==0){
-let rep ="<div class='card border-success mb-3 botrep' style='max-width: 18rem;'>"	;
+if(index%3==0){
+	let rep ="<div class='card border-success mb-3 botrep' style='max-width: 18rem;'>"											;
+	rep+= '<div class="card-header"> 댓글 '																						;
+	if(ssid==item.id){
+	rep+='<input type="submit" onclick=delrep('+ item.repno  +','+  item.bno  +'); class="btn btn-success btndel" value="삭제">'	;
+	rep+='<input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정">'									;
+	}
+	rep+= "</div><div class='card-body text-success'><h5 class='card-title'>"+item.nick +"</h5>"								;
+	rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"													; 
+	$('#replist').append(rep);
+}else if(index%2==0){
+	let rep ="<div class='card border-info mb-3 botrep' style='max-width: 18rem;'>"												;
+	rep+= '<div class="card-header"> 댓글 ';
+	if(ssid==item.id){
+	rep+='<input type="submit" onclick=delrep('+ item.repno  +','+  item.bno  +'); class="btn btn-info btndel" value="삭제"> '	;
+	rep+='<input type="submit" onclick=update();" class="btn btn-info btnupd" value="수정">'										;
+	}
+	rep+= "</div><div class='card-body text-info'><h5 class='card-title'>"+item.nick +"</h5>"									;
+	rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"													; 
+	$('#replist').append(rep)																									;
 
-
-rep+= '<div class="card-header"> 댓글 <input type="submit" onclick=delrep('+ item.repno  +','+  item.bno  +'); class="btn btn-success btndel" value="삭제"> <input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정"></div>'	;
-
-rep+= "<div class='card-body text-success'>"										;
-rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"			; 
-
-$('#replist').append(rep);
-
-					}else if(index%2==0){
-let rep ="<div class='card border-info mb-3 botrep' style='max-width: 18rem;'>"	;
-rep+= '<div class="card-header"> 댓글 <input type="submit" onclick=delrep('+ item.repno  +','+  item.bno  +'); class="btn btn-success btndel" value="삭제"> <input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정"></div>'	;
-
-rep+= "<div class='card-body text-info'>"										;
-rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"			; 
-
-$('#replist').append(rep);
-
-					}else{
-let rep ="<div class='card border-dark mb-3 botrep' style='max-width: 18rem;'>"	;
-rep+= '<div class="card-header"> 댓글 <input type="submit" onclick=delrep('+ item.repno  +','+  item.bno  +'); class="btn btn-success btndel" value="삭제"> <input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정"></div>'	;
-
-rep+= "<div class='card-body text-dark'>"										;
-rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"			; 
-
-$('#replist').append(rep);
-					}
+}else{
+	let rep ="<div class='card border-dark mb-3 botrep' style='max-width: 18rem;'>"												;
+	rep+= '<div class="card-header"> 댓글 '																						;
+	if(ssid==item.id){
+	rep+='<input type="submit" onclick=delrep('+ item.repno  +','+  item.bno  +'); class="btn btn-dark btndel" value="삭제"> '	;
+	rep+='<input type="submit" onclick=update();" class="btn btn-dark btnupd" value="수정">'										;
+	}
+	rep+= "</div><div class='card-body text-dark'><h5 class='card-title'>"+item.nick +"</h5>"									;
+	rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"													; 
+	$('#replist').append(rep)																									;
+}
 				});
 	
 		}, error:function(data){
