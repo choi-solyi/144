@@ -20,7 +20,7 @@ public class CalBoardDAO {
 
 	private CalBoardDAO() {};
 
-	public List<CalBoardDTO> List(Connection conn) throws SQLException {
+	public List<CalBoardDTO> List(Connection conn, int startrow, int endrow) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append("   select            ");
 		sql.append("          bno        ");
@@ -29,10 +29,14 @@ public class CalBoardDAO {
 		sql.append("        , bhit       ");
 		sql.append("        , bup        ");
 		sql.append("   from calboard     ");
+		sql.append("   limit ?, ?        ");
+		ResultSet rs=null;
 		List<CalBoardDTO> list = new ArrayList<CalBoardDTO>();
-		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 
-			ResultSet rs = pstmt.executeQuery();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString()); 				
 				) {
+			pstmt.setInt(1, startrow);
+			pstmt.setInt(2, endrow);
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				CalBoardDTO dto = new CalBoardDTO();
 				dto.setBno(rs.getInt("bno"));
@@ -42,6 +46,7 @@ public class CalBoardDAO {
 				dto.setBup(rs.getInt("bup"));
 				list.add(dto);
 			}
+			
 		}
 		return list;
 	}
@@ -123,6 +128,21 @@ public class CalBoardDAO {
 			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
 		}
 		
+	}
+
+	public int getTotalCount(Connection conn) throws SQLException{
+		StringBuilder sql=new StringBuilder();
+		ResultSet rs=null;
+		sql.append(" select count(*) from calboard   ");
+		int totalcount=0;
+		try (
+		PreparedStatement pstmt=conn.prepareStatement(sql.toString());
+		){
+			rs=pstmt.executeQuery(); 
+			rs.next();
+			totalcount=rs.getInt(1);
+		}
+		return totalcount;
 	}
 
 }
