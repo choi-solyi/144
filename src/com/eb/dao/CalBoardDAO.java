@@ -37,6 +37,7 @@ public class CalBoardDAO {
 			else if (search.equals("bcontent"))
 				sql.append(" where bcontent like ? ");
 		}
+		sql.append(" ORDER BY bno DESC   ");
 		sql.append("   limit ?, ?        ");
 		ResultSet rs = null;
 		List<CalBoardDTO> list = new ArrayList<CalBoardDTO>();
@@ -79,6 +80,7 @@ public class CalBoardDAO {
 				dto.setBtitle(rs.getString("btitle"));
 				dto.setBhit(rs.getInt("bhit"));
 				dto.setBup(rs.getInt("bup"));
+				dto.setBimg(rs.getString("bimg"));
 				dto.setBcontent(rs.getString("bcontent"));
 			}
 		} finally {	if (rs != null) try {rs.close();} catch (SQLException e) {}
@@ -93,15 +95,17 @@ public class CalBoardDAO {
 		sql.append("              , btitle         ");
 		sql.append("              , bcaldate       ");
 		sql.append("              , bcontent       ");
+		sql.append("              , bimg           ");
 		sql.append("              , id)            ");
-		sql.append("  values( null ,? ,? ,? ,? )   ");
+		sql.append("  values( null ,? ,? ,? ,? ,? )   ");
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, dto.getBtitle());
 			pstmt.setString(2, dto.getBcaldate());
 			pstmt.setString(3, dto.getBcontent());
-			pstmt.setString(4, dto.getId());
+			pstmt.setString(4, dto.getBimg());
+			pstmt.setString(5, dto.getId());
 			pstmt.executeUpdate();
 		} finally {
 			if (pstmt != null)
@@ -119,7 +123,7 @@ public class CalBoardDAO {
 		}
 	}
 
-	public void Update(Connection conn, CalBoardDTO dto) throws SQLException {
+	public void Update(Connection conn, CalBoardDTO dto) throws SQLException  {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" update calboard set                ");
 		sql.append("	       btitle = ?               ");
@@ -154,12 +158,22 @@ public class CalBoardDAO {
 		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 			if (!(search.equals("")) && !(searchtxt.equals(""))) {
 				pstmt.setString(1, "%" + searchtxt + "%");
+			}
 			rs = pstmt.executeQuery();
 			rs.next();
 			totalcount = rs.getInt(1);
 		}
 		return totalcount;
 	}
-	}
 
+	public void Uphit(Connection conn, int bno) throws SQLException{
+		StringBuilder sql=new StringBuilder();
+		sql.append(" update calboard set          ");
+		sql.append("   bhit = bhit+1              ");
+		sql.append("   where  bno=?               ");
+		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());){
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();		
+		}
+	}
 }

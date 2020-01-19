@@ -35,6 +35,9 @@
 	
 	<div class="col-sm-12">
 	${dto.bcontent}
+	<c:if test="${dto.bimg ne null}">
+	<img alt="이미지" src="calBoard/calupload/${dto.bimg}">
+	</c:if> 
 	</div>
 	
 	

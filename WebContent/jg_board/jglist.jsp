@@ -149,19 +149,19 @@
 }
 
 .bno, .bcategory, .brepcount {
-	width: 110px;
+	width: 115px;
 	text-align: center;
 	border-radius: 3px;
 }
 
 .jgnick, .bwritedate, .bhit {
-	width: 150px;
+	width: 170px;
 	text-align: center;
 	border-radius: 3px;
 }
 
 .btitle {
-	width: 500px;
+	width: 550px;
 	text-align: center;
 }
 
@@ -250,6 +250,7 @@ if (session.getAttribute("id") == null) {
 				<li class="bno">글번호</li>
 				<li class="bcategory">카테고리</li>
 				<li class="btitle">제목</li>
+				<li class="jgnick">닉네임</li>
 				<li class="bwritedate">작성일</li>
 				<li class="bhit">조회수</li>
 			</ul>
@@ -270,7 +271,7 @@ if (session.getAttribute("id") == null) {
 								value="${item.btitle }" /></a></li>
 
 
-					<%-- <li class="jgnick"><c:out value="${item.nick }" /></li> --%>
+				    <li class="jgnick"><c:out value="${item.nick }" /></li> 
 					<li class="bwritedate"><c:out value="${item.bwritedate }" /></li>
 					<li class="bhit"><c:out value="${item.bhit }" /></li>
 				</ul>

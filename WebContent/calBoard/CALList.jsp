@@ -28,9 +28,6 @@
 			<div class="col">추천</div>
 		</div>
 
-		${startblock} ${endblock}
-
-
 		<div>
 			<c:forEach items="${requestScope.list}" var="index">
 				<div>

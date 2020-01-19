@@ -8,8 +8,15 @@ public class JGBoardDTO {
 	private String bcategory;
 	private int bhit;
 	private String id;
+	private String nick;
 	
 	
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	public int getBno() {
 		return bno;
 	}
@@ -51,6 +58,10 @@ public class JGBoardDTO {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	@Override
+	public String toString() {
+		return id ;
 	}
 
 
