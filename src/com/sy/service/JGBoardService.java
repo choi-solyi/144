@@ -215,4 +215,21 @@ public class JGBoardService {
 		}
 		
 	}
+	public void history(String sname) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			
+	
+			conn.commit();
+			
+		}catch(NamingException|SQLException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(Exception e2) {}
+		}finally {
+			if(conn!=null) try { conn.close(); } catch(SQLException e) {}
+		}		
+	}
 }
