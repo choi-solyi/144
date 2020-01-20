@@ -117,7 +117,7 @@
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="EBlist.do"
 					style="color: white;"> 대회 일정</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"
+				<li class="nav-item"><a class="nav-link" href="shop.do"
 					style="color: white;">쇼핑</a></li>
 				<!--    <li class="nav-item">
                     <a class="nav-link" href="#">Link3</a>

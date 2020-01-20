@@ -26,7 +26,7 @@ public class SBInsertResultAction implements Action {
 		String bcategory=request.getParameter("bcategory");
 		String btitle=request.getParameter("btitle");
 		String bcontent=request.getParameter("bcontent");
-		
+		String id = request.getParameter("id");
 		
 		
 		SUPBoardService service = SUPBoardService.sbGetBoardService();
@@ -35,6 +35,7 @@ public class SBInsertResultAction implements Action {
 		dto.setBcategory(bcategory);
 		dto.setBtitle(btitle);
 		dto.setBcontent(bcontent);
+		dto.setId(id);
 		
 		service.sbInsert(dto);
 		

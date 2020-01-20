@@ -96,8 +96,9 @@ public class CalBoardDAO {
 		sql.append("              , bcaldate       ");
 		sql.append("              , bcontent       ");
 		sql.append("              , bimg           ");
+		sql.append("              , bhit           ");
 		sql.append("              , id)            ");
-		sql.append("  values( null ,? ,? ,? ,? ,? )   ");
+		sql.append("  values( null ,? ,? ,? ,? ,0 ,? )   ");
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql.toString());

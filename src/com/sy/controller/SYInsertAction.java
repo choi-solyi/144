@@ -15,7 +15,7 @@ public class SYInsertAction implements Action {
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-
+		
 		
 
 		
