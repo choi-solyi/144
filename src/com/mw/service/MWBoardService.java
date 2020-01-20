@@ -12,6 +12,7 @@ import javax.naming.NamingException;
 import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
 import com.mw.dto.MWBoardDTO;
+import com.mw.dto.MWRepBoardDTO;
 
 import oracle.jdbc.driver.DBConversion;
 
@@ -39,6 +40,7 @@ public class MWBoardService {
 			conn = db.getConn();
 			conn.setAutoCommit(false);
 			MWBoardDAO dao = MWBoardDAO.getDAO();
+			
 			list = dao.mwBoardSelect(conn, search, searchtxt, startrow, endrow);
 						
 			conn.commit();
@@ -85,7 +87,6 @@ public class MWBoardService {
 			conn.setAutoCommit(false);
 			MWBoardDAO dao = MWBoardDAO.getDAO();
 			
-			dao.mwUp(conn, no);
 			dao.mwHit(conn, no);
 			dto = dao.mwDetail(conn, no);
 			
@@ -100,6 +101,32 @@ public class MWBoardService {
 			try {conn.rollback();} catch(SQLException e2) {}
 		}
 		return dto;
+	}
+	
+	public MWBoardDTO mwUp(int no) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		MWBoardDTO dto = null;
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			MWBoardDAO dao = MWBoardDAO.getDAO();
+			
+			dao.mwUp(conn, no);
+			dto = dao.mwDetail(conn, no);
+			
+			conn.commit();
+			
+		}
+		catch(NamingException | SQLException e){
+			System.out.println(e);
+		}
+		finally {
+			if(conn!=null) try { conn.close();} catch(SQLException e){}
+			try {conn.rollback();} catch(SQLException e2) {}
+		}
+		return dto;
+		
 	}
 
 	public void mwUpdate(MWBoardDTO dto) {
@@ -160,6 +187,75 @@ public class MWBoardService {
 		}
 		return count;
 	}
+
+	public void addRep(MWRepBoardDTO rdto) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			MWBoardDAO dao = MWBoardDAO.getDAO();
+			dao.addRep(conn, rdto);
+			System.out.println(rdto.getBno());
+			conn.commit();
+			
+		}
+		catch(NamingException | SQLException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(Exception e2) {}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		
+	}
+
+	public List<MWRepBoardDTO> repDetail(int no) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		List<MWRepBoardDTO> list = null;
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			MWBoardDAO dao = MWBoardDAO.getDAO();
+			list = dao.repDetailList(conn, no);
+			
+			conn.commit();
+		}
+		catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(Exception e2) {}
+		}
+		finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		
+		return list;
+	}
+
+	public void repDelete(int repno, int bno) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			MWBoardDAO dao = MWBoardDAO.getDAO();
+			dao.repDelete(conn, repno, bno);
+			
+			conn.commit();
+		}
+		catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(Exception e2) {}
+		}
+		finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		
+	}
+
+	
 
 	
 }

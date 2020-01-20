@@ -1,7 +1,6 @@
 package com.mw.controller;
 
 import java.io.IOException;
-
 import java.util.List;
 
 import javax.activation.ActivationDataFlavor;
@@ -28,12 +27,16 @@ public class MWListAction implements Action {
 		
 		String search = request.getParameter("search");
 		String searchtxt = request.getParameter("searchtxt");
-		
 		if(search == null)
+			System.out.println("없습니다");
 			search = "";
 		if(searchtxt == null)
+			System.out.println("없습니다");
 			searchtxt = "";
 		
+		System.out.println(search);
+		System.out.println(searchtxt);
+			
 		MWBoardService service = MWBoardService.getService();
 		
 		int totalcount = service.getCount(search, searchtxt);

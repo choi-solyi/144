@@ -28,7 +28,8 @@ ul li {
 <body>
 	<c:set var="dto" value="${requestScope.dto}" />
 	<c:set var="ssid" value ="${sessionScope.id }"/>
-
+	<c:set var="file1" value="${dto.bimg }"/>
+	
 	<div class="container">
 
 		<div class="card" style="text-align: center;">
@@ -45,15 +46,25 @@ ul li {
 		</div>
 		<br>
 		<p style="margin-left: 20px;" class="btn btn-outline-info">${dto.bcategory}</p>
+		<c:if test="${dto.bimg ne null}">
+			<div style="text-align: right;">
+			<label>[파일첨부]</label>
+				<a href="sbdownload.do?file=${file1 }">${file1 }</a>
+			</div>
+		</c:if>
+			
 		<br>
 		<div style="text-align: center;">
 			<h3>${dto.btitle}</h3>
 		</div>
 		<div style="margin-top: 50px; padding: 0px 30px;">
 			<pre>${dto.bcontent}</pre>
-
+			
 		</div>
-
+		
+		
+		
+		
 		<div style="padding: 5px 15px;">
 			<c:if test="${ssid==dto.id}">
 			<a class="btn btn-secondary btn-sm" href="sbupdate.do?bno=${dto.bno}"

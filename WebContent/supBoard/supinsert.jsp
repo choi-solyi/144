@@ -25,7 +25,7 @@
 <body>
 	
 	<!-- Example single danger button -->
-	<form method="post" action="sbinsertresult.do" name="frm" > <!-- enctype="multipart/form-data" -->
+	<form method="post" action="sbinsertresult.do" name="frm" enctype="multipart/form-data"  > <!-- enctype="multipart/form-data" -->
 		 <div class="container">
 			<select class="custom-select custom-select-sm subin subin1" name="bcategory" id="bcategory" required="required">
 				<option value="카테고리">카테고리</option>
@@ -53,8 +53,8 @@
 		
 
 		<div class="form-group"  >
-			<label for="exampleFormControlFile1"></label> <input type="file"
-				class="form-control-file" id="exampleFormControlFile1">
+			<label for="bimg"></label> <input type="file"
+				class="form-control-file" id="bimg" name="bimg">
 			
 		</div>
 		<div >
