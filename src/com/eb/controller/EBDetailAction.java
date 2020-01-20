@@ -23,9 +23,6 @@ public class EBDetailAction implements Action {
 			bno=Integer.parseInt(n);
 		
 		
-
-			
-		
 		CalBoardService service=CalBoardService.getService();
 		service.uphit(bno);
 		CalBoardDTO dto=service.detail(bno);
