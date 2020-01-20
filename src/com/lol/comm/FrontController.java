@@ -84,7 +84,7 @@ public class FrontController extends HttpServlet {
 	private void doReq(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		if(session.getAttribute("id")==null)
+		if(session.getAttribute("id")==null && request.getAttribute("id")==null)
 		{
 			response.sendRedirect("index.jsp");
 		}else {
