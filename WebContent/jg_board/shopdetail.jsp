@@ -28,7 +28,7 @@
 	border:1px solid silver;
 	border-radius:  10px;
 	text-align: center;
-	padding :20px;
+	padding :10px 20px;
 
 }
 .shopimg{
@@ -57,9 +57,11 @@
 
 
 <div class="shopdetail">
+	
 	<div class="shopimg"><img src="${mddto.img }" class="card-img" alt="..."></div>
-	<div class="shopmd"> ${mddto.mdname }</div><br>
-	<div class="shopprice"> ${mddto.price }</div>
+	<div class="shopmd">[상품코드: ${mddto.mdcode }]<b> ${mddto.mdname }</b></div><br>
+	<div class="shopprice"> <b>${mddto.price }원</b></div>
+	
 </div>
 
 <div class="shoppayment">

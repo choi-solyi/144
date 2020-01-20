@@ -232,7 +232,7 @@ public class JGBoardService {
 			if(conn!=null) try { conn.close(); } catch(SQLException e) {}
 		}		
 	}*/
-	public int login(String id, String pw) {
+	/*public int login(String id, String pw) {
 		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		
@@ -254,7 +254,7 @@ public class JGBoardService {
 		}		
 		
 		return result;
-	}
+	}*/
 	public MDDTO getMdDetail(int mdcode) {
 		DBConn db = DBConn.getDB();
 		Connection conn = null;
@@ -277,5 +277,27 @@ public class JGBoardService {
 		}
 
 		return mddto;		
+	}
+	public int[] prevnext(int bno) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		int[] arr= null;
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			
+			JGBoardDAO dao = JGBoardDAO.getDAO();
+			arr = dao.prev(conn, bno);
+			
+			conn.commit();
+		}catch(NamingException|SQLException e) {
+			e.getStackTrace();
+			try { conn.rollback(); } catch(SQLException e2) {}
+		}finally {
+			if( conn!=null ) try{ conn.close(); } catch(SQLException e) {}
+		}
+		
+		return arr;
+		
 	}
 }
