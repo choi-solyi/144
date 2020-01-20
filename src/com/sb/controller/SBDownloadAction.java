@@ -47,7 +47,7 @@ public class SBDownloadAction extends HttpServlet {
 		HttpSession session = request.getSession();	
 		
 		
-		String f=(String)session.getAttribute("file");
+		String f=request.getParameter("file");
 		String folder=request.getServletContext().getRealPath("supBoard/upload");
 		String filepath=folder+"/"+f;
 		

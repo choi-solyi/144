@@ -53,8 +53,8 @@
 		
 
 		<div class="form-group"  >
-			<label for="uploadfile"></label> <input type="file"
-				class="form-control-file" id="uploadfile" name="uploadfile">
+			<label for="bimg"></label> <input type="file"
+				class="form-control-file" id="bimg" name="bimg">
 			
 		</div>
 		<div >
