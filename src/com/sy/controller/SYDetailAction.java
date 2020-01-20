@@ -1,6 +1,8 @@
 package com.sy.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,21 @@ public class SYDetailAction implements Action {
 		JGBoardDTO dto = service.detail(bno);
 		
 		request.setAttribute("dto", dto);
+		
+		///////////
+		JGBoardDTO predto = new JGBoardDTO();
+		predto = service.prev(bno);
+		System.out.println(predto + "action predto");
+		request.setAttribute("predto", predto);
+		
+		/////////////
+		JGBoardDTO nexdto = new JGBoardDTO();
+		nexdto = service.next(bno);
+		System.out.println(nexdto + "action nexdto");
+				
+		request.setAttribute("nexdto", nexdto);
+		
+		///////////
 		
 		ForwardAction f = new ForwardAction();
 		f.setForward(true);

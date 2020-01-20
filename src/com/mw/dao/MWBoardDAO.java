@@ -1,6 +1,7 @@
 package com.mw.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mw.dto.MWBoardDTO;
+import com.mw.dto.MWRepBoardDTO;
+import com.mysql.cj.protocol.Resultset;
 
 public class MWBoardDAO {
 	private static MWBoardDAO dao = new MWBoardDAO();
@@ -19,49 +22,55 @@ public class MWBoardDAO {
 		return dao;
 	}
 	public List<MWBoardDTO> mwBoardSelect(Connection conn, String search, String searchtxt, int startrow, int endrow) throws SQLException {
+		if(search.equals("")) {
+			System.out.println("search적용중");
+		}
+		if(searchtxt.equals("")) {
+			System.out.println("searchtxt적용중");
+		}
+		
 		StringBuilder sql = new StringBuilder();
-//		sql.append(" select r1.* from (                           ");
+		sql.append(" select r1.* from (                           ");
 		sql.append(" select                                       ");
 		sql.append("         bno                                  ");
 		sql.append("        ,bcategory                            ");
 		sql.append("        ,btitle                               ");
 		sql.append("        ,id                                   ");
 		sql.append("        ,bcontent                             ");
-		sql.append("        ,bwritedate                           ");
+		sql.append("        ,date_format(sysdate(), '%Y-%m-%d') as bwritedate    ");
 		sql.append("        ,bhit                                 ");
 		sql.append("        ,bup                                  ");
 		sql.append("        from topboard                         ");
-//		sql.append("        ) r1 limit 3 offset 0                  ");
 		
-		/*if(!(search.equals("")) && !(search.equals(""))) {
+		if(!(search.equals("")) && !(search.equals(""))) {
 			if(search.equals("title")) {
-				sql.append("  where btitle like = ? ");
+				sql.append("  where btitle like ? ");
 			}
 			else if(search.equals("id")) {
-				sql.append("  where id like = ? ");
+				sql.append("  where id like ? ");
 			}
 			else if(search.equals("bcontent")) {
-				sql.append("  where bcontent like = ? ");
+				sql.append("  where bcontent like ? ");
 			}
-		}*/
+		}
 		
+		sql.append("        ) r1 limit ? offset ?                  ");
+
 		List<MWBoardDTO> list = new ArrayList<>();
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 			ResultSet rs = pstmt.executeQuery();
 			) {
-/*			pstmt.setInt(1, endrow);
-			pstmt.setInt(2, startrow);*/
-			System.out.println(startrow);
-			System.out.println(endrow);
-			/*if(!(search.equals("")) && !(searchtxt.equals(""))) {
-				pstmt.setInt(1, endrow);
-				pstmt.setInt(2, startrow-1);
-				pstmt.setString(3, "%"+search+"%");
+			if(!(search.equals("")) && !(searchtxt.equals(""))) {
+				pstmt.setString(1, "%"+search+"%");
+				pstmt.setInt(2, endrow);
+				pstmt.setInt(3, startrow);
+				System.out.println("이상작동");
 			}
 			else {
 				pstmt.setInt(1, endrow);
-				pstmt.setInt(2, startrow-1);
-			}*/
+				pstmt.setInt(2, startrow);
+				System.out.println("작동중");
+			}
 			
 			while(rs.next()) {
 				MWBoardDTO dto = new MWBoardDTO();
@@ -156,17 +165,22 @@ public class MWBoardDAO {
 		sql.append(" set                                          ");
 		sql.append("           btitle = ?                        ");
 		sql.append("          ,bcategory = ?                     ");
-		sql.append("          ,id = ?                         ");
 		sql.append("          ,bcontent = ?                      ");
 		sql.append("           where bno = ?                     ");
 		try{
 			pstmt = conn.prepareStatement(sql.toString());
-			
+			pstmt.setString(1, dto.getBtitle());
+			pstmt.setString(2, dto.getBcategory());
+			pstmt.setString(3, dto.getBcontent());
+			pstmt.setInt(4, dto.getBno());
+			pstmt.executeUpdate();
 		}
 		finally {
 			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
 		}
 	}
+	
+	
 	public void mwDelete(Connection conn, int no) throws SQLException {
 		PreparedStatement pstmt = null;
 		StringBuilder sql = new StringBuilder();
@@ -230,15 +244,98 @@ public class MWBoardDAO {
 			pstmt.executeUpdate();
 		}
 	}
+	
+	
 	public void mwUp(Connection conn, int no) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append("    update topboard                     ");
 		sql.append("    set bup = ifnull(bup, 0)+1        ");
 		sql.append("    where bno = ?                      ");
+		
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 			){
 			pstmt.setInt(1, no);
 			pstmt.executeUpdate();
 		}
+	}
+	public void addRep(Connection conn, MWRepBoardDTO rdto) throws SQLException{
+		PreparedStatement pstmt = null;
+		StringBuilder sql = new StringBuilder();
+		sql.append("  insert into toprepboard(                            ");
+		sql.append("                      rcontent                       ");
+		sql.append("                      ,rwritedate                     ");
+		sql.append("                      ,bno                            ");
+		sql.append("                      ,id                             ");
+		sql.append("     ) values( ?, sysdate(), ?, ? )                   ");
+		
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			
+			pstmt.setString(1, rdto.getRcontent());
+			pstmt.setInt(2, rdto.getBno());
+			pstmt.setString(3, rdto.getNick());
+			
+			pstmt.executeUpdate();
+		}
+		finally {
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
+		}
+		
+	}
+	public List<MWRepBoardDTO> repDetailList(Connection conn, int no) throws SQLException {
+		PreparedStatement pstmt = null;
+		StringBuilder sql = new StringBuilder();
+		ResultSet rs = null;
+		
+		sql.append(" select                                              ");
+		sql.append("            rcontent                                 ");
+		sql.append("           ,rwritedate                               ");
+		sql.append("           ,bno                                      ");
+		sql.append("           ,id                                       ");
+		sql.append("           from toprepboard                          ");
+		sql.append("           where bno =?                              ");
+		sql.append("           order by repno asc                        ");
+		
+		List<MWRepBoardDTO> list= new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MWRepBoardDTO dto = new MWRepBoardDTO();
+				dto.setRcontent(rs.getString("rcontent"));
+				dto.setRwritedate(rs.getString("rwritedate"));
+				dto.setBno(rs.getInt("bno"));
+				dto.setNick(rs.getString("id"));
+				
+				list.add(dto);
+			}
+			
+		}
+		finally {
+			
+		}
+		return list;
+	}
+	public void repDelete(Connection conn, int repno, int bno) throws SQLException {
+		
+		PreparedStatement pstmt = null;
+		StringBuilder sql = new StringBuilder();
+		ResultSet rs = null;
+		sql.append(" delete from toprepboard           ");
+		sql.append(" where bno = ?                     ");
+		
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, bno);
+			pstmt.executeUpdate();
+		}
+		finally {
+			if(rs!=null) try {rs.close();} catch(SQLException e) {};
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {};
+		}
+		
 	}
 }

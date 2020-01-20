@@ -43,7 +43,7 @@
 	padding: -3px;
 	width: 39.6%;
 	height: 400px;
-	background-image:url(http://choisolyi.dothome.co.kr/lol/img/jg3_11.jpg);
+	background-image: url(http://choisolyi.dothome.co.kr/lol/img/jg3_11.jpg);
 	background-repeat: no-repeat;
 	background-position: top;
 
@@ -54,7 +54,7 @@
 	padding: -3px;
 	width: 30.6%;
 	height: 400px;
-	background-image:url(http://choisolyi.dothome.co.kr/lol/img/jg3_33.jpg);
+	background-image: url(http://choisolyi.dothome.co.kr/lol/img/jg3_33.jpg);
 	background-repeat: no-repeat;
 	background-position: right;
 }
@@ -72,9 +72,7 @@
 	padding: 1px 0px 0px 0px;
 	font-size: 6em;
 	font-weight: 900;
-		text-shadow: 0 0 30px #000000;
-	
-	
+	text-shadow: 0 0 30px #000000;
 }
 
 .imglines {
@@ -88,8 +86,6 @@
 	bottom: 150px;
 	border-radius: 10px;
 	padding: 1px 0px 0px 0px;
-	
-	
 }
 
 .gesipan {
@@ -171,11 +167,15 @@
 	display: inline-block;
 }
 
-.btndel, .btnupd{
-	padding :0px;
+.btndel, .btnupd {
+	padding: 0px;
 	margin: 0px 3px;
 	float: right;
+}
 
+
+.alert a{
+	text-decoration: none;
 }
 </style>
 
@@ -199,7 +199,7 @@ function delrep(repno, bno){
 
 
 </script>
- 
+
 
 </head>
 <body>
@@ -236,7 +236,8 @@ function delrep(repno, bno){
 	<div class="jgcontent">
 		<div class="card-header">
 
-			글번호 ${dto.bno } / ${dto.bcategory } / 조회수 ${dto.bhit } / 작성자 ${dto.nick } <!-- 작성자 -->
+			글번호 ${dto.bno } / [ ${dto.bcategory } ] / 작성자	${dto.nick } / 조회수 ${dto.bhit }
+			<!-- 작성자 -->
 			<%-- 		글번호  <%=dto.getBno()%>
 			[<%=dto.getBcategory()%>] / 조회수
 			<%=dto.getBhit()%>
@@ -245,161 +246,186 @@ function delrep(repno, bno){
 
 		</div>
 		<div class="card-body">
-			<h5 class="card-title">${dto.btitle}<%-- <%=dto.getBtitle()%> --%>
+			<h5 class="card-title"  style="padding:20px;">${dto.btitle}<%-- <%=dto.getBtitle()%> --%>
 			</h5>
-			<p class="card-text">${dto.bcontent}<%-- <%=dto.getBcontent()%> --%>
+			<p class="card-text" style="padding:20px;">${dto.bcontent}<%-- <%=dto.getBcontent()%> --%>
 			</p>
 
-			<a href="jglist.do" class="btn btn-success btnsol">목록 보기</a> 
-			
-			
+			<a href="jglist.do" class="btn btn-success btnsol">목록 보기</a>
+
+
 			<!-- 본인일 경우에만 !!!!! -->
-			
+
 			<c:if test="${sessionScope.id == dto.id}">
-			
+
 				<a href="jgupdate.do?bno=${dto.bno}" class="btn btn-success btnsol">수정</a>
 
 				<a href="jgdelete.do?bno=${dto.bno}" class="btn btn-success btnsol">삭제</a>
-			
-			</c:if> 
-			
-			
+
+			</c:if>
+
+
 		</div>
 	</div>
 
 
 	<!-- 이전글, 다음글  -->
 	
-	
-	<c:set var="arr" value="${arr }"/>
-	
-	<div class="prevnext">
+	 <div class="prevnext">
+	 
+	 <div class="alert alert-info" role="alert">
+			<a href="jgdetail.do?bno=${nexdto.bno}"><table><tbody class="prevnexttable"><tr><td style="width:80px; color:black;"> ▲ ${nexdto.bno} </td><td style="width:800px; color:black;">|| ${nexdto.btitle } </td><td style="width:300px; color:black;">|| ${nexdto.nick} </td><td style="width:30px; color:black;"> ▲ </td></tr> </tbody></table></a>
+		</div>
 		<div class="alert alert-success" role="alert">
-			<a href="prevnext.do">  ${arr[0].bno } / ${arr[0].btitle } / ${arr[0].nick} </a>
-		</div>
+			<a href="jgdetail.do?bno=${predto.bno}"><table><tbody class="prevnexttable"><tr><td style="width:80px; color:black;"> ▼ ${predto.bno} </td><td style="width:800px; color:black;">|| ${predto.btitle } </td><td style="width:300px; color:black;">|| ${predto.nick} </td><td style="width:30px; color:black;"> ▼ </td></tr> </tbody></table>  </a>
+		</div>	
 
 
-		<div class="alert alert-info" role="alert">
-		 	<a href="prevnext.do">${arr[1].bno } / ${arr[1].btitle } / ${arr[1].nick} </a>
-			
-		</div>
+		
 	</div> 
-	
-	<%-- <div class="prevnext">
+
+<%-- 		 <div class="prevnext">
 		<div class="alert alert-success" role="alert">
-
-			<a href="jgdetail.do?bno="<%=dto.getBno()%>">▲ 안 녕</a>
-
-		</div>
+			<a href="jgdetail.do?bno=${dto.bno-1}">▲ 안 녕</a>
+		</div>	
 
 
 		<div class="alert alert-info" role="alert">
-			<a href="jgdetail.do?bno="<%=dto.getBno()%>">▲ ㅂㅇ</a> ▼ ㄶㅇㄹ하슈
+			<a href="jgdetail.do?bno=${dto.bno+1}">▲ ㅂㅇ</a>
 		</div>
-	</div> --%>
+	</div> - --%>
 
-	<!-- 댓글 쓰기 -->
+		<!-- 댓글 쓰기 -->
 
-	<div class="writerep">
-		<form method="post" action="jgaddrep.do" name="frm"
-			class="was-validated">
-			<div class="form-group">
-				<label for="disabledTextInput">닉네임</label> <input type="text"
-					id="id" class="form-control" name="id" placeholder="자동 입력"
-					value="${sessionScope.id}" readonly="readonly">
-			</div>
+		<div class="writerep">
+			<form method="post" action="jgaddrep.do" name="frm"
+				class="was-validated">
+				<div class="form-group">
+					<label for="disabledTextInput">닉네임</label> <input type="text"
+						id="id" class="form-control" name="id" placeholder="자동 입력"
+						value="${sessionScope.id}" readonly="readonly">
+				</div>
 
 
-			<div class="mb-3">
-				<label for="validationTextarea">내용</label>
-				<textarea class="form-control is-invalid" name="rcontent"
-					id="rcontent" placeholder="Required example textarea" required></textarea>
-				<!-- <div class="invalid-feedback">Please enter a message in the
+				<div class="mb-3">
+					<label for="validationTextarea">내용</label>
+					<textarea class="form-control is-invalid" name="rcontent"
+						id="rcontent" placeholder="Required example textarea" required></textarea>
+					<!-- <div class="invalid-feedback">Please enter a message in the
 					textarea.</div> -->
-			</div>
+				</div>
 
 
 
-			<div class="inlineblockcontent">
-				<input type="hidden" name="bno" id="bno" value="${dto.bno }">
-				
-				
-				<input type="submit" onclick="send();" class="btn btn-success" value="댓글 쓰기">
-				
-				
-			</div>
-		</form>
-
-	</div>
+				<div class="inlineblockcontent">
+					<input type="hidden" name="bno" id="bno" value="${dto.bno }">
 
 
-	<!-- 댓글 목록 보기 -->
-	<div id="replist" style="margin: 10px auto;	width: 1220px; padding: 5px;"></div>
-<!-- 	<input type="submit" onclick="update();" class="btn btn-success" value="수정">
+					<input type="submit" onclick="send();" class="btn btn-success"
+						value="댓글 쓰기">
+
+
+				</div>
+			</form>
+
+		</div>
+
+
+		<!-- 댓글 목록 보기 -->
+		<div id="replist"
+			style="margin: 10px auto; width: 1220px; padding: 5px;"></div>
+		<!-- 	<input type="submit" onclick="update();" class="btn btn-success" value="수정">
 	<input type="submit" onclick="delete();" class="btn btn-success" value="삭제"> 
   -->
 
- <script>
+		<script>
     let bno = ${dto.bno};
-	let ssid = '<%=(String)session.getAttribute("id")%>';
-	console.log(bno);
-	console.log('세션아이디');
-	console.log(ssid);
-	
-	$.ajax({
-		url : 'listreq.do',
-		data : {'bno' : bno},
-		dataType : 'JSON',
-		method : 'post',
-		success : function(data) {
-			console.log('test-alldata :' , data);
-			$('#replist').empty();
-			$.each(data, function(index, item) {
-					console.log(index);
-					console.log(item);
-					
-					console.log(item.repno);
-if(index%3==0){
-	let rep ="<div class='card border-success mb-3 botrep' style='max-width: 18rem;'>"											;
-	rep+= '<div class="card-header"> 댓글 '																						;
-	if(ssid==item.id){
-	rep+='<input type="submit" onclick=delrep('+ item.repno  +','+  item.bno  +'); class="btn btn-success btndel" value="삭제">'	;
-	rep+='<input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정">'									;
-	}
-	rep+= "</div><div class='card-body text-success'><h5 class='card-title'>"+item.nick +"</h5>"								;
-	rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"													; 
-	$('#replist').append(rep);
-}else if(index%2==0){
-	let rep ="<div class='card border-info mb-3 botrep' style='max-width: 18rem;'>"												;
-	rep+= '<div class="card-header"> 댓글 ';
-	if(ssid==item.id){
-	rep+='<input type="submit" onclick=delrep('+ item.repno  +','+  item.bno  +'); class="btn btn-info btndel" value="삭제"> '	;
-	rep+='<input type="submit" onclick=update();" class="btn btn-info btnupd" value="수정">'										;
-	}
-	rep+= "</div><div class='card-body text-info'><h5 class='card-title'>"+item.nick +"</h5>"									;
-	rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"													; 
-	$('#replist').append(rep)																									;
+	let ssid = '<%=(String) session.getAttribute("id")%>';
+			console.log(bno);
+			console.log('세션아이디');
+			console.log(ssid);
 
-}else{
-	let rep ="<div class='card border-dark mb-3 botrep' style='max-width: 18rem;'>"												;
-	rep+= '<div class="card-header"> 댓글 '																						;
-	if(ssid==item.id){
-	rep+='<input type="submit" onclick=delrep('+ item.repno  +','+  item.bno  +'); class="btn btn-dark btndel" value="삭제"> '	;
-	rep+='<input type="submit" onclick=update();" class="btn btn-dark btnupd" value="수정">'										;
-	}
-	rep+= "</div><div class='card-body text-dark'><h5 class='card-title'>"+item.nick +"</h5>"									;
-	rep+=	 "<p class='card-text'>" + item.rcontent  + "</p>	</div></div>"													; 
-	$('#replist').append(rep)																									;
-}
-				});
-	
-		}, error:function(data){
-			console.log('error : ' , data);
-		}
-	});
- 
- 
- </script>
+			$.ajax({
+						url : 'listreq.do',
+						data : {
+							'bno' : bno
+						},
+						dataType : 'JSON',
+						method : 'post',
+						success : function(data) {
+							console.log('test-alldata :', data);
+							$('#replist').empty();
+							$
+									.each(
+											data,
+											function(index, item) {
+												console.log(index);
+												console.log(item);
 
+												console.log(item.repno);
+												if (index % 3 == 0) {
+													let rep = "<div class='card border-success mb-3 botrep' style='max-width: 18rem;'>";
+													rep += '<div class="card-header"> 댓글 ';
+													if (ssid == item.id) {
+														rep += '<input type="submit" onclick=delrep('
+																+ item.repno
+																+ ','
+																+ item.bno
+																+ '); class="btn btn-success btndel" value="삭제">';
+														rep += '<input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정">';
+													}
+													rep += "</div><div class='card-body text-success'><h5 class='card-title'>"
+															+ item.nick
+															+ "</h5>";
+													rep += "<p class='card-text'>"
+															+ item.rcontent
+															+ "</p>	</div></div>";
+													$('#replist').append(rep);
+												} else if (index % 2 == 0) {
+													let rep = "<div class='card border-info mb-3 botrep' style='max-width: 18rem;'>";
+													rep += '<div class="card-header"> 댓글 ';
+													if (ssid == item.id) {
+														rep += '<input type="submit" onclick=delrep('
+																+ item.repno
+																+ ','
+																+ item.bno
+																+ '); class="btn btn-info btndel" value="삭제"> ';
+														rep += '<input type="submit" onclick=update();" class="btn btn-info btnupd" value="수정">';
+													}
+													rep += "</div><div class='card-body text-info'><h5 class='card-title'>"
+															+ item.nick
+															+ "</h5>";
+													rep += "<p class='card-text'>"
+															+ item.rcontent
+															+ "</p>	</div></div>";
+													$('#replist').append(rep);
+
+												} else {
+													let rep = "<div class='card border-dark mb-3 botrep' style='max-width: 18rem;'>";
+													rep += '<div class="card-header"> 댓글 ';
+													if (ssid == item.id) {
+														rep += '<input type="submit" onclick=delrep('
+																+ item.repno
+																+ ','
+																+ item.bno
+																+ '); class="btn btn-dark btndel" value="삭제"> ';
+														rep += '<input type="submit" onclick=update();" class="btn btn-dark btnupd" value="수정">';
+													}
+													rep += "</div><div class='card-body text-dark'><h5 class='card-title'>"
+															+ item.nick
+															+ "</h5>";
+													rep += "<p class='card-text'>"
+															+ item.rcontent
+															+ "</p>	</div></div>";
+													$('#replist').append(rep);
+												}
+											});
+
+						},
+						error : function(data) {
+							console.log('error : ', data);
+						}
+					});
+		</script>
 </body>
 </html>
