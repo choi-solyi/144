@@ -182,6 +182,51 @@ public class DYBoardDAO {
 			
 		}
 	}
+	public int dygetCount(Connection conn, String search, String txtsearch) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select count(*)  ");
+		sql.append(" from midboard as m join userinfo as u   ");
+		sql.append(" on m.id = u.id                          ");
+		
+		
+		if(!search.equals(" ") && !txtsearch.equals(" "))
+		{
+			if(search.equals("btitle"))
+			{
+				sql.append(" where btitle like ?        ");
+			}else if(search.equals("bcontent"))
+			{
+				sql.append(" where bcontent like ?      ");
+			}else if(search.equals("nick"))
+			{
+				sql.append(" where u.nick like ?        ");
+			}
+		}
+		ResultSet rs =null;
+		int totalcount =0;
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) 
+		{
+			if(!search.equals("") && !txtsearch.equals(""))
+			{
+				pstmt.setString(1, "%" + txtsearch + "%");
+			}
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next())
+			{
+				totalcount = rs.getInt(1);
+			}
+			
+		}finally {
+			if(rs!=null)try {rs.close();}catch(SQLException e) {}
+		}
+		
+		return totalcount;
+	}
 	
 	
 	
