@@ -15,8 +15,8 @@ public class JoinAction implements Action {
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ForwardAction f = new ForwardAction();
-		f.setForward(false);
-		f.setUrl("index.jsp");
+		f.setForward(true);
+		f.setUrl("loginresult.do");
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String nick = request.getParameter("nick");
@@ -26,8 +26,8 @@ public class JoinAction implements Action {
 		
 		String salt = SHA.generateSalt();
 		pw = SHA.getEncrypt(pw, salt);
-		System.out.println(salt);
-		System.out.println(pw);
+		System.out.println("salt :" + salt);
+		System.out.println("pw :" + pw);
 		UserDTO dto = new UserDTO();
 		dto.setId(id);
 		dto.setPw(pw);
@@ -35,10 +35,13 @@ public class JoinAction implements Action {
 		dto.setName(name);
 		dto.setTel(tel);
 		dto.setLine(line);
-		
+		dto.setSalt(salt);
 		UserService service = UserService.getService();
-		//service.join(dto);
+		service.join(dto);
 		
+		System.out.println(pw);
+		request.setAttribute("id", id);
+		request.setAttribute("pw", pw);
 		return f;
 	}
 

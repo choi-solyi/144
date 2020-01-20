@@ -19,6 +19,7 @@ public class DYUpdateResultAction implements Action {
 		// TODO Auto-generated method stub
 		
 		int bno =Integer.parseInt(request.getParameter("bno"));
+		System.out.println("update : " +bno);
 		String bcategory = (String)request.getParameter("bcategory");
 		String btitle = (String)request.getParameter("btitle");
 		String bcontent = (String)request.getParameter("bcontent");
@@ -34,7 +35,7 @@ public class DYUpdateResultAction implements Action {
 		service.dyupdate(dto);
 		
 		ForwardAction forward = new ForwardAction();
-		forward.setForward(true);
+		forward.setForward(false);
 		forward.setUrl("dylist.do");
 		
 		return forward;

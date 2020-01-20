@@ -5,9 +5,12 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sb.dto.SUPBoardDTO;
 import com.sb.service.SUPBoardService;
 
@@ -18,15 +21,17 @@ public class SBInsertResultAction implements Action {
 			throws ServletException, IOException {
 		
 		
-//		int filesize = 1024*1024*10;
-//		String uploadpath= request.getServletContext().getRealPath("upload");
-//		
-//		
-//		MultipartRequest mul = new MultipartRequest(request, )
-		String bcategory=request.getParameter("bcategory");
-		String btitle=request.getParameter("btitle");
-		String bcontent=request.getParameter("bcontent");
-		String id = request.getParameter("id");
+		int filesize = 1024*1024*10;
+		String uploadpath= request.getServletContext().getRealPath("supBoard/upload");
+		
+		
+		MultipartRequest mul = new MultipartRequest(request,uploadpath,filesize,"utf-8",new DefaultFileRenamePolicy());
+		String bcategory=mul.getParameter("bcategory");
+		String btitle=mul.getParameter("btitle");
+		String bcontent=mul.getParameter("bcontent");
+		String id = mul.getParameter("id");
+		String file = mul.getFilesystemName("uploadfile");
+		String original = mul.getOriginalFileName("uploadfile");
 		
 		
 		SUPBoardService service = SUPBoardService.sbGetBoardService();
@@ -36,10 +41,10 @@ public class SBInsertResultAction implements Action {
 		dto.setBtitle(btitle);
 		dto.setBcontent(bcontent);
 		dto.setId(id);
-		
+		HttpSession session = request.getSession();
 		service.sbInsert(dto);
-		
-		
+		session.setAttribute("file", file);
+		session.setAttribute("original", original);
 		ForwardAction f = new ForwardAction();
 		f.setForward(false);
 		f.setUrl("sblist.do");

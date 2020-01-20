@@ -24,6 +24,7 @@
 	<c:set var="totalpage" value="${requestScope.totalpage}"></c:set>
 	<c:set var="search" value="${requestScope.search}"></c:set>
 	<c:set var="txtsearch" value="${requestScope.txtsearch}"></c:set>
+	
 	<div class="container">
 
 		<table class="table table-hover">
@@ -80,7 +81,7 @@
 			<select name="search">
 				<option value="btitle">글제목</option>
 				<option value="bcontent">내용</option>
-				<option value="id">작성자</option>
+				<option value="nick">작성자</option>
 			</select> <input type="text" name="txtsearch"> <input type="submit"
 				value="검색">
 		</form>
