@@ -78,6 +78,7 @@ public class DYBoardService {
 			
 			DYBoardDAO dao = DYBoardDAO.getdao();
 			dto = dao.dydetail(conn,bno);
+			dao.dyhitup(conn,bno);
 			
 			conn.commit();		
 		}catch(NamingException | SQLException e) {

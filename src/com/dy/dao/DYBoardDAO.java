@@ -111,7 +111,7 @@ public class DYBoardDAO {
 					dto.setNick(rs.getString("u.nick"));
 					dto.setBcategory(rs.getString("bcategory"));
 					dto.setBtitle(rs.getString("btitle"));
-					dto.setBhit(rs.getInt("bhit")+1);
+					dto.setBhit(rs.getInt("bhit"));
 					dto.setBcontent(rs.getString("bcontent"));
 					
 				}
@@ -133,6 +133,22 @@ public class DYBoardDAO {
 		{
 			pstmt.setInt(1, bno);
 			pstmt.executeUpdate();	
+		}
+	}
+	public void dyhitup(Connection conn, int bno) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update midboard              ");
+		sql.append(" set                          ");
+		sql.append("     bhit = ifnull(bhit,0)+1  ");
+		sql.append(" where bno = ?                ");
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());) 
+		{
+			pstmt.setInt(1,  bno);
+			pstmt.executeUpdate();
+			
 		}
 	}
 	
