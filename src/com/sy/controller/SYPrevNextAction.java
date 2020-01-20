@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
+import com.sy.dto.JGBoardDTO;
 import com.sy.service.JGBoardService;
 
-public class SYPrevAction implements Action {
+public class SYPrevNextAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
@@ -19,19 +20,25 @@ public class SYPrevAction implements Action {
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
 		JGBoardService service = JGBoardService.getService();
-		int[] arr = service.prevnext(bno);
+		JGBoardDTO[] arr = new JGBoardDTO[2];
+		arr = service.prev(bno);
 		
+		
+		System.out.println(arr + "action arr");
 		ForwardAction f = new ForwardAction();
 		
 		
 		request.setAttribute("arr", arr);
-		
+/*		
 		f.setForward(false);
-		f.setUrl("jgdetail.do");
+		f.setUrl("jgdetail.do");*/
 		
+		f.setForward(true);
 		
+		f.setUrl("main.jsp?page=jg_board/jgdetail.jsp");
+
 		
-		return null;
+		return f;
 	}
 
 }
