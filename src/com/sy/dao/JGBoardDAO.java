@@ -336,7 +336,7 @@ public class JGBoardDAO {
 		}
 		
 	}
-	public int login(Connection conn, String id, String pw) throws SQLException {
+/*	public int login(Connection conn, String id, String pw) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select pw,line			");
 		sql.append(" from userinfo 			");
@@ -389,7 +389,7 @@ public class JGBoardDAO {
 
 		}
 		return -2;
-	}
+	}*/
 	public MDDTO getMdDetail(Connection conn, int mdcode) throws SQLException{
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select mdcode, mdname, price, img ");
