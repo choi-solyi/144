@@ -7,14 +7,15 @@ public class UserDTO {
 	private String name;
 	private String salt;
 	private String line;
+	private String tel;
+	
 	public String getLine() {
 		return line;
 	}
 	public void setLine(String line) {
 		this.line = line;
 	}
-	private String email;
-	private String tel;
+
 	public String getId() {
 		return id;
 	}
@@ -44,12 +45,6 @@ public class UserDTO {
 	}
 	public void setSalt(String salt) {
 		this.salt = salt;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	public String getTel() {
 		return tel;

@@ -22,7 +22,7 @@ public class LoginResultAction implements Action {
 		String pw = request.getParameter("pw");
 
 		
-		JGBoardService service = JGBoardService.getService();
+		UserService service = UserService.getService();
 		
 
 		int result = service.login(id,pw);

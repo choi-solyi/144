@@ -24,7 +24,7 @@ public class UserService {
 			conn = db.getConn();
 			conn.setAutoCommit(false);
 			
-			JGBoardDAO dao = JGBoardDAO.getDAO();
+			UserDAO dao = UserDAO.getDAO();
 			result = dao.login(conn, id,pw);
 	
 			conn.commit();

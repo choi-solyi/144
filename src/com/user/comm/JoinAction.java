@@ -17,14 +17,28 @@ public class JoinAction implements Action {
 		ForwardAction f = new ForwardAction();
 		f.setForward(false);
 		f.setUrl("index.jsp");
-		request.getParameter("id");
-		request.getParameter("pw");
-		request.getParameter("nick");
-		request.getParameter("name");
-		request.getParameter("tel");
-		request.getParameter("line");
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		String nick = request.getParameter("nick");
+		String name = request.getParameter("name");
+		String tel = request.getParameter("tel");
+		String line = request.getParameter("line");
 		
-	
+		String salt = SHA.generateSalt();
+		pw = SHA.getEncrypt(pw, salt);
+		System.out.println(salt);
+		System.out.println(pw);
+		UserDTO dto = new UserDTO();
+		dto.setId(id);
+		dto.setPw(pw);
+		dto.setNick(nick);
+		dto.setName(name);
+		dto.setTel(tel);
+		dto.setLine(line);
+		
+		UserService service = UserService.getService();
+		//service.join(dto);
+		
 		return f;
 	}
 
