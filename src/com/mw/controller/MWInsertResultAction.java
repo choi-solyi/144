@@ -32,8 +32,8 @@ public class MWInsertResultAction implements Action {
 		service.mwInsert(dto);
 		
 		ForwardAction f = new ForwardAction();
-		f.setForward(true);
-		f.setUrl("/main.jsp?page=topboard/toplist.jsp");
+		f.setForward(false);
+		f.setUrl("toplist.do");
 		
 		return f;
 	}

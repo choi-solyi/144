@@ -25,6 +25,7 @@ public class MWUpdateAction implements Action {
 		f.setForward(true);
 		f.setUrl("/main.jsp?page=topboard/topupdate.jsp");
 		
+		
 		return f;
 	}
 

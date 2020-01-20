@@ -22,7 +22,7 @@ public class MWDelete implements Action {
 		
 		ForwardAction f = new ForwardAction();
 		f.setForward(false);
-		f.setUrl("/main.jsp?page=topboard/toplist.do");
+		f.setUrl("toplist.do");
 		
 		return f;
 	}
