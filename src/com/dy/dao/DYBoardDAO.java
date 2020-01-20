@@ -95,6 +95,7 @@ public class DYBoardDAO {
 		sql.append("       ,bhit                                   ");
 		sql.append("       ,bcontent                               ");
 		sql.append("       ,m.id                                   ");
+		sql.append("       ,bno                                    ");
 		sql.append(" from midboard as m join userinfo as u         ");
 		sql.append(" on m.id = u.id                                ");
 		sql.append(" where bno = ?                                 ");
@@ -115,6 +116,7 @@ public class DYBoardDAO {
 					dto.setBhit(rs.getInt("bhit"));
 					dto.setBcontent(rs.getString("bcontent"));
 					dto.setId(rs.getString("id"));
+					dto.setBno(rs.getInt("bno"));
 					
 				}
 			
