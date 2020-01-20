@@ -43,8 +43,8 @@
         </div>
         <div id="content"><c:out value="${dto.bcontent }"/></div>
       	<c:if test="${sessionScope.id == dto.id }">
-	        <div id="updateboard"><a href="dyupdate.dobno=${dto.bno }"> <input type="button" value="수정" ></a></div>
-	        <div id="deleteboard"><a href="dydelete.do?bno=${dto.bno}" }> <input type="button" value="삭제" ></a></div>
+	        <div id="updateboard"><a href="dyupdate.do?bno=${dto.bno}"> <input type="button" value="수정" ></a></div>
+	        <div id="deleteboard"><a href="dydelete.do?bno=${dto.bno}"> <input type="button" value="삭제" ></a></div>
         </c:if>
         <br>
         <a href="dylist.do" ><input type="button" value="목록으로"></a>
