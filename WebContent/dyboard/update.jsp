@@ -34,7 +34,7 @@
 <div id="dyupdatewrap">
 	<form action="dyupdateresult.do" method="post" id="dyupdateform">
 		<ul>
-			<input type="hidden" name ="bno" value="${bno}">
+			
 			<li><label for="dybcategory">카테고리</label>
 				<select id="dybcategory" name="bcategory">
 					<option value="일반" selected>일반</option>
@@ -47,9 +47,10 @@
 				<!-- 파일 업로드 코드 작성  -->
 			</li>
 			<li>
-				<textarea rows="20" cols="100" id="dybcontent" name="bcontent" required>내용을 입력하세요</textarea>
+				<textarea rows="20" cols="100" id="dybcontent" name="bcontent" placeholder="내용을 입력하세요" required></textarea>
 			</li>
 			<li>
+				<input type="hidden" name ="bno" value="${requestScope.bno}">
 				<input type="submit" value="수정">
 				<input type="reset" value="취소">
  			</li>

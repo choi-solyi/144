@@ -416,28 +416,72 @@ public class JGBoardDAO {
 		
 		return mddto;
 	}
-	public JGBoardDTO[]  prev(Connection conn, int bno) throws SQLException {
+	public JGBoardDTO  prev(Connection conn, int bno) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		sql.append(" select bno, btitle, us.nick, bhit from jgboard as jg join userinfo as us ");
+		sql.append(" select bno, btitle, us.nick, bhit from jgboard as jg join userinfo as us on jg.id = us.id  ");
+		sql.append(" where bno = ( select max(bno) from jgboard where bno < ? ) ");
+		
+/*		sql.append(" select bno, btitle, us.nick, bhit from jgboard as jg join userinfo as us ");
 		sql.append(" where bno in ( (select bno from jgboard where bno < ? order by bno desc limit 1), ");
-		sql.append(" (select bno from jgboard where bno > ? order by bno limit 1)); ");
+		sql.append(" (select bno from jgboard where bno > ? order by bno limit 1)) ");*/
 		PreparedStatement pstmt = null;
 
 		ResultSet rs = null;
-		 JGBoardDTO[] arr=new JGBoardDTO[2];
-		
+		JGBoardDTO dto = new JGBoardDTO();
+				
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setInt(1, bno);
-			pstmt.setInt(2, bno);
+			System.out.println("원래 bno값"+bno);
+			rs = pstmt.executeQuery();
+			System.out.println("rs::::::::::::::" + rs);
+			
+			if(rs.next()) {
+				
+				System.out.println("바뀐 bno 값" + rs.getInt("bno"));
+				dto.setBno(rs.getInt("bno"));
+				dto.setBtitle(rs.getString("btitle"));
+				dto.setNick(rs.getString("nick"));
+				dto.setBhit(rs.getInt("bhit"));
+				
+				System.out.println(rs.getInt("bno"));
+				System.out.println(rs.getString("btitle"));
+			}
+		}finally {
+			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
+
+		}
+		
+		return dto;
+	}
+	public JGBoardDTO next(Connection conn, int bno) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select bno, btitle, us.nick, bhit from jgboard as jg join userinfo as us on jg.id = us.id ");
+		sql.append(" where bno = ( select min(bno) from jgboard where bno > ? )");
+		
+/*		sql.append(" select bno, btitle, us.nick, bhit from jgboard as jg join userinfo as us ");
+		sql.append(" where bno in ( (select bno from jgboard where bno < ? order by bno desc limit 1), ");
+		sql.append(" (select bno from jgboard where bno > ? order by bno limit 1)) ");*/
+		PreparedStatement pstmt = null;
+
+		ResultSet rs = null;
+		JGBoardDTO dto = new JGBoardDTO();
+				
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, bno);
 			
 			rs = pstmt.executeQuery();
+			System.out.println("rs::::::::::::::" + rs);
 			
-			for(int i=0;i<arr.length;i++) {
-				arr[i].getBno();
-				arr[i].getBtitle();
-				arr[i].getNick();
-				arr[i].getBhit();
+			if(rs.next()) {
+				dto.setBno(rs.getInt("bno"));
+				dto.setBtitle(rs.getString("btitle"));
+				dto.setNick(rs.getString("nick"));
+				dto.setBhit(rs.getInt("bhit"));
+				
+				System.out.println(rs.getInt("bno"));
+				System.out.println(rs.getString("btitle"));
 			}
 			System.out.println("--------------sdfafsadfsdfsdafasfdsf----------------");
 		}finally {
@@ -445,6 +489,6 @@ public class JGBoardDAO {
 
 		}
 		
-		return arr;
+		return dto;
 	}
 }

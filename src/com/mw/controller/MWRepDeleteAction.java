@@ -8,24 +8,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
-import com.mw.dto.MWBoardDTO;
 import com.mw.service.MWBoardService;
 
-public class MWDetailAction implements Action {
+public class MWRepDeleteAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		int no = Integer.parseInt(request.getParameter("no"));
+		int repno = Integer.parseInt(request.getParameter("repno"));
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		
 		MWBoardService service = MWBoardService.getService();
-		MWBoardDTO dto = service.mwDetail(no);
-		request.setAttribute("dto", dto);
+		service.repDelete(repno, bno);
 		
 		ForwardAction f = new ForwardAction();
-		
-		f.setForward(true);
-		f.setUrl("/main.jsp?page=topboard/topdetail.jsp");
+		f.setForward(false);
+		f.setUrl("/main.jsp?page=topboard/topdetail.do?no="+bno);
 		
 		return f;
 	}

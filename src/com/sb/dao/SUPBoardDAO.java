@@ -29,7 +29,7 @@ public class SUPBoardDAO {
 		ResultSet rs=null;
 		List<SUPBoardDTO> list =new ArrayList<SUPBoardDTO>();
 		sql.append(" select bno,bcategory,btitle,bcontent,bwritedate,bhit,sup.id,us.nick  ");
-		sql.append(" from supboard as sup inner join userinfo as us ");
+		sql.append(" from supboard as sup join userinfo as us ");
 		sql.append(" on sup.id=us.id ");
 		if(!search.equals("") && !txtsearch.equals(""))
 		{
@@ -37,8 +37,8 @@ public class SUPBoardDAO {
 			 sql.append("                where btitle  like ?      ");
 		  else if(search.equals("bcontent"))
 			 sql.append("                where bcontent like ?       ");
-		  else if(search.equals("id"))
-			 sql.append("                where id like  ?       ");
+		  else if(search.equals("nick"))
+			 sql.append("                where nick like  ?       ");
 		  
 		}
 		sql.append(" order by bno desc ");
@@ -71,7 +71,7 @@ public class SUPBoardDAO {
 				dto.setBwritedate(rs.getString("bwritedate"));
 				dto.setBhit(rs.getInt("bhit"));
 				dto.setNick(rs.getString("nick"));
-			
+				
 				list.add(dto);
 			}
 			
@@ -203,15 +203,16 @@ public class SUPBoardDAO {
 	public int sbGetCount(Connection conn, String search, String txtsearch) throws SQLException {
 		StringBuilder sql=new StringBuilder();
 		sql.append(" select  count(*)        ");
-		sql.append(" from  supboard             ");
+		sql.append(" from  supboard sup join userinfo us");
+		sql.append(" on sup.id=us.id ");
 		if(!search.equals("")  && !txtsearch.equals("") )
 		{
 			if(search.equals("btitle"))
 				sql.append(" where btitle like    ?   ");
 			else if(search.equals("bcontent"))
 				sql.append(" where bcontent like  ?   ");
-			else if(search.equals("id"))
-				sql.append(" where id like   ?   ");
+			else if(search.equals("nick"))
+				sql.append(" where nick like   ?   ");
 		}
 
 		ResultSet rs=null;

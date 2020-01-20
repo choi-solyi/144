@@ -121,7 +121,7 @@ public class DYBoardService {
 			conn.setAutoCommit(false);
 			
 			DYBoardDAO dao = DYBoardDAO.getdao();
-			dao.dyupdate(conn,dto);
+			dao.dyupdate(conn, dto);
 			
 			conn.commit();
 		}catch(NamingException | SQLException e) {
