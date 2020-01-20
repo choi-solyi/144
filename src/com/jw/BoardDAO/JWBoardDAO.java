@@ -31,7 +31,7 @@ public class JWBoardDAO {
 			else if(search.equals("id"))
 				sql.append(" where id like ? ");
 		}
-		sql.append(" order by bno             ");
+		sql.append(" order by bno desc        ");
 		sql.append(" limit ?, ?               ");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 			if(!(search.equals(""))&&!(searchtxt.equals("")))

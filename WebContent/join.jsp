@@ -21,21 +21,155 @@
 	background-attachment: fixed;
 	background-size: cover;
 	min-height: 160px;
-	display: flex;
-	justify-content: center;
 	flex-direction: column;
+	justify-content: center;
+	display: flex;
 	color: white;
+}
+
+#left h1 {
+	font-size: 4.5em;
+	font-weight: 400;
+	font-stretch: ultra-condensed;
+}
+
+#right {
+	min-height: 160px;
+	flex-direction: column;
+	justify-content: center;
+	display: flex;
+}
+
+.or {
+	margin: 3.2rem 0px;
+}
+
+#ordiv {
+	width: 100%;
+	height: 1px;
+	position: relative;
+	top: 1rem;
+	background: rgb(221, 221, 221);
+}
+
+#orspan {
+	line-height: 1.4;
+	background-color: white;
+	color: rgb(187, 187, 187);
+	font-size: 1.4rem;
+	font-weight: 200;
+	position: relative;
+	top: -0.2rem;
+	padding: 0px 1rem;
+}
+
+.btn {
+	width: 30%;
+}
+
+.row {
+	margin: 0px;
 }
 </style>
 </head>
 <body>
-	<div class="row align-items-center">
-		<div id="left" class="col-6 vh-100 vw-100">123</div>
-		<div class="col-6 vh-100 vw-100">
-			123
-			<div class="row">
-				<div class="col">456</div>
+	<div class="row">
+		<div id="left" class="col-6 vh-100 vw-100 text-center">
+			<h1>
+				To continue, <br>sing in to LoLing
+			</h1>
+		</div>
+		<div id="right" class="col-6 vh-100 vw-100 text-center">
+			<img class="btn" alt="네이로이미지" src="img/네이버 아이디로 로그인_완성형_White.PNG"
+				style="margin: 0px auto">
+			<div class="or">
+				<div id="ordiv"></div>
+				<span id="orspan">or</span>
 			</div>
+
+			<form method="post" action="join.do">
+
+				<h3 class="mb-3">Enter your info</h3>
+				<div class="row justify-content-center">
+					<div class="col-5 text-left">
+						<p class="mb-0">Email address</p>
+					</div>
+				</div>
+				<div class="input-group row justify-content-center mt-0 mb-2">
+					<div class="col-5">
+						<input class="form-control" type="email" name="id"
+							required="required" autofocus="autofocus">
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-5 text-left">
+						<p class="mb-0">password</p>
+					</div>
+				</div>
+				<div class="input-group row justify-content-center mt-0 mb-2">
+					<div class="col-5">
+						<input class="form-control" type="password" name="pw"
+							required="required">
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-5 text-left">
+						<p class="mb-0">nick</p>
+					</div>
+				</div>
+				<div class="input-group row justify-content-center mt-0 mb-2">
+					<div class="col-5">
+						<input class="form-control" type="text" name="nick"
+							required="required">
+					</div>
+				</div>
+
+
+				<div class="row justify-content-center">
+					<div class="col-5 text-left">
+						<p class="mb-0">name</p>
+					</div>
+				</div>
+				<div class="input-group row justify-content-center mt-0 mb-2">
+					<div class="col-5">
+						<input class="form-control" type="text" name="name"
+							required="required">
+					</div>
+				</div>
+				
+				<div class="row justify-content-center">
+					<div class="col-5 text-left">
+						<p class="mb-0">tel</p>
+					</div>
+				</div>
+				<div class="input-group row justify-content-center mt-0 mb-2">
+					<div class="col-5">
+						<input class="form-control" type="tel" name="tel"
+							required="required">
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-5 text-left">
+						<p class="mb-0">line</p>
+					</div>
+				</div>
+				<div class="input-group row justify-content-center mt-0 mb-5">
+					<div class="col-5">
+						<select class="custom-select" name="line">
+							<!--<option selected disabled="disabled">Choose...</option>-->
+							<option value="top">top</option>
+							<option value="mid">mid</option>
+							<option value="jg">jg</option>
+							<option value="ad">ad</option>
+							<option value="sup">sup</option>
+						</select>
+					</div>
+				</div>
+				<input class="btn btn-secondary" type="submit" value="continue">
+			</form>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
