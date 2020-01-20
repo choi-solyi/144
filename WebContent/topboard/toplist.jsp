@@ -183,11 +183,11 @@
                 <a href = "#" class = "top_board_btn">▶</a>
                 
                 <form class = "top_board_search" method="post" action = "toplist.do">
-                    <select name = "search">
-						<option value = "title">글제목</option>
-						<option value = "content">내용</option>
-						<option value = "writer">작성자</option>
-					</select>
+                    	<select name = "search">
+							<option value = "btitle">글제목</option>
+							<option value = "bcontent">내용</option>
+							<option value = "id">작성자</option>
+						</select>
 					<input class = "top_board_search_txt" type="text" name = "searchtxt">
 					<input class = "top_board_search_btn" type="submit" value="검색">
                 </form>

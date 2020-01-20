@@ -40,6 +40,7 @@ public class MWBoardDAO {
 		sql.append("        ,bhit                                 ");
 		sql.append("        ,bup                                  ");
 		sql.append("        from topboard                         ");
+		sql.append("        order by bno desc                     ");
 		if(!(search.equals("")) && !(search.equals(""))) {
 			if(search.equals("btitle")) {
 				sql.append("  where btitle like ? ");
@@ -52,7 +53,7 @@ public class MWBoardDAO {
 			}
 		}
 		
-		sql.append("        ) r1 limit ? offset ?                  ");
+		sql.append("        ) r1 limit 5 offset ?                  ");
 		System.out.println(startrow);
 		System.out.println(endrow);
 		List<MWBoardDTO> list = new ArrayList<>();
@@ -60,13 +61,11 @@ public class MWBoardDAO {
 			) {
 			if(!(search.equals("")) && !(searchtxt.equals(""))) {
 				pstmt.setString(1, "%"+searchtxt+"%");
-				pstmt.setInt(2, endrow);
-				pstmt.setInt(3, startrow);
+				pstmt.setInt(2, startrow);
 				System.out.println("이상작동");
 			}
 			else {
-				pstmt.setInt(1, endrow);
-				pstmt.setInt(2, startrow);
+				pstmt.setInt(1, startrow);
 				System.out.println("작동중");
 			}
 			ResultSet rs = pstmt.executeQuery();
@@ -129,6 +128,7 @@ public class MWBoardDAO {
 		sql.append("       ,bcontent                                  ");
 		sql.append("       from topboard                              ");
 		sql.append("       where bno = ?                              ");
+		
 		
 		ResultSet rs = null;
 		MWBoardDTO dto = new MWBoardDTO();

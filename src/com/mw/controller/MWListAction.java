@@ -39,7 +39,7 @@ public class MWListAction implements Action {
 		MWBoardService service = MWBoardService.getService();
 		
 		int totalcount = service.getCount(search, searchtxt);
-		int pagepercount = 3;
+		int pagepercount = 5;
 		int totalpage = (int)Math.ceil((float)totalcount/pagepercount);
 		int startrow = (currpage-1)*pagepercount;
 		int endrow = startrow+pagepercount;
