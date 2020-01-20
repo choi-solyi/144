@@ -10,6 +10,7 @@ import java.util.List;
 import com.mysql.cj.protocol.Resultset;
 import com.sy.dto.JGBoardDTO;
 import com.sy.dto.JGRepBoardDTO;
+import com.sy.dto.MDDTO;
 import com.user.comm.UserDTO;
 
 public class JGBoardDAO {
@@ -124,7 +125,7 @@ public class JGBoardDAO {
 				
 				
 			}
-			System.out.println("dto-detail-tes : t" + dto.getBcontent());
+			System.out.println("dto-detail-test : " + dto.getBcontent());
 			
 
 		}finally {
@@ -371,5 +372,36 @@ public class JGBoardDAO {
 
 		}
 		return -2;
+	}
+	public MDDTO getMdDetail(Connection conn, int mdcode) throws SQLException{
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select mdcode, mdname, price, img ");
+		sql.append(" from md where mdcode= ? ");
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		MDDTO mddto = new MDDTO();
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, mdcode);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				mddto.setMdcode(rs.getInt("mdcode"));
+				mddto.setMdname(rs.getString("mdname"));
+				mddto.setPrice(rs.getInt("price"));
+				mddto.setImg(rs.getString("img"));
+				
+			}
+			
+			
+
+		}finally {
+			if( rs!=null ) try { rs.close(); } catch(SQLException e) {}
+			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
+			
+		}
+		
+		return mddto;
 	}
 }
