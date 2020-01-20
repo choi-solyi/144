@@ -18,12 +18,12 @@
 	<label>분류</label>
 	<select name = "category">
 		<option value = "">분류</option>
-		<option value = "일반">일반</option>
-		<option value = "정보">정보</option>
-		<option value = "질문">질문</option>
-		<option value = "인증">인증</option>
-		<option value = "토론">토론</option>
-		<option value = "공지">공지</option>
+		<option value = "[일반]">일반</option>
+		<option value = "[정보]">정보</option>
+		<option value = "[질문]">질문</option>
+		<option value = "[인증]">인증</option>
+		<option value = "[토론]">토론</option>
+		<option value = "[공지]">공지</option>
 	</select>
 	<li>
 	<label for = "id">작성자</label>
