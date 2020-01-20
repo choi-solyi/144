@@ -102,14 +102,14 @@
 				<option value="옵션1">옵션1</option>
 				<option value="옵션1">옵션2</option>
 				<option value="옵션1">옵션3</option>
-			</select> <a href="dyinsert.do"><input type="button" name="write"
-				id="write" value="글쓰기"></a>
+			</select> 
+			<a href="dyinsert.do"><input type="button" name="write" id="write" value="글쓰기"></a>
 
 			<div id="dy_boardhead">
 				<div class="dy_bno">번호</div>
 				<div class="dy_btitle">제목</div>
-				<div class="dy_nick">글쓴이</div>
-				<div class="dy_bwritedate">등록일</div>
+				<div class="dy_nick">작성자</div>
+				<div class="dy_bwritedate">작성일</div>
 				<div class="dy_bhit">조회</div>
 
 				<c:forEach var="list" items="${list }">
@@ -139,7 +139,8 @@
 
 				</c:forEach>
 				<br>
-				<c:forEach var="i" begin="${starblock }" end="${endblock }" step="1">
+				<c:forEach var="i" begin="${startblock }" end="${endblock }"
+					step="1">
 					<c:if test="${currpage==i }">
 						<c:out value="${i }" />
 					</c:if>

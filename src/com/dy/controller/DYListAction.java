@@ -36,10 +36,10 @@ public class DYListAction implements Action {
 		
 		int totalcount = service.dygetCount(search,txtsearch);
 		
-		int pagepercount = 10; 
+		int pagepercount = 3; 
 		int totalpage = (int)Math.ceil((float)totalcount/pagepercount);
 		int startrow = (currpage-1)*pagepercount+1;
-		int endrow = startrow+pagepercount + 1;
+		int endrow = startrow+pagepercount-1;
 		if(endrow>totalcount)endrow=totalcount;
 		
 		int blockcount = 5;
