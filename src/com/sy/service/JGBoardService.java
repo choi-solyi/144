@@ -232,7 +232,7 @@ public class JGBoardService {
 			if(conn!=null) try { conn.close(); } catch(SQLException e) {}
 		}		
 	}*/
-	public int login(String id, String pw) {
+	/*public int login(String id, String pw) {
 		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		
@@ -254,7 +254,7 @@ public class JGBoardService {
 		}		
 		
 		return result;
-	}
+	}*/
 	public MDDTO getMdDetail(int mdcode) {
 		DBConn db = DBConn.getDB();
 		Connection conn = null;
