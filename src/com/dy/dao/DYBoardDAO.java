@@ -89,14 +89,15 @@ public class DYBoardDAO {
 		// TODO Auto-generated method stub
 		
 		StringBuilder sql = new StringBuilder();
-		sql.append(" select u.nick                               ");
-		sql.append("       ,bcategory                            ");
-		sql.append("       ,btitle                               ");
-		sql.append("       ,bhit                                 ");
-		sql.append("       ,bcontent                             ");
-		sql.append(" from midboard as m join userinfo as u       ");
-		sql.append(" on m.id = u.id                              ");
-		sql.append(" where bno = ?                               ");
+		sql.append(" select u.nick                                 ");
+		sql.append("       ,bcategory                              ");
+		sql.append("       ,btitle                                 ");
+		sql.append("       ,bhit                                   ");
+		sql.append("       ,bcontent                               ");
+		sql.append("       ,m.id                                   ");
+		sql.append(" from midboard as m join userinfo as u         ");
+		sql.append(" on m.id = u.id                                ");
+		sql.append(" where bno = ?                                 ");
 		
 		ResultSet rs =null;
 		DYBoardDTO dto = new DYBoardDTO();
@@ -113,6 +114,7 @@ public class DYBoardDAO {
 					dto.setBtitle(rs.getString("btitle"));
 					dto.setBhit(rs.getInt("bhit"));
 					dto.setBcontent(rs.getString("bcontent"));
+					dto.setId(rs.getString("id"));
 					
 				}
 			

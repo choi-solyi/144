@@ -24,8 +24,12 @@
             
         }
         #title{
-            width: 50%
+            width: 50%;
         }
+        #deleteboard, #updateboard{
+        	display: inline-block;
+        }
+        
     </style>
 </head>
 <body>
@@ -38,6 +42,11 @@
             <div id="repnum">댓글(00)</div>
         </div>
         <div id="content"><c:out value="${dto.bcontent }"/></div>
+      	<c:if test="${sessionScope.id == dto.id }">
+	        <div id="updateboard"><a href=""> <input type="button" value="수정" ></a></div>
+	        <div id="deleteboard"><a href=""> <input type="button" value="삭제" ></a></div>
+        </c:if>
+        <br>
         <a href="dylist.do" ><input type="button" value="목록으로"></a>
     </div>
 </body>
