@@ -7,6 +7,48 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
+<!-- 댓글 script -->
+<script>
+	function send()
+	{
+		if(document.rep.rcontent.value!="")
+			document.rep.submit();
+	}
+	
+	function del(repno, bno)
+	{
+		location.href='EBdelrep.do?repno='+repno+'&bno='+bno;
+	}
+	$(document).ready(function(){
+		let bno=${dto.bno};
+		$.ajax({
+			 url:'EBrepdetail.do'
+			, method:'post'
+			, data:{'bno':bno}
+			, dataType:'json'
+			, success:function(data){
+				$.each(data, function(index, item){
+					let result="<tr>";
+					result+="<td>"+item.rcontent+"</td>";
+					result+="<td>"+item.id;
+					result+="<input type='button' value='삭제' onclick=del("+item.repno+","+item.bno+")>";
+				    result+="</td></tr>";
+				    
+				    $('#result').append(result);
+				});
+			}
+			, error:function(data)
+			{
+				console.log('error', data);
+			}
+		});
+	});
+	
+
+
+</script>
+
+
 <body>
 <!-- 본문 detail -->
 <div class="container mt-5">
@@ -48,9 +90,11 @@
 	</div>
 	
 	<!-- 댓글 -->
-	<form method="post" action="/rep">
-	
-	
+	<form method="post" action="EBaddrep.do" name="rep">
+	<input type="hidden" name="bno" value="${dto.bno}">
+	<textarea rows="4" cols="20" name="rcontent"></textarea>
+	<input type="text" name="id">
+	<input type="button" onclick="send()"value="추가">
 	</form>
 	
 
