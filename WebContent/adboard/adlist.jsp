@@ -25,9 +25,9 @@ a {
 			<c:forEach var="i" items="${list}">
 				<li class="list-group-item list-group-item-action"><a
 					href="JWdetail.do?bno=${i.bno}">[${i.bcategory}] ${i.bno},
-						${i.btitle}, ${i.bwritedate}, ${i.bhit}, ${i.bup}, ${i.id}</a></li>
+						${i.btitle}, ${i.bwritedate}, ${i.bhit}, ${i.bup}, ${i.nick}</a></li>
 			</c:forEach>
-${id}asd
+
 
 			<li class="list-group-item">
 
@@ -84,8 +84,9 @@ ${id}asd
 							</div>
 						</div>
 					</div>
-				</form> <a class="btn btn-secondary" href="JWlist.do">목록</a> <a
-				class="btn btn-secondary" href="JWinsert.do">글쓰기</a>
+				</form> 
+				<a class="btn btn-secondary" href="JWlist.do">목록</a> 
+				<a class="btn btn-secondary" href="JWinsert.do">글쓰기</a>
 			</li>
 		</ul>
 	</div>
