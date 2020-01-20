@@ -141,7 +141,6 @@ public class CalBoardService {
 		}finally {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
-	
 	}
 }
 

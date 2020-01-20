@@ -26,7 +26,8 @@ public class EBInsertResultAction implements Action {
 		System.out.println(uploadpath);
 		int filesize = 1024*1024*10;
 		MultipartRequest muti = new MultipartRequest(request, uploadpath, filesize, "utf-8", new DefaultFileRenamePolicy());
-		String uploadfile = muti.getFilesystemName("uploadfile"); //  
+		String uploadfile = muti.getFilesystemName("uploadfile"); // 
+		
 		String btitle=muti.getParameter("btitle");
 		String bcaldate=muti.getParameter("bcaldate");
 		String bcontent=muti.getParameter("bcontent");
@@ -39,6 +40,9 @@ public class EBInsertResultAction implements Action {
 		dto.setBtitle(btitle);
 		dto.setBcaldate(bcaldate);
 		dto.setBcontent(bcontent);
+		
+
+		
 		service.Insert(dto);
 	
 		ForwardAction forward=new ForwardAction();
