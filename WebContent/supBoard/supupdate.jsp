@@ -22,8 +22,7 @@
 	<c:set var="dto" value="${requestScope.dto }"/>
 	
 	<!-- Example single danger button -->
-	<form method="post" action="sbupdateresult.do" name="frm"
-		>
+	<form method="post" action="sbupdateresult.do" name="frm" >
 		<div class="container">
 			<input type="hidden" name="bno" id="bno" value="${dto.bno}" readonly="readonly">
 			<select class="custom-select custom-select-sm subin subin1" name="bcategory" id="bcategory" >
@@ -51,8 +50,8 @@
 		
 
 		<div class="form-group">
-			<label for="exampleFormControlFile1"></label> <input type="file"
-				class="form-control-file" id="exampleFormControlFile1">
+			<label for="uploadfile1"></label> <input type="file"
+				class="form-control-file" id="uploadfile1">
 		</div>
 		<div >
 			<a class="btn btn-secondary btn-sm" href="sblist.do" role="button" style="padding: 5px 15px;">목록</a>
