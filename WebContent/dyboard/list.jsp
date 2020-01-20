@@ -138,7 +138,7 @@
 					</c:if>
 
 				</c:forEach>
-
+				<br>
 				<c:forEach var="i" begin="${starblock }" end="${endblock }" step="1">
 					<c:if test="${currpage==i }">
 						<c:out value="${i }" />
