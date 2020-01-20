@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
+import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
+
 import com.jw.BoardDAO.JWBoardDAO;
 import com.jw.BoardDTO.JWBoardDTO;
 import com.lol.comm.DBConn;
@@ -118,5 +120,21 @@ public class JWBoardService {
 			if(conn!=null) try{conn.close();} catch(SQLException e) {}
 		}
 		return Totalcount;
+	}
+	public void Uphit(String bno) {
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		try {
+			conn=DBC.getConn();
+			conn.setAutoCommit(false);
+			dao.Uphit(conn, bno);
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try{conn.rollback();}catch(SQLException rollback) {}
+		}finally {
+			if(conn!=null) try{conn.close();} catch(SQLException e) {}
+		}
 	}
 }
