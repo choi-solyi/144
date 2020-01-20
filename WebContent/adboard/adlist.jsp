@@ -17,6 +17,7 @@ a {
 </style>
 </head>
 <body>
+
 	<div class="container">
 		<ul class="list-group-item list-group-flush mt-3">
 			<li class="list-group-item list-group-item-dark"><h5>[카테고리]
@@ -26,7 +27,7 @@ a {
 					href="JWdetail.do?bno=${i.bno}">[${i.bcategory}] ${i.bno},
 						${i.btitle}, ${i.bwritedate}, ${i.bhit}, ${i.bup}, ${i.id}</a></li>
 			</c:forEach>
-
+${id}asd
 
 			<li class="list-group-item">
 
