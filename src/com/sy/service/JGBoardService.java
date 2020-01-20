@@ -278,16 +278,20 @@ public class JGBoardService {
 
 		return mddto;		
 	}
-	public int[] prevnext(int bno) {
+	public JGBoardDTO[] prev(int bno) {
 		DBConn db = DBConn.getDB();
 		Connection conn = null;
-		int[] arr= null;
+
+		JGBoardDTO[] arr = new JGBoardDTO[2];
+		
 		try {
 			conn = db.getConn();
 			conn.setAutoCommit(false);
 			
 			JGBoardDAO dao = JGBoardDAO.getDAO();
 			arr = dao.prev(conn, bno);
+			System.out.println(arr + "service arr");
+
 			
 			conn.commit();
 		}catch(NamingException|SQLException e) {
