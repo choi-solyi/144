@@ -269,6 +269,21 @@ function delrep(repno, bno){
 
 
 	<!-- 이전글, 다음글  -->
+	
+	<c:set  var="arr" value="${arr }"/>
+	<div class="prevnext">
+		<div class="alert alert-success" role="alert">
+
+			<a href="prev.do?bno=${arr[0] }" >▲ 안 녕</a>
+
+		</div>
+
+
+		<div class="alert alert-info" role="alert">
+			<a href="next.do?bno="${arr[1] }">▲ ㅂㅇ</a> ▼ 
+		</div>
+	</div> 
+	
 	<%-- <div class="prevnext">
 		<div class="alert alert-success" role="alert">
 

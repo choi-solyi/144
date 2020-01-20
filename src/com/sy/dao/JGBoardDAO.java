@@ -241,16 +241,20 @@ public class JGBoardDAO {
 	}
 	public int getTotalCount(Connection conn, String search) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		sql.append(" select count(*) from jgboard ");/*
-		sql.append(" where concat(btitle, bcontent) regexp #?# ");*/
+		sql.append(" select count(*) from jgboard ");
+		
+		if(!search.equals("")) {
+			sql.append("  where btitle like ? or bcontent like ?  ");
+		}
+		
 		int totalCount = 0;
 		ResultSet rs = null;
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());){
 			
-	/*		if(!search.equals("")) {
+			if(!search.equals("")) {
 				pstmt.setString(1, search);
 			}
-	*/		
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				totalCount = rs.getInt(1);
@@ -265,15 +269,28 @@ public class JGBoardDAO {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select bno, btitle, bcontent, bwritedate, bcategory, bhit, jb.id, us.nick 	");
 		sql.append(" from jgboard as jb join userinfo as us on jb.id = us.id					");
-		sql.append(" order by bno desc  limit ? , ?												");
+		
+		if(!search.equals("")) {
+			sql.append("  where btitle like ? or bcontent like ?  ");
+		}
+			
+		sql.append(" order by bno desc  limit ? , 10												");
 
 		ResultSet rs = null;
 		List<JGBoardDTO> list = new ArrayList<>();
 		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());
 				) {
 		
-			pstmt.setInt(1, startRow-1);
-			pstmt.setInt(2, 10);
+			if(!search.equals("")) {
+				pstmt.setString(1, "%"+search+"%");
+				pstmt.setString(2, "%"+search+"%");
+				pstmt.setInt(3, startRow-1);
+
+			}else {
+				pstmt.setInt(1, startRow-1);
+				
+			}
+			
 	
 			rs = pstmt.executeQuery();
 			System.out.println("rs" + rs);
@@ -391,17 +408,47 @@ public class JGBoardDAO {
 				mddto.setMdname(rs.getString("mdname"));
 				mddto.setPrice(rs.getInt("price"));
 				mddto.setImg(rs.getString("img"));
-				
 			}
-			
-			
-
 		}finally {
 			if( rs!=null ) try { rs.close(); } catch(SQLException e) {}
 			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
-			
 		}
 		
 		return mddto;
+	}
+	public int[]  prev(Connection conn, int bno) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select bno, btitle, us.nick, bhit from jgboard as jg join userinfo as us ");
+		sql.append(" where bno in ( (select bno from jgboard where bno < ? order by bno desc limit 1), ");
+		sql.append(" (select bno from jgboard where bno > ? order by bno limit 1)); ");
+		PreparedStatement pstmt = null;
+
+		JGBoardDTO dto1 = new JGBoardDTO();
+		JGBoardDTO dto2 = new JGBoardDTO();
+		
+		ResultSet rs = null;
+		int[] arr = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, bno);
+			pstmt.setInt(2, bno);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				arr[0]=(rs.getInt(1));
+				arr[1]=(rs.getInt(2));
+			}
+			System.out.println(arr);
+			System.out.println(arr[0]);
+			System.out.println(arr[1]);
+			System.out.println("--------------sdfafsadfsdfsdafasfdsf----------------");
+		}finally {
+			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
+
+		}
+		
+		return arr;
 	}
 }
