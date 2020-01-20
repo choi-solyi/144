@@ -126,6 +126,23 @@ public class CalBoardService {
 		}
 		return totalcount;
 	}
+	public void uphit(int bno) {
+		DBConn db=DBConn.getDB();
+		Connection conn=null;
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
+			dao.Uphit(conn,bno);
+			conn.commit();
+		}catch(SQLException|NamingException e){
+			System.out.println(e);
+			try {conn.rollback();} catch (SQLException e1) {}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+	
+	}
 }
 
 	

@@ -164,5 +164,16 @@ public class JWBoardDAO {
 		}
 		System.out.println(Totalcount);
 		return Totalcount;
+	}
+	
+	public void Uphit(Connection conn, String bno) throws SQLException{
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update adboard                    ");
+		sql.append("   set   bhit = bhit+1             ");
+		sql.append("   where bno  = ?                  ");
+			try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+				pstmt.setInt(1, Integer.parseInt(bno));
+				pstmt.executeUpdate();
+			}
 	};
 }

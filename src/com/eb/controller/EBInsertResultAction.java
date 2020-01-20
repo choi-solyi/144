@@ -11,6 +11,8 @@ import com.eb.dto.CalBoardDTO;
 import com.eb.service.CalBoardService;
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class EBInsertResultAction implements Action {
 
@@ -18,12 +20,22 @@ public class EBInsertResultAction implements Action {
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String btitle=request.getParameter("btitle");
-		String bcaldate=request.getParameter("bcaldate");
-		String bcontent=request.getParameter("bcontent");
+		
+		//파일 업로드
+		String uploadpath = request.getServletContext().getRealPath("/calBoard/calupload");
+		System.out.println(uploadpath);
+		int filesize = 1024*1024*10;
+		MultipartRequest muti = new MultipartRequest(request, uploadpath, filesize, "utf-8", new DefaultFileRenamePolicy());
+		String uploadfile = muti.getFilesystemName("uploadfile"); //  
+		String btitle=muti.getParameter("btitle");
+		String bcaldate=muti.getParameter("bcaldate");
+		String bcontent=muti.getParameter("bcontent");
+		
+		
 	
 		CalBoardService service=CalBoardService.getService();
 		CalBoardDTO dto=new CalBoardDTO();
+		dto.setBimg(uploadfile);
 		dto.setBtitle(btitle);
 		dto.setBcaldate(bcaldate);
 		dto.setBcontent(bcontent);
