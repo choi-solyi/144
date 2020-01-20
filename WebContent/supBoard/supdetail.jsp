@@ -27,13 +27,14 @@ ul li {
 </head>
 <body>
 	<c:set var="dto" value="${requestScope.dto}" />
+	<c:set var="ssid" value ="${sessionScope.id }"/>
 
 	<div class="container">
 
 		<div class="card" style="text-align: center;">
 			<div class="card-header">
 				<ul>
-					<li>${dto.id}</li>
+					<li>${dto.nick}</li>
 					<li>${dto.bwritedate}</li>
 					<li>${dto.bhit}</li>
 				</ul>
@@ -54,11 +55,12 @@ ul li {
 		</div>
 
 		<div style="padding: 5px 15px;">
-
+			<c:if test="${ssid==dto.id}">
 			<a class="btn btn-secondary btn-sm" href="sbupdate.do?bno=${dto.bno}"
-				role="button">수정</a> <a class="btn btn-secondary btn-sm"
+				role="button">수정</a>
+			 <a class="btn btn-secondary btn-sm"
 				href="sbdelete.do?bno=${dto.bno}" role="button">삭제</a>
-
+			</c:if>
 			<div style="display: inline-block; margin-left: 900px;">
 				<a class="btn btn-secondary btn-sm" href="sblist.do" role="button"
 					style="padding: 5px 20px;">목록</a> <a
@@ -75,14 +77,17 @@ ul li {
 			</div>
 
 		</div>
-
+	
 	
 		<script>
 	
 
-		let bno = ${dto.bno}
-		
-
+		let bno = ${dto.bno};
+		let ssid = '${sessionScope.id}';
+		console.log(bno);
+		console.log('세션아이디',ssid);
+	
+		console.log(ssid == '<%=session.getAttribute("id")%>');
 		$.ajax({
 			url:'sbdetailrep.do'
 			,data: {'bno':bno}
@@ -92,10 +97,14 @@ ul li {
 				
 				$.each(data,function(index,item){
 					let result= "<tr>";
-					result+= "<th>"+item.id+"("+item.rwritedate+")"+"</th>";
-					result+= "<th>"+"<a href="+"sbdeleterep.do?repno="+item.repno+"&bno="+item.bno;
-					result+= ">"+"삭제</a></th>";
-					result+= "</tr>";
+					result+= "<th>"+item.nick+"("+item.rwritedate+")"+"</th>";
+					result+= "<th>";
+					if(ssid==item.id){
+					result+= "<a href="+"sbdeleterep.do?repno="+item.repno+"&bno="+item.bno;
+					result+= ">"+"삭제</a>";
+					}
+					result+= "</th></tr>";
+					
 					result+= "<tr><th>"+item.rcontent+"</th>";
 					result+= "</tr>";
 					
@@ -129,7 +138,7 @@ ul li {
 					<span class="input-group-text">댓글</span>
 				</div>
 				<input type="hidden" name="bno" value="${dto.bno}">
-				<input type="hidden" name="id" value="${dto.id }">
+				<input type="hidden" name="id" value="${sessionScope.id }">
 				<textarea class="form-control" aria-label="With textarea" name="rcontent" rows="3"></textarea>
 				<input type="button" onclick="send()" value="등록">
 				

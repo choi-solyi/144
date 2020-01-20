@@ -64,6 +64,7 @@ public class SBDetailRepAction extends HttpServlet {
 			o.put("id", rdto.getId());
 			o.put("rwritedate", rdto.getRwritedate());
 			o.put("bno", rdto.getBno());
+			o.put("nick", rdto.getNick());
 			arr.add(o);
 		}
 		out.print(arr);
