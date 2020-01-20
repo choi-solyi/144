@@ -158,12 +158,27 @@ public class DYBoardDAO {
 	public void dyupdate(Connection conn, DYBoardDTO dto) throws SQLException {
 		// TODO Auto-generated method stub
 		
+		
 		StringBuilder sql = new StringBuilder();
+		sql.append(" update midboard          ");
+		sql.append(" set                      ");
+		sql.append("        bcategory = ?     ");
+		sql.append("       ,btitle = ?        ");
+		sql.append("       ,bcontent = ?      ");
+		sql.append("       ,bimg = ?          ");
+		sql.append(" where bno = ?            ");
+		
 		
 		try(
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 				) {
+			pstmt.setString(1, dto.getBcategory());
+			pstmt.setString(2, dto.getBtitle());
+			pstmt.setString(3, dto.getBcontent());
+			pstmt.setString(4, "null");
+			pstmt.setInt(5, dto.getBno());
 			
+			pstmt.executeUpdate();
 			
 		}
 	}
