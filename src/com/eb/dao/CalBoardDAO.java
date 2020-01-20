@@ -179,7 +179,7 @@ public class CalBoardDAO {
 		}
 	}
 
-	public java.util.List<CalSubBoardDTO> SubDetail(Connection conn, int bno) throws SQLException  {
+	public List<CalSubBoardDTO> SubDetail(Connection conn, int bno) throws SQLException  {
 		StringBuilder sql=new StringBuilder();
 		List<CalSubBoardDTO> list=new ArrayList<>();
 		sql.append(" select * from calrepboard  ");
@@ -200,5 +200,38 @@ public class CalBoardDAO {
 			}
 		}
 		return list;
+	}
+
+	public void CalAddRep(Connection conn, CalSubBoardDTO dto) throws SQLException {
+		StringBuilder sql=new StringBuilder();
+		sql.append(" insert  into  calrepboard  (repno     ");
+		sql.append("                          , rcontent   ");
+		sql.append("                          , rwritedate ");
+		sql.append("                          , bno        ");
+		sql.append("                          , id)        ");
+		sql.append(" values (null, ?, now() ,? ,? )        ");
+		PreparedStatement pstmt = null;
+		try {
+		pstmt=conn.prepareStatement(sql.toString());
+		pstmt.setString(1, dto.getRcontent());
+		pstmt.setInt(2, dto.getBno());
+		pstmt.setString(3, dto.getId());
+		pstmt.executeUpdate();
+		}finally {
+			if (pstmt != null)
+				try {pstmt.close();} catch (SQLException e) {}
+		}
+	}
+
+	public void DelRep(Connection conn, int repno) throws SQLException {
+		StringBuilder sql=new StringBuilder();
+		sql.append(" delete from calrepboard ");
+		sql.append(" where repno = ?           ");
+		try (
+		PreparedStatement pstmt=conn.prepareStatement(sql.toString());
+		){
+			pstmt.setInt(1, repno);
+			pstmt.executeUpdate();
+		}
 	}
 }

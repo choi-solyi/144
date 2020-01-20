@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
+import com.mw.dao.MWBoardDAO;
 import com.mw.dto.MWBoardDTO;
 import com.mw.service.MWBoardService;
 
-public class MWDetailAction implements Action {
+public class MWUpAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
@@ -19,8 +20,9 @@ public class MWDetailAction implements Action {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
 		MWBoardService service = MWBoardService.getService();
-		MWBoardDTO dto = service.mwDetail(no);
+		MWBoardDTO dto = service.mwUp(no);
 		request.setAttribute("dto", dto);
+		
 		
 		ForwardAction f = new ForwardAction();
 		

@@ -70,12 +70,13 @@ public class JWBoardDAO {
 		sql.append(" insert into adboard     ");
 		sql.append(" values(null, ?, ?       ");
 		sql.append("        , now(), ?, 0    ");
-		sql.append("        , 0, ?,'master') ");
+		sql.append("        , 0, ?, ?) ");
 		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
 			pstmt.setString(1, dto.getBtitle());
 			pstmt.setString(2, dto.getBcontent());
 			pstmt.setString(3, dto.getBcategory());
 			pstmt.setString(4, dto.getBimg());
+			pstmt.setString(5, dto.getId());
 			pstmt.executeUpdate();
 		}
 	}

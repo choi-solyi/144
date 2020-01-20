@@ -2,7 +2,6 @@ package com.mw.controller;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +32,7 @@ public class MWInsertResultAction implements Action {
 		service.mwInsert(dto);
 		
 		ForwardAction f = new ForwardAction();
-		f.setForward(false);
+		f.setForward(true);
 		f.setUrl("/main.jsp?page=topboard/toplist.jsp");
 		
 		return f;

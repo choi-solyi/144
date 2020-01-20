@@ -39,7 +39,6 @@ public class JoinAction implements Action {
 		UserService service = UserService.getService();
 		service.join(dto);
 		
-		System.out.println(pw);
 		request.setAttribute("id", id);
 		request.setAttribute("pw", pw);
 		return f;

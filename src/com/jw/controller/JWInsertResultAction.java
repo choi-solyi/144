@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jw.BoardDTO.JWBoardDTO;
 import com.jw.service.JWBoardService;
@@ -30,7 +31,12 @@ public class JWInsertResultAction implements Action {
 		MultipartRequest muti = new MultipartRequest(request, uploadpath, 
 				filesize, "utf-8", new DefaultFileRenamePolicy());
 		String bimg = muti.getFilesystemName("bimg"); //
-
+		//
+		
+		// 세션
+		HttpSession session =request.getSession();
+		String id =(String)session.getAttribute("id");
+		// form 태그 값
 		String btitle = muti.getParameter("btitle");
 		String bcategory = muti.getParameter("bcategory");
 		String bcontent = muti.getParameter("bcontent");
@@ -40,6 +46,7 @@ public class JWInsertResultAction implements Action {
 		System.out.println(bcontent);
 		JWBoardDTO dto = new JWBoardDTO(); 
 		
+		dto.setId(id);
 		dto.setBtitle(btitle);
 		dto.setBcategory(bcategory);
 		dto.setBimg(bimg);

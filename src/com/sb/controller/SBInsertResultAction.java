@@ -22,7 +22,7 @@ public class SBInsertResultAction implements Action {
 		
 		
 		int filesize = 1024*1024*10;
-		String uploadpath= request.getServletContext().getRealPath("supBoard/upload");
+		String uploadpath= request.getServletContext().getRealPath("/supBoard/upload");
 		
 		
 		MultipartRequest mul = new MultipartRequest(request,uploadpath,filesize,"utf-8",new DefaultFileRenamePolicy());
@@ -30,8 +30,8 @@ public class SBInsertResultAction implements Action {
 		String btitle=mul.getParameter("btitle");
 		String bcontent=mul.getParameter("bcontent");
 		String id = mul.getParameter("id");
-		String file = mul.getFilesystemName("uploadfile");
-		String original = mul.getOriginalFileName("uploadfile");
+		String file = mul.getFilesystemName("bimg");
+		
 		
 		
 		SUPBoardService service = SUPBoardService.sbGetBoardService();
@@ -41,10 +41,11 @@ public class SBInsertResultAction implements Action {
 		dto.setBtitle(btitle);
 		dto.setBcontent(bcontent);
 		dto.setId(id);
-		HttpSession session = request.getSession();
+		dto.setBimg(file);
+		
 		service.sbInsert(dto);
-		session.setAttribute("file", file);
-		session.setAttribute("original", original);
+		
+		
 		ForwardAction f = new ForwardAction();
 		f.setForward(false);
 		f.setUrl("sblist.do");

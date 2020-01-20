@@ -20,40 +20,39 @@ public class LoginResultAction implements Action {
 		//request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-
+		String joinid = (String)request.getAttribute("id");
+		String joinpw = (String)request.getAttribute("pw");
 		
 		UserService service = UserService.getService();
+		String salt =null;
+
+		if(joinid!=null) {
+			id=joinid;
+		}
+
+		salt = service.getSalt(id);
 		
-		//추가
-		String salt = service.getSalt(id);
-		pw = SHA.getEncrypt(pw, salt);
-		//추가 끝
+		if(joinpw!=null) {
+			pw=joinpw;	
+		}else {
+			pw = SHA.getEncrypt(pw, salt);
+		}
 		
 		int result = service.login(id,pw);
 		
 		ForwardAction f = new ForwardAction();
-		
-		//추가
-		String joinid = (String)request.getAttribute("id");
-		String joinpw = (String)request.getAttribute("pw");
-		//추가 끝
-		
-		if(joinid!=null && joinpw!=null) {
-			id=joinid;
-			pw=joinpw;
-		}
-		
+				
 		if(result == 1) {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
-			session.setMaxInactiveInterval(60*5); //5min.
+			session.setMaxInactiveInterval(60*30); //30min.
 			f.setForward(true);
 			f.setUrl("toplist.do");
 					
 		}else if(result ==2){
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
-			session.setMaxInactiveInterval(60*5); //5min.
+			session.setMaxInactiveInterval(60*30); //30min.
 
 			System.out.println(session.getAttribute("id"));
 			
@@ -62,28 +61,28 @@ public class LoginResultAction implements Action {
 		}else if(result ==3){
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
-			session.setMaxInactiveInterval(60*5); //5min.
+			session.setMaxInactiveInterval(60*30); //30min.
 			
 			f.setForward(true);
 			f.setUrl("dylist.do");
 		}else if(result ==4){
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
-			session.setMaxInactiveInterval(60*5); //5min.
+			session.setMaxInactiveInterval(60*30); //30min.
 			
 			f.setForward(true);
 			f.setUrl("JWlist.do");
 		}else if(result ==5){
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
-			session.setMaxInactiveInterval(60*5); //5min.
+			session.setMaxInactiveInterval(60*30); //30min.
 			
 			f.setForward(true);
 			f.setUrl("sblist.do");
 		}else if(result ==6){
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
-			session.setMaxInactiveInterval(60*5); //5min.
+			session.setMaxInactiveInterval(60*30); //30min.
 			
 			f.setForward(true);
 			f.setUrl("EBlist.do");
