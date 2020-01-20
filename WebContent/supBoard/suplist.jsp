@@ -44,7 +44,7 @@
 						<td scope="row">${ item.bno}</td>
 						<td>${item.bcategory}</td>
 						<td><a href="sbdetail.do?bno=${item.bno}">${item.btitle}</a></td>
-						<td>${item.id}</td>
+						<td>${item.nick}</td>
 						<td>${item.bwritedate}</td>
 						<td>${item.bhit}</td>
 					</tr>

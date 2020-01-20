@@ -33,7 +33,7 @@ public class EBListAction implements Action {
 		int pagepersize = 10;
 		int totalcount = service.Totalcount(search, searchtxt);
 		int totalpage = (int) Math.ceil((float) totalcount / pagepersize);
-
+		System.out.println(totalcount);
 		int startrow = (currpage - 1) * pagepersize;
 		int endrow = startrow + pagepersize - 1;
 		if (endrow > totalcount)

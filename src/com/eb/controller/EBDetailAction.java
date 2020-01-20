@@ -19,13 +19,18 @@ public class EBDetailAction implements Action {
 		String n=request.getParameter("bno");
 		int bno=1;
 		
-		
 		if(n!=null && !n.equals(""))
 			bno=Integer.parseInt(n);
 		
+		
+
+			
+		
 		CalBoardService service=CalBoardService.getService();
+		service.uphit(bno);
 		CalBoardDTO dto=service.detail(bno);
 		request.setAttribute("dto", dto);
+		
 		ForwardAction forward=new ForwardAction();
 		forward.setForward(true);
 		forward.setUrl("/main.jsp?page=calBoard/CALDetail.jsp");

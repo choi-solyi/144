@@ -28,7 +28,9 @@ public class SUPBoardDAO {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<SUPBoardDTO> list =new ArrayList<SUPBoardDTO>();
-		sql.append(" select * from supboard ");
+		sql.append(" select bno,bcategory,btitle,bcontent,bwritedate,bhit,sup.id,us.nick  ");
+		sql.append(" from supboard as sup inner join userinfo as us ");
+		sql.append(" on sup.id=us.id ");
 		if(!search.equals("") && !txtsearch.equals(""))
 		{
 		  if(search.equals("btitle"))
@@ -68,6 +70,7 @@ public class SUPBoardDAO {
 				dto.setId(rs.getString("id"));
 				dto.setBwritedate(rs.getString("bwritedate"));
 				dto.setBhit(rs.getInt("bhit"));
+				dto.setNick(rs.getString("nick"));
 			
 				list.add(dto);
 			}
@@ -87,7 +90,7 @@ public class SUPBoardDAO {
 		StringBuilder sql = new StringBuilder();
 		PreparedStatement pstmt = null;
 		sql.append(" insert into supboard(bno,bcategory,btitle,bcontent,id,bwritedate,bimg,bhit) ");
-		sql.append(" values( null,?,?,?,'general',now(),'aa.jpg',0 ) ");
+		sql.append(" values( null,?,?,?,?,now(),'aa.jpg',0 ) ");
 		
 		
 		
@@ -96,7 +99,7 @@ public class SUPBoardDAO {
 			pstmt.setString(1, dto.getBcategory());
 			pstmt.setString(2, dto.getBtitle());
 			pstmt.setString(3, dto.getBcontent());
-			
+			pstmt.setString(4, dto.getId());
 			
 			pstmt.executeUpdate();
 			
@@ -111,8 +114,9 @@ public class SUPBoardDAO {
 		PreparedStatement pstmt = null;
 		StringBuilder sql = new StringBuilder();
 		ResultSet rs = null;
-		sql.append(" select id,bwritedate,bhit,bcategory,btitle,bcontent,bimg,bno ");
-		sql.append(" from supboard ");
+		sql.append(" select sup.id,bwritedate,bhit,bcategory,btitle,bcontent,bimg,bno,us.nick ");
+		sql.append(" from supboard as sup inner join userinfo as us ");
+		sql.append(" on sup.id=us.id ");
 		sql.append(" where bno=? ");
 		SUPBoardDTO dto = new SUPBoardDTO();
 		
@@ -131,6 +135,7 @@ public class SUPBoardDAO {
 		 		dto.setBcontent(rs.getString("bcontent"));
 		 		dto.setBimg(rs.getString("bimg"));
 		 		dto.setBno(rs.getInt("bno"));
+		 		dto.setNick(rs.getString("nick"));
 		 	}
 			
 		}finally {
@@ -233,12 +238,14 @@ public class SUPBoardDAO {
 	public void sbRepAdd(Connection conn, SUPRepBoardDTO rdto) throws SQLException {
 		StringBuilder sql= new StringBuilder();
 		sql.append(" insert into suprepboard(repno,rcontent,id,rwritedate,bno) ");
-		sql.append(" values(null,?,'general',now(),?) ");
+		sql.append(" values(null,?,?,now(),?) ");
 		PreparedStatement pstmt = null;
 		try {
 			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setString(1, rdto.getRcontent());
-			pstmt.setInt(2, rdto.getBno());
+			pstmt.setString(2, rdto.getId());
+			pstmt.setInt(3, rdto.getBno());
+			
 			
 			pstmt.executeUpdate();
 		}finally {
@@ -250,8 +257,9 @@ public class SUPBoardDAO {
 	public List<SUPRepBoardDTO> sbDetailRep(Connection conn, int bno) throws SQLException {
 		ResultSet rs =null;
 		StringBuilder sql = new StringBuilder();
-		sql.append(" select repno,rcontent,id,rwritedate,bno ");
-		sql.append(" from suprepboard ");
+		sql.append(" select repno,rcontent,sb.id,rwritedate,bno,us.nick ");
+		sql.append(" from suprepboard as sb join userinfo as us ");
+		sql.append(" on sb.id=us.id ");
 		sql.append(" where bno=? ");
 		sql.append(" order by repno desc ");
 		List<SUPRepBoardDTO> list = new ArrayList<>();
@@ -268,6 +276,7 @@ public class SUPBoardDAO {
 				rdto.setId(rs.getString("id"));
 				rdto.setRwritedate(rs.getString("rwritedate"));
 				rdto.setBno(rs.getInt("bno"));
+				rdto.setNick(rs.getString("nick"));
 				list.add(rdto);
 			}
 			
