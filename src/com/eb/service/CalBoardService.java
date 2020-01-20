@@ -3,12 +3,14 @@ package com.eb.service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingException;
 
 import com.eb.dao.CalBoardDAO;
 import com.eb.dto.CalBoardDTO;
+import com.eb.dto.CalSubBoardDTO;
 import com.lol.comm.DBConn;
 
 public class CalBoardService {
@@ -141,6 +143,21 @@ public class CalBoardService {
 		}finally {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
+	}
+	public List<CalSubBoardDTO> subDetail(int bno) {
+		List<CalSubBoardDTO> list=new ArrayList<CalSubBoardDTO>();
+		CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
+		DBConn db=DBConn.getDB();
+		Connection conn=null;
+		try {
+			conn=db.getConn();
+			list=dao.SubDetail(conn, bno);
+		}catch(SQLException | NamingException e){
+			System.out.println(e);
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		return list;
 	}
 }
 

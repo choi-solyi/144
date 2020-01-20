@@ -416,18 +416,15 @@ public class JGBoardDAO {
 		
 		return mddto;
 	}
-	public int[]  prev(Connection conn, int bno) throws SQLException {
+	public JGBoardDTO[]  prev(Connection conn, int bno) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select bno, btitle, us.nick, bhit from jgboard as jg join userinfo as us ");
 		sql.append(" where bno in ( (select bno from jgboard where bno < ? order by bno desc limit 1), ");
 		sql.append(" (select bno from jgboard where bno > ? order by bno limit 1)); ");
 		PreparedStatement pstmt = null;
 
-		JGBoardDTO dto1 = new JGBoardDTO();
-		JGBoardDTO dto2 = new JGBoardDTO();
-		
 		ResultSet rs = null;
-		int[] arr = null;
+		 JGBoardDTO[] arr=new JGBoardDTO[2];
 		
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
@@ -436,13 +433,12 @@ public class JGBoardDAO {
 			
 			rs = pstmt.executeQuery();
 			
-			while(rs.next()) {
-				arr[0]=(rs.getInt(1));
-				arr[1]=(rs.getInt(2));
+			for(int i=0;i<arr.length;i++) {
+				arr[i].getBno();
+				arr[i].getBtitle();
+				arr[i].getNick();
+				arr[i].getBhit();
 			}
-			System.out.println(arr);
-			System.out.println(arr[0]);
-			System.out.println(arr[1]);
 			System.out.println("--------------sdfafsadfsdfsdafasfdsf----------------");
 		}finally {
 			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
