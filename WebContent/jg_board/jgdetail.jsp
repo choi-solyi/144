@@ -257,11 +257,9 @@ function delrep(repno, bno){
 			
 			<c:if test="${sessionScope.id == dto.id}">
 			
-				<a href="jgupdate.do?bno=${dto.bno}"
-						class="btn btn-success btnsol">수정</a>
+				<a href="jgupdate.do?bno=${dto.bno}" class="btn btn-success btnsol">수정</a>
 
-				<a href="jgdelete.do?bno=${dto.bno}"
-					class="btn btn-success btnsol">삭제</a>
+				<a href="jgdelete.do?bno=${dto.bno}" class="btn btn-success btnsol">삭제</a>
 			
 			</c:if> 
 			
