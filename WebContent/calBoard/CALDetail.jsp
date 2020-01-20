@@ -93,10 +93,14 @@
 	<form method="post" action="EBaddrep.do" name="rep">
 	<input type="hidden" name="bno" value="${dto.bno}">
 	<textarea rows="4" cols="20" name="rcontent"></textarea>
-	<input type="text" name="id">
+	<input type="text" name="id" value="${dto.id}">
 	<input type="button" onclick="send()"value="추가">
 	</form>
 	
+	<table id="result">
+	</table>
+
+
 
 </body>
 </html>

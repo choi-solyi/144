@@ -19,7 +19,7 @@ public class CalBoardService {
 		return service;
 	}
 	private CalBoardService() {}
-	
+
 	public List<CalBoardDTO> list(int startrow, int endrow, String search, String searchtxt) {
 		DBConn db=DBConn.getDB();
 		Connection conn=null;
@@ -27,8 +27,8 @@ public class CalBoardService {
 		try {
 			conn=db.getConn();
 			conn.setAutoCommit(false);
-				CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
-				list=dao.List(conn, startrow, endrow, search, searchtxt);
+			CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
+			list=dao.List(conn, startrow, endrow, search, searchtxt);
 			conn.commit();
 		} catch (SQLException | NamingException e) {
 			try {conn.rollback();} catch (SQLException e1) {}
@@ -45,11 +45,11 @@ public class CalBoardService {
 		Connection conn=null;
 		CalBoardDTO dto=null;
 		try {
-		conn=db.getConn();
-		conn.setAutoCommit(false);
+			conn=db.getConn();
+			conn.setAutoCommit(false);
 			CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
 			dto=dao.Detail(conn,bno);
-		conn.commit();
+			conn.commit();
 		} catch(SQLException | NamingException e) {
 			try {conn.rollback();} catch (SQLException e1) {}
 			System.out.println(e);
@@ -57,8 +57,8 @@ public class CalBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 		return dto;
-		}
-	
+	}
+
 	public void Insert(CalBoardDTO dto) {
 		DBConn db=DBConn.getDB();
 		Connection conn=null;
@@ -75,7 +75,7 @@ public class CalBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
-	
+
 	public void Delete(int bno) {
 		DBConn db=DBConn.getDB();
 		Connection conn=null;
@@ -92,7 +92,7 @@ public class CalBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
-	
+
 	public void update(CalBoardDTO dto) {
 		DBConn db=DBConn.getDB();
 		Connection conn=null;
@@ -109,7 +109,7 @@ public class CalBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
-	
+
 	public int Totalcount(String search, String searchtxt) {
 		DBConn db=DBConn.getDB();
 		Connection conn=null;
@@ -159,10 +159,46 @@ public class CalBoardService {
 		}
 		return list;
 	}
+	public void AddRep(CalSubBoardDTO dto) {
+		CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
+		DBConn db=DBConn.getDB();
+		Connection conn=null;
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			dao.CalAddRep(conn, dto);
+			conn.commit();
+		}catch(SQLException|NamingException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch (SQLException e1) {}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+
+
+
+	}
+	public void DelRep(int repno) {
+		DBConn db=DBConn.getDB();
+		Connection conn=null;
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
+			dao.DelRep(conn, repno);
+			System.out.println(repno);
+			conn.commit();
+		}catch(SQLException|NamingException e){
+			System.out.println(e);
+			try {conn.rollback();} catch (SQLException e1) {}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+	}
 }
 
-	
-	
-	
-	
+
+
+
+
 
