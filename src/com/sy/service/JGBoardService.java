@@ -278,19 +278,19 @@ public class JGBoardService {
 
 		return mddto;		
 	}
-	public JGBoardDTO[] prev(int bno) {
+	public JGBoardDTO prev(int bno) {
 		DBConn db = DBConn.getDB();
 		Connection conn = null;
+		JGBoardDTO dto = new JGBoardDTO();
 
-		JGBoardDTO[] arr = new JGBoardDTO[2];
 		
 		try {
 			conn = db.getConn();
 			conn.setAutoCommit(false);
 			
 			JGBoardDAO dao = JGBoardDAO.getDAO();
-			arr = dao.prev(conn, bno);
-			System.out.println(arr + "service arr");
+			dto = dao.prev(conn, bno);
+			System.out.println(dto + "service arr");
 
 			
 			conn.commit();
@@ -301,7 +301,33 @@ public class JGBoardService {
 			if( conn!=null ) try{ conn.close(); } catch(SQLException e) {}
 		}
 		
-		return arr;
+		return dto;
+		
+	}
+	public JGBoardDTO next(int bno) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		JGBoardDTO dto = new JGBoardDTO();
+
+		
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			
+			JGBoardDAO dao = JGBoardDAO.getDAO();
+			dto = dao.next(conn, bno);
+			System.out.println(dto + "service arr");
+
+			
+			conn.commit();
+		}catch(NamingException|SQLException e) {
+			e.getStackTrace();
+			try { conn.rollback(); } catch(SQLException e2) {}
+		}finally {
+			if( conn!=null ) try{ conn.close(); } catch(SQLException e) {}
+		}
+		
+		return dto;
 		
 	}
 }

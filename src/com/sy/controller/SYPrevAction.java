@@ -1,6 +1,8 @@
 package com.sy.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,32 +13,32 @@ import com.lol.comm.ForwardAction;
 import com.sy.dto.JGBoardDTO;
 import com.sy.service.JGBoardService;
 
-public class SYPrevNextAction implements Action {
+public class SYPrevAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		int bno = Integer.parseInt(request.getParameter("bno"));
+		System.out.println(bno +"bno!!!!!!!!!!!");
 		
 		JGBoardService service = JGBoardService.getService();
-		JGBoardDTO[] arr = new JGBoardDTO[2];
-		arr = service.prev(bno);
-		
-		
-		System.out.println(arr + "action arr");
+		JGBoardDTO predto = new JGBoardDTO();
+		predto = service.prev(bno);
+
+		System.out.println(predto + "action dto");
 		ForwardAction f = new ForwardAction();
-		
-		
-		request.setAttribute("arr", arr);
+				
+		request.setAttribute("predto", predto);
 /*		
 		f.setForward(false);
 		f.setUrl("jgdetail.do");*/
 		
-		f.setForward(true);
+/*		f.setForward(true);
+		f.setUrl("main.jsp?page=jg_board/jgdetail.jsp");*/
 		
-		f.setUrl("main.jsp?page=jg_board/jgdetail.jsp");
-
+		f.setForward(true);
+		f.setUrl("main.jsp?page=jg_board/jgdetail.jsp?bno="+bno);
 		
 		return f;
 	}
