@@ -10,6 +10,13 @@ public class JWBoardDTO {
 	private int bup;
 	private String bimg;
 	private String id;
+	private String nick;
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	public int getBno() {
 		return bno;
 	}

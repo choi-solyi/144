@@ -1,7 +1,6 @@
 package com.mw.dao;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,9 +40,8 @@ public class MWBoardDAO {
 		sql.append("        ,bhit                                 ");
 		sql.append("        ,bup                                  ");
 		sql.append("        from topboard                         ");
-		
 		if(!(search.equals("")) && !(search.equals(""))) {
-			if(search.equals("title")) {
+			if(search.equals("btitle")) {
 				sql.append("  where btitle like ? ");
 			}
 			else if(search.equals("id")) {
@@ -55,13 +53,13 @@ public class MWBoardDAO {
 		}
 		
 		sql.append("        ) r1 limit ? offset ?                  ");
-
+		System.out.println(startrow);
+		System.out.println(endrow);
 		List<MWBoardDTO> list = new ArrayList<>();
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
-			ResultSet rs = pstmt.executeQuery();
 			) {
 			if(!(search.equals("")) && !(searchtxt.equals(""))) {
-				pstmt.setString(1, "%"+search+"%");
+				pstmt.setString(1, "%"+searchtxt+"%");
 				pstmt.setInt(2, endrow);
 				pstmt.setInt(3, startrow);
 				System.out.println("이상작동");
@@ -71,7 +69,7 @@ public class MWBoardDAO {
 				pstmt.setInt(2, startrow);
 				System.out.println("작동중");
 			}
-			
+			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				MWBoardDTO dto = new MWBoardDTO();
 				
@@ -203,26 +201,28 @@ public class MWBoardDAO {
 		sql.append("  select count(*)                     ");
 		sql.append("         from topboard                ");
 		if(!(search.equals("")) && !(search.equals(""))) {
-			if(search.equals("title")) {
-				sql.append("  where btitle like = ? ");
+			if(search.equals("btitle")) {
+				sql.append("  where btitle like ? ");
 			}
 			else if(search.equals("id")) {
-				sql.append("  where id like = ? ");
+				sql.append("  where id like ? ");
 			}
 			else if(search.equals("bcontent")) {
-				sql.append("  where bcontent like = ? ");
+				sql.append("  where bcontent like ? ");
 			}
 		}
 		int count = 0;
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
-			rs = pstmt.executeQuery();
-			if(!(search.equals("")) && !(searchtxt.equals(""))) {
+			if(!(search.equals("")) && !(search.equals(""))) {
 				pstmt.setString(1, "%"+searchtxt+"%");
+				System.out.println("333333333333333333333333333");
 			}
+			
 			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
-				count = rs.getInt(1);//첫번째 자료 받기
+				count = rs.getInt(1);
 			}
 		}
 		finally {

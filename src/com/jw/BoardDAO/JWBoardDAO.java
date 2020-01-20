@@ -21,7 +21,8 @@ public class JWBoardDAO {
 		List<JWBoardDTO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		ResultSet rs = null;
-		sql.append(" select * from adboard ");
+		sql.append(" select * from adboard                     ");
+		sql.append(" join userinfo on adboard.id = userinfo.id ");
 		if(!(search.equals(""))&&!(searchtxt.equals("")))
 		{
 			if(search.equals("btitle"))
@@ -56,6 +57,7 @@ public class JWBoardDAO {
 				dto.setBup(rs.getInt("bup"));
 				dto.setBimg(rs.getString("bimg"));
 				dto.setId(rs.getString("id"));
+				dto.setNick(rs.getString("nick"));
 				list.add(dto);
 			}
 		}catch(SQLException e) {
@@ -86,7 +88,8 @@ public class JWBoardDAO {
 		JWBoardDTO dto = new JWBoardDTO();
 		StringBuilder sql = new StringBuilder();
 		ResultSet rs = null;
-		sql.append(" select * from adboard     ");
+		sql.append(" select * from adboard                     ");
+		sql.append(" join userinfo on adboard.id = userinfo.id ");
 		sql.append("   where bno = ?           ");
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
@@ -103,6 +106,7 @@ public class JWBoardDAO {
 				dto.setBup(rs.getInt("bup"));
 				dto.setBimg(rs.getString("bimg"));
 				dto.setId(rs.getString("id"));
+				dto.setNick(rs.getString("nick"));
 			}
 		}
 		System.out.println(dto);
