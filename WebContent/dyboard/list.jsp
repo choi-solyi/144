@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ page import="java.io.PrintWriter" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,6 +72,8 @@
 
 </head>
 <body>
+
+	
 	<div id="dy_bgimg"><p>우리는 승패의 중심</p><div>MID</div></div>
 	<p id="dy_champwords">"챔피언 대사"</p>
 	<div id="bhitlist">(댓글수에 따른 상단 리스트)</div>
@@ -92,10 +95,15 @@
 		
 		<c:forEach var="list" items="${list }" >
 			<div class="dy_bno"><c:out value="${list.bno }"/></div>
-			<div class="dy_btitle"><c:out value="${list.btitle }"/></div>
+			<div class="dy_btitle"><a href="dydetail.do?bno=${list.bno}"><c:out value="${list.btitle }"/></a></div>
 			<div class="dy_nick"><c:out value="${list.nick }"/></div>
 			<div class="dy_bwritedate"><c:out value="${list.bwritedate }"/></div>
 			<div class="dy_bhit"><c:out value="${list.bhit }"/></div>
+			
+			<c:if test="${sessionScope.id == list.id }">
+				<div><a href="dydelete.do?bno=${list.bno }"> <input type="button" value="삭제"></a></div>
+			</c:if>
+		
 		</c:forEach>
 	
 		</div>
@@ -113,5 +121,6 @@
 	<br>
 	<br>
 	<br>
+	
 </body>
 </html>

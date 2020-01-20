@@ -13,7 +13,7 @@
 			<h2>대회 일정</h2>
 		</div>
 
-		<form method="post" action="EBinsertresult.do">
+		<form method="post" action="EBinsertresult.do" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="btitle" class="col-sm-2 control-label">제목</label>
 				<div class="col-sm-12">
@@ -28,10 +28,14 @@
 						id="bcaldate" required="required">
 				</div>
 			</div>
-			<!-- 			
-			<li><label for="bimg">파일첨부</label>
-				<input type="file" name="bimg" id="bimg"></li>
--->
+			
+			<div class="form-group ">			
+			<label for="uploadfile" class="col-sm-2 control-label">이미지</label>
+			<div class="col-sm-3">
+				<input type="file" name="uploadfile" id="uploadfile">
+			</div>
+			
+
 			<div class="form-group">
 				<label for="bcontent" class="col-sm-2 control-label">내용</label>
 				<div class="col-sm-12">

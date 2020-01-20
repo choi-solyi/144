@@ -21,9 +21,10 @@ public class JWDetailAction implements Action {
 			f.setForward(true);
 			
 			String bno = request.getParameter("bno");
-			System.out.println(bno);
+			System.out.println("detailAction :"+bno);
 			JWBoardService service = JWBoardService.getBoardService();
 			JWBoardDTO dto = null;
+			service.Uphit(bno);
 			dto = service.Detail(bno);
 			
 			request.setAttribute("dto", dto);

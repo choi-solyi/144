@@ -36,9 +36,9 @@
 		<ul>
 			<li><label for="dybcategory">카테고리</label>
 				<select id="dybcategory" name="bcategory">
-					<option value="1" selected>옵션1</option>
-					<option value="2">옵션2</option>
-					<option value="3">옵션3</option>
+					<option value="일반" selected>일반</option>
+					<option value="유머">유머</option>
+					<option value="꿀팁">꿀팁</option>
 				</select>
 			</li>
 			<li><label for="dybtitle">제목</label>

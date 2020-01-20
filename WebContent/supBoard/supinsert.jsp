@@ -21,7 +21,9 @@
 
 
 </style>
+
 <body>
+	
 	<!-- Example single danger button -->
 	<form method="post" action="sbinsertresult.do" name="frm" > <!-- enctype="multipart/form-data" -->
 		 <div class="container">
@@ -31,6 +33,7 @@
 				<option value="질문">질문</option>
 				<option value="정보">정보</option>
 			</select>
+			<input type="hidden" name="id" value="${sessionScope.id}">
 
 			<div class="input-group mb-3 subin" style="width: 600px;">
 				<div class="input-group-prepend">

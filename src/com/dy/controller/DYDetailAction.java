@@ -11,31 +11,23 @@ import com.dy.service.DYBoardService;
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
 
-public class DYInsertResultAction implements Action {
+public class DYDetailAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String bcategory = (String)request.getParameter("bcategory");
-		String btitle = (String)request.getParameter("btitle");
-		String bcontent = (String)request.getParameter("bcontent");
-		
-		DYBoardDTO dto = new DYBoardDTO();
-		
-		System.out.println("bcategory : " +bcategory);
-		dto.setBcategory(bcategory);
-		dto.setBtitle(btitle);
-		dto.setBcontent(bcontent);
+		int bno =Integer.parseInt(request.getParameter("bno"));
 		
 		DYBoardService service = DYBoardService.getservice();
-		service.dyinsert(dto);
+		DYBoardDTO dto = service.dydetail(bno);
+		
+		request.setAttribute("dto", dto);
 		
 		ForwardAction forward = new ForwardAction();
-		forward.setForward(false);
-		forward.setUrl("dylist.do");
-		
+		forward.setForward(true);
+		forward.setUrl("main.jsp?page=dyboard/detail.jsp");
 		
 		return forward;
 	}

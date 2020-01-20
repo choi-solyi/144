@@ -10,6 +10,8 @@ import com.jw.BoardDTO.JWBoardDTO;
 import com.jw.service.JWBoardService;
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class JWInsertResultAction implements Action {
 
@@ -20,15 +22,22 @@ public class JWInsertResultAction implements Action {
 		f.setForward(false);
 		f.setUrl("JWlist.do");
 		
-		String btitle = request.getParameter("btitle");
-		String bcategory = request.getParameter("bcategory");
-		String bimg = request.getParameter("bimg");
-		String bcontent = request.getParameter("bcontent");
+		
+		// 파일 업로드
+		String uploadpath = request.getServletContext()
+				.getRealPath("/adboard/upload"); //WebContent > upload, 업로드 할경로
+		int filesize = 1024*1024*10; // 10MB
+		MultipartRequest muti = new MultipartRequest(request, uploadpath, 
+				filesize, "utf-8", new DefaultFileRenamePolicy());
+		String bimg = muti.getFilesystemName("bimg"); //
+
+		String btitle = muti.getParameter("btitle");
+		String bcategory = muti.getParameter("bcategory");
+		String bcontent = muti.getParameter("bcontent");
 		System.out.println(btitle);
 		System.out.println(bcategory);
 		System.out.println(bimg);
 		System.out.println(bcontent);
-		
 		JWBoardDTO dto = new JWBoardDTO(); 
 		
 		dto.setBtitle(btitle);
@@ -41,5 +50,4 @@ public class JWInsertResultAction implements Action {
 		
 		return f;
 	}
-
 }
