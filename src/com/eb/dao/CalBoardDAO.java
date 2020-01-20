@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.eb.dto.CalBoardDTO;
+import com.eb.dto.CalSubBoardDTO;
 import com.lol.comm.DBConn;
 
 public class CalBoardDAO {
@@ -96,8 +97,9 @@ public class CalBoardDAO {
 		sql.append("              , bcaldate       ");
 		sql.append("              , bcontent       ");
 		sql.append("              , bimg           ");
+		sql.append("              , bhit           ");
 		sql.append("              , id)            ");
-		sql.append("  values( null ,? ,? ,? ,? ,? )   ");
+		sql.append("  values( null ,? ,? ,? ,? ,0 ,? )   ");
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
@@ -175,5 +177,28 @@ public class CalBoardDAO {
 			pstmt.setInt(1, bno);
 			pstmt.executeUpdate();		
 		}
+	}
+
+	public java.util.List<CalSubBoardDTO> SubDetail(Connection conn, int bno) throws SQLException  {
+		StringBuilder sql=new StringBuilder();
+		List<CalSubBoardDTO> list=new ArrayList<>();
+		sql.append(" select * from calrepboard  ");
+		sql.append(" where bno = ?              ");
+		ResultSet rs=null;
+		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());){
+			pstmt.setInt(1, bno);
+			rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				CalSubBoardDTO dto=new CalSubBoardDTO();
+				dto.setRepno(rs.getInt("repno"));
+				dto.setRcontent(rs.getString("rcontent"));
+				dto.setRwritedate(rs.getString("rwritedate"));
+				dto.setId(rs.getString("id"));
+				dto.setBno(rs.getInt("bno"));
+				list.add(dto);
+			}
+		}
+		return list;
 	}
 }

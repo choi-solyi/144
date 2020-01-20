@@ -12,6 +12,7 @@ import com.lol.comm.DBConn;
 import com.sy.dao.JGBoardDAO;
 import com.sy.dto.JGBoardDTO;
 import com.sy.dto.JGRepBoardDTO;
+import com.sy.dto.MDDTO;
 import com.user.comm.UserDTO;
 
 public class JGBoardService {
@@ -231,7 +232,7 @@ public class JGBoardService {
 			if(conn!=null) try { conn.close(); } catch(SQLException e) {}
 		}		
 	}*/
-	public int login(String id, String pw) {
+	/*public int login(String id, String pw) {
 		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		
@@ -253,5 +254,54 @@ public class JGBoardService {
 		}		
 		
 		return result;
+	}*/
+	public MDDTO getMdDetail(int mdcode) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+
+		MDDTO mddto = new MDDTO();
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			
+			JGBoardDAO dao = JGBoardDAO.getDAO();
+			mddto = dao.getMdDetail(conn, mdcode);
+			System.out.println("servcie - mddto : " + mddto);
+			conn.commit();
+			
+		}catch(NamingException|SQLException e) {
+			e.getStackTrace();
+			try { conn.rollback(); } catch(SQLException e2) {}
+		}finally {
+			if( conn!=null ) try{ conn.close(); } catch(SQLException e) {}
+		}
+
+		return mddto;		
+	}
+	public JGBoardDTO[] prev(int bno) {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+
+		JGBoardDTO[] arr = new JGBoardDTO[2];
+		
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			
+			JGBoardDAO dao = JGBoardDAO.getDAO();
+			arr = dao.prev(conn, bno);
+			System.out.println(arr + "service arr");
+
+			
+			conn.commit();
+		}catch(NamingException|SQLException e) {
+			e.getStackTrace();
+			try { conn.rollback(); } catch(SQLException e2) {}
+		}finally {
+			if( conn!=null ) try{ conn.close(); } catch(SQLException e) {}
+		}
+		
+		return arr;
+		
 	}
 }

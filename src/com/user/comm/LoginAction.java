@@ -18,7 +18,7 @@ public class LoginAction implements Action {
 	      ForwardAction f= new ForwardAction();
 	      
 	      f.setForward(false);
-			f.setUrl("main.jsp?page=jglist.do");
+	      f.setUrl("main.jsp?page=jglist.do");
 	      
 	      return f;
 	}

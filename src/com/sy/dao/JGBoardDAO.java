@@ -10,6 +10,7 @@ import java.util.List;
 import com.mysql.cj.protocol.Resultset;
 import com.sy.dto.JGBoardDTO;
 import com.sy.dto.JGRepBoardDTO;
+import com.sy.dto.MDDTO;
 import com.user.comm.UserDTO;
 
 public class JGBoardDAO {
@@ -124,7 +125,7 @@ public class JGBoardDAO {
 				
 				
 			}
-			System.out.println("dto-detail-tes : t" + dto.getBcontent());
+			System.out.println("dto-detail-test : " + dto.getBcontent());
 			
 
 		}finally {
@@ -240,16 +241,20 @@ public class JGBoardDAO {
 	}
 	public int getTotalCount(Connection conn, String search) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		sql.append(" select count(*) from jgboard ");/*
-		sql.append(" where concat(btitle, bcontent) regexp #?# ");*/
+		sql.append(" select count(*) from jgboard ");
+		
+		if(!search.equals("")) {
+			sql.append("  where btitle like ? or bcontent like ?  ");
+		}
+		
 		int totalCount = 0;
 		ResultSet rs = null;
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());){
 			
-	/*		if(!search.equals("")) {
+			if(!search.equals("")) {
 				pstmt.setString(1, search);
 			}
-	*/		
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				totalCount = rs.getInt(1);
@@ -264,15 +269,28 @@ public class JGBoardDAO {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select bno, btitle, bcontent, bwritedate, bcategory, bhit, jb.id, us.nick 	");
 		sql.append(" from jgboard as jb join userinfo as us on jb.id = us.id					");
-		sql.append(" order by bno desc  limit ? , ?												");
+		
+		if(!search.equals("")) {
+			sql.append("  where btitle like ? or bcontent like ?  ");
+		}
+			
+		sql.append(" order by bno desc  limit ? , 10												");
 
 		ResultSet rs = null;
 		List<JGBoardDTO> list = new ArrayList<>();
 		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());
 				) {
 		
-			pstmt.setInt(1, startRow-1);
-			pstmt.setInt(2, 10);
+			if(!search.equals("")) {
+				pstmt.setString(1, "%"+search+"%");
+				pstmt.setString(2, "%"+search+"%");
+				pstmt.setInt(3, startRow-1);
+
+			}else {
+				pstmt.setInt(1, startRow-1);
+				
+			}
+			
 	
 			rs = pstmt.executeQuery();
 			System.out.println("rs" + rs);
@@ -318,7 +336,7 @@ public class JGBoardDAO {
 		}
 		
 	}
-	public int login(Connection conn, String id, String pw) throws SQLException {
+/*	public int login(Connection conn, String id, String pw) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select pw,line			");
 		sql.append(" from userinfo 			");
@@ -371,5 +389,62 @@ public class JGBoardDAO {
 
 		}
 		return -2;
+	}*/
+	public MDDTO getMdDetail(Connection conn, int mdcode) throws SQLException{
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select mdcode, mdname, price, img ");
+		sql.append(" from md where mdcode= ? ");
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		MDDTO mddto = new MDDTO();
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, mdcode);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				mddto.setMdcode(rs.getInt("mdcode"));
+				mddto.setMdname(rs.getString("mdname"));
+				mddto.setPrice(rs.getInt("price"));
+				mddto.setImg(rs.getString("img"));
+			}
+		}finally {
+			if( rs!=null ) try { rs.close(); } catch(SQLException e) {}
+			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
+		}
+		
+		return mddto;
+	}
+	public JGBoardDTO[]  prev(Connection conn, int bno) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select bno, btitle, us.nick, bhit from jgboard as jg join userinfo as us ");
+		sql.append(" where bno in ( (select bno from jgboard where bno < ? order by bno desc limit 1), ");
+		sql.append(" (select bno from jgboard where bno > ? order by bno limit 1)); ");
+		PreparedStatement pstmt = null;
+
+		ResultSet rs = null;
+		 JGBoardDTO[] arr=new JGBoardDTO[2];
+		
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, bno);
+			pstmt.setInt(2, bno);
+			
+			rs = pstmt.executeQuery();
+			
+			for(int i=0;i<arr.length;i++) {
+				arr[i].getBno();
+				arr[i].getBtitle();
+				arr[i].getNick();
+				arr[i].getBhit();
+			}
+			System.out.println("--------------sdfafsadfsdfsdafasfdsf----------------");
+		}finally {
+			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
+
+		}
+		
+		return arr;
 	}
 }

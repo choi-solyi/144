@@ -17,17 +17,31 @@ public class LoginResultAction implements Action {
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 
 		
-		JGBoardService service = JGBoardService.getService();
+		UserService service = UserService.getService();
 		
-
+		//추가
+		String salt = service.getSalt(id);
+		pw = SHA.getEncrypt(pw, salt);
+		//추가 끝
+		
 		int result = service.login(id,pw);
 		
 		ForwardAction f = new ForwardAction();
+		
+		//추가
+		String joinid = (String)request.getAttribute("id");
+		String joinpw = (String)request.getAttribute("pw");
+		//추가 끝
+		
+		if(joinid!=null && joinpw!=null) {
+			id=joinid;
+			pw=joinpw;
+		}
 		
 		if(result == 1) {
 			HttpSession session = request.getSession();
