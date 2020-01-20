@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="../css/list.css" type="text/css">
 <style type="text/css">
 
+#dy_midboardwrap{
+	width : 100%; height: 1500px;
+}
 #dy_bgimg{
     border: 1px solid black;
     width: 100%; height: 450px;
@@ -73,7 +76,7 @@
 </head>
 <body>
 
-	
+	<div id="dy_midboardwrap">
 	<div id="dy_bgimg"><p>우리는 승패의 중심</p><div>MID</div></div>
 	<p id="dy_champwords">"챔피언 대사"</p>
 	<div id="bhitlist">(댓글수에 따른 상단 리스트)</div>
@@ -109,18 +112,6 @@
 		</div>
 	</div>
 	
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	
+	</div>
 </body>
 </html>
