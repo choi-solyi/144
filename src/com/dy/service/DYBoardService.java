@@ -1,6 +1,7 @@
 package com.dy.service;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -109,6 +110,27 @@ public class DYBoardService {
 		}finally {
 			if(conn!=null)try {conn.close();}catch(SQLException e) {}
 		}
+	}
+	public void dyupdate(DYBoardDTO dto) {
+		// TODO Auto-generated method stub
+		DBConn dbconn = DBConn.getDB();
+		Connection conn=null;
+		
+		try {
+			conn=dbconn.getConn();
+			conn.setAutoCommit(false);
+			
+			DYBoardDAO dao = DYBoardDAO.getdao();
+			dao.dyupdate(conn,dto);
+			
+			conn.commit();
+		}catch(NamingException | SQLException e) {
+			System.out.println(e);
+			try {conn.rollback();}catch(SQLException e2) {}
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}
+		}
+		
 	}
 	
 	

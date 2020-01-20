@@ -18,7 +18,6 @@ public class SYPrevAction implements Action {
 
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		
 		JGBoardService service = JGBoardService.getService();
 		int[] arr = service.prevnext(bno);
 		
