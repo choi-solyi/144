@@ -257,11 +257,9 @@ function delrep(repno, bno){
 			
 			<c:if test="${sessionScope.id == dto.id}">
 			
-				<a href="jgupdate.do?bno=${dto.bno}"
-						class="btn btn-success btnsol">수정</a>
+				<a href="jgupdate.do?bno=${dto.bno}" class="btn btn-success btnsol">수정</a>
 
-				<a href="jgdelete.do?bno=${dto.bno}"
-					class="btn btn-success btnsol">삭제</a>
+				<a href="jgdelete.do?bno=${dto.bno}" class="btn btn-success btnsol">삭제</a>
 			
 			</c:if> 
 			
@@ -292,7 +290,7 @@ function delrep(repno, bno){
 			<div class="form-group">
 				<label for="disabledTextInput">닉네임</label> <input type="text"
 					id="id" class="form-control" name="id" placeholder="자동 입력"
-					value="${dto.id }" readonly="readonly">
+					value="${sessionScope.id}" readonly="readonly">
 			</div>
 
 

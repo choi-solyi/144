@@ -13,7 +13,9 @@ import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponse;import com.mysql.cj.Session;
+import com.sy.dao.JGBoardDAO;
+import com.sy.service.JGBoardService;
 
 
 /**
@@ -78,6 +80,7 @@ public class FrontController extends HttpServlet {
 
    private void doReq(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       // TODO Auto-generated method stub
+	   
       String path = request.getServletPath();
       Action act = null;
       act = hm.get(path);
@@ -92,5 +95,6 @@ public class FrontController extends HttpServlet {
       {
          response.sendRedirect(f.getUrl());
       }
+      
    }
 }
