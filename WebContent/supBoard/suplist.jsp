@@ -13,7 +13,18 @@
 	text-align: right;
 	margin-bottom: 10px;
 	margin-top: 15px;
-}
+	}
+	.bg{
+		display: inline-block;
+		
+	}
+
+	.bg1{
+		width:470px;		
+		
+	}
+	
+
 </style>
 </head>
 <body>
@@ -24,9 +35,25 @@
 	<c:set var="totalpage" value="${requestScope.totalpage}"></c:set>
 	<c:set var="search" value="${requestScope.search}"></c:set>
 	<c:set var="txtsearch" value="${requestScope.txtsearch}"></c:set>
-	
+	<div class="bg">
+			<img src=supBoard/img/sup1.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup2.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup3.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup4.jpg class="bg1">
+	</div>
 	<div class="container">
-
+		
+	
+	
+		<div style="text-align: center; margin-bottom: 50px; margin-top:50px;">
+		<h1>서 포 터</h1>
+		</div>
 		<table class="table table-hover">
 			<thead class="thead-dark">
 				<tr>

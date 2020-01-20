@@ -12,6 +12,15 @@ ul li {
 	display: inline-table;
 	padding: 0px 120px;
 }
+.bg{
+		display: inline-block;
+		
+	}
+
+	.bg1{
+		width:470px;		
+		
+	}
 </style>
 
 <script>
@@ -29,10 +38,28 @@ ul li {
 	<c:set var="dto" value="${requestScope.dto}" />
 	<c:set var="ssid" value ="${sessionScope.id }"/>
 	<c:set var="file1" value="${dto.bimg }"/>
+	<div class="bg">
+			<img src=supBoard/img/sup1.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup2.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup3.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup4.jpg class="bg1">
+	</div>
+	<div class="container">
+		
 	
+	
+		<div style="text-align: center; margin-bottom: 50px; margin-top:50px;">
+		<h1>서 포 터</h1>
+		</div>
 	<div class="container">
 
-		<div class="card" style="text-align: center;">
+		<div class="card" style="text-align: center; margin-left:-95px;">
 			<div class="card-header">
 				<ul>
 					<li>${dto.nick}</li>
@@ -88,7 +115,7 @@ ul li {
 			</div>
 
 		</div>
-	
+	</div>
 	
 		<script>
 	
