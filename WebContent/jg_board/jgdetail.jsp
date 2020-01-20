@@ -292,7 +292,7 @@ function delrep(repno, bno){
 			<div class="form-group">
 				<label for="disabledTextInput">닉네임</label> <input type="text"
 					id="id" class="form-control" name="id" placeholder="자동 입력"
-					value="${dto.id }" readonly="readonly">
+					value="${sessionScope.id}" readonly="readonly">
 			</div>
 
 
