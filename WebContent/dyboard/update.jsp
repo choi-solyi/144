@@ -50,7 +50,7 @@
 				<textarea rows="20" cols="100" id="dybcontent" name="bcontent" required>내용을 입력하세요</textarea>
 			</li>
 			<li>
-				<input type="submit" value="등록">
+				<input type="submit" value="수정">
 				<input type="reset" value="취소">
  			</li>
 		</ul>

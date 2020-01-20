@@ -155,6 +155,18 @@ public class DYBoardDAO {
 			
 		}
 	}
+	public void dyupdate(Connection conn, DYBoardDTO dto) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		StringBuilder sql = new StringBuilder();
+		
+		try(
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				) {
+			
+			
+		}
+	}
 	
 	
 	
