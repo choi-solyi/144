@@ -11,6 +11,7 @@ import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
 import com.jw.BoardDAO.JWBoardDAO;
 import com.jw.BoardDTO.JWBoardDTO;
+import com.jw.BoardDTO.JWRepBoardDTO;
 import com.lol.comm.DBConn;
 
 public class JWBoardService {
@@ -136,5 +137,22 @@ public class JWBoardService {
 		}finally {
 			if(conn!=null) try{conn.close();} catch(SQLException e) {}
 		}
+	}
+	
+	//rep
+	public List<JWRepBoardDTO> adListRep(String bno) {
+		List<JWRepBoardDTO> list = new ArrayList<>();
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		try{
+			conn=DBC.getConn();
+			list = dao.adListRep(conn, bno);
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		return list;
 	}
 }
