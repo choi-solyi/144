@@ -10,8 +10,7 @@
 </head>
 <body>
 	<div class="container">
-		<form method="post" action="JWinsertresult.do">
-			<!-- enctype="multipart/form-data" -->
+		<form method="post" action="JWinsertresult.do" enctype="multipart/form-data">
 			<ul class="list-group-item list-group-flush mt-3">
 				<li class="list-group-item">
 					<div class="input-group mb-2">
@@ -33,13 +32,12 @@
 							<option value="도움">도움</option>
 						</select>
 					</div>
-					
-					<!-- <div class="input-group mb-3">
+					<div class="input-group mb-3">
 						<div class="custom-file">
 							<input type="file" class="custom-file-input" name="bimg" id="bimg"> 
 								<label class="custom-file-label" for="bimg">Choose file</label>
 						</div>
-					</div> --> 
+					</div>
 					
 					<textarea class="form-control" rows="20" name="bcontent"
 						id="bcontent"></textarea>
