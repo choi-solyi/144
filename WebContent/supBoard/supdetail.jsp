@@ -158,19 +158,26 @@ ul li {
 				success : function(data) {
 
 					$.each(data, function(index, item) {
-						let result = "<tr>";
-						result += "<th>" + item.nick + "(" + item.rwritedate
-								+ ")" + "</th>";
-						result += "<th>";
-						if (ssid == item.id) {
-							result += "<a href=" + "sbdeleterep.do?repno="
-									+ item.repno + "&bno=" + item.bno;
-							result += ">" + "삭제</a>";
+						
+						
+						
+						
+						
+						var result="<tr>";
+						 
+						result+="<th>"+item.nick+"("+item.rwritedate+")"+"</th>";
+						if(ssid==item.id){
+							result+="<th>";
+							result+="<a href="+"sbdeleterep.do?repno="+item.repno+"&bno="+item.bno;
+							result+=">"+"삭제</a></th>";
 						}
-						result += "</th></tr>";
-
-						result += "<tr><th>" + item.rcontent + "</th>";
-						result += "</tr>";
+						result+="</tr>";
+						result+="<tr>";
+						result+="<th>"+item.rcontent;
+						result+="</th></tr>";
+						
+					 
+						 
 
 						$('#represult').append(result);
 					});
@@ -186,15 +193,16 @@ ul li {
 
 
 
-		<table class="table" style="margin: 0 auto;">
+		<table class="table">
 			<thead id="represult">
-
+				
 			</thead>
+			
 
 		</table>
 		
-		<div style="padding: 50px;"></div>
-		<div class="input-group" style="width:500px;  margin-left:350px;">
+		
+		<div class="input-group" style="width:500px;  margin-left:350px; margin-bottom:150px;">
 		
 		<input type="text" class="form-control" placeholder="소환사명을 입력하세요">
 		<div class="input-group-btn">
