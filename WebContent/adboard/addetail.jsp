@@ -15,8 +15,28 @@
 	function del(repno, bno){
 		location.href="JWdelrep.do?repno="+repno+"&bno="+bno
 	}
+	var upcheck=0;
+	function up(bno){
+		upcheck=upcheck+1;
+		if(upcheck>1)
+			{
+			alert('추천은 한번만 가능합니다.');
+			return;
+		}
+		$.ajax({
+			url : 'JWuprep.do'
+			,data : {'bno' : bno}
+			,method : 'post'
+			,success : function(data) {
+				$('#boardup').val('추천'+'+${dto.bup+1}');
+			}
+			,error : function(e) {
+				console.log(e);
+			}
+		});
+	} 
 	
-	$(document).ready(function() {
+	function replist(){
 		let bno = ${dto.bno}
 		$.ajax({
 			url : 'JWreplist.do'
@@ -47,7 +67,12 @@
 				console.log('error');
 			}
 		})
+	};
+	
+	$(document).ready(function() {
+		replist();
 	});
+	
 </script>
 <style>
 img {
@@ -66,7 +91,11 @@ img {
 					<div>
 						<img alt="이미지" src="adboard/upload/${dto.bimg}">
 					</div>
-				</c:if></li>
+				</c:if>
+				<div class="text-center">
+				<input id="boardup"class="btn btn-secondary" type="button" value="추천+${dto.bup}" onclick="up(${dto.bno})">
+				</div>
+				</li>
 			<li class="list-group-item pb-0">
 				<form method="post" action="JWaddrep.do?bno=${dto.bno}">
 				<div class="input-group">
@@ -74,11 +103,11 @@ img {
 					<textarea class="form-control" rows="2" autofocus="autofocus"
 						maxlength="100" name="rcontent"></textarea>
 					<div class="input-group-append">
-						<input type="submit" class="btn btn-secondary p-3" onclick="send()" value="댓글작성">
+						<input type="submit" class="btn btn-secondary p-3" onclick="send()" value="댓글작성" >
 					</div>
 				</div>
 				</form>
-				<ul id="replist" class="list-group-item list-group-flush p-0 pl-4">
+				<ul id="replist" class="list-group-item list-group-flush p-2 pl-4">
 				</ul>
 			</li>
 			<li class="list-group-item"><a class="btn btn-secondary"

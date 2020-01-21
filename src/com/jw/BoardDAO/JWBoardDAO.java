@@ -228,5 +228,63 @@ public class JWBoardDAO {
 			pstmt.setString(1, repno);
 			pstmt.executeUpdate();
 		}
-	};
+	}
+	public void adUpRep(Connection conn, String bno) throws SQLException{
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update adboard set bup = bup+1     ");
+		sql.append("   where bno     =  ?               ");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			pstmt.setString(1, bno);
+			pstmt.executeUpdate();
+		}
+	}
+	/*public List<JWBoardDTO> repcount(Connection conn, List<JWBoardDTO> list, int startrow,
+			int endrow, String search, String searchtxt) {
+		List<JWBoardDTO> list = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		ResultSet rs = null;
+		sql.append(" select count(*) ");
+		sql.append(" join userinfo u on a.id = u.id    ");
+		if(!(search.equals(""))&&!(searchtxt.equals("")))
+		{
+			if(search.equals("btitle"))
+				sql.append(" where btitle like ? ");
+			else if(search.equals("bcontent"))
+				sql.append(" where bcontent like ? ");
+			else if(search.equals("id"))
+				sql.append(" where id like ? ");
+		}
+		sql.append(" order by bno desc        ");
+		sql.append(" limit ?, ?               ");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+			if(!(search.equals(""))&&!(searchtxt.equals("")))
+			{
+				pstmt.setString(1, "%"+searchtxt+"%");
+				pstmt.setInt(2, startrow);
+				pstmt.setInt(3, endrow);
+			}else {
+			pstmt.setInt(1, startrow);
+			pstmt.setInt(2, endrow);
+			}
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				JWBoardDTO dto = new JWBoardDTO();
+				dto.setBno(rs.getInt("bno"));
+				dto.setBtitle(rs.getString("btitle"));
+				dto.setBcontent(rs.getString("bcontent"));
+				dto.setBwritedate(rs.getString("bwritedate"));
+				dto.setBcategory(rs.getString("bcategory"));
+				dto.setBhit(rs.getInt("bhit"));
+				dto.setBup(rs.getInt("bup"));
+				dto.setBimg(rs.getString("bimg"));
+				dto.setId(rs.getString("id"));
+				dto.setNick(rs.getString("nick"));
+				list.add(dto);
+			}
+		}catch(SQLException e) {
+			System.out.println(e);
+		}
+		return list;		
+	};*/
 }

@@ -14,16 +14,31 @@ a {
 .list-group-item-dark {
 	font-weight: bolder;
 }
+
+.page-item.active .page-link {
+
+    color: #fff;
+    background-color: gray;
+    border-color: gray;
+}
+
+.page-link {
+    color: gray;
+
+}
+	
 </style>
 </head>
-<body>
-
+<body>		
 	<div class="container">
+	<div class="row justify-content-center" style="min-width : 100%">
+	<img alt="이미지" src="img/one.JPG">
+	</div>
 		<ul class="list-group-item list-group-flush mt-3">
 			<li class="list-group-item list-group-item-dark"><h5>[카테고리]
 					글번호, 글제목, 글작성일, 글조회수, 추천수, 작성자</h5></li>
 			<c:forEach var="i" items="${list}">
-				<li class="list-group-item list-group-item-action"><a
+				<li class="list-group-item list-group-item-action p-3"><a
 					href="JWdetail.do?bno=${i.bno}">[${i.bcategory}] ${i.bno},
 						${i.btitle}, ${i.bwritedate}, ${i.bhit}, ${i.bup}, ${i.nick}</a></li>
 			</c:forEach>

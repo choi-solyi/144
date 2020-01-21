@@ -37,14 +37,14 @@ public class JWListAction implements Action{
 			currpage = Integer.parseInt(curr);
 		
 		int totalcount = service.Totalcount(search, searchtxt);
-		int pagesize = 10;
+		int pagesize = 20;
 		int startrow = (currpage-1)*pagesize;
 		int endrow = startrow+pagesize-1;
 		if(endrow>totalcount)
 			endrow=totalcount;
 		
 		int pagecount = (int)Math.ceil((float)totalcount/pagesize);
-		int pageblock = 5;
+		int pageblock = 10;
 		int startpage = (currpage-1)/pageblock*pageblock+1;
 		int endpage = startpage+pageblock-1;
 		if(endpage>pagecount)
