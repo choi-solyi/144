@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jw.BoardDTO.JWBoardDTO;
+import com.jw.BoardDTO.JWRepBoardDTO;
 
 public class JWBoardDAO {
 	private static JWBoardDAO dao = new JWBoardDAO();
@@ -21,8 +22,8 @@ public class JWBoardDAO {
 		List<JWBoardDTO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		ResultSet rs = null;
-		sql.append(" select * from adboard                     ");
-		sql.append(" join userinfo on adboard.id = userinfo.id ");
+		sql.append(" select a.*, u.nick from adboard a ");
+		sql.append(" join userinfo u on a.id = u.id    ");
 		if(!(search.equals(""))&&!(searchtxt.equals("")))
 		{
 			if(search.equals("btitle"))
@@ -88,9 +89,9 @@ public class JWBoardDAO {
 		JWBoardDTO dto = new JWBoardDTO();
 		StringBuilder sql = new StringBuilder();
 		ResultSet rs = null;
-		sql.append(" select * from adboard                     ");
-		sql.append(" join userinfo on adboard.id = userinfo.id ");
-		sql.append("   where bno = ?           ");
+		sql.append(" select a.*, u.nick from adboard a ");
+		sql.append(" join userinfo u on a.id = u.id    ");
+		sql.append("   where bno = ?                   ");
 
 		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
 			pstmt.setString(1, bno);
@@ -109,7 +110,7 @@ public class JWBoardDAO {
 				dto.setNick(rs.getString("nick"));
 			}
 		}
-		System.out.println(dto);
+		System.out.println("Detail : "+dto);
 		return dto;
 	}
 
@@ -180,5 +181,30 @@ public class JWBoardDAO {
 				pstmt.setInt(1, Integer.parseInt(bno));
 				pstmt.executeUpdate();
 			}
+	}
+	public List<JWRepBoardDTO> adListRep(Connection conn, String bno) throws SQLException{
+		List<JWRepBoardDTO> list = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		ResultSet rs = null;
+		sql.append(" select r.*, u.nick from adrepboard r ");
+		sql.append(" join userinfo u on r.id = u.id       ");
+		sql.append(" where bno = ?                        ");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());){
+			pstmt.setString(1, bno);
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				JWRepBoardDTO dto = new JWRepBoardDTO();
+				dto.setBno(rs.getInt("bno"));
+				dto.setId(rs.getString("id"));
+				dto.setNick(rs.getString("nick"));
+				dto.setRcontent(rs.getString("rcontent"));
+				dto.setRepno(rs.getInt("repno"));
+				dto.setRwritedate(rs.getString("rwritedate"));
+				list.add(dto);
+				System.out.println(dto);
+			}
+		}
+		return list;
 	};
 }
