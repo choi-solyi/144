@@ -9,17 +9,17 @@
 </head>
 <!-- 댓글 script -->
 <script>
-	function send() {
+	function send() { //댓글 작성 insert
 		if (document.rep.rcontent.value != "")
 			document.rep.submit();
 	}
 
-	function del(repno, bno) {
+	function del(repno, bno) { //del
 		location.href = 'EBdelrep.do?repno=' + repno + '&bno=' + bno;
 	}
 	$(document)
 			.ready(
-					function() {
+					function() { // replist
 						let bno = ${dto.bno};
 						$.ajax({
 									url : 'EBrepdetail.do',
@@ -37,7 +37,7 @@
 											result +='<td width="15%">'+item.rwritedate+'</td>';
 											result += "<td><input type='button' class='btn btn-outline-primary btn-sm' value='x' onclick=del("+ item.repno+ ","+ item.bno+ ")></td>";
 											result += "</tr></tbody></table>";
-															$('#result').append(result);
+										    $('#result').append(result);
 														});
 													}
 									,error : function(data) {
@@ -72,11 +72,12 @@
 		</div>
 
 		<!-- 내용 이미지 첨부 -->
-		<div class="col-sm-12 border-bottom mb-3" style="height:500px">
+		<div class="col-sm-12 border-bottom mb-3" style="min-height:500px">
 			<c:if test="${dto.bimg ne null}">
 				<img alt="이미지" src="calBoard/calupload/${dto.bimg}">
 			</c:if>
 			<div class="text-left">${dto.bcontent}</div>
+			<div>${dto.id }</div>
 		</div>
 
 		<!-- 목록으로, 수정, 삭제 -->
@@ -86,7 +87,7 @@
 				href="EBdelete.do?bno=${dto.bno}" class="btn btn-primary p-2">삭제</a>
 		</div>
 
-
+		${dto.bno}
 		<!-- 댓글 -->
 		<c:if test="${sessionScope.id ne null}">
 			<form method="post" action="EBaddrep.do" name="rep">
@@ -100,7 +101,6 @@
 			</form>
 			<table id="result"></table>
 		</c:if>
-
 
 	</div>
 

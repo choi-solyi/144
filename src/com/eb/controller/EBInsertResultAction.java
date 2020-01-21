@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.eb.dao.CalBoardDAO;
 import com.eb.dto.CalBoardDTO;
@@ -20,6 +21,9 @@ public class EBInsertResultAction implements Action {
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+	
+		
+		
 		
 		//파일 업로드
 		String uploadpath = request.getServletContext().getRealPath("/calBoard/calupload");
@@ -31,7 +35,8 @@ public class EBInsertResultAction implements Action {
 		String btitle=muti.getParameter("btitle");
 		String bcaldate=muti.getParameter("bcaldate");
 		String bcontent=muti.getParameter("bcontent");
-		
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
 		
 	
 		CalBoardService service=CalBoardService.getService();
@@ -40,6 +45,7 @@ public class EBInsertResultAction implements Action {
 		dto.setBtitle(btitle);
 		dto.setBcaldate(bcaldate);
 		dto.setBcontent(bcontent);
+		dto.setId(id);
 		
 
 		
