@@ -10,13 +10,10 @@ public class MWBoardDTO {
 	private int bup;
 	private int brepcount;
 	private String id;
+	private String nick;
 	private String bimg;
 	public int getBno() {
 		return bno;
-	}
-	
-	public void setBno(int bno) {
-		this.bno = bno;
 	}
 	public String getBtitle() {
 		return btitle;
@@ -66,12 +63,23 @@ public class MWBoardDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	public String getBimg() {
 		return bimg;
 	}
 	public void setBimg(String bimg) {
 		this.bimg = bimg;
 	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+	
+	
 	
 		
 	

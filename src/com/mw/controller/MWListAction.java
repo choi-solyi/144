@@ -33,8 +33,6 @@ public class MWListAction implements Action {
 		if(searchtxt == null) {
 			searchtxt = "";
 		}
-		System.out.println(search);
-		System.out.println(searchtxt);
 			
 		MWBoardService service = MWBoardService.getService();
 		
