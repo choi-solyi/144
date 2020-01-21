@@ -26,7 +26,10 @@
 	
 
 </style>
+<script>
 
+
+</script>
 	
 	
 
@@ -39,6 +42,8 @@
 	<c:set var="totalpage" value="${requestScope.totalpage}"></c:set>
 	<c:set var="search" value="${requestScope.search}"></c:set>
 	<c:set var="txtsearch" value="${requestScope.txtsearch}"></c:set>
+	<c:set var="rcount" value="${requestScope.rcount }"/>
+	
 	<div class="bg">
 			<img src=supBoard/img/sup1.jpg class="bg1">
 	</div>
@@ -56,9 +61,11 @@
 	
 	
 		<div style="text-align: center; margin-bottom: 50px; margin-top:50px;">
-		<h1>서 포 터</h1>
+		<h1>S U P P O R T E R</h1>
 		</div>
+		
 		<table class="table table-hover">
+		
 			<thead class="thead-dark">
 				<tr style="text-align: center;">
 					<th scope="col" >번호</th>
@@ -67,6 +74,7 @@
 					<th scope="col" >닉네임</th>
 					<th scope="col" >작성일</th>
 					<th scope="col" >조회수</th>
+					
 				</tr>
 			</thead>
 
@@ -79,6 +87,7 @@
 						<td>${item.nick}</td>
 						<td>${item.bwritedate}</td>
 						<td>${item.bhit}</td>
+					
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -124,7 +133,7 @@
 				value="검색">
 		</form>
 
-
+		
 
 
 

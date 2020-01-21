@@ -182,6 +182,7 @@ public class JWBoardDAO {
 				pstmt.executeUpdate();
 			}
 	}
+	
 	public List<JWRepBoardDTO> adListRep(Connection conn, String bno) throws SQLException{
 		List<JWRepBoardDTO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
@@ -206,5 +207,17 @@ public class JWBoardDAO {
 			}
 		}
 		return list;
+	}
+	
+	public void adAddRep(Connection conn, JWRepBoardDTO dto) throws SQLException{
+		StringBuilder sql = new StringBuilder();
+		sql.append(" insert into adrepboard values(      ");
+		sql.append("   null, ?, now(), ?, ?        )     ");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			pstmt.setString(1, dto.getRcontent());
+			pstmt.setInt(2, dto.getBno());
+			pstmt.setString(3, dto.getId());
+			pstmt.executeUpdate();
+		}
 	};
 }

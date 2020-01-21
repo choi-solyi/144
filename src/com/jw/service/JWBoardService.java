@@ -155,4 +155,20 @@ public class JWBoardService {
 		}
 		return list;
 	}
+	public void adAddRep(JWRepBoardDTO dto) {
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		try{
+			conn=DBC.getConn();
+			conn.setAutoCommit(false);
+			dao.adAddRep(conn, dto);
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try{conn.rollback();} catch(SQLException rollback) {System.out.println(rollback);}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+	}
 }

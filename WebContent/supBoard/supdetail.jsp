@@ -37,6 +37,8 @@ ul li {
 	<c:set var="dto" value="${requestScope.dto}" />
 	<c:set var="ssid" value="${sessionScope.id }" />
 	<c:set var="file1" value="${dto.bimg }" />
+	<c:set var="repcount" value="${requestScope.repcount }"/>
+	
 	<div class="bg">
 		<img src=supBoard/img/sup1.jpg class="bg1">
 	</div>
@@ -55,7 +57,7 @@ ul li {
 
 		<div
 			style="text-align: center; margin-bottom: 50px; margin-top: 50px;">
-			<h1>서 포 터</h1>
+			<h1>S U P P O R T E R</h1>
 		</div>
 		<div class="container">
 
@@ -67,7 +69,7 @@ ul li {
 					<li>${dto.bhit}</li>
 				</ul>
 
-
+	
 
 
 			</div>
@@ -92,7 +94,7 @@ ul li {
 				
 				
 			</div>
-
+			
 
 
 
@@ -103,12 +105,13 @@ ul li {
 					<a class="btn btn-secondary btn-sm"
 						href="sbdelete.do?bno=${dto.bno}" role="button">삭제</a>
 				</c:if>
-				<div style="display: inline-block; margin-left: 880px;">
-					<a class="btn btn-secondary btn-sm" href="sblist.do" role="button"
-						style="padding: 5px 20px;">목록</a> <a
+				<div style="display: inline-block; margin-left: 850px;">
+					<a
 						class="btn btn-secondary btn-sm" href="#represult" role="button"
-						style="padding: 5px 20px;">댓글</a>
-					<div></div>
+						style="padding: 5px 20px;">댓글수(${repcount})</a>
+					<a class="btn btn-secondary btn-sm" href="sblist.do" role="button"
+						style="padding: 5px 20px;">목록</a> 
+					
 				</div>
 				<div style="margin-top: 20px; text-align: right;">
 
@@ -120,7 +123,22 @@ ul li {
 
 			</div>
 		</div>
+		<form method="post" action="sbaddrep.do" name="frm">
+		   <div style="margin:0 auto;">
+			<div class="input-group" style="margin-top:70px;">
+				<div class="input-group-prepend">
+					<span class="input-group-text">댓글</span>
+				</div>
+				<input type="hidden" name="bno" value="${dto.bno}"> <input
+					type="hidden" name="id" value="${sessionScope.id }">
+				<textarea class="form-control" aria-label="With textarea"
+					name="rcontent" rows="3"></textarea>
+				<!-- <input type="button" onclick="send()" value="등록" > -->
+				<button type="button" onclick="send()" class="btn btn-outline-dark">등록</button>
+			</div>
+			</div>
 
+		</form>
 		<script>
 	
 
@@ -174,22 +192,7 @@ ul li {
 			</thead>
 
 		</table>
-		<form method="post" action="sbaddrep.do" name="frm">
-
-			<div class="input-group" style="margin: 0 auto;">
-				<div class="input-group-prepend">
-					<span class="input-group-text">댓글</span>
-				</div>
-				<input type="hidden" name="bno" value="${dto.bno}"> <input
-					type="hidden" name="id" value="${sessionScope.id }">
-				<textarea class="form-control" aria-label="With textarea"
-					name="rcontent" rows="3"></textarea>
-				<!-- <input type="button" onclick="send()" value="등록" > -->
-				<button type="button" onclick="send()" class="btn btn-outline-dark">등록</button>
-			</div>
-			
-
-		</form>
+		
 		<div style="padding: 50px;"></div>
 		<div class="input-group" style="width:500px;  margin-left:350px;">
 		
