@@ -70,7 +70,7 @@
 				<tr style="text-align: center;">
 					<th scope="col" >번호</th>
 					<th scope="col">카테고리</th>
-					<th scope="col" style="width:250px;" >제목</th>
+					<th scope="col" style="width:300px;" >제목</th>
 					<th scope="col" >닉네임</th>
 					<th scope="col" >작성일</th>
 					<th scope="col" >조회수</th>
@@ -143,15 +143,16 @@
 				style="width: 200px; background-color: silver; border: 3px solid silver; color: black;">글쓰기</a>
 		</div>
 	</div>
+	<form method="post" action="opgg.do">
 	<div class="input-group" style="width:500px; margin: 0 auto;">
 		
-		<input type="text" class="form-control" placeholder="소환사명을 입력하세요">
-		<div class="input-group-btn">
-			<button class="btn btn-default" type="button">전적검색</button>
+		<input type="text" class="form-control" placeholder="소환사명을 입력하세요" name="summoner" id="summoner">
+		<div class="input-group-btn" style="margin-bottom:150px;">
+			<button class="btn btn-default" type="submit" >전적검색</button>
 		</div>
 		
 	</div>
-	
+	</form>
 	<!-- /input-group -->
 
 
