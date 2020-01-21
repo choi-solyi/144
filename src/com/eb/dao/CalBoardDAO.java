@@ -68,9 +68,10 @@ public class CalBoardDAO {
 	public CalBoardDTO Detail(Connection conn, int bno) throws SQLException {
 		ResultSet rs = null;
 		StringBuilder sql = new StringBuilder();
-		sql.append(" select *              ");
-		sql.append(" from calboard         ");
-		sql.append(" where bno = ?         ");
+		sql.append(" select *                         ");
+		sql.append(" from calboard b join userinfo u  ");
+		sql.append(" on b.id = u.id                   ");
+		sql.append(" where b.bno = ?                  ");
 		CalBoardDTO dto = new CalBoardDTO();
 		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 			pstmt.setInt(1, bno);
@@ -82,6 +83,7 @@ public class CalBoardDAO {
 				dto.setBhit(rs.getInt("bhit"));
 				dto.setBup(rs.getInt("bup"));
 				dto.setBimg(rs.getString("bimg"));
+				dto.setId(rs.getString("id"));
 				dto.setBcontent(rs.getString("bcontent"));
 			}
 		} finally {	if (rs != null) try {rs.close();} catch (SQLException e) {}
@@ -182,8 +184,11 @@ public class CalBoardDAO {
 	public List<CalSubBoardDTO> SubDetail(Connection conn, int bno) throws SQLException  {
 		StringBuilder sql=new StringBuilder();
 		List<CalSubBoardDTO> list=new ArrayList<>();
-		sql.append(" select * from calrepboard  ");
-		sql.append(" where bno = ?              ");
+		System.out.println(bno);
+		sql.append(" select * from  calrepboard c   ");
+		sql.append(" join userinfo u                ");
+		sql.append(" on c.id = u.id                 ");
+		sql.append(" where bno = ?                  ");
 		ResultSet rs=null;
 		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());){
 			pstmt.setInt(1, bno);
