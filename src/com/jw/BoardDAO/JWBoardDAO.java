@@ -219,5 +219,14 @@ public class JWBoardDAO {
 			pstmt.setString(3, dto.getId());
 			pstmt.executeUpdate();
 		}
+	}
+	public void adDelRep(Connection conn, String repno) throws SQLException{
+		StringBuilder sql = new StringBuilder();
+		sql.append(" delete from adrepboard             ");
+		sql.append("   where repno   =  ?               ");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			pstmt.setString(1, repno);
+			pstmt.executeUpdate();
+		}
 	};
 }

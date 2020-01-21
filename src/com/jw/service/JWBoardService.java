@@ -171,4 +171,20 @@ public class JWBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
+	public void adDelRep(String repno) {
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		try{
+			conn=DBC.getConn();
+			conn.setAutoCommit(false);
+			dao.adDelRep(conn, repno);
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try{conn.rollback();} catch(SQLException rollback) {System.out.println(rollback);}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+	}
 }

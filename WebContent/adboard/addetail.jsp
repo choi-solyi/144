@@ -12,6 +12,10 @@
 			document.frm.submit();
 	}
 	
+	function del(repno, bno){
+		location.href="JWdelrep.do?repno="+repno+"&bno="+bno
+	}
+	
 	$(document).ready(function() {
 		let bno = ${dto.bno}
 		$.ajax({
@@ -21,11 +25,23 @@
 			,dataType : 'json'
 			,success : function(arr) {
 				console.log(arr);
-				$.each(arr, function(index, dto) {
-					let repboard = "<li>"+dto.rcontent+"<c:if test='${id eq dto.id}'>"
-					repboard += "<input type='button' value='삭제' onclick='del("+dto.rep+")'></c:if></li>"
-					$('#replist').append(repboard);
-				});
+				let id='${sessionScope.id}';
+				console.log(id);
+				 $.each(arr, function(index, repdto) {
+					 let repboard ="";
+					 repboard = "<li class='list-group-item list-group-item-action'" 
+						 if(repdto.id==id)
+							 {
+							 repboard+="style='background-color : #f1f3f4; border-radius: 10px'"
+							 }
+					 repboard +=">"+repdto.nick+"<small class=''>("+repdto.rwritedate+")</small><br>"+repdto.rcontent+"<div class='text-right'>"
+					 if(repdto.id==id)
+						  {
+						repboard+="<input class='btn btn-secondary' type='button' value='댓글삭제' onclick='del("+repdto.repno+","+repdto.bno+")'></div>"	 
+						  }
+					  repboard+="</li>"
+					 $('#replist').append(repboard);
+				}); 
 			}
 			,error : function(e) {
 				console.log('error');
@@ -51,7 +67,7 @@ img {
 						<img alt="이미지" src="adboard/upload/${dto.bimg}">
 					</div>
 				</c:if></li>
-			<li class="list-group-item">
+			<li class="list-group-item pb-0">
 				<form method="post" action="JWaddrep.do?bno=${dto.bno}">
 				<div class="input-group">
 				
@@ -66,9 +82,9 @@ img {
 				</ul>
 			</li>
 			<li class="list-group-item"><a class="btn btn-secondary"
-				href="JWlist.do">목록</a> <c:if test="${id eq dto.id}">
-					<a class="btn btn-secondary" href="JWupdate.do?bno=${dto.bno}">수정</a>
-					<a class="btn btn-secondary" href="JWdelete.do?bno=${dto.bno}">삭제</a>
+				href="JWlist.do">글목록</a> <c:if test="${id eq dto.id}">
+					<a class="btn btn-secondary" href="JWupdate.do?bno=${dto.bno}">글수정</a>
+					<a class="btn btn-secondary" href="JWdelete.do?bno=${dto.bno}">글삭제</a>
 				</c:if></li>
 		</ul>
 	</div>

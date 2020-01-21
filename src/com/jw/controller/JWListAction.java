@@ -37,7 +37,7 @@ public class JWListAction implements Action{
 			currpage = Integer.parseInt(curr);
 		
 		int totalcount = service.Totalcount(search, searchtxt);
-		int pagesize = 5;
+		int pagesize = 10;
 		int startrow = (currpage-1)*pagesize;
 		int endrow = startrow+pagesize-1;
 		if(endrow>totalcount)
@@ -49,6 +49,8 @@ public class JWListAction implements Action{
 		int endpage = startpage+pageblock-1;
 		if(endpage>pagecount)
 			endpage=pagecount;
+		System.out.println(startrow);
+		
 		System.out.println(pagecount);
 		request.setAttribute("startpage", startpage);
 		request.setAttribute("endpage", endpage);
@@ -58,7 +60,6 @@ public class JWListAction implements Action{
 		request.setAttribute("searchtxt",searchtxt);
 		List<JWBoardDTO> list = service.List(startrow, pagesize, search, searchtxt);
 		request.setAttribute("list", list);
-		
 		f.setForward(true);
 		f.setUrl("main.jsp?page=adboard/adlist.jsp");
 		return f;

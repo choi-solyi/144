@@ -57,7 +57,7 @@ public class JWListRepAction extends HttpServlet {
 			o.put("nick", dto.getNick());
 			o.put("rcontent", dto.getRcontent());
 			o.put("repno", dto.getRepno());
-			o.put("writedate", dto.getRwritedate());
+			o.put("rwritedate", dto.getRwritedate());
 			arr.add(o);
 		}
 		response.setContentType("apllication/json;charset=utf-8");

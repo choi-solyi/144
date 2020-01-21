@@ -1,6 +1,7 @@
 <%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -34,6 +35,10 @@
 
 
 <body>
+
+	<c:set var = "dto" value = "${requestScope.dto }"></c:set>
+	<c:set var = "id" value = "${requestScope.id }"></c:set>
+	
     <form class = "top_update_form" method = "post" action = "topinsertresult.do">
 	<label class = "top_update_label top_update_label_title" for = "title">제목</label>
 	<input class = "top_update_input top_update_input_title" type = "text" name = "title" id = "title" required="required"><br>
@@ -48,7 +53,8 @@
 		<option value = "[공지]">공지</option>
 	</select><br>
 	<label class = "top_update_label top_update_lable_nick" for = "id">작성자</label>
-	<input class = "top_update_input top_update_input_id" type = "text" name = "id" id = "id" required="required"><br>
+	<input class = "top_update_input top_update_input_id" type = "text" name = "id" id = "id"
+	value = '<c:out value="${id }"></c:out>'  readonly ><br>
 	<textarea class = "top_update_content" rows="30" cols="100" name = "content" id = "content" required="required"></textarea><br>
 	<input class = "top_update_btn" type = "submit" value = "전송">
 	<input class = "top_update_btn" type = "reset" value = 취소>
