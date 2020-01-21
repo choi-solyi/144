@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <script>
 	function send(){
-		if(document.frm.repcontent.value!="")
+		if(document.frm.rcontent.value!="")
 			document.frm.submit();
 	}
 	
@@ -22,7 +22,8 @@
 			,success : function(arr) {
 				console.log(arr);
 				$.each(arr, function(index, dto) {
-					let repboard = "<li>"+dto.rcontent+"</li>"
+					let repboard = "<li>"+dto.rcontent+"<c:if test='${id eq dto.id}'>"
+					repboard += "<input type='button' value='삭제' onclick='del("+dto.rep+")'></c:if></li>"
 					$('#replist').append(repboard);
 				});
 			}
@@ -44,21 +45,24 @@ img {
 			<li class="list-group-item list-group-item-dark mb-3">${dto.id},
 				${dto.bwritedate}, ${dto.bhit}, ${dto.bup}</li>
 			<li class="list-group-item"><h2>[${dto.bcategory}]
-					${dto.btitle}</h2> <br> <pre>${dto.bcontent}</pre> <c:if
-					test="${dto.bimg ne null}">
+					${dto.btitle}</h2> <br> <pre>${dto.bcontent}</pre> 
+					<c:if test="${dto.bimg ne null}">
 					<div>
 						<img alt="이미지" src="adboard/upload/${dto.bimg}">
 					</div>
 				</c:if></li>
 			<li class="list-group-item">
+				<form method="post" action="JWaddrep.do?bno=${dto.bno}">
 				<div class="input-group">
+				
 					<textarea class="form-control" rows="2" autofocus="autofocus"
-						maxlength="100" name="repcontent"></textarea>
+						maxlength="100" name="rcontent"></textarea>
 					<div class="input-group-append">
-						<span class="btn btn-secondary p-3" onclick="send()">댓글작성</span>
+						<input type="submit" class="btn btn-secondary p-3" onclick="send()" value="댓글작성">
 					</div>
 				</div>
-				<ul id="replist" class="list-group-item list-group-flush">
+				</form>
+				<ul id="replist" class="list-group-item list-group-flush p-0 pl-4">
 				</ul>
 			</li>
 			<li class="list-group-item"><a class="btn btn-secondary"
