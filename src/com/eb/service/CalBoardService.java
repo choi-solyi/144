@@ -174,9 +174,6 @@ public class CalBoardService {
 		}finally {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
-
-
-
 	}
 	public void DelRep(int repno) {
 		DBConn db=DBConn.getDB();
