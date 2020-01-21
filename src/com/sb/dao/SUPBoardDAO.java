@@ -90,7 +90,7 @@ public class SUPBoardDAO {
 		StringBuilder sql = new StringBuilder();
 		PreparedStatement pstmt = null;
 		sql.append(" insert into supboard(bno,bcategory,btitle,bcontent,id,bwritedate,bimg,bhit) ");
-		sql.append(" values( null,?,?,?,?,now(),'aa.jpg',0 ) ");
+		sql.append(" values( null,?,?,?,?,now(),?,0 ) ");
 		
 		
 		
@@ -100,6 +100,7 @@ public class SUPBoardDAO {
 			pstmt.setString(2, dto.getBtitle());
 			pstmt.setString(3, dto.getBcontent());
 			pstmt.setString(4, dto.getId());
+			pstmt.setString(5, dto.getBimg());
 			
 			pstmt.executeUpdate();
 			
