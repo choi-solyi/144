@@ -39,8 +39,8 @@ public class MWBoardDAO {
 			if(search.equals("btitle")) {
 				sql.append("  where btitle like ? ");
 			}
-			else if(search.equals("id")) {
-				sql.append("  where id like ? ");
+			else if(search.equals("nick")) {
+				sql.append("  where u.nick like ? ");
 			}
 			else if(search.equals("bcontent")) {
 				sql.append("  where bcontent like ? ");
