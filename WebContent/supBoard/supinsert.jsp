@@ -17,7 +17,15 @@
 .subin1 {
 	width: 120px;
 }
+.bg{
+		display: inline-block;
+		
+	}
 
+	.bg1{
+		width:470px;		
+		
+	}
 
 
 </style>
@@ -26,7 +34,23 @@
 	
 	<!-- Example single danger button -->
 	<form method="post" action="sbinsertresult.do" name="frm" enctype="multipart/form-data"  > <!-- enctype="multipart/form-data" -->
+		<div class="bg">
+			<img src=supBoard/img/sup1.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup2.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup3.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup4.jpg class="bg1">
+	</div>
 		 <div class="container">
+		 	
+		<div style="text-align: center; margin-bottom: 50px; margin-top:50px;">
+		<h1>서 포 터</h1>
+		</div>
 			<select class="custom-select custom-select-sm subin subin1" name="bcategory" id="bcategory" required="required">
 				<option value="카테고리">카테고리</option>
 				<option value="일반">일반</option>
@@ -66,12 +90,14 @@
 		</div>
 		
 		
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="소환사명을 입력하세요" >
-				<div class="input-group-btn">
-					<button class="btn btn-default" type="button">전적검색</button>
-				</div>
-			</div>
+		<div class="input-group" style="width:500px; margin: 0 auto;">
+		
+		<input type="text" class="form-control" placeholder="소환사명을 입력하세요">
+		<div class="input-group-btn">
+			<button class="btn btn-default" type="button">전적검색</button>
+		</div>
+		
+	</div>
 			<!-- /input-group -->
 			
 		<!-- /.col-lg-6 -->

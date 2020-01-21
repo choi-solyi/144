@@ -26,6 +26,10 @@
 	
 
 </style>
+
+	
+	
+
 </head>
 <body>
 	<c:set var="list" value="${requestScope.list }" />
@@ -56,22 +60,22 @@
 		</div>
 		<table class="table table-hover">
 			<thead class="thead-dark">
-				<tr>
-					<th scope="col" style="width: 100px;">번호</th>
-					<th scope="col" style="width: 150px;">카테고리</th>
-					<th scope="col" style="width: 250px;">제목</th>
-					<th scope="col" style="width: 150px;">닉네임</th>
-					<th scope="col" style="width: 150px;">작성일</th>
-					<th scope="col" style="width: 150px;">조회수</th>
+				<tr style="text-align: center;">
+					<th scope="col" >번호</th>
+					<th scope="col">카테고리</th>
+					<th scope="col" style="width:250px;" >제목</th>
+					<th scope="col" >닉네임</th>
+					<th scope="col" >작성일</th>
+					<th scope="col" >조회수</th>
 				</tr>
 			</thead>
 
 			<tbody>
 				<c:forEach var="item" items="${list}">
-					<tr>
+					<tr style="text-align: center;">
 						<td scope="row">${ item.bno}</td>
 						<td>${item.bcategory}</td>
-						<td><a href="sbdetail.do?bno=${item.bno}">${item.btitle}</a></td>
+						<td><a style="text-decoration: none;"  href="sbdetail.do?bno=${item.bno}">${item.btitle}</a></td>
 						<td>${item.nick}</td>
 						<td>${item.bwritedate}</td>
 						<td>${item.bhit}</td>
@@ -79,31 +83,38 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
 		<c:if test="${startblock>1}">
 					
-
-					<a href="sblist.do?curr=${startblock-1}">이전</a>
-
+					<li class="page-item">
+					<a  class="page-link" href="sblist.do?curr=${startblock-1}"  aria-label="Previous">이전</a>
+					</li>
 		</c:if>
 	
 		<c:forEach var="i" begin="${startblock}" end="${endblock }" step="1">
+			<li class="page-item">
 			<c:if test="${currpage==i}">
-				<c:out value="${i}" />
+				 <a class="page-link" href="#">${i}</a> <%-- <c:out  value="${i}" /> --%>
 			</c:if>
+			</li>	
+			 <li class="page-item">
+			  
 			<c:if test="${currpage!=i}">
-				<a
-					href="sblist.do?curr=${i}&search=${search}&txtsearch=${txtsearch}">${i}</a>
+				<a class="page-link" href="sblist.do?curr=${i}&search=${search}&txtsearch=${txtsearch}">${i}</a>
 			</c:if>
-
+			</li>
 		</c:forEach>
+		 <li class="page-item">
 		<c:if test="${endblock < totalpage}">
 					
-
-			<a href="sblist.do?curr=${endblock+1}">다음</a>
+			
+			<a class="page-link" href="sblist.do?curr=${endblock+1}" aria-label="Next">다음</a>
 
 		</c:if>
-
-
+		</li>
+		</ul>
+		</nav>
 		<form method="get" action="sblist.do">
 			<select name="search">
 				<option value="btitle">글제목</option>
@@ -123,11 +134,13 @@
 				style="width: 200px; background-color: silver; border: 3px solid silver; color: black;">글쓰기</a>
 		</div>
 	</div>
-	<div class="input-group">
+	<div class="input-group" style="width:500px; margin: 0 auto;">
+		
 		<input type="text" class="form-control" placeholder="소환사명을 입력하세요">
 		<div class="input-group-btn">
 			<button class="btn btn-default" type="button">전적검색</button>
 		</div>
+		
 	</div>
 	
 	<!-- /input-group -->

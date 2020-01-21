@@ -11,7 +11,6 @@
 <body>
 	<div class="container">
 		<form method="post" action="JWinsertresult.do" enctype="multipart/form-data">
-			<!-- enctype="multipart/form-data" -->
 			<ul class="list-group-item list-group-flush mt-3">
 				<li class="list-group-item">
 					<div class="input-group mb-2">
@@ -38,7 +37,9 @@
 							<input type="file" class="custom-file-input" name="bimg" id="bimg"> 
 								<label class="custom-file-label" for="bimg">Choose file</label>
 						</div>
-					</div> <textarea class="form-control" rows="20" name="bcontent"
+					</div>
+					
+					<textarea class="form-control" rows="20" name="bcontent"
 						id="bcontent"></textarea>
 				</li>
 				<li class="list-group-item"><input class="btn btn-secondary"
