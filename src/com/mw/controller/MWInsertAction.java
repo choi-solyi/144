@@ -15,6 +15,11 @@ public class MWInsertAction implements Action {
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String id = request.getParameter("id");
+		
+		request.setAttribute("id", id);
+		
 		ForwardAction f = new ForwardAction();
 		f.setForward(true);
 		f.setUrl("/main.jsp?page=topboard/topinsert.jsp");

@@ -124,6 +124,7 @@
 </head>
 <body>
 <c:set var = "dto" value = "${requestScope.dto }"></c:set>
+<c:set var = "session" value="${sessionScope.id }" />
 <div id = "top_content_wrap">
 
 	<header class = "top_content_header">
@@ -140,10 +141,15 @@
                 <div class = "tcontent top_content_category"><c:out value = "${dto.bcategory }"></c:out></div><br>
                 <div class = "tcontent top_content_title"><c:out value = "${dto.btitle }"></c:out></div><br>
                 <div class = "tcontent top_content_content"><c:out value = "${dto.bcontent }"></c:out></div><br>
-                <a class = "top_link_up" href = "topup.do?no=${dto.bno }">추천</a><br>
-                <a class = "top_link_list" href = "toplist.do">목록</a>
-                <a class = "top_link_update" href = "topupdate.do?no=${dto.bno }">수정</a>
-                <a class = "top_link_del" href = "topdelete.do?no=${dto.bno }">삭제</a>
+                
+                <c:if test="${session == dto.id }">
+						<div>
+							<a class = "top_link_up" href = "topup.do?no=${dto.bno }">추천</a><br>
+							<a class = "top_link_update" href = "topupdate.do?no=${dto.bno }">수정</a>
+                			<a class = "top_link_del" href = "topdelete.do?no=${dto.bno }">삭제</a>
+						</div>
+					</c:if>
+				<a class = "top_link_list" href = "toplist.do">목록</a>
             </div>
         </section>
 
