@@ -21,14 +21,18 @@ public class SBUpdateResultAction implements Action{
 			throws ServletException, IOException {
 		
 		
+		int filesize = 1024*1024*10;
+		String uploadpath= request.getServletContext().getRealPath("/supBoard/upload");
 		
-		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		String btitle = request.getParameter("btitle");
+		MultipartRequest mul = new MultipartRequest(request,uploadpath,filesize,"utf-8",new DefaultFileRenamePolicy());
+		int bno = Integer.parseInt(mul.getParameter("bno"));
 		
-		String bcontent = request.getParameter("bcontent");
-		String bcategory = request.getParameter("bcategory");
+		String btitle = mul.getParameter("btitle");
 		
+		String bcontent = mul.getParameter("bcontent");
+		String bcategory = mul.getParameter("bcategory");
+		String file = mul.getFilesystemName("bimg");
 		
 		SUPBoardService service = SUPBoardService.sbGetBoardService();
 		SUPBoardDTO dto = new SUPBoardDTO();
@@ -37,10 +41,10 @@ public class SBUpdateResultAction implements Action{
 		dto.setBcategory(bcategory);
 		dto.setBtitle(btitle);
 		dto.setBcontent(bcontent);
-		
+		dto.setBimg(file);
 		
 		service.sbUpdate(dto);
-		HttpSession session = request.getSession();
+		
 		request.setAttribute("dto", dto);
 	
 		ForwardAction f= new ForwardAction();

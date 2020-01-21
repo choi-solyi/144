@@ -12,6 +12,14 @@ ul li {
 	display: inline-table;
 	padding: 0px 120px;
 }
+
+.bg {
+	display: inline-block;
+}
+
+.bg1 {
+	width: 470px;
+}
 </style>
 
 <script>
@@ -27,13 +35,32 @@ ul li {
 </head>
 <body>
 	<c:set var="dto" value="${requestScope.dto}" />
-	<c:set var="ssid" value ="${sessionScope.id }"/>
-	<c:set var="file1" value="${dto.bimg }"/>
-	
+	<c:set var="ssid" value="${sessionScope.id }" />
+	<c:set var="file1" value="${dto.bimg }" />
+	<div class="bg">
+		<img src=supBoard/img/sup1.jpg class="bg1">
+	</div>
+	<div class="bg">
+		<img src=supBoard/img/sup2.jpg class="bg1">
+	</div>
+	<div class="bg">
+		<img src=supBoard/img/sup3.jpg class="bg1">
+	</div>
+	<div class="bg">
+		<img src=supBoard/img/sup4.jpg class="bg1">
+	</div>
 	<div class="container">
 
-		<div class="card" style="text-align: center;">
-			<div class="card-header">
+
+
+		<div
+			style="text-align: center; margin-bottom: 50px; margin-top: 50px;">
+			<h1>서 포 터</h1>
+		</div>
+		<div class="container">
+
+
+			<div class="card-header" style="margin-left: -40px;">
 				<ul>
 					<li>${dto.nick}</li>
 					<li>${dto.bwritedate}</li>
@@ -41,55 +68,57 @@ ul li {
 				</ul>
 
 
-			</div>
 
-		</div>
-		<br>
-		<p style="margin-left: 20px;" class="btn btn-outline-info">${dto.bcategory}</p>
-		<c:if test="${dto.bimg ne null}">
-			<div style="text-align: right;">
-			<label>[파일첨부]</label>
-				<a href="sbdownload.do?file=${file1 }">${file1 }</a>
+
 			</div>
-		</c:if>
+			<br>
+			<p style="margin-left: 20px;" class="btn btn-outline-info">${dto.bcategory}</p>
+			<c:if test="${dto.bimg != null}">
+				<div style="text-align: right; padding: 0px 55px;">
+					<label>[파일첨부]</label> <a href="sbdownload.do?file=${file1 }">${file1 }</a>
+				</div>
 			
-		<br>
-		<div style="text-align: center;">
-			<h3>${dto.btitle}</h3>
-		</div>
-		<div style="margin-top: 50px; padding: 0px 30px;">
-			<pre>${dto.bcontent}</pre>
-			
-		</div>
-		
-		
-		
-		
-		<div style="padding: 5px 15px;">
-			<c:if test="${ssid==dto.id}">
-			<a class="btn btn-secondary btn-sm" href="sbupdate.do?bno=${dto.bno}"
-				role="button">수정</a>
-			 <a class="btn btn-secondary btn-sm"
-				href="sbdelete.do?bno=${dto.bno}" role="button">삭제</a>
 			</c:if>
-			<div style="display: inline-block; margin-left: 900px;">
-				<a class="btn btn-secondary btn-sm" href="sblist.do" role="button"
-					style="padding: 5px 20px;">목록</a> <a
-					class="btn btn-secondary btn-sm" href="#represult" role="button"
-					style="padding: 5px 20px;">댓글</a>
-				<div></div>
+
+			<br>
+			<div style="text-align: center;">
+				<h3>${dto.btitle}</h3>
 			</div>
-			<div style="margin-top: 20px; text-align: right; margin-right: 10px;">
-
-				<a href="sbinsert.do" class="btn btn-primary btn-lg active"
-					role="button" aria-pressed="true"
-					style="width: 200px; background-color: silver; border: 3px solid silver; color: black;">글쓰기</a>
-
+			<div style="margin-top: 50px; padding: 0px 30px;">
+				
+				<pre>${dto.bcontent}</pre>
+				<img src="supBoard/upload/${file1}" alt="${file1 }">
+				
 			</div>
 
+
+
+
+			<div style="padding: 5px 15px;">
+				<c:if test="${ssid==dto.id}">
+					<a class="btn btn-secondary btn-sm"
+						href="sbupdate.do?bno=${dto.bno}" role="button">수정</a>
+					<a class="btn btn-secondary btn-sm"
+						href="sbdelete.do?bno=${dto.bno}" role="button">삭제</a>
+				</c:if>
+				<div style="display: inline-block; margin-left: 880px;">
+					<a class="btn btn-secondary btn-sm" href="sblist.do" role="button"
+						style="padding: 5px 20px;">목록</a> <a
+						class="btn btn-secondary btn-sm" href="#represult" role="button"
+						style="padding: 5px 20px;">댓글</a>
+					<div></div>
+				</div>
+				<div style="margin-top: 20px; text-align: right;">
+
+					<a href="sbinsert.do" class="btn btn-primary btn-lg active"
+						role="button" aria-pressed="true"
+						style="width: 200px; background-color: silver; border: 3px solid silver; color: black;">글쓰기</a>
+
+				</div>
+
+			</div>
 		</div>
-	
-	
+
 		<script>
 	
 
@@ -98,40 +127,41 @@ ul li {
 		console.log(bno);
 		console.log('세션아이디',ssid);
 	
-		console.log(ssid == '<%=session.getAttribute("id")%>');
-		$.ajax({
-			url:'sbdetailrep.do'
-			,data: {'bno':bno}
-			,dataType:'json'
-			,method:'post'
-			,success:function(data){
-				
-				$.each(data,function(index,item){
-					let result= "<tr>";
-					result+= "<th>"+item.nick+"("+item.rwritedate+")"+"</th>";
-					result+= "<th>";
-					if(ssid==item.id){
-					result+= "<a href="+"sbdeleterep.do?repno="+item.repno+"&bno="+item.bno;
-					result+= ">"+"삭제</a>";
-					}
-					result+= "</th></tr>";
-					
-					result+= "<tr><th>"+item.rcontent+"</th>";
-					result+= "</tr>";
-					
-					$('#represult').append(result);
-				});
-				
-			}
-			,error:function(data){
-				console.log('error',data);
-			}
-			
-		});
+		
+			$.ajax({
+				url : 'sbdetailrep.do',
+				data : {
+					'bno' : bno
+				},
+				dataType : 'json',
+				method : 'post',
+				success : function(data) {
 
-	
-	
-	</script>
+					$.each(data, function(index, item) {
+						let result = "<tr>";
+						result += "<th>" + item.nick + "(" + item.rwritedate
+								+ ")" + "</th>";
+						result += "<th>";
+						if (ssid == item.id) {
+							result += "<a href=" + "sbdeleterep.do?repno="
+									+ item.repno + "&bno=" + item.bno;
+							result += ">" + "삭제</a>";
+						}
+						result += "</th></tr>";
+
+						result += "<tr><th>" + item.rcontent + "</th>";
+						result += "</tr>";
+
+						$('#represult').append(result);
+					});
+
+				},
+				error : function(data) {
+					console.log('error', data);
+				}
+
+			});
+		</script>
 
 
 
@@ -142,21 +172,31 @@ ul li {
 			</thead>
 
 		</table>
-			<form method="post" action="sbaddrep.do" name="frm">
+		<form method="post" action="sbaddrep.do" name="frm">
 
-			<div class="input-group" style=" margin:0 auto;">
-				<div class="input-group-prepend" >
+			<div class="input-group" style="margin: 0 auto;">
+				<div class="input-group-prepend">
 					<span class="input-group-text">댓글</span>
 				</div>
-				<input type="hidden" name="bno" value="${dto.bno}">
-				<input type="hidden" name="id" value="${sessionScope.id }">
-				<textarea class="form-control" aria-label="With textarea" name="rcontent" rows="3"></textarea>
-				<input type="button" onclick="send()" value="등록">
-				
+				<input type="hidden" name="bno" value="${dto.bno}"> <input
+					type="hidden" name="id" value="${sessionScope.id }">
+				<textarea class="form-control" aria-label="With textarea"
+					name="rcontent" rows="3"></textarea>
+				<!-- <input type="button" onclick="send()" value="등록" > -->
+				<button type="button" onclick="send()" class="btn btn-outline-dark">등록</button>
 			</div>
-
+			
 
 		</form>
+		<div style="padding: 50px;"></div>
+		<div class="input-group" style="width:500px;  margin-left:350px;">
+		
+		<input type="text" class="form-control" placeholder="소환사명을 입력하세요">
+		<div class="input-group-btn">
+			<button class="btn btn-default" type="button">전적검색</button>
+		</div>
+		
+	</div>
 
 	</div>
 

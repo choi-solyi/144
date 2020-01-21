@@ -27,20 +27,19 @@ public class MWListAction implements Action {
 		
 		String search = request.getParameter("search");
 		String searchtxt = request.getParameter("searchtxt");
-		if(search == null)
-			System.out.println("없습니다");
+		if(search == null) {
 			search = "";
-		if(searchtxt == null)
-			System.out.println("없습니다");
+		}
+		if(searchtxt == null) {
 			searchtxt = "";
-		
+		}
 		System.out.println(search);
 		System.out.println(searchtxt);
 			
 		MWBoardService service = MWBoardService.getService();
 		
 		int totalcount = service.getCount(search, searchtxt);
-		int pagepercount = 3;
+		int pagepercount = 5;
 		int totalpage = (int)Math.ceil((float)totalcount/pagepercount);
 		int startrow = (currpage-1)*pagepercount;
 		int endrow = startrow+pagepercount;
@@ -62,7 +61,7 @@ public class MWListAction implements Action {
 		request.setAttribute("endblock", endblock);
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("search", search);
-		request.setAttribute("searchtxt", searchtxt);
+		request.setAttribute("txtsearch", searchtxt);
 		ForwardAction f = new ForwardAction();
 		f.setForward(true);
 		f.setUrl("/main.jsp?page=topboard/toplist.jsp");

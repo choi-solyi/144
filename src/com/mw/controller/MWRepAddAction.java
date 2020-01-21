@@ -34,7 +34,7 @@ public class MWRepAddAction implements Action {
 		
 		ForwardAction f = new ForwardAction();
 		f.setForward(false);
-		f.setUrl("/main.jsp?page=topboard/topdetail.do?no="+no);
+		f.setUrl("main.jsp?page=topboard/topdetail.jsp?no="+no);
 		
 		return f;
 	}

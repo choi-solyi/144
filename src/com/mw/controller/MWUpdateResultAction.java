@@ -36,8 +36,11 @@ public class MWUpdateResultAction implements Action {
 		service.mwUpdate(dto);
 		
 		ForwardAction f = new ForwardAction();
+		/*f.setForward(false);
+		f.setUrl("/topdetail.do?no="+no);*/
+		
 		f.setForward(false);
-		f.setUrl("/main.jsp?page=topboard/topdetail.do?no="+no);
+		f.setUrl("topdetail.do?no="+no);
 		
 		return f;
 	}

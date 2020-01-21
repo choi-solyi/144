@@ -19,15 +19,46 @@ public class DYListAction implements Action {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//session check (template project 참고)
+		int currpage =1;
+		String curr = request.getParameter("curr");
+		if(curr!=null)
+		{
+			currpage=Integer.parseInt(curr);
+		}
+		
+		String search = request.getParameter("search");
+		String txtsearch = request.getParameter("txtsearch");
+		
+		if(search==null) search="";
+		if(txtsearch==null) txtsearch="";
 		
 		DYBoardService service = DYBoardService.getservice(); 
+		
+		int totalcount = service.dygetCount(search,txtsearch);
+		
+		int pagepercount = 3; 
+		int totalpage = (int)Math.ceil((float)totalcount/pagepercount);
+		int startrow = (currpage-1)*pagepercount+1;
+		int endrow = startrow+pagepercount-1;
+		if(endrow>totalcount)endrow=totalcount;
+		
+		int blockcount = 5;
+		int startblock =((currpage-1)/blockcount)*blockcount+1;
+		int endblock =startblock+blockcount-1;
+		if(endblock>totalpage) endblock=totalpage;
+		
 		
 		List<DYBoardDTO> list = service.dylist();
 		
 		System.out.println(list);
 		
 		request.setAttribute("list", list);
+		request.setAttribute("currpage",currpage);
+		request.setAttribute("startblock",startblock);
+		request.setAttribute("endblock",endblock);
+		request.setAttribute("totalpage",totalpage);
+		request.setAttribute("search",search);
+		request.setAttribute("txtsearch",txtsearch);
 		
 		ForwardAction forward = new ForwardAction();
 		forward.setForward(true); //forward로 값을 넘긴다.
