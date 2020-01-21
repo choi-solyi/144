@@ -27,6 +27,10 @@ public class MWListAction implements Action {
 		
 		String search = request.getParameter("search");
 		String searchtxt = request.getParameter("searchtxt");
+		
+		System.out.println(search);
+		System.out.println(searchtxt);
+		
 		if(search == null) {
 			search = "";
 		}
