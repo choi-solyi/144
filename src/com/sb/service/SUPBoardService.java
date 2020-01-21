@@ -222,6 +222,26 @@ public class SUPBoardService {
 		
 		
 	}
+
+	public int sbRepCount(int bno) {
+		DBConn  db=   DBConn.getDB();
+	    Connection conn=null;
+	    int count=0;
+	    try {
+	    	  conn=db.getConn();
+	    	  conn.setAutoCommit(false);
+	    	  SUPBoardDAO dao=SUPBoardDAO.sbGetBoardDAO();
+	    	  count=dao.sbRepCount(conn,bno);
+	    	  conn.commit();
+	    }catch(NamingException|SQLException e)
+	    {
+	    	System.out.println(e);
+	       try {conn.rollback();} catch(Exception e2) {}
+	    }finally {
+	    	if(conn!=null) try { conn.close();} catch(SQLException e) {}
+	    }
+	    return count;
+	}
 		
 	
 

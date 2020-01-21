@@ -47,7 +47,7 @@
 		<div class="container">
 			
 		<div style="text-align: center; margin-bottom: 50px; margin-top:50px;">
-		<h1>서 포 터</h1>
+		<h1>S U P P O R T E R</h1>
 		</div>
 			<input type="hidden" name="bno" id="bno" value="${dto.bno}" readonly="readonly">
 			<select class="custom-select custom-select-sm subin subin1" name="bcategory" id="bcategory" >

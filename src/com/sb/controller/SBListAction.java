@@ -17,6 +17,9 @@ public class SBListAction implements Action{
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+			
+		
+		
 		
 		 int currpage=1;
 		  String curr=request.getParameter("curr");
@@ -30,7 +33,7 @@ public class SBListAction implements Action{
 		  if(search==null)    search="";
 		  if(txtsearch==null) txtsearch="";
 		  SUPBoardService service = SUPBoardService.sbGetBoardService();
-		  
+		 
 		 int totalcount= service.sbGetCount(search, txtsearch); //전체자료
 		 int pagepercount=10; // 1페이지에 보여줄 자료
 		 int totalpage=(int)Math.ceil((float)totalcount/pagepercount); 
@@ -42,10 +45,16 @@ public class SBListAction implements Action{
 		 int startblock=(currpage-1)/blockcount*blockcount+1;
 		 int endblock=startblock+blockcount-1;
 		 if(endblock>totalpage) endblock=totalpage;
+		 
+		 SUPBoardDTO dto = new SUPBoardDTO();
 		
+		 	
+		 
 		List<SUPBoardDTO> list = service.sbList(startrow,endrow,search,txtsearch);
 		
+		
 		request.setAttribute("list", list);
+		
 		 request.setAttribute("currpage", currpage);
 		 request.setAttribute("startblock", startblock);
 		 request.setAttribute("endblock",endblock);

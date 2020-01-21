@@ -304,4 +304,35 @@ public class SUPBoardDAO {
 		
 	}
 
+	public int sbRepCount(Connection conn, int bno) throws SQLException {
+		StringBuilder sql=new StringBuilder();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		sql.append(" select  ");
+		sql.append("            (select count(*) ");
+		sql.append("             from suprepboard rep ");
+		sql.append("              where rep.bno=sup.bno) as repcount ");
+		sql.append("   from supboard sup ");
+		sql.append("  where bno=? ");
+		
+		int count=0;
+		try {
+			pstmt= conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, bno);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+			count= rs.getInt(1);
+			}
+		
+		}finally {
+			
+			if(rs!=null) try {rs.close();} catch(SQLException e) {}
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
+		}
+		return count;
+	}
+
+	
+
 }
