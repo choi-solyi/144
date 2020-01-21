@@ -87,15 +87,11 @@
 					aria-expanded="false" style="color: white;"> POSITION </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						
-						
 						<a class="dropdown-item" href="toplist.do">TOP</a> 
-						
 						<a class="dropdown-item" href="jglist.do">JUNGLE</a> 
-							
-							<a class="dropdown-item" href="dylist.do">MID</a> <a
-							class="dropdown-item" href="JWlist.do">AD</a> 
-							
-							<a class="dropdown-item" href="sblist.do">SUP</a>
+						<a class="dropdown-item" href="dylist.do">MID</a>
+						<a class="dropdown-item" href="JWlist.do">AD</a> 
+						<a class="dropdown-item" href="sblist.do">SUP</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="logout.jsp">로그아웃</a>
 					</div></li>
@@ -124,7 +120,7 @@
                 </li>-->
 
 				<li class="nav-item">
-					<form method="post" action="search.do" class="form-inline my-2 my-lg-0">
+					<form method="post" action="opgg.do" class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search"
 							placeholder="소환사명 입력" aria-label="Search" name="summoner" id="summoner">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>

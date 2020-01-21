@@ -21,12 +21,6 @@ public class MWBoardDAO {
 		return dao;
 	}
 	public List<MWBoardDTO> mwBoardSelect(Connection conn, String search, String searchtxt, int startrow, int endrow) throws SQLException {
-		if(search.equals("")) {
-			System.out.println("search적용중");
-		}
-		if(searchtxt.equals("")) {
-			System.out.println("searchtxt적용중");
-		}
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select r1.* from (                           ");
@@ -34,25 +28,25 @@ public class MWBoardDAO {
 		sql.append("         bno                                  ");
 		sql.append("        ,bcategory                            ");
 		sql.append("        ,btitle                               ");
-		sql.append("        ,id                                   ");
+		sql.append("        ,u.nick                               ");
+		sql.append("        ,t.id                                 ");
 		sql.append("        ,bcontent                             ");
 		sql.append("        ,date_format(sysdate(), '%Y-%m-%d') as bwritedate    ");
 		sql.append("        ,bhit                                 ");
 		sql.append("        ,bup                                  ");
-		sql.append("        from topboard                         ");
-		sql.append("        order by bno desc                     ");
+		sql.append("        from topboard as t join userinfo as u on t.id=u.id   ");
 		if(!(search.equals("")) && !(search.equals(""))) {
 			if(search.equals("btitle")) {
 				sql.append("  where btitle like ? ");
 			}
-			else if(search.equals("id")) {
-				sql.append("  where id like ? ");
+			else if(search.equals("nick")) {
+				sql.append("  where u.nick like ? ");
 			}
 			else if(search.equals("bcontent")) {
 				sql.append("  where bcontent like ? ");
 			}
 		}
-		
+		sql.append("        order by bno desc                     ");
 		sql.append("        ) r1 limit 5 offset ?                  ");
 		System.out.println(startrow);
 		System.out.println(endrow);
@@ -79,6 +73,7 @@ public class MWBoardDAO {
 				dto.setBwritedate(rs.getString("bwritedate"));
 				dto.setBhit(rs.getInt("bhit"));
 				dto.setBup(rs.getInt("bup"));
+				dto.setNick(rs.getString("nick"));
 				
 				list.add(dto);
 				
@@ -119,14 +114,15 @@ public class MWBoardDAO {
 		PreparedStatement pstmt = null;
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select bno                                     ");
-		sql.append("       ,id                                     ");
+		sql.append("       ,t.id                                      ");
+		sql.append("       ,u.nick                                    ");
 		sql.append("       ,bwritedate                                ");
 		sql.append("       ,bhit                                      ");
 		sql.append("       ,bup                                       ");
 		sql.append("       ,bcategory                                 ");
 		sql.append("       ,btitle                                    ");
 		sql.append("       ,bcontent                                  ");
-		sql.append("       from topboard                              ");
+		sql.append("        from topboard as t join userinfo as u on t.id=u.id   ");
 		sql.append("       where bno = ?                              ");
 		
 		
@@ -147,6 +143,7 @@ public class MWBoardDAO {
 				dto.setBcategory(rs.getString("bcategory"));
 				dto.setBtitle(rs.getString("btitle"));
 				dto.setBcontent(rs.getString("bcontent"));
+				dto.setNick(rs.getString("nick"));
 			}
 		}
 		finally {
@@ -288,11 +285,13 @@ public class MWBoardDAO {
 		ResultSet rs = null;
 		
 		sql.append(" select                                              ");
-		sql.append("            rcontent                                 ");
+		sql.append("            repno                                    ");
+		sql.append("           ,rcontent                                 ");
 		sql.append("           ,rwritedate                               ");
 		sql.append("           ,bno                                      ");
-		sql.append("           ,id                                       ");
-		sql.append("           from toprepboard                          ");
+		sql.append("           ,t.id                                     ");
+		sql.append("           ,u.nick                                   ");
+		sql.append("           from toprepboard as t join userinfo as u on t.id=u.id ");
 		sql.append("           where bno =?                              ");
 		sql.append("           order by repno asc                        ");
 		
@@ -308,7 +307,8 @@ public class MWBoardDAO {
 				dto.setRcontent(rs.getString("rcontent"));
 				dto.setRwritedate(rs.getString("rwritedate"));
 				dto.setBno(rs.getInt("bno"));
-				dto.setNick(rs.getString("id"));
+				dto.setNick(rs.getString("nick"));
+				dto.setRepno(rs.getInt("repno"));
 				
 				list.add(dto);
 			}
@@ -325,11 +325,11 @@ public class MWBoardDAO {
 		StringBuilder sql = new StringBuilder();
 		ResultSet rs = null;
 		sql.append(" delete from toprepboard           ");
-		sql.append(" where bno = ?                     ");
-		
+		sql.append(" where repno = ?                     ");
+		System.out.println(repno+"하하하하하하");
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
-			pstmt.setInt(1, bno);
+			pstmt.setInt(1, repno);
 			pstmt.executeUpdate();
 		}
 		finally {
