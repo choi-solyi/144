@@ -87,7 +87,7 @@ ul li {
 			<div style="margin-top: 50px; padding: 0px 30px;">
 				
 				<pre>${dto.bcontent}</pre>
-			
+				
 				<img src="supBoard/upload/${file1}" alt="${file1 }">
 				
 				
