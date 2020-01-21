@@ -24,7 +24,7 @@ public class MWRepDeleteAction implements Action {
 		
 		ForwardAction f = new ForwardAction();
 		f.setForward(false);
-		f.setUrl("toplist.do");
+		f.setUrl("topdetail.do?no="+bno);
 		
 		return f;
 	}

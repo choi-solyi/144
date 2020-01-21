@@ -26,8 +26,7 @@
 							<label class="input-group-text" for="bcategory">카테고리</label>
 						</div>
 						<select class="custom-select" name="bcategory" id="bcategory">
-							<option selected>Choose category</option>
-							<option value="정보">정보</option>
+							<option selected value="정보">정보</option>
 							<option value="잡담">잡담</option>
 							<option value="도움">도움</option>
 						</select>

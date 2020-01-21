@@ -277,7 +277,12 @@
         padding: 5px 10px;
         border-radius: 100px;
     }
-    .top_board_no.on{
+    .top_board_no_on{
+    	display : inline-block;
+        border: 1px solid black;
+        margin-left: 10px;
+        padding: 5px 10px;
+        border-radius: 100px;
         background: green;
     }
     .top_board_search{
@@ -770,7 +775,7 @@
                 <div class = "top_s top_board top_no"><c:out value="${list.bno }"></c:out></div>
                 <div class = "top_s top_board top_title">
                 <a href = "topdetail.do?no=${list.bno }"><c:out value="${list.bcategory }"> </c:out><c:out value="${list.btitle }"></c:out></a></div>
-                <div class = "top_s top_board top_nick"><c:out value="${list.id }"></c:out></div>
+                <div class = "top_s top_board top_nick"><c:out value="${list.nick }"></c:out></div>
                 <div class = "top_s top_board top_date"><c:out value="${list.bwritedate }"></c:out></div>
                 <div class = "top_s top_board top_hit"><c:out value="${list.bhit }"></c:out></div>
                 <div class = "top_s top_board top_up"><c:out value="${list.bup }"></c:out></div>
@@ -778,18 +783,21 @@
         </c:forEach>
 		</section>
 		<div class = "top_board_paging">
-                <a href = "#" class = "top_board_btn">◀</a>
+				<c:if test="${startblock>1 }">
+                <a href="toplist.do?curr=${startblock-1}"  aria-label="Previous" class = "top_board_btn">◀</a>
+                </c:if>
                 <c:forEach var = "i" begin = "${startblock}" end = "${endblock }" step = "1">
 					<c:if test = "${currpage==i }">
-						<c:out value="${i }"></c:out>
+						<span class = "top_board_no_on"><c:out value="${i }"></c:out></span>
 					</c:if>
 					<c:if test="${currpage!=i }">
 						<a class = "top_board_no" href = "toplist.do?curr=${i}&search=${search}&txtsearch=${txtsearch}">${i}</a>
 					</c:if>
 	
 				</c:forEach>
-                <a href = "#" class = "top_board_btn">▶</a>
-                
+				<c:if test="${endblock<totalpage }">
+                <a href="toplist.do?curr=${endblock+1}" aria-label="Next" class = "top_board_btn">▶</a>
+                </c:if>
                 <form class = "top_board_search" method="post" action = "toplist.do">
                     	<select name = "search">
 							<option value = "btitle">글제목</option>
