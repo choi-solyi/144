@@ -18,6 +18,7 @@ public class DYInsertResultAction implements Action {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		String id = (String)request.getParameter("id");
 		String bcategory = (String)request.getParameter("bcategory");
 		String btitle = (String)request.getParameter("btitle");
 		String bcontent = (String)request.getParameter("bcontent");
@@ -25,6 +26,8 @@ public class DYInsertResultAction implements Action {
 		DYBoardDTO dto = new DYBoardDTO();
 		
 		System.out.println("bcategory : " +bcategory);
+		System.out.println("id : " + id);
+		dto.setId(id);
 		dto.setBcategory(bcategory);
 		dto.setBtitle(btitle);
 		dto.setBcontent(bcontent);

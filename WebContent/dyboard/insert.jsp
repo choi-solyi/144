@@ -34,6 +34,7 @@
 	<div id="dywritewrap">
 	<form action="dyinsertresult.do" method="post" id="dyinsertform">
 		<ul>
+		<input type="hidden" value="${sessionScope.id }" name="id">
 			<li><label for="dybcategory">카테고리</label>
 				<select id="dybcategory" name="bcategory">
 					<option value="일반" selected>일반</option>
@@ -42,11 +43,11 @@
 				</select>
 			</li>
 			<li><label for="dybtitle">제목</label>
-				<input type="text" name="btitle" id="dybtitle" value="제목을 입력하세요" required>
+				<input type="text" name="btitle" id="dybtitle" placeholder="제목을 입력하세요" required>
 				<!-- 파일 업로드 코드 작성  -->
 			</li>
 			<li>
-				<textarea rows="20" cols="100" id="dybcontent" name="bcontent" required>내용을 입력하세요</textarea>
+				<textarea rows="20" cols="100" id="dybcontent" name="bcontent" placeholder="내용을 입력하세요" required></textarea>
 			</li>
 			<li>
 				<input type="submit" value="등록">

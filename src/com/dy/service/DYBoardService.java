@@ -21,7 +21,7 @@ public class DYBoardService {
 	private DYBoardService () {}
 
 	
-	public List<DYBoardDTO> dylist() {
+	public List<DYBoardDTO> dylist(int startrow, int endrow, String search, String txtsearch) {
 		// TODO Auto-generated method stub
 		
 		DBConn dbconn = DBConn.getDB();
@@ -33,7 +33,7 @@ public class DYBoardService {
 			conn.setAutoCommit(false);
 			
 			DYBoardDAO dao = DYBoardDAO.getdao();
-			list = dao.dylist(conn);
+			list = dao.dylist(conn,startrow,endrow,search,txtsearch);
 			System.out.println(list);
 			conn.commit();
 		}catch(SQLException | NamingException e) {

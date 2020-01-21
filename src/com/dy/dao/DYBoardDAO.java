@@ -17,7 +17,7 @@ public class DYBoardDAO {
 	}
 	private DYBoardDAO () {}
 
-	public List<DYBoardDTO> dylist(Connection conn) throws SQLException {
+	public List<DYBoardDTO> dylist(Connection conn, int startrow, int endrow, String search, String txtsearch) throws SQLException {
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select         bno                                ");
@@ -30,12 +30,35 @@ public class DYBoardDAO {
 		sql.append(" from midboard as m join userinfo as u             ");
 		sql.append(" on m.id = u.id                    ");
 		
+		if(!search.equals("") && !(txtsearch.equals("")))
+				{
+					if(search.equals("btitle"))
+						sql.append(" where btitle like ? ");
+					else if(search.equals("bcontent"))
+						sql.append(" where bcontent like ? ");
+					else if(search.equals("nick"))
+						sql.append(" where u.nick like ?  ");
+				}
+		sql.append(" order by bno desc ");
+		sql.append(" limit ?, 5 ");
+		
 		List<DYBoardDTO> list = new ArrayList<DYBoardDTO>();
 		
-		try(PreparedStatement pstmt= conn.prepareStatement(sql.toString());
-			ResultSet rs=pstmt.executeQuery();
-			) 
-		{
+		
+		PreparedStatement pstmt =null;
+		ResultSet rs =null;
+		
+		try{
+			pstmt= conn.prepareStatement(sql.toString());
+			if(!search.equals("") && !txtsearch.equals(""))
+			{
+				pstmt.setString(1, "%" + txtsearch + "%");
+				pstmt.setInt(2, startrow-1);
+			}else {
+				pstmt.setInt(1, startrow-1);
+			}
+			
+			rs=pstmt.executeQuery();
 			
 			while(rs.next())
 			{
@@ -52,6 +75,9 @@ public class DYBoardDAO {
 				
 			}
 			
+		}finally {
+			if(pstmt!=null) try {pstmt.close();}catch(SQLException e) {}
+			if(rs!=null)try {rs.close();}catch(SQLException e) {}
 		}
 		
 		return list;
@@ -68,7 +94,7 @@ public class DYBoardDAO {
 		sql.append("                       ,bup                    ");
 		sql.append("                       ,bimg                   ");
 		sql.append("                       ,id )                   ");
-		sql.append(" values ( ?, ?, ?, now(), 0, 0, 'null', 'planet') ");
+		sql.append(" values ( ?, ?, ?, now(), 0, 0, 'null', ?)     ");
 	
 		
 		try(
@@ -78,6 +104,7 @@ public class DYBoardDAO {
 			pstmt.setString(1, dto.getBtitle());
 			pstmt.setString(2, dto.getBcontent());
 			pstmt.setString(3,  dto.getBcategory());
+			pstmt.setString(4, dto.getId());
 			//pstmt.setString(3, 'img°æ·Î');
 			
 			pstmt.executeUpdate();
