@@ -11,6 +11,7 @@ import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
 import com.jw.BoardDAO.JWBoardDAO;
 import com.jw.BoardDTO.JWBoardDTO;
+import com.jw.BoardDTO.JWRepBoardDTO;
 import com.lol.comm.DBConn;
 
 public class JWBoardService {
@@ -135,6 +136,55 @@ public class JWBoardService {
 			try{conn.rollback();}catch(SQLException rollback) {}
 		}finally {
 			if(conn!=null) try{conn.close();} catch(SQLException e) {}
+		}
+	}
+	
+	//rep
+	public List<JWRepBoardDTO> adListRep(String bno) {
+		List<JWRepBoardDTO> list = new ArrayList<>();
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		try{
+			conn=DBC.getConn();
+			list = dao.adListRep(conn, bno);
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		return list;
+	}
+	public void adAddRep(JWRepBoardDTO dto) {
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		try{
+			conn=DBC.getConn();
+			conn.setAutoCommit(false);
+			dao.adAddRep(conn, dto);
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try{conn.rollback();} catch(SQLException rollback) {System.out.println(rollback);}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+	}
+	public void adDelRep(String repno) {
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		try{
+			conn=DBC.getConn();
+			conn.setAutoCommit(false);
+			dao.adDelRep(conn, repno);
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try{conn.rollback();} catch(SQLException rollback) {System.out.println(rollback);}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
 }

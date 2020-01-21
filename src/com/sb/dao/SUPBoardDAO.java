@@ -90,7 +90,7 @@ public class SUPBoardDAO {
 		StringBuilder sql = new StringBuilder();
 		PreparedStatement pstmt = null;
 		sql.append(" insert into supboard(bno,bcategory,btitle,bcontent,id,bwritedate,bimg,bhit) ");
-		sql.append(" values( null,?,?,?,?,now(),'aa.jpg',0 ) ");
+		sql.append(" values( null,?,?,?,?,now(),?,0 ) ");
 		
 		
 		
@@ -100,6 +100,7 @@ public class SUPBoardDAO {
 			pstmt.setString(2, dto.getBtitle());
 			pstmt.setString(3, dto.getBcontent());
 			pstmt.setString(4, dto.getId());
+			pstmt.setString(5, dto.getBimg());
 			
 			pstmt.executeUpdate();
 			
@@ -302,5 +303,36 @@ public class SUPBoardDAO {
 		}
 		
 	}
+
+	public int sbRepCount(Connection conn, int bno) throws SQLException {
+		StringBuilder sql=new StringBuilder();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		sql.append(" select  ");
+		sql.append("            (select count(*) ");
+		sql.append("             from suprepboard rep ");
+		sql.append("              where rep.bno=sup.bno) as repcount ");
+		sql.append("   from supboard sup ");
+		sql.append("  where bno=? ");
+		
+		int count=0;
+		try {
+			pstmt= conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, bno);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+			count= rs.getInt(1);
+			}
+		
+		}finally {
+			
+			if(rs!=null) try {rs.close();} catch(SQLException e) {}
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
+		}
+		return count;
+	}
+
+	
 
 }

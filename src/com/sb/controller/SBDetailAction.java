@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
@@ -22,11 +23,14 @@ public class SBDetailAction implements Action {
 		SUPBoardService service= SUPBoardService.sbGetBoardService();
 		SUPBoardDTO dto = new SUPBoardDTO();
 		
-	
+		
+		
 		dto= service.sbDetail(bno);
-		
+		int repcount = service.sbRepCount(bno);
 		request.setAttribute("dto", dto);
+		request.setAttribute("repcount", repcount);
 		
+	
 		
 		ForwardAction f = new ForwardAction();
 		f.setForward(true);

@@ -51,6 +51,7 @@ public class MWBoardService {
 		}
 		finally {
 			if(conn!=null) try{conn.close();} catch(Exception e) {}
+
 		}
 		
 		return list;
@@ -74,6 +75,7 @@ public class MWBoardService {
 		}
 		finally {
 			if(conn!=null) try{conn.close();} catch(Exception e) {}
+			
 		}
 		
 	}
@@ -95,10 +97,10 @@ public class MWBoardService {
 		}
 		catch(NamingException | SQLException e){
 			System.out.println(e);
+			try {conn.rollback();} catch(SQLException e2) {}
 		}
 		finally {
 			if(conn!=null) try { conn.close();} catch(SQLException e){}
-			try {conn.rollback();} catch(SQLException e2) {}
 		}
 		return dto;
 	}
@@ -120,10 +122,10 @@ public class MWBoardService {
 		}
 		catch(NamingException | SQLException e){
 			System.out.println(e);
+			try {conn.rollback();} catch(SQLException e2) {}
 		}
 		finally {
 			if(conn!=null) try { conn.close();} catch(SQLException e){}
-			try {conn.rollback();} catch(SQLException e2) {}
 		}
 		return dto;
 		

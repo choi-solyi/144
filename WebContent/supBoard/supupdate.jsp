@@ -16,14 +16,39 @@
 .subin1 {
 	width: 120px;
 }
+.bg{
+		display: inline-block;
+		
+	}
+
+	.bg1{
+		width:470px;		
+		
+	}
 </style>
 </head>
 <body>
 	<c:set var="dto" value="${requestScope.dto }"/>
 	
 	<!-- Example single danger button -->
-	<form method="post" action="sbupdateresult.do" name="frm" >
+	<form method="post" action="sbupdateresult.do" name="frm" enctype="multipart/form-data" >
+	<div class="bg">
+			<img src=supBoard/img/sup1.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup2.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup3.jpg class="bg1">
+	</div>
+	<div class="bg">
+			<img src=supBoard/img/sup4.jpg class="bg1">
+	</div>
 		<div class="container">
+			
+		<div style="text-align: center; margin-bottom: 50px; margin-top:50px;">
+		<h1>S U P P O R T E R</h1>
+		</div>
 			<input type="hidden" name="bno" id="bno" value="${dto.bno}" readonly="readonly">
 			<select class="custom-select custom-select-sm subin subin1" name="bcategory" id="bcategory" >
 				<option value="카테고리" >카테고리</option>
@@ -50,8 +75,8 @@
 		
 
 		<div class="form-group">
-			<label for="uploadfile1"></label> <input type="file"
-				class="form-control-file" id="uploadfile1">
+			<label for="bimg"></label> <input type="file"
+				class="form-control-file" id="bimg" name="bimg" value="${dto.bimg }">
 		</div>
 		<div >
 			<a class="btn btn-secondary btn-sm" href="sblist.do" role="button" style="padding: 5px 15px;">목록</a>
@@ -62,15 +87,14 @@
 		</div>
 
 		
-		<div class="col-lg-6">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="소환사명을 입력하세요" >
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">전적검색</button>
-				</span>
-			</div>
-			<!-- /input-group -->
+		<div class="input-group" style="width:500px; margin: 0 auto;">
+		
+		<input type="text" class="form-control" placeholder="소환사명을 입력하세요">
+		<div class="input-group-btn">
+			<button class="btn btn-default" type="button">전적검색</button>
 		</div>
+		
+	</div>
 		<!-- /.col-lg-6 -->
 			</div>
 	</form>

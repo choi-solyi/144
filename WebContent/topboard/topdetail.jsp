@@ -8,51 +8,7 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <script src=https://code.jquery.com/jquery-3.4.1.min.js></script>
-<script>
-	function send(){
-		if(document.frm.title.value!=""){
-			document.frm.submit();
-		}
-	}
-	
-	function del(repno, bno){
-		location.href="toprepdelete.do?repno="+repno+"&bno="+bno;
-		
-	}
-	
-	$(document).ready(function(){
-		
-		let no=${dto.bno}
-				
-		$.ajax({
-			url:'repdetail.do'
-			,data: {'no':no}
-			,dataType:'json'
-			,method:'post'
-			,success:function(data){
-				
-				$.each(data,function(index,item){
-					let result="<div class = 'top_content_rep_content'>"
-					result+= "<div class = 'top_content_rep_id'>닉네임 : "+item.nick+"</div>";
-					result+= "<div class = 'top_content_rep_rcontent'>"+item.rcontent;
-					result+= "<input class = 'top_content_rep_del' type='button' value='삭제' onclick=del("+item.repno+","+item.bno+")>";
-					result+= "</div></div>";
-					
-					$('#top_content_rep').append(result);
-				});
-				
-			}
-			,error:function(data){
-				console.log('error',data);
-			}
-			
-		});
-		
-		
-	});
-	
 
-</script>
 <style>
         .top_content_header{
             margin: 40px auto;
@@ -175,7 +131,7 @@
         </header>
         <section class = "top_content">
             <div class = "top_btitle">
-                <div class = "tcontent tc_title top_content_id">닉네임 : <c:out value = "${dto.id }"></c:out></div>
+                <div class = "tcontent tc_title top_content_id">닉네임 : <c:out value = "${dto.nick }"></c:out></div>
                 <div class = "tcontent tc_title top_content_writedate"><c:out value = "${dto.bwritedate }"></c:out></div>
                 <div class = "tcontent tc_title top_content_hit">조회 : <c:out value = "${dto.bhit }"></c:out></div>
                 <div class = "tcontent tc_title top_content_up">추천 : <c:out value = "${dto.bup }"></c:out></div><br>
@@ -207,6 +163,52 @@
 	        <input type = "button" onclick = "send()" value = "추가">
     </form>
 
+<script>
+	function send(){
+		if(document.frm.title.value!=""){
+			document.frm.submit();
+		}
+	}
+	
+	function del(repno, bno){
+		location.href="toprepdelete.do?repno="+repno+"&bno="+bno;
+		
+	}
+	
+
+		let no=${dto.bno}
+				
+		$.ajax({
+			url:'repdetail.do'
+			,data: {'no':no}
+			,dataType:'json'
+			,method:'post'
+			,success:function(data){
+				
+				$.each(data,function(index,item){
+					let result="<div class = 'top_content_rep_content'>"
+					result+= "<div class = 'top_content_rep_id'>닉네임 : "+item.nick+"</div>";
+					result+= "<div class = 'top_content_rep_rcontent'>"+item.rcontent;
+					console.log(item.repno);
+					result+= "<input class = 'top_content_rep_del' type='button' value='삭제' onclick=del("+item.repno+","+item.bno+")>";
+					result+= "</div></div>";
+					
+					$('#top_content_rep').append(result);
+				});
+				
+			}
+			,error:function(data){
+				console.log('error',data);
+			}
+			
+		});
+
+	
+
+</script>
+
 
 </body>
+
+
 </html>

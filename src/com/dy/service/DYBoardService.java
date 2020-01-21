@@ -132,6 +132,29 @@ public class DYBoardService {
 		}
 		
 	}
+	public int dygetCount(String search, String txtsearch) {
+		// TODO Auto-generated method stub
+		
+		DBConn dbconn = DBConn.getDB();
+		Connection conn=null;
+		int totalcount =0;
+		
+		try {
+			conn=dbconn.getConn();
+			conn.setAutoCommit(false);
+			
+			DYBoardDAO dao = DYBoardDAO.getdao();
+			totalcount = dao.dygetCount(conn, search, txtsearch);
+			
+			conn.commit();
+		}catch(NamingException | SQLException e) {
+			System.out.println(e);
+			try {conn.rollback();}catch(SQLException e2) {}
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}
+		}
+		return totalcount;
+	}
 	
 	
 }

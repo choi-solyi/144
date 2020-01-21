@@ -24,7 +24,7 @@ public class JWInsertResultAction implements Action {
 		f.setUrl("JWlist.do");
 		
 		
-		// 파일 업로드
+		// 파일 업로드 input=file 시작
 		String uploadpath = request.getServletContext()
 				.getRealPath("/adboard/upload"); //WebContent > upload, 업로드 할경로
 		int filesize = 1024*1024*10; // 10MB
@@ -40,12 +40,25 @@ public class JWInsertResultAction implements Action {
 		String btitle = muti.getParameter("btitle");
 		String bcategory = muti.getParameter("bcategory");
 		String bcontent = muti.getParameter("bcontent");
+		
+		//input=file 끝
+		
+		
+		
+		/*HttpSession session =request.getSession();
+		String id =(String)session.getAttribute("id");
+		// form 태그 값
+		String btitle = request.getParameter("btitle");
+		String bcategory = request.getParameter("bcategory");
+		String bcontent = request.getParameter("bcontent");
+		String bimg = null;
 		System.out.println(btitle);
 		System.out.println(bcategory);
 		System.out.println(bimg);
 		System.out.println(bcontent);
-		JWBoardDTO dto = new JWBoardDTO(); 
+		*/
 		
+		JWBoardDTO dto = new JWBoardDTO(); 
 		dto.setId(id);
 		dto.setBtitle(btitle);
 		dto.setBcategory(bcategory);

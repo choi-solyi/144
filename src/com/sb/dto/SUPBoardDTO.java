@@ -10,7 +10,14 @@ public class SUPBoardDTO {
 	private String bimg;
 	private String id;
 	private String nick;
+	private int repcount;
 	
+	public int getRepcount() {
+		return repcount;
+	}
+	public void setRepcount(int repcount) {
+		this.repcount = repcount;
+	}
 	public String getNick() {
 		return nick;
 	}
