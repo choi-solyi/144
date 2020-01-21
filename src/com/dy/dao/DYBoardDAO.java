@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dy.dto.DYBoardDTO;
+import com.dy.dto.DYRepBoardDTO;
 
 public class DYBoardDAO {
 
@@ -254,7 +255,87 @@ public class DYBoardDAO {
 		
 		return totalcount;
 	}
-	
-	
+	public void dyrepinsert(Connection conn,DYRepBoardDTO dto) throws SQLException{
+		// TODO Auto-generated method stub
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" insert into midrepboard ( rcontent        ");
+		sql.append("                          ,rwritedate      ");
+		sql.append("                          ,bno             ");
+		sql.append("                          ,id   )          ");
+		sql.append(" values ( ?, now(), ?, ? )                 ");
+		
+		
+		try(PreparedStatement pstmt=conn.prepareStatement(sql.toString());
+				)
+		{
+			pstmt.setString(1, dto.getRcontent());
+			pstmt.setInt(2, dto.getBno());
+			pstmt.setString(3, dto.getId());
+			
+			pstmt.executeUpdate();
+		}
+		
+	}
+	public List<DYRepBoardDTO> dyreplist(Connection conn, int bno) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		PreparedStatement  pstmt = null;
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select repno                               ");
+		sql.append("       ,rcontent                            ");
+		sql.append("       ,m.id                                  ");
+		sql.append("       ,rwritedate                          ");
+		sql.append("       ,bno                                 ");
+		sql.append("       ,u.nick                                ");
+		sql.append(" from midrepboard as m join userinfo as u   ");
+		sql.append(" on m.id = u.id                             ");
+		sql.append(" where bno = ?                              ");
+		
+		ResultSet rs=null;
+		List<DYRepBoardDTO> list = new ArrayList<>();
+		
+		
+		try {
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, bno);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next())
+			{
+				DYRepBoardDTO dto = new DYRepBoardDTO();
+				
+				dto.setRepno(rs.getInt("repno"));
+				dto.setRcontent(rs.getString("rcontent"));
+				dto.setId(rs.getString("m.id"));
+				dto.setRwritedate(rs.getString("rwritedate"));
+				dto.setBno(rs.getInt("bno"));
+				dto.setNick(rs.getString("u.nick"));
+				
+				list.add(dto);
+			}
+			
+		}finally {
+			if(rs!=null)try {rs.close();}catch(SQLException e) {}
+			if(pstmt!=null)try {pstmt.close();}catch(SQLException e) {}
+		}
+		
+		return list;
+	}
+	public void dyrepdelete(Connection conn, int repno) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" delete from midrepboard ");
+		sql.append(" where repno = ?         ");
+		
+		try(
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+				){
+			pstmt.setInt(1, repno);
+			pstmt.executeUpdate();
+		}
+		
+	}
 	
 }

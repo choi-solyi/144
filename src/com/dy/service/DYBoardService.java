@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 import com.lol.comm.DBConn;
 import com.dy.dao.DYBoardDAO;
 import com.dy.dto.DYBoardDTO;
+import com.dy.dto.DYRepBoardDTO;
 
 public class DYBoardService {
 
@@ -155,6 +156,73 @@ public class DYBoardService {
 		}
 		return totalcount;
 	}
+	public void dyrepinsert(DYRepBoardDTO dto) {
+		// TODO Auto-generated method stub
+		
+		DBConn dbconn = DBConn.getDB();
+		Connection conn=null;
+		try {
+			conn=dbconn.getConn();
+			conn.setAutoCommit(false);
+			
+			DYBoardDAO dao = DYBoardDAO.getdao();
+			dao.dyrepinsert(conn,dto);
+			
+			conn.commit();
+		}catch(NamingException | SQLException e)
+		{
+			System.out.println(e);
+			try {conn.rollback();}catch(SQLException e2) {}
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}
+		}
+		
+	}
+	public List<DYRepBoardDTO> dyreplist(int bno) {
+		// TODO Auto-generated method stub
+		DBConn dbconn = DBConn.getDB();
+		Connection conn=null;
+		
+		List<DYRepBoardDTO> list =null;
+		
+		try {
+			conn=dbconn.getConn();
+			conn.setAutoCommit(false);
+			
+			DYBoardDAO dao = DYBoardDAO.getdao();
+			 list = dao.dyreplist(conn,bno);
+			
+			conn.commit();
+		}catch(NamingException | SQLException e) {
+			System.out.println(e);
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}
+		}
+		
+		return list;
+	}
+	public void dyrepdelete(int repno) {
+		// TODO Auto-generated method stub
+		DBConn dbconn = DBConn.getDB();
+		Connection conn = null;
+		
+		try {
+			conn=dbconn.getConn();
+			conn.setAutoCommit(false);
+			
+			DYBoardDAO dao = DYBoardDAO.getdao();
+			dao.dyrepdelete(conn,repno);
+			
+			conn.commit();
+		}catch(NamingException | SQLException e){
+			System.out.println(e);
+			try {conn.rollback();}catch(SQLException e2) {}
+		}finally {
+			if(conn!=null)try {conn.close();}catch(SQLException e) {}
+		}
+	}
+	
+	
 	
 	
 }
