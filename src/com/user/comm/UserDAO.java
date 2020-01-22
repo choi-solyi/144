@@ -132,4 +132,18 @@ public class UserDAO {
 		}
 		return dto;
 	}
+	public void payment(Connection conn, String id, int price) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update userinfo ");
+		sql.append(" set cp = cp - ?  ");
+		sql.append(" where id = ? ");
+		
+		
+		UserDTO dto = new UserDTO();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			pstmt.setInt(1, price);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+		}
+	}
 }
