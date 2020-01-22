@@ -18,7 +18,7 @@
 	border: 1px solid black;
 	width: 100%;
 	height: 450px;
-	background-image:;
+	background-image: ;
 	text-align: center;
 }
 
