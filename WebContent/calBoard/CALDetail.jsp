@@ -6,6 +6,15 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<style>
+.jumbotron {
+margin-bottom: 20px;
+background-image: url("calBoard/calupload/calboard.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+color: white;
+}
+</style>
 <link rel="stylesheet" 
 href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
 integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
@@ -58,9 +67,9 @@ crossorigin="anonymous">
 <body>
 	<!-- 본문 detail -->
 	<div class="container mt-5 text-center">
-
+	
 		<div class="jumbotron">
-			<h1>대회 일정</h1>
+		 <h1 class="display-4">대회 일정</h1>
 		</div>
 
 		<!-- 글번호, 제목 -->
@@ -99,7 +108,6 @@ crossorigin="anonymous">
 			<form method="post" action="EBaddrep.do" name="rep">
 				<div class="input-group mb-3">
 					<input type="hidden" name="bno" value="${dto.bno}">
-					
 					<textarea class="form-control" name="rcontent"></textarea>
 					<div class="input-group-append">
 						<input class="input-group btn btn-outline-primary " type="button" onclick="send()" value="추가">

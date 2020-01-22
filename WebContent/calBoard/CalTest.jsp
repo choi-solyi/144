@@ -45,9 +45,9 @@ $(document).ready(function(){
     var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
       header: {
-        left: 'prev,next today',
+        left: 'prev,next',
         center: 'title',
-        right: 'dayGridMonth'
+        right: 'today'
       },
     
       //defaultDate: '2019-08-12',
@@ -69,18 +69,13 @@ $(document).ready(function(){
       },
       editable: true,
       eventLimit: true, // allow "more" link when too many events
-      events: [ // 일정 출력부분 데이터 넣어줄것임  	  
- 
-    	{
-          title: '${list[0].btitle}',
-          start: '${list[0].bcaldate}'
-        },
+/*       events: [ // 일정 출력부분 데이터 넣어줄것임  	  
         {
           title: 'Click for Google',
           url: 'http://google.com/',
           start: '2020-01-22'
         }
-      ]
+      ] */
     });
     calendar.render();
     console.log(data);
@@ -93,17 +88,17 @@ $(document).ready(function(){
           })
 	}
 }); 
-    calendar.addEvent({
+   /*  calendar.addEvent({
         title: "은별",
         start: "2020-01-23"
-      })
+      }) */
   };
   
 </script>
 <style>
 
   body {
-    margin: 40px 10px;
+    margin: 0px;
     padding: 0;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
@@ -119,6 +114,6 @@ $(document).ready(function(){
 <body>
 
   <div id='calendar'></div>
-	${list[0].bno} ${list[0].bcaldate}
+	
 </body>
 </html>
