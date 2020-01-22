@@ -66,6 +66,7 @@ public class MWRepDetailAction extends HttpServlet {
 			o.put("rwritedate", dto.getRwritedate());
 			o.put("nick", dto.getNick());
 			o.put("bno", dto.getBno());
+			o.put("id", dto.getId());
 			arr.add(o);
 		}
 		out.print(arr);

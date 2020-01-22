@@ -20,11 +20,13 @@ public class MWRepAddAction implements Action {
 		String no = request.getParameter("no");
 		String content = request.getParameter("content");
 		String nick = request.getParameter("nick");
+		String id = request.getParameter("id");
 		
 		MWRepBoardDTO rdto = new MWRepBoardDTO();
 		rdto.setBno(Integer.parseInt(no));
 		rdto.setRcontent(content);
 		rdto.setNick(nick);
+		rdto.setId(id);
 		
 		System.out.println(rdto.getBno());
 		System.out.println(rdto.getNick());

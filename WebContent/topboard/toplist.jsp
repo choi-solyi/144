@@ -183,8 +183,9 @@
 
 <style>
    #top_wrap{
-   		
    		background-image: url("topboard/img/top_bg.jpg");
+   	
+   		background-size: cover;
    }
    .top_opacity{
    		padding: 40px;
@@ -245,12 +246,12 @@
         display: inline-block;
     }
     .top_no{
-        width: 50px;
+        width: 120px;
         text-align: center;
         margin-left: 5px
     }
     .top_title{
-        width: 750px;
+        width: 610px;
     }
     .top_title p{
         margin-bottom: -5px;
@@ -268,11 +269,11 @@
         text-align: center;
     }
     .top_hit{
-        width: 60px;
+        width: 100px;
         text-align: center;
     }
     .top_up{
-        width: 60px;
+        width: 100px;
         text-align: center;
     }
     
@@ -284,6 +285,7 @@
     
     .top_board_paging{
         width: 1200px;
+        padding : 0px 20px;
         margin: 20px auto 50px;
         
     }
@@ -1055,6 +1057,7 @@
             </div>
         </c:forEach>
 		</section>
+		
 		<div class = "top_board_paging">
 			<div class = "top_board_paging_no">
 				<c:if test="${startblock>1 }">

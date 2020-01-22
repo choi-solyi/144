@@ -188,7 +188,7 @@
         }
         
         .top_content_rep_id, .top_content_rep_rcontent{
-			display : none;
+			
 		}
 		
 
@@ -270,9 +270,8 @@
                 <div class = "tcontent top_content_category"><c:out value = "${dto.bcategory }"></c:out></div>
                 <div class = "tcontent top_content_title"><c:out value = "${dto.btitle }"></c:out></div><br>
                 <div class = "tcontent top_content_content"><c:out value = "${dto.bcontent }"></c:out></div><br>
-                
+                <a class = "top_link_up" href = "topup.do?no=${dto.bno }">추천</a><br>
                 <c:if test="${session == dto.id }">
-					<a class = "top_link_up" href = "topup.do?no=${dto.bno }">추천</a><br>
 					<a class = "top_link_update" href = "topupdate.do?no=${dto.bno }">수정</a>
                 	<a class = "top_link_del" href = "topdelete.do?no=${dto.bno }">삭제</a>
 				</c:if>
@@ -284,12 +283,12 @@
 
 		
 </div>
-	<section id = "top_content_rep">
+	<div id = "top_content_rep">
 		<div class = "top_content_rep_title">
              	댓글
         </div>
-		
-	</section>
+    </div>
+	
 	
 	<form class = "top_rep_form" method = "post" action = "mwrep.do" name = "frm">
         	<input type = "hidden" name = "no" value = "${dto.bno}">
@@ -323,13 +322,11 @@
 				
 				$.each(data,function(index,item){
 					let result="<div class = 'top_content_rep_content'>"
-					result+= "<div class = 'top_content_rep_id'>"+item.nick+"</div>";
+					result+= "<div class = 'top_content_rep_id'>"+item.nick+" "+"("+item.rwritedate+")"+"</div>";
 					result+= "<div class = 'top_content_rep_rcontent'>"+item.rcontent;
-					console.log(item.repno);
 					result+= "<input class = 'top_content_rep_del' type='button' value='삭제' onclick=del("+item.repno+","+item.bno+")>";
 					result+= "</div></div>";
-					
-					$('top_content_rep').append(result);
+					$('#top_content_rep').append(result);
 				});
 				
 			}

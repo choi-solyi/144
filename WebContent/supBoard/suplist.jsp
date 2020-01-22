@@ -26,11 +26,7 @@
 	
 
 </style>
-<script>
-	
-	
 
-</script>
 	
 	
 

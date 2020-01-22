@@ -105,6 +105,8 @@ public class FrontController extends HttpServlet {
 			{
 				response.sendRedirect(f.getUrl());
 			}
+			
+			
 		}
 
 	}

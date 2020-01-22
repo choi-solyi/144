@@ -20,7 +20,7 @@ public class MWBoardDAO {
 		
 		return dao;
 	}
-	public List<MWBoardDTO> mwBoardSelect(Connection conn, String search, String searchtxt, int startrow, int endrow) throws SQLException {
+	public List<MWBoardDTO> mwBoardSelect(Connection conn, String search, String searchtxt, int startrow, int pagepercount) throws SQLException {
 		
 		StringBuilder sql = new StringBuilder();
 		sql.append(" select r1.* from (                           ");
@@ -47,19 +47,21 @@ public class MWBoardDAO {
 			}
 		}
 		sql.append("        order by bno desc                     ");
-		sql.append("        ) r1 limit 5 offset ?                  ");
+		sql.append("        ) r1 limit ? offset ?                  ");
 		System.out.println(startrow);
-		System.out.println(endrow);
+		System.out.println(pagepercount);
 		List<MWBoardDTO> list = new ArrayList<>();
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
 			) {
 			if(!(search.equals("")) && !(searchtxt.equals(""))) {
 				pstmt.setString(1, "%"+searchtxt+"%");
-				pstmt.setInt(2, startrow);
+				pstmt.setInt(2, pagepercount);
+				pstmt.setInt(3, startrow);
 				System.out.println("이상작동");
 			}
 			else {
-				pstmt.setInt(1, startrow);
+				pstmt.setInt(1, pagepercount);
+				pstmt.setInt(2, startrow);
 				System.out.println("작동중");
 			}
 			ResultSet rs = pstmt.executeQuery();
@@ -213,7 +215,6 @@ public class MWBoardDAO {
 			pstmt = conn.prepareStatement(sql.toString());
 			if(!(search.equals("")) && !(search.equals(""))) {
 				pstmt.setString(1, "%"+searchtxt+"%");
-				System.out.println("333333333333333333333333333");
 			}
 			
 			rs = pstmt.executeQuery();
@@ -309,6 +310,7 @@ public class MWBoardDAO {
 				dto.setBno(rs.getInt("bno"));
 				dto.setNick(rs.getString("nick"));
 				dto.setRepno(rs.getInt("repno"));
+				dto.setId(rs.getString("id"));
 				
 				list.add(dto);
 			}

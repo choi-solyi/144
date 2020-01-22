@@ -22,7 +22,7 @@
 <style>
 body {
 	background-image:
-		url('http://choisolyi.dothome.co.kr/lol/img/main_img.jpg');
+		url('http://choisolyi.dothome.co.kr/lol/img/main_img2.jpg');
 	background-attachment: fixed;
 	background-size: cover;
 	background-size: 100% 100%;
@@ -30,13 +30,13 @@ body {
 
 .login_form {
 	width: 400px;
-	height: 400px;
+	height: 300px;
 	background-color: rgb(48, 48, 48, 0.8);
 	padding: 25px;
 	border-radius: 14px;
 	position: absolute;
 	left: 65%;
-	top: 40%;
+	top: 50%;
 	color: white;
 }
 
@@ -53,9 +53,7 @@ body {
 
 <body>
 <body>
-	<div
-		style="font-size: 4em; color: #f5fe8d; padding: 100px; font-weight: 900">
-		L O L i n g</div>
+	<div style="font-size: 4em; color: #f5fe8d; padding: 100px 200px;"><img src="http://choisolyi.dothome.co.kr/lol/img/logo.png" style="width:300px; padding:0px; margin:0px;"></div>
 
 
 	<div class="login_form">
@@ -74,15 +72,15 @@ body {
 				<button type="submit" class="btn btn-primary">로 그 인</button>
 
 			</div>
-			<div>
+			<!-- <div>
 
 				<div
 					style="width: 140px; height: 40px; background-color: limegreen; margin: 20px"></div>
 				<div
 					style="float: right; width: 140px; height: 40px; background-color: yellow; margin: 0px 20px; position: relative; bottom: 60px;"></div>
 
-				<!--카카오로그인이나 네이버 로그인-->
-			</div>
+				카카오로그인이나 네이버 로그인
+			</div> -->
 			<div>
 				<a href="join.jsp" style="color: white; font-size: 0.9em;">신규가입</a>
 			</div>
