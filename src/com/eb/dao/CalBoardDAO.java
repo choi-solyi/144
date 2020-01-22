@@ -10,6 +10,8 @@ import java.util.List;
 import com.eb.dto.CalBoardDTO;
 import com.eb.dto.CalSubBoardDTO;
 import com.lol.comm.DBConn;
+import com.user.comm.UserDAO;
+import com.user.comm.UserDTO;
 
 public class CalBoardDAO {
 
@@ -184,7 +186,6 @@ public class CalBoardDAO {
 	public List<CalSubBoardDTO> SubDetail(Connection conn, int bno) throws SQLException  {
 		StringBuilder sql=new StringBuilder();
 		List<CalSubBoardDTO> list=new ArrayList<>();
-		System.out.println(bno);
 		sql.append(" select * from  calrepboard c   ");
 		sql.append(" join userinfo u                ");
 		sql.append(" on c.id = u.id                 ");
@@ -201,6 +202,7 @@ public class CalBoardDAO {
 				dto.setRwritedate(rs.getString("rwritedate"));
 				dto.setId(rs.getString("id"));
 				dto.setBno(rs.getInt("bno"));
+				dto.setNick(rs.getString("nick"));
 				list.add(dto);
 			}
 		}
