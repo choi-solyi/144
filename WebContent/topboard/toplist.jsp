@@ -14,22 +14,27 @@
         $(document).ready(function(){
             
             $('.img_champ1').on('click', function(){
+            	$('.top_champ').hide();
                 $('.top_champ_inpo').hide();
                 $('.top_board_champ1').show();     
             });
             $('.img_champ2').on('click', function(){
+            	$('.top_champ').hide();
                 $('.top_champ_inpo').hide();
                 $('.top_board_champ2').show();     
             });    
             $('.img_champ3').on('click', function(){
+            	$('.top_champ').hide();
                 $('.top_champ_inpo').hide();
                 $('.top_board_champ3').show();     
             }); 
             $('.img_champ4').on('click', function(){
+            	$('.top_champ').hide();
                 $('.top_champ_inpo').hide();
                 $('.top_board_champ4').show();     
             }); 
             $('.img_champ5').on('click', function(){
+            	$('.top_champ').hide();
                 $('.top_champ_inpo').hide();
                 $('.top_board_champ5').show();     
             }); 
@@ -184,7 +189,6 @@
 <style>
    #top_wrap{
    		background-image: url("topboard/img/top_bg.jpg");
-   	
    		background-size: cover;
    }
    .top_opacity{
