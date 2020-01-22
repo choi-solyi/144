@@ -173,8 +173,7 @@
 	float: right;
 }
 
-
-.alert a{
+.alert a {
 	text-decoration: none;
 }
 </style>
@@ -185,10 +184,7 @@ function send(){
 		document.frm.submit();
 }
 
-/* function update(){
-	location.href="jgupdatrep.do?repno"+repno+"&bno="+bno;
 
-}; */
 function delrep(repno, bno){
 	console.log("-------------------");
 	console.log(repno);
@@ -236,7 +232,8 @@ function delrep(repno, bno){
 	<div class="jgcontent">
 		<div class="card-header">
 
-			글번호 ${dto.bno } / [ ${dto.bcategory } ] / 작성자	${dto.nick } / 조회수 ${dto.bhit }
+			글번호 ${dto.bno } / [ ${dto.bcategory } ] / 작성자 ${dto.nick } / 조회수
+			${dto.bhit }
 			<!-- 작성자 -->
 			<%-- 		글번호  <%=dto.getBno()%>
 			[<%=dto.getBcategory()%>] / 조회수
@@ -246,9 +243,9 @@ function delrep(repno, bno){
 
 		</div>
 		<div class="card-body">
-			<h5 class="card-title"  style="padding:20px;">${dto.btitle}<%-- <%=dto.getBtitle()%> --%>
+			<h5 class="card-title" style="padding: 20px;">${dto.btitle}<%-- <%=dto.getBtitle()%> --%>
 			</h5>
-			<p class="card-text" style="padding:20px;">${dto.bcontent}<%-- <%=dto.getBcontent()%> --%>
+			<p class="card-text" style="padding: 20px;">${dto.bcontent}<%-- <%=dto.getBcontent()%> --%>
 			</p>
 
 			<a href="jglist.do" class="btn btn-success btnsol">목록 보기</a>
@@ -270,21 +267,41 @@ function delrep(repno, bno){
 
 
 	<!-- 이전글, 다음글  -->
-	
-	 <div class="prevnext">
-	 
-	 <div class="alert alert-info" role="alert">
-			<a href="jgdetail.do?bno=${nexdto.bno}"><table><tbody class="prevnexttable"><tr><td style="width:80px; color:black;"> ▲ ${nexdto.bno} </td><td style="width:800px; color:black;">|| ${nexdto.btitle } </td><td style="width:300px; color:black;">|| ${nexdto.nick} </td><td style="width:30px; color:black;"> ▲ </td></tr> </tbody></table></a>
+
+	<div class="prevnext">
+
+		<div class="alert alert-info" role="alert">
+			<a href="jgdetail.do?bno=${nexdto.bno}"><table>
+					<tbody class="prevnexttable">
+						<tr>
+							<td style="width: 80px; color: black;">▲ ${nexdto.bno}</td>
+							<td style="width: 800px; color: black;">|| ${nexdto.btitle }
+							</td>
+							<td style="width: 300px; color: black;">|| ${nexdto.nick}</td>
+							<td style="width: 30px; color: black;">▲</td>
+						</tr>
+					</tbody>
+				</table></a>
 		</div>
 		<div class="alert alert-success" role="alert">
-			<a href="jgdetail.do?bno=${predto.bno}"><table><tbody class="prevnexttable"><tr><td style="width:80px; color:black;"> ▼ ${predto.bno} </td><td style="width:800px; color:black;">|| ${predto.btitle } </td><td style="width:300px; color:black;">|| ${predto.nick} </td><td style="width:30px; color:black;"> ▼ </td></tr> </tbody></table>  </a>
-		</div>	
+			<a href="jgdetail.do?bno=${predto.bno}"><table>
+					<tbody class="prevnexttable">
+						<tr>
+							<td style="width: 80px; color: black;">▼ ${predto.bno}</td>
+							<td style="width: 800px; color: black;">|| ${predto.btitle }
+							</td>
+							<td style="width: 300px; color: black;">|| ${predto.nick}</td>
+							<td style="width: 30px; color: black;">▼</td>
+						</tr>
+					</tbody>
+				</table> </a>
+		</div>
 
 
-		
-	</div> 
 
-<%-- 		 <div class="prevnext">
+	</div>
+
+	<%-- 		 <div class="prevnext">
 		<div class="alert alert-success" role="alert">
 			<a href="jgdetail.do?bno=${dto.bno-1}">▲ 안 녕</a>
 		</div>	
@@ -295,134 +312,144 @@ function delrep(repno, bno){
 		</div>
 	</div> - --%>
 
-		<!-- 댓글 쓰기 -->
+	<!-- 댓글 쓰기 -->
 
-		<div class="writerep">
-			<form method="post" action="jgaddrep.do" name="frm"
-				class="was-validated">
-				<div class="form-group">
-					<label for="disabledTextInput">닉네임</label> <input type="text"
-						id="id" class="form-control" name="id" placeholder="자동 입력"
-						value="${sessionScope.id}" readonly="readonly">
-				</div>
+	<div class="writerep">
+		<form method="post" action="jgaddrep.do" name="frm"
+			class="was-validated">
+			<div class="form-group">
+				<label for="disabledTextInput">닉네임</label> <input type="text"
+					id="id" class="form-control" name="id" placeholder="자동 입력"
+					value="${sessionScope.id}" readonly="readonly">
+			</div>
 
 
-				<div class="mb-3">
-					<label for="validationTextarea">내용</label>
-					<textarea class="form-control is-invalid" name="rcontent"
-						id="rcontent" placeholder="Required example textarea" required></textarea>
-					<!-- <div class="invalid-feedback">Please enter a message in the
+			<div class="mb-3">
+				<label for="validationTextarea">내용</label>
+				<textarea class="form-control is-invalid" name="rcontent"
+					id="rcontent" placeholder="Required example textarea" required></textarea>
+				<!-- <div class="invalid-feedback">Please enter a message in the
 					textarea.</div> -->
-				</div>
+			</div>
 
 
 
-				<div class="inlineblockcontent">
-					<input type="hidden" name="bno" id="bno" value="${dto.bno }">
+			<div class="inlineblockcontent">
+				<input type="hidden" name="bno" id="bno" value="${dto.bno }">
 
 
-					<input type="submit" onclick="send();" class="btn btn-success"
-						value="댓글 쓰기">
+				<input type="submit" onclick="send();" class="btn btn-success"
+					value="댓글 쓰기">
 
 
-				</div>
-			</form>
+			</div>
+		</form>
 
-		</div>
+	</div>
 
 
-		<!-- 댓글 목록 보기 -->
-		<div id="replist"
-			style="margin: 10px auto; width: 1220px; padding: 5px;"></div>
-		<!-- 	<input type="submit" onclick="update();" class="btn btn-success" value="수정">
+	<!-- 댓글 목록 보기 -->
+	<div id="replist"
+		style="margin: 10px auto; width: 1220px; padding: 5px;"></div>
+	<!-- 	<input type="submit" onclick="update();" class="btn btn-success" value="수정">
 	<input type="submit" onclick="delete();" class="btn btn-success" value="삭제"> 
   -->
 
-		<script>
+	<script>
     let bno = ${dto.bno};
 	let ssid = '<%=(String) session.getAttribute("id")%>';
-			console.log(bno);
-			console.log('세션아이디');
-			console.log(ssid);
+		console.log(bno);
+		console.log('세션아이디');
+		console.log(ssid);
 
-			$.ajax({
-						url : 'listreq.do',
-						data : {
-							'bno' : bno
-						},
-						dataType : 'JSON',
-						method : 'post',
-						success : function(data) {
-							console.log('test-alldata :', data);
-							$('#replist').empty();
-							$
-									.each(
-											data,
-											function(index, item) {
-												console.log(index);
-												console.log(item);
+		$
+				.ajax({
+					url : 'listreq.do',
+					data : {
+						'bno' : bno
+					},
+					dataType : 'JSON',
+					method : 'post',
+					success : function(data) {
+						console.log('test-alldata :', data);
+						$('#replist').empty();
+						$
+								.each(
+										data,
+										function(index, item) {
+											console.log(index);
+											console.log(item);
 
-												console.log(item.repno);
-												if (index % 3 == 0) {
-													let rep = "<div class='card border-success mb-3 botrep' style='max-width: 18rem;'>";
-													rep += '<div class="card-header"> 댓글 ';
-													if (ssid == item.id) {
-														rep += '<input type="submit" onclick=delrep('
-																+ item.repno
-																+ ','
-																+ item.bno
-																+ '); class="btn btn-success btndel" value="삭제">';
-														rep += '<input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정">';
-													}
-													rep += "</div><div class='card-body text-success'><h5 class='card-title' style='text-align:center;'>"
-															+ item.nick +"<br><small> ( "+ item.rwritedate + " )</h5>";
-													rep += "<p class='card-text'>"
-															+ item.rcontent
-															+ "</p>	</div></div>";
-													$('#replist').append(rep);
-												} else if (index % 2 == 0) {
-													let rep = "<div class='card border-info mb-3 botrep' style='max-width: 18rem;'>";
-													rep += '<div class="card-header"> 댓글 ';
-													if (ssid == item.id) {
-														rep += '<input type="submit" onclick=delrep('
-																+ item.repno
-																+ ','
-																+ item.bno
-																+ '); class="btn btn-info btndel" value="삭제"> ';
-														rep += '<input type="submit" onclick=update();" class="btn btn-info btnupd" value="수정">';
-													}
-													rep += "</div><div class='card-body text-info'><h5 class='card-title'  style='text-align:center;'>"
-															+ item.nick+"<br><small> ( "+ item.rwritedate + " )</h5>";
-													rep += "<p class='card-text'>"
-															+ item.rcontent
-															+ "</p>	</div></div>";
-													$('#replist').append(rep);
-
-												} else {
-													let rep = "<div class='card border-dark mb-3 botrep' style='max-width: 18rem;'>";
-													rep += '<div class="card-header"> 댓글 ';
-													if (ssid == item.id) {
-														rep += '<input type="submit" onclick=delrep('
-																+ item.repno
-																+ ','
-																+ item.bno
-																+ '); class="btn btn-dark btndel" value="삭제"> ';
-														rep += '<input type="submit" onclick=update();" class="btn btn-dark btnupd" value="수정">';
-													}
-													rep += "</div><div class='card-body text-dark'><h5 class='card-title'  style='text-align:center;'>"
-															+ item.nick+"<br><small> ( "+ item.rwritedate + " )</h5>";
-													rep += "<p class='card-text'>"
-															+ item.rcontent
-															+ "</p>	</div></div>";
-													$('#replist').append(rep);
+											console.log(item.repno);
+											if (index % 3 == 0) {
+												let rep = "<div class='card border-success mb-3 botrep' style='max-width: 18rem;'>";
+												rep += '<div class="card-header"> 댓글 ';
+												if (ssid == item.id) {
+													rep += '<input type="submit" onclick=delrep('
+															+ item.repno
+															+ ','
+															+ item.bno
+															+ '); class="btn btn-success btndel" value="삭제">';
+													rep += '<input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정">';
 												}
-											});
+												rep += "</div><div class='card-body text-success'><h5 class='card-title' style='text-align:center;'>"
+														+ item.nick
+														+ "<br><small> ( "
+														+ item.rwritedate
+														+ " )</h5>";
+												rep += "<p class='card-text'>"
+														+ item.rcontent
+														+ "</p>	</div></div>";
+												$('#replist').append(rep);
+											} else if (index % 2 == 0) {
+												let rep = "<div class='card border-info mb-3 botrep' style='max-width: 18rem;'>";
+												rep += '<div class="card-header"> 댓글 ';
+												if (ssid == item.id) {
+													rep += '<input type="submit" onclick=delrep('
+															+ item.repno
+															+ ','
+															+ item.bno
+															+ '); class="btn btn-info btndel" value="삭제"> ';
+													rep += '<input type="submit" onclick=update();" class="btn btn-info btnupd" value="수정">';
+												}
+												rep += "</div><div class='card-body text-info'><h5 class='card-title'  style='text-align:center;'>"
+														+ item.nick
+														+ "<br><small> ( "
+														+ item.rwritedate
+														+ " )</h5>";
+												rep += "<p class='card-text'>"
+														+ item.rcontent
+														+ "</p>	</div></div>";
+												$('#replist').append(rep);
 
-						},
-						error : function(data) {
-							console.log('error : ', data);
-						}
-					});
-		</script>
+											} else {
+												let rep = "<div class='card border-dark mb-3 botrep' style='max-width: 18rem;'>";
+												rep += '<div class="card-header"> 댓글 ';
+												if (ssid == item.id) {
+													rep += '<input type="submit" onclick=delrep('
+															+ item.repno
+															+ ','
+															+ item.bno
+															+ '); class="btn btn-dark btndel" value="삭제"> ';
+													rep += '<input type="submit" onclick=update();" class="btn btn-dark btnupd" value="수정">';
+												}
+												rep += "</div><div class='card-body text-dark'><h5 class='card-title'  style='text-align:center;'>"
+														+ item.nick
+														+ "<br><small> ( "
+														+ item.rwritedate
+														+ " )</h5>";
+												rep += "<p class='card-text'>"
+														+ item.rcontent
+														+ "</p>	</div></div>";
+												$('#replist').append(rep);
+											}
+										});
+
+					},
+					error : function(data) {
+						console.log('error : ', data);
+					}
+				});
+	</script>
 </body>
 </html>

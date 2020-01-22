@@ -189,8 +189,8 @@ public class JGBoardDAO {
 	public void addRep(Connection conn, int bno, JGRepBoardDTO rdto) throws SQLException {
 		PreparedStatement pstmt=null;
 		StringBuilder sql = new StringBuilder();
-		sql.append(" insert into jgrepboard(repno, rcontent, rwritedate, bno, id ) ");
-		sql.append(" values(NULL, ?, now(), ?, ?, ) ");
+		sql.append(" insert into jgrepboard(repno, rcontent, rwritedate, bno, id) ");
+		sql.append(" values(NULL, ?, now(), ?, ? ) ");
 
 		try {
 			pstmt = conn.prepareStatement(sql.toString());
@@ -208,10 +208,10 @@ public class JGBoardDAO {
 	//댓글 리스트 보기
 	public List<JGRepBoardDTO> ListRep(Connection conn, int bno) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		sql.append(" select repno, rcontent, rwritedate, bno, jr.id, us.nick 	 ");
-		sql.append(" from jgrepboard as jr join userinfo as us	on jr.id = us.id					 ");
-		sql.append(" where bno = ?					 ");
-		sql.append(" order by repno desc ");
+		sql.append(" select repno, rcontent, rwritedate, bno, jr.id, us.nick 	 	");
+		sql.append(" from jgrepboard as jr join userinfo as us	on jr.id = us.id	");
+		sql.append(" where bno = ?					 								");
+		sql.append(" order by repno desc 											");
 		ResultSet rs=  null;
 		List<JGRepBoardDTO> list = new ArrayList<>();
 		
