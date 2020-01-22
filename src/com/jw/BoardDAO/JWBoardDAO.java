@@ -245,8 +245,8 @@ public class JWBoardDAO {
 		StringBuilder sql = new StringBuilder();
 		ResultSet rs = null;
 		
-		sql.append(" select count(*) from adrepboard r ");
-		sql.append(" join adboard b on r.bno = b.bno   ");
+		sql.append(" select count(r.bno) from adrepboard r          ");
+		sql.append(" right join adboard b on r.bno = b.bno          ");
 		if(!(search.equals(""))&&!(searchtxt.equals("")))
 		{
 			if(search.equals("btitle"))
@@ -256,7 +256,7 @@ public class JWBoardDAO {
 			else if(search.equals("id"))
 				sql.append(" where id like ? ");
 		}
-		sql.append(" group by r.bno             ");
+		sql.append(" group by b.bno             ");
 		sql.append(" order by b.bno desc        ");
 		sql.append(" limit ?, ?               ");
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
@@ -270,6 +270,7 @@ public class JWBoardDAO {
 			pstmt.setInt(2, endrow);
 			}
 			rs = pstmt.executeQuery();
+
 			for(JWBoardDTO index : list)
 			{
 				rs.next();
