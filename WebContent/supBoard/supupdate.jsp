@@ -51,10 +51,10 @@
 		</div>
 			<input type="hidden" name="bno" id="bno" value="${dto.bno}" readonly="readonly">
 			<select class="custom-select custom-select-sm subin subin1" name="bcategory" id="bcategory" >
-				<option value="카테고리" >카테고리</option>
 				<option value="일반">일반</option>
 				<option value="질문">질문</option>
 				<option value="정보">정보</option>
+				<option value="인증">인증</option>
 			</select>
 
 			<div class="input-group mb-3 subin" style="width: 600px;">

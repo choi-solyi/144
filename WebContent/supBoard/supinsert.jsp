@@ -52,10 +52,10 @@
 		<h1>S U P P O R T E R</h1>
 		</div>
 			<select class="custom-select custom-select-sm subin subin1" name="bcategory" id="bcategory" required="required">
-				<option value="카테고리">카테고리</option>
 				<option value="일반">일반</option>
 				<option value="질문">질문</option>
 				<option value="정보">정보</option>
+				<option value="인증">인증</option>
 			</select>
 			<input type="hidden" name="id" value="${sessionScope.id}">
 
