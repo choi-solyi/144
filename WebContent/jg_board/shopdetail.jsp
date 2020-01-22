@@ -14,7 +14,7 @@
 
 .shopdetail{
 	width:700px;
-	height:400px;
+	height:450px;
 	margin : 15px auto;
 	border:1px solid silver;
 	border-radius:  10px;
@@ -25,7 +25,6 @@
 	height: 200px;
 
 	margin : 15px auto;
-	border:1px solid silver;
 	border-radius:  10px;
 	text-align: center;
 	padding :10px 20px;
@@ -84,15 +83,16 @@ $(document).ready(function(){
 	
 	<div class="shopimg"><img src="${mddto.img }" class="card-img" alt="..."></div>
 	<div class="shopmd">[상품코드: ${mddto.mdcode }]<b> ${mddto.mdname }</b></div><br>
-	<div class="shopprice"> <b>${mddto.price }원</b></div>
+	<div class="shopprice"> <b>${mddto.price } CP</b></div>
+		<div class="shoppayment">
+		<input type="button" class="btn btn-success btnsol" id="payment" value="CP로 결제" <%-- onclick=payment(${mddto.mdcode },${mddto.price},'${mddto.mdname}') --%>> 
+	</div>
 	
 </div>
 
-<div class="shoppayment">
-	<input type="button" id="payment" value="결제버튼" <%-- onclick=payment(${mddto.mdcode },${mddto.price},'${mddto.mdname}') --%>> 
 
 <%-- 	<input type="button" value="결제" onclick="payment('${mddto.mdcode }', '${mddto.mdname }', '${mddto.price }')>
- --%></div>
+ --%>
 
 
 

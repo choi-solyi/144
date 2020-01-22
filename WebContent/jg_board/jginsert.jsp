@@ -118,6 +118,8 @@
 	width: 1200px;
 	padding: 30px;
 	margin: 0 auto;
+	position:relative;
+	top: -100px;
 }
 </style>
 
@@ -138,10 +140,7 @@
 			<I> "이제 고통을 안겨줄 새로운 녀석을 찾아야겠군."</I>
 		</p>
 
-		<div class="gesipantitle">
-			<p class="titles">정글 게시판</p>
-		</div>
-
+	
 <!-- 상단이미지 끝  -->
 <%String id = (String)session.getAttribute("id");
 	System.out.println(id);
@@ -185,7 +184,10 @@
 		<div>
 
 			<input type="submit" class="btn btn-success" value="글쓰기"> 
-			<input type="reset" class="btn btn-secondary" value="취소">
+			<input type="reset" class="btn btn-secondary" value="다시쓰기">
+			
+			<a href="jglist.do" class="btn btn-success btnsol" style="position:relative; left:874px;">목록 보기</a>
+			
 		</div>
 	</form>
 

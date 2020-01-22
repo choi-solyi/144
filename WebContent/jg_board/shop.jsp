@@ -88,7 +88,7 @@
 					src="http://choisolyi.dothome.co.kr/lol/img/shop3_1.jpg"
 					class="card-img-top" alt="...">
 					<div class="card-body" style="text-align: center;">
-						<h5 class="card-title">귀여운 티모 피규어^ㅗ^</h5>
+						<h5 class="card-title">귀여운 티모 피규어 ^ㅗ^</h5>
 						<p class="card-text">
 							<big class="text-muted"><b style="color: dodgerblue">7,000 CP</b></big>
 						</p>

@@ -25,7 +25,7 @@
 </head>
 <body>
   <section class="mypage">
-	<div class="mypageinfo">My Page</div>
+	<div class="mypageinfo">내 정보</div>
 	<c:set var="dto" value="${requestScope.dto }" />
         <form>
             <fieldset disabled>
@@ -61,13 +61,13 @@
                 </div>
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
+                        <!-- <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
                         <label class="form-check-label" for="disabledFieldsetCheck">
                             Can't check this
-                        </label>
+                        </label> -->
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+             <!--    <button type="submit" class="btn btn-primary">Submit</button> -->
             </fieldset>
         </form>
 

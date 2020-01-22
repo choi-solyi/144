@@ -40,10 +40,10 @@
     <img src="${requestScope.img}" class="card-img-top" alt="..." style="width:498px;">
     <div class="card-body">
       <h5 class="card-title">${requestScope.mdname} <small>가격 / ${requestScope.price } CP </small></h5>
-      <p class="card-text"> 차감 전 CP / ${dto1.cp}</p>
+      <p class="card-text"> 차감 전 CP / ${dto1.cp} CP</p>
     </div>
     <div class="card-footer">
-      <small class="text-muted">차감 후 CP / ${dto2.cp }</small>
+      <small class="text-muted">차감 후 CP / ${dto2.cp } CP</small>
     </div>
   </div>
  </div>
