@@ -12,6 +12,8 @@
 		.top_update_form{
 			width: 1200px;
             margin: 40px auto 0px auto;
+            border : 2px solid silver;
+            padding: 40px 80px;
 		}
         .tupdate{
             margin: 5px 0px 5px 20px;
@@ -112,7 +114,7 @@
     </select><br>
     <input class = "tupdate top_update_nick" type = "hidden" name = "nick" id = "nick" 
     value = '<c:out value="${dto.id }"></c:out>' required="required"><br>
-    <textarea class = "top_update_content" rows="30" cols="161" name = "content" id = "content"
+    <textarea class = "top_update_content" rows="30" cols="130" name = "content" id = "content"
      required="required"><c:out value="${dto.bcontent }"></c:out></textarea><br>
     <input class = "top_update_updateinput" type = "submit" value = "수정">
 	<input class = "top_update_cancelinput" type = "reset" value = "취소">

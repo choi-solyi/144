@@ -8,25 +8,21 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
     <style>
-        .top_insert_header{
-            width: 840px;
-            margin: 40px auto;
-            padding: 20px 0px;
-            text-align: center;
-            background-color: lightgray;
-        }
-        
+                
         .top_update_form{
-            width: 800px;
+            width: 1000px;
             margin: 50px auto;
-
-            padding: 20px;
+            padding: 40px 80px;
+            border: 2px solid silver;
         }
         .top_update_label{
             display: inline-block;
             width: 80px;
             margin-top: 10px;
-            background: 
+        }
+        .top_update_input_title{
+        	height : 30px;
+        	border: 2px solid silver;
         }
         
         .top_update_select{
@@ -37,7 +33,7 @@
             height: 20px;
         }
         .top_update_content{
-            margin: 0px 20px ;
+
         }
         .top_update_btn {
 	text-decoration:none;
@@ -107,9 +103,6 @@
 	<c:set var = "id" value = "${requestScope.id }"></c:set>
 	
     <div class = "top_insert_wrap">
-        <header class = "top_insert_header">
-        <h1 class = "top_insert_name">글쓰기</h1>
-        </header>
         <form class = "top_update_form" method = "post" action = "topinsertresult.do">
         <label class = "top_update_label top_update_label_title" for = "title">제목</label>
         <input class = "top_update_input top_update_input_title" type = "text" name = "title" id = "title" required="required"><br>
