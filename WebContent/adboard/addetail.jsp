@@ -48,6 +48,7 @@
 			,success : function(arr) {
 				console.log(arr);
 				console.log(id);
+				$('#replist').append("댓글 수 : "+arr.length);
 				 $.each(arr, function(index, repdto) {
 					 let repboard ="";
 					 repboard = "<li class='list-group-item list-group-item-action'" 
@@ -63,7 +64,6 @@
 					  repboard+="</li>"
 					 $('#replist').append(repboard);
 				}); 
-				 console.log(arr.length);
 			}
 			,error : function(e) {
 				console.log('error');
@@ -87,7 +87,7 @@
 img {
 	width: 100%;
 }
-#replength{
+#replength, #replist{
 	color: gray; 
 } 
 </style>
