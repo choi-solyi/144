@@ -85,19 +85,12 @@
 			<a class="btn btn-secondary btn-sm" href="sblist.do" role="button" style="padding: 5px 15px;">목록</a>
 		</div>
 		
-		<div style="text-align: right; margin-right:30px;">
+		<div style="text-align: right; margin-right:30px; margin-bottom:150px;">
 		<input type="submit" value="작성완료" class="btn btn-secondary btn-lg" style="padding:10px 30px;">
 		</div>
 		
 		
-		<div class="input-group" style="width:500px; margin: 0 auto;">
-		
-		<input type="text" class="form-control" placeholder="소환사명을 입력하세요">
-		<div class="input-group-btn">
-			<button class="btn btn-default" type="button">전적검색</button>
-		</div>
-		
-	</div>
+	
 			<!-- /input-group -->
 			
 		<!-- /.col-lg-6 -->

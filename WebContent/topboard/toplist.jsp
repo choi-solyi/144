@@ -412,6 +412,9 @@
 	<c:set var="totalpage" value="${requestScope.totalpage }"></c:set>
 	<c:set var="search" value="${requestScope.search }"></c:set>
 	<c:set var="searchtxt" value="${requestScope.searchtxt }"></c:set>
+	
+	<c:set var = "session" value="${sessionScope.id }" />
+	
 	<header class = "top_header">
 	
 	</header>
@@ -804,9 +807,12 @@
 					<input class = "top_board_search_txt" type="text" name = "searchtxt">
 					<input class = "top_board_search_btn" type="submit" value="검색">
                 </form>
-                <a href = "topinsert.do">추가</a><br>
-            </div>
-	
+                <c:if test="${session != null }">
+						<div>
+							<a href = "topinsert.do?id=${session }">추가</a><br>
+						</div>
+					</c:if>
+	            </div>
 </div>
 </body>
 </html>

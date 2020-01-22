@@ -36,17 +36,6 @@
 	margin: 10px;
 }
 
-#bhitlist {
-	margin: 0px auto;
-	border: 1px solid black;
-	width: 500px;
-	height: 100px;
-}
-
-#writebtn {
-	
-}
-
 #dy_boardhead {
 	border: 1px solid black;
 	width: 1020px;
@@ -79,31 +68,36 @@
 .dy_bhit {
 	width: 10%;
 }
+
+#dy_write {
+	display: inline-block; position : relative;
+	left: 30%;
+	position: relative;
+}
+#searchbar{
+	
+}
 </style>
 
 </head>
 <body>
-	<c:set var="currpage" value="${currpage }" />
-	<c:set var="startblock" value="${startblock }" />
-	<c:set var="endblock" value="${endblock }" />
-	<c:set var="totalpage" value="${totalpage }" />
-	<c:set var="search" value="${search }" />
-	<c:set var="txtsearch" value="${txtsearch }" />
+	<c:set var="list" value = "${requestScope.list }"/>
+	<c:set var="currpage" value="${requestScope.currpage }" />
+	<c:set var="startblock" value="${requestScope.startblock }" />
+	<c:set var="endblock" value="${requestScope.endblock }" />
+	<c:set var="totalpage" value="${requestScope.totalpage }" />
+	<c:set var="search" value="${requestScope.search }" />
+	<c:set var="txtsearch" value="${requestScope.txtsearch }" />
 
+	<!--게시판 헤더 이미지  -->
 	<div id="dy_midboardwrap">
 		<div id="dy_bgimg">
 			<p>우리는 승패의 중심</p>
 			<div>MID</div>
 		</div>
 		<p id="dy_champwords">"챔피언 대사"</p>
-		<div id="bhitlist">(댓글수에 따른 상단 리스트)</div>
+		<!-- 게시판  -->
 		<div id="boardwrap">
-			<select id="dy_category">
-				<option value="옵션1">옵션1</option>
-				<option value="옵션1">옵션2</option>
-				<option value="옵션1">옵션3</option>
-			</select> 
-			<a href="dyinsert.do"><input type="button" name="write" id="write" value="글쓰기"></a>
 
 			<div id="dy_boardhead">
 				<div class="dy_bno">번호</div>
@@ -138,9 +132,16 @@
 					</c:if>
 
 				</c:forEach>
-				<br>
-				<c:forEach var="i" begin="${startblock }" end="${endblock }"
-					step="1">
+				<br> <br> <br>
+<!-- test -->
+				
+
+<!-- 페이징 -->
+				<c:if test ="${startblock>1}">
+					<a href="dylist.do?curr=${startblock-1}" aria-label="Previous">이전</a>
+				</c:if>
+
+				<c:forEach var="i" begin="${startblock}" end="${endblock }" step="1">
 					<c:if test="${currpage==i }">
 						<c:out value="${i }" />
 					</c:if>
@@ -150,15 +151,22 @@
 					</c:if>
 
 				</c:forEach>
-
+				
+				<c:if test = "${endblock < totalpage }">
+					<a href="dylist.do?curr=${endblock+1}" aria-label="next">다음</a>
+				</c:if>
+<!-- 검색 -->
 				<form action="dylist.do" method="post">
 					<select name="searh">
 						<option value="btitle">제목</option>
 						<option value="bcontent">내용</option>
 						<option value="nick">작성자</option>
-					</select> <input type="text" name="txtsearch"> <input type="submit"
-						value="검색">
+					</select> 
+					<input type="text" name="txtsearch" id="searchbar"> <input type="submit" value="검색">
+
 				</form>
+<!-- 글쓰기 버튼 -->
+					<a href="dyinsert.do"><input type="button" name="write" id="dy_write" value="글쓰기"></a>
 			</div>
 		</div>
 

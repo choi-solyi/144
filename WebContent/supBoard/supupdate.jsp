@@ -87,14 +87,7 @@
 		</div>
 
 		
-		<div class="input-group" style="width:500px; margin: 0 auto;">
-		
-		<input type="text" class="form-control" placeholder="소환사명을 입력하세요">
-		<div class="input-group-btn">
-			<button class="btn btn-default" type="button">전적검색</button>
-		</div>
-		
-	</div>
+	
 		<!-- /.col-lg-6 -->
 			</div>
 	</form>
