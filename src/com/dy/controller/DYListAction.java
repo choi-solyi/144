@@ -25,6 +25,7 @@ public class DYListAction implements Action {
 		{
 			currpage=Integer.parseInt(curr);
 		}
+		System.out.println(currpage);
 		
 		String search = request.getParameter("search");
 		String txtsearch = request.getParameter("txtsearch");
@@ -36,19 +37,21 @@ public class DYListAction implements Action {
 		
 		int totalcount = service.dygetCount(search,txtsearch);
 		
-		int pagepercount = 3; 
+		System.out.println("totalcount :" + totalcount);
+		
+		int pagepercount = 5; //1페이지에 보여줄 갯수
 		int totalpage = (int)Math.ceil((float)totalcount/pagepercount);
 		int startrow = (currpage-1)*pagepercount+1;
 		int endrow = startrow+pagepercount-1;
 		if(endrow>totalcount)endrow=totalcount;
 		
 		int blockcount = 5;
-		int startblock =((currpage-1)/blockcount)*blockcount+1;
+		int startblock =(currpage-1)/blockcount*blockcount+1;
 		int endblock =startblock+blockcount-1;
 		if(endblock>totalpage) endblock=totalpage;
 		
 		
-		List<DYBoardDTO> list = service.dylist();
+		List<DYBoardDTO> list = service.dylist(startrow, endrow, search, txtsearch);
 		
 		System.out.println(list);
 		
@@ -57,6 +60,7 @@ public class DYListAction implements Action {
 		request.setAttribute("startblock",startblock);
 		request.setAttribute("endblock",endblock);
 		request.setAttribute("totalpage",totalpage);
+		
 		request.setAttribute("search",search);
 		request.setAttribute("txtsearch",txtsearch);
 		

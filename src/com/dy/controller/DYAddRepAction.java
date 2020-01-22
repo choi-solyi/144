@@ -1,44 +1,39 @@
 package com.dy.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dy.dto.DYBoardDTO;
+import com.dy.dto.DYRepBoardDTO;
 import com.dy.service.DYBoardService;
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
 
-public class DYInsertResultAction implements Action {
+public class DYAddRepAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int bno =Integer.parseInt(request.getParameter("bno"));
+		String id = request.getParameter("repwriter");
+		String rcontent = request.getParameter("repcontent");
 		
-		String id = (String)request.getParameter("id");
-		String bcategory = (String)request.getParameter("bcategory");
-		String btitle = (String)request.getParameter("btitle");
-		String bcontent = (String)request.getParameter("bcontent");
+		DYRepBoardDTO dto = new DYRepBoardDTO();
 		
-		DYBoardDTO dto = new DYBoardDTO();
-		
-		System.out.println("bcategory : " +bcategory);
-		System.out.println("id : " + id);
+		dto.setBno(bno);
 		dto.setId(id);
-		dto.setBcategory(bcategory);
-		dto.setBtitle(btitle);
-		dto.setBcontent(bcontent);
+		dto.setRcontent(rcontent);
 		
 		DYBoardService service = DYBoardService.getservice();
-		service.dyinsert(dto);
+		service.dyrepinsert(dto);
 		
 		ForwardAction forward = new ForwardAction();
 		forward.setForward(false);
-		forward.setUrl("dylist.do");
-		
+		forward.setUrl("dydetail.do?bno="+bno);
 		
 		return forward;
 	}
