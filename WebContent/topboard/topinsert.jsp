@@ -19,7 +19,7 @@
         .top_update_form{
             width: 800px;
             margin: 50px auto;
-            background-color: antiquewhite;
+
             padding: 20px;
         }
         .top_update_label{

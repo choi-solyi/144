@@ -52,12 +52,14 @@
             margin-left: 40px;
         }
         .top_content_category{
-            margin: 20px 0px;
+        	float:right;
+            margin: 20px;
+            vertical-align: middle;
         }
         .top_content_title{
-            margin: 60px 0px;
-            font-size: 2rem;
-            color: red;
+            margin: 20px 0px 60px 0px;
+            font-size: 1.5em;
+            font-weight: bolder;
         }
         .top_content_content{
             margin-bottom: 60px;
@@ -260,12 +262,12 @@
         <section class = "top_content">
             <div class = "top_btitle">
                 <div class = "tcontent tc_title top_content_id">닉네임 : <c:out value = "${dto.nick }"></c:out></div>
-                <div class = "tcontent tc_title top_content_writedate"><c:out value = "${dto.bwritedate }"></c:out></div>
+                <div class = "tcontent tc_title top_content_writedate"> <c:out value = "${dto.bwritedate }"></c:out></div>
                 <div class = "tcontent tc_title top_content_hit">조회 : <c:out value = "${dto.bhit }"></c:out></div>
                 <div class = "tcontent tc_title top_content_up">추천 : <c:out value = "${dto.bup }"></c:out></div><br>
             </div>
             <div class = "top_bcontent">
-                <div class = "tcontent top_content_category"><c:out value = "${dto.bcategory }"></c:out></div><br>
+                <div class = "tcontent top_content_category"><c:out value = "${dto.bcategory }"></c:out></div>
                 <div class = "tcontent top_content_title"><c:out value = "${dto.btitle }"></c:out></div><br>
                 <div class = "tcontent top_content_content"><c:out value = "${dto.bcontent }"></c:out></div><br>
                 
