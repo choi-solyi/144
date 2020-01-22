@@ -100,10 +100,10 @@ img {
 				<form method="post" action="JWaddrep.do?bno=${dto.bno}">
 				<div class="input-group">
 				
-					<textarea class="form-control" rows="2" autofocus="autofocus"
-						maxlength="100" name="rcontent"></textarea>
+					<textarea class="form-control" rows="3" autofocus="autofocus"
+						maxlength="100" name="rcontent" placeholder="저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시물은 이용약관 및 관련 법률에 의해 제재를 받을 수 있습니다. 건전한 토론문화와 양질의 댓글 문화를 위해, 타인에게 불쾌감을 주는 욕설 또는 특정 계층/민족, 종교 등을 비하하는 단어들은 표시가 제한됩니다."></textarea>
 					<div class="input-group-append">
-						<input type="submit" class="btn btn-secondary p-3" onclick="send()" value="댓글작성" >
+						<input type="submit" class="btn btn-secondary p-3" onclick="send()" value="댓글작성">
 					</div>
 				</div>
 				</form>

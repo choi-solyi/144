@@ -54,6 +54,7 @@ public class JWBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
+	
 	public JWBoardDTO Detail(String bno) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDTO dto = new JWBoardDTO();
@@ -73,6 +74,7 @@ public class JWBoardService {
 		}
 		return dto;
 	}
+	
 	public void Delete(String bno) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
@@ -90,6 +92,7 @@ public class JWBoardService {
 			if(conn!=null) try{conn.close();} catch(SQLException e) {}
 		}
 	}
+	
 	public void Update(JWBoardDTO dto) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
@@ -107,6 +110,7 @@ public class JWBoardService {
 			if(conn!=null) try{conn.close();} catch(SQLException e) {}
 		}
 	}
+	
 	public int Totalcount(String search, String searchtxt) {
 		int Totalcount = 0;
 		DBConn DBC = DBConn.getDB();
@@ -123,6 +127,7 @@ public class JWBoardService {
 		}
 		return Totalcount;
 	}
+	
 	public void Uphit(String bno) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
@@ -156,6 +161,7 @@ public class JWBoardService {
 		}
 		return list;
 	}
+	
 	public void adAddRep(JWRepBoardDTO dto) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
@@ -172,6 +178,7 @@ public class JWBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
+	
 	public void adDelRep(String repno) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
@@ -188,6 +195,7 @@ public class JWBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
+	
 	public void adUpRep(String bno) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();

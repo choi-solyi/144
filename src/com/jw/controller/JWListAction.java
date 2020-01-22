@@ -25,12 +25,11 @@ public class JWListAction implements Action{
 		
 		String search = request.getParameter("search");
 		String searchtxt = request.getParameter("searchtxt");
-
+	
 		if(search==null)
 			search="";
 		if(searchtxt==null)
 			searchtxt="";
-	
 		String curr = request.getParameter("curr");
 		int currpage = 1;
 		if(curr!=null && !curr.equals(""))
@@ -49,9 +48,9 @@ public class JWListAction implements Action{
 		int endpage = startpage+pageblock-1;
 		if(endpage>pagecount)
 			endpage=pagecount;
-		System.out.println(startrow);
+		System.out.println("startrow : "+startrow);
+		System.out.println("pagecount : "+pagecount);
 		
-		System.out.println(pagecount);
 		request.setAttribute("startpage", startpage);
 		request.setAttribute("endpage", endpage);
 		request.setAttribute("pageblock", pageblock);
