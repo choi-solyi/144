@@ -192,6 +192,24 @@ public class CalBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
+	public List<CalBoardDTO> callistall() {
+		List<CalBoardDTO> list = new ArrayList<CalBoardDTO>();
+		DBConn db=DBConn.getDB();
+		Connection conn=null;
+		try {
+			conn=db.getConn();
+			conn.setAutoCommit(false);
+			CalBoardDAO dao=CalBoardDAO.getCalBoardDAO();
+			list = dao.callistall(conn);
+			conn.commit();
+		}catch(SQLException|NamingException e){
+			System.out.println(e);
+			try {conn.rollback();} catch (SQLException e1) {}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		return list;
+	}
 }
 
 

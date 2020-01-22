@@ -241,4 +241,24 @@ public class CalBoardDAO {
 			pstmt.executeUpdate();
 		}
 	}
+
+	public List<CalBoardDTO> callistall(Connection conn) throws SQLException{
+		StringBuilder sql = new StringBuilder();
+		sql.append("   select *          ");
+		sql.append("   from calboard     ");
+		ResultSet rs = null;
+		List<CalBoardDTO> list = new ArrayList<CalBoardDTO>();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				CalBoardDTO dto = new CalBoardDTO();
+				dto.setBno(rs.getInt("bno"));
+				dto.setBcaldate(rs.getString("bcaldate"));
+				dto.setBtitle(rs.getString("btitle"));
+				list.add(dto);
+				System.out.println(dto);
+			}
+		}
+		return list;
+	}
 }

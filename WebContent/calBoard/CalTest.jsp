@@ -14,9 +14,34 @@
 <script src='http://localhost:8080/challenger144/calBoard/fullcalendar/timegrid/main.js'></script>
 <script>
 //페이지가 로드되면 DB에 접속해서 calboard title, caldate, bno를 가져올거야
-  document.addEventListener('DOMContentLoaded', function() {
+$(document).ready(function(){
+	$.ajax({
+		url : 'EBCallist.do',
+		method : 'post',
+		dataType : 'json',
+		success : function(data) {
+			cal(data);
+			/* $.each(data, function(index, callist) {
+	    		  {
+	    	          calendar.addEvent({
+	    	        	  title: 'callist.btitle',
+	    	        	  start: 'callist.bcaldate',
+	    	              //end: arg.en,
+	    	              //allDay: arg.allDay
+	    	        	  url: 'EBdetail.do?bno=callist.bno'
+	    	            })
+	    		}
+	    	}); */
+		},
+		error : function(data) {
+			console.log('error', data);
+		}
+	});
+	
+})
+ //document.addEventListener('DOMContentLoaded', function() {
+  function cal(data) {  
     var calendarEl = document.getElementById('calendar');
-
     var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
       header: {
@@ -24,6 +49,7 @@
         center: 'title',
         right: 'dayGridMonth'
       },
+    
       //defaultDate: '2019-08-12',
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
@@ -43,10 +69,11 @@
       },
       editable: true,
       eventLimit: true, // allow "more" link when too many events
-      events: [ // 일정 출력부분 데이터 넣어줄것임
-        {
-          title: 'All Day Event',
-          start: '2020-01-23'
+      events: [ // 일정 출력부분 데이터 넣어줄것임  	  
+ 
+    	{
+          title: '${list[0].btitle}',
+          start: '${list[0].bcaldate}'
         },
         {
           title: 'Click for Google',
@@ -55,10 +82,23 @@
         }
       ]
     });
-
     calendar.render();
-  });
-
+    console.log(data);
+    $.each(data, function(index, callist) {
+	  {
+        calendar.addEvent({
+      	  title: callist.btitle,
+      	  start: callist.bcaldate,
+      	  url: 'EBdetail.do?bno='+callist.bno
+          })
+	}
+}); 
+    calendar.addEvent({
+        title: "은별",
+        start: "2020-01-23"
+      })
+  };
+  
 </script>
 <style>
 
@@ -79,6 +119,6 @@
 <body>
 
   <div id='calendar'></div>
-
+	${list[0].bno} ${list[0].bcaldate}
 </body>
 </html>
