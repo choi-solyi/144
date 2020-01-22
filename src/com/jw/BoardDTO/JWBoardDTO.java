@@ -11,6 +11,14 @@ public class JWBoardDTO {
 	private String bimg;
 	private String id;
 	private String nick;
+	private int repcount;
+	
+	public int getRepcount() {
+		return repcount;
+	}
+	public void setRepcount(int repcount) {
+		this.repcount = repcount;
+	}
 	public String getNick() {
 		return nick;
 	}
@@ -75,6 +83,7 @@ public class JWBoardDTO {
 	public String toString() {
 		return "JWBoardDTO [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bwritedate=" + bwritedate
 				+ ", bcategory=" + bcategory + ", bhit=" + bhit + ", bup=" + bup + ", bimg=" + bimg + ", id=" + id
-				+ "]";
+				+ ", nick=" + nick + ", repcount=" + repcount + "]";
 	}
+
 }

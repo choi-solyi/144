@@ -20,6 +20,14 @@ ul li {
 .bg1 {
 	width: 470px;
 }
+.subinlink:link,.subinlink:active,.subinlink:visited{
+	text-decoration:none;
+	border:1px solid black;
+	border-radius: 5px;
+	color:black;
+	padding:3px 5px;
+}
+
 </style>
 
 <script>
@@ -137,7 +145,7 @@ ul li {
 				<button type="button" onclick="send()" class="btn btn-outline-dark">등록</button>
 			</div>
 			</div>
-
+		
 		</form>
 		<script>
 	
@@ -163,18 +171,24 @@ ul li {
 						
 						
 						
-						var result="<tr>";
+						let result="<tr style='margin:30px 0px 0px 0px;'>";
 						 
-						result+="<th>"+item.nick+"("+item.rwritedate+")"+"</th>";
+						result+="<td style='background-color:#e0e0e0; padding: 10px 20px;'>"+item.nick+"("+item.rwritedate+")"+"</td>";
+						
 						if(ssid==item.id){
-							result+="<th>";
-							result+="<a href="+"sbdeleterep.do?repno="+item.repno+"&bno="+item.bno;
-							result+=">"+"삭제</a></th>";
+							result+="<td  style='border-bottom:1px solid #dee2e6; background-color:#e0e0e0; text-align:center;'>";
+							result+="<a class='subinlink' href="+"sbdeleterep.do?repno="+item.repno+"&bno="+item.bno+">"+"삭제</a></td>";
+					
 						}
-						result+="</tr>";
+
+						else{
+							result+="<td  style='border-bottom:1px solid #dee2e6; background-color:#e0e0e0; text-align:center;' ></td>";
+							
+					
+						}
 						result+="<tr>";
-						result+="<th>"+item.rcontent;
-						result+="</th></tr>";
+						result+="<td>"+item.rcontent;
+						result+="</td></tr>";
 						
 					 
 						 
@@ -193,10 +207,10 @@ ul li {
 
 
 
-		<table class="table">
-			<thead id="represult">
+		<table class="table" style="margin:30px 0px 0px 0px;">
+			<tbody id="represult">
 				
-			</thead>
+			</tbody>
 			
 
 		</table>

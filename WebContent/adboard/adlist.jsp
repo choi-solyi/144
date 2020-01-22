@@ -14,20 +14,34 @@ a {
 .list-group-item-dark {
 	font-weight: bolder;
 }
+
+.page-item.active .page-link {
+
+    color: #fff;
+    background-color: gray;
+    border-color: gray;
+}
+
+.page-link {
+    color: gray;
+
+}
+	
 </style>
 </head>
-<body>
-
+<body>		
 	<div class="container">
-		<ul class="list-group-item list-group-flush mt-3">
-			<li class="list-group-item list-group-item-dark"><h5>[카테고리]
-					글번호, 글제목, 글작성일, 글조회수, 추천수, 작성자</h5></li>
-			<c:forEach var="i" items="${list}">
-				<li class="list-group-item list-group-item-action"><a
-					href="JWdetail.do?bno=${i.bno}">[${i.bcategory}] ${i.bno},
-						${i.btitle}, ${i.bwritedate}, ${i.bhit}, ${i.bup}, ${i.nick}</a></li>
+	<div class="row justify-content-center" style="min-width : 100%">
+	<img alt="이미지" src="img/one.JPG">
+	</div>
+		<ul class="list-group list-group-flush mt-3">
+			<li class="list-group-item list-group-horizontal list-group-item-dark pt-3 pl-3 pr-3 pb-2 m-0 d-flex justify-content-between">
+				<h3>번호</h3><h3>제목</h3><h3>글쓴이</h3><h3>등록일</h3><h3>조회</h3><h3>추천</h3>
+		 <c:forEach var="i" items="${list}">
+		
+			<li class="list-group-item list-group-item-action p-3"><a
+					href="JWdetail.do?bno=${i.bno}" class="d-flex justify-content-between"><span>${i.bno} [${i.bcategory}]</span><span>${i.btitle}<span class="badge badge-pill badge-secondary">${i.repcount}</span></span><span> ${i.nick}</span> <span>${i.bwritedate}</span> <span>${i.bhit}</span> <span>${i.bup}</span></a></li>
 			</c:forEach>
-
 
 			<li class="list-group-item">
 
@@ -74,11 +88,10 @@ a {
 								<select class="form-control" name="search">
 									<option value="btitle">제목</option>
 									<option value="bcontent">내용</option>
-									<option value="id">작성자</option>
+									<option value="nick">작성자</option>
 								</select>
 							</div>
-							<input type="text" class="form-control"
-								aria-label="Text input with dropdown button">
+							<input type="text" class="form-control" name="searchtxt">
 							<div class="input-group-append">
 								<input class="btn btn-secondary" type="submit" value="검색">
 							</div>
