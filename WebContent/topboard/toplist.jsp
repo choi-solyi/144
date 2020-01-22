@@ -183,58 +183,70 @@
 
 <style>
     
-    #top_wrap a{
+   #top_wrap a{
         text-decoration : none;
         color: black;
     }    
     .top_header{
-        margin: 40px auto;
+        margin: 30px auto;
         width: 1200px;
         height: 260px;
+        background-image: url(topboard/img/topbanner.jpg);
         background-size: contain;
         background-repeat: no-repeat;
-        background-image: url(topboard/img/topbanner.jpg);
     }
     .top_nav{
-        width: 1200px;
+        width: 700px;
         margin: 0px auto;
         text-align: center;
+        
     }
-    .top_nav img{
-        margin: 50px 70px;
+    .top_nav>img{
+        margin: 30px;
+        width: 7%;
     }
-    #top_wrap section{
+    .top_section{
         margin: 0px auto;
         width: 1200px;
-        border-bottom: 1px solid black;
+    }.top_section p{
+        padding-top:15px;
     }
     .top_board_wrap{
-        border: 1px solid black;
-        border-bottom: 0px solid black;
+        border-top: 2px solid gray;
+        border-bottom: 2px solid gray;
+        background-color: lightgray;
+    }
+    
+    .top_board_wrap1{
+        border-bottom: 2px solid gray;
+        
     }
     .top_t{
         font-weight: bolder;
         text-align: center;
+        
     }
     .top_s{
+        
     }
     
     .top_board {
         display: inline-block;
-        padding : 5px 0px;
     }
     .top_no{
         width: 50px;
         text-align: center;
-        margin-left: 5px;
+        margin-left: 5px
     }
     .top_title{
         width: 750px;
+    }
+    .top_title p{
+        margin-bottom: -5px;
         white-space: nowrap;
-        word-wrap: normal;
+        overflow: hidden;
         text-overflow: ellipsis;
-        overflow:hidden; 
-        margin-bottom : -10px;
+
     }
     .top_nick{
         width: 120px;
@@ -252,56 +264,254 @@
         width: 60px;
         text-align: center;
     }
+    
+    
+    
+    
+    
+    
+    
     .top_board_paging{
         width: 1200px;
-        margin: 0px auto;
-        margin-top : 10px;
-    }
-    .top_board_paging a{
-        display : inline-block;
-        border: 1px solid black;
-        margin-left: 10px;
-        padding: 5px 10px;
-        border-radius: 100px;
-    }
-    .top_board_paging a:first-child{
-        margin-left: 0px;
-    }
-    .top_board_btn{
+        margin: 20px auto 50px;
         
     }
-    .top_board_no{
+    /* .top_board_paging a{
         display : inline-block;
         border: 1px solid black;
         margin-left: 10px;
         padding: 5px 10px;
         border-radius: 100px;
+    } */
+    .top_board_paging a:first-child{
+        margin-left: 30px;
     }
-    .top_board_no_on{
+    
+    .top_board_paging_no{
     	display : inline-block;
-        border: 1px solid black;
-        margin-left: 10px;
-        padding: 5px 10px;
-        border-radius: 100px;
-        background: green;
+    	width : 500px;
+    	margin-left : 20px;
     }
+    
+    .top_board_btn {
+	text-decoration:none;
+	font-family:Arial;
+	background:#808080;
+	background:-o-linear-gradient(90deg, #808080, #d1d1d1);
+	background:-moz-linear-gradient( center top, #808080 5%, #d1d1d1 100% );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #808080), color-stop(1, #d1d1d1) );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#808080', endColorstr='#d1d1d1');
+	background:-webkit-linear-gradient(#808080, #d1d1d1);
+	background:-ms-linear-gradient(#808080, #d1d1d1);
+	background:linear-gradient(#808080, #d1d1d1);
+	text-indent:0px;
+	line-height:25px;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:16px;
+	color:#000000;
+	width:50px;
+	height:30px;
+	padding:0px;
+	border-color:#757575;
+	border-width:2px;
+	border-style:solid;
+}
+
+.top_board_btn:active {
+	position:relative;
+	top:3px
+}
+
+.top_board_btn:hover {
+	background:#d1d1d1;
+	background:-o-linear-gradient(90deg, #d1d1d1, #808080);
+	background:-moz-linear-gradient( center top, #d1d1d1 5%, #808080 100% );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d1d1d1), color-stop(1, #808080) );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1d1d1', endColorstr='#808080');
+	background:-webkit-linear-gradient(#d1d1d1, #808080);
+	background:-ms-linear-gradient(#d1d1d1, #808080);
+	background:linear-gradient(#d1d1d1, #808080);
+}
+    
+    .top_board_no {
+	text-decoration:none;
+	font-family:Arial;
+	background:#808080;
+	background:-o-linear-gradient(90deg, #808080, #d1d1d1);
+	background:-moz-linear-gradient( center top, #808080 5%, #d1d1d1 100% );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #808080), color-stop(1, #d1d1d1) );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#808080', endColorstr='#d1d1d1');
+	background:-webkit-linear-gradient(#808080, #d1d1d1);
+	background:-ms-linear-gradient(#808080, #d1d1d1);
+	background:linear-gradient(#808080, #d1d1d1);
+	text-indent:0px;
+	line-height:30px;
+	-moz-border-radius:18px;
+	-webkit-border-radius:18px;
+	border-radius:18px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:20px;
+	color:#000000;
+	width:29px;
+	height:30px;
+	padding:0px;
+	border-color:#757575;
+	border-width:2px;
+	border-style:solid;
+}
+
+.top_board_no:active {
+	position:relative;
+	top:3px
+}
+
+.top_board_no:hover {
+	background:#d1d1d1;
+	background:-o-linear-gradient(90deg, #d1d1d1, #808080);
+	background:-moz-linear-gradient( center top, #d1d1d1 5%, #808080 100% );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d1d1d1), color-stop(1, #808080) );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1d1d1', endColorstr='#808080');
+	background:-webkit-linear-gradient(#d1d1d1, #808080);
+	background:-ms-linear-gradient(#d1d1d1, #808080);
+	background:linear-gradient(#d1d1d1, #808080);
+}
+    .top_board_no_on {
+	text-decoration:none;
+	font-family:Arial;
+	text-indent:0px;
+	line-height:30px;
+	-moz-border-radius:18px;
+	-webkit-border-radius:18px;
+	border-radius:18px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:20px;
+	color:#000000;
+	width:29px;
+	height:30px;
+	padding:0px;
+	border-color:#757575;
+	border-width:2px;
+	border-style:solid;
+}
+
+    
+    
+    
+    
+    
+    
     .top_board_search{
         float: right;
         font-size: 16px;
-        margin: 0px auto;
+        margin-right: 20px;
+        margin-top : -5px;
     }
-    select{
-        width: 80px;
+    .top_board_search_select{
+    	margin-top:5px;
         height: 30px;
+        border: 3px solid lightgray;
     }
     .top_board_search_txt{
-        height: 27px;
+    	margin-top:5px;
+        height: 30px;
         margin-right: 20px;
+        border: 3px solid lightgray;
     }
-    top_board_search_btn{
-        margin-right: 10px;
-    }
-    
+   
+    .top_board_search_btn{
+	text-decoration:none;
+	font-family:Arial;
+	background:#919191;
+	background:-o-linear-gradient(90deg, #919191, #c2c2c2);
+	background:-moz-linear-gradient( center top, #919191 5%, #c2c2c2 100% );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #919191), color-stop(1, #c2c2c2) );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#919191', endColorstr='#c2c2c2');
+	background:-webkit-linear-gradient(#919191, #c2c2c2);
+	background:-ms-linear-gradient(#919191, #c2c2c2);
+	background:linear-gradient(#919191, #c2c2c2);
+	text-indent:0px;
+	line-height:10px;
+	-moz-border-radius:25px;
+	-webkit-border-radius:25px;
+	border-radius:25px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:16px;
+	color:#ffffff;
+	width:100px;
+	height:30px;
+	border-color:#757575;
+	border-width:2px;
+	border-style:solid;
+	margin-top:-5px;
+}
+
+.top_board_search_btn:hover{
+	background:#c2c2c2;
+	background:-o-linear-gradient(90deg, #c2c2c2, #919191);
+	background:-moz-linear-gradient( center top, #c2c2c2 5%, #919191 100% );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c2c2c2), color-stop(1, #919191) );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c2c2c2', endColorstr='#919191');
+	background:-webkit-linear-gradient(#c2c2c2, #919191);
+	background:-ms-linear-gradient(#c2c2c2, #919191);
+	background:linear-gradient(#c2c2c2, #919191);
+}
+
+.top_board_insert_btn {
+	text-decoration:none;
+	font-family:Arial;
+	background:#808080;
+	background:-o-linear-gradient(90deg, #808080, #d1d1d1);
+	background:-moz-linear-gradient( center top, #808080 5%, #d1d1d1 100% );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #808080), color-stop(1, #d1d1d1) );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#808080', endColorstr='#d1d1d1');
+	background:-webkit-linear-gradient(#808080, #d1d1d1);
+	background:-ms-linear-gradient(#808080, #d1d1d1);
+	background:linear-gradient(#808080, #d1d1d1);
+	text-indent:0px;
+	line-height:30px;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:16px;
+	color:#000000;
+	width:70px;
+	height:30px;
+	padding:0px;
+	border-color:#757575;
+	border-width:2px;
+	border-style:solid;
+}
+
+.top_board_insert_btn:active {
+	position:relative;
+	top:3px
+}
+
+.top_board_insert_btn:hover {
+	background:#d1d1d1;
+	background:-o-linear-gradient(90deg, #d1d1d1, #808080);
+	background:-moz-linear-gradient( center top, #d1d1d1 5%, #808080 100% );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d1d1d1), color-stop(1, #808080) );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d1d1d1', endColorstr='#808080');
+	background:-webkit-linear-gradient(#d1d1d1, #808080);
+	background:-ms-linear-gradient(#d1d1d1, #808080);
+	background:linear-gradient(#d1d1d1, #808080);
+}
+
     
     
     
@@ -375,7 +585,7 @@
         padding: 30px 0px 1px 0px;
     }
     .top_cname p{
-        line-height: 0
+        line-height: 1;
     }
     
     .top_champ{
@@ -763,26 +973,27 @@
 	
 	<section class = "top_section">
 		<div class = "top_board_wrap">
-                <div class = "top_t top_board top_no">번호</div>
-                <div class = "top_t top_board top_title">제목</div>
-                <div class = "top_t top_board top_nick">작성자</div>
-                <div class = "top_t top_board top_date">작성일</div>
-                <div class = "top_t top_board top_hit">조회수</div>
-                <div class = "top_t top_board top_up">추천수</div>
+                <div class = "top_t top_board top_no"><p>번호</p></div>
+                <div class = "top_t top_board top_title"><p>제목</p></div>
+                <div class = "top_t top_board top_nick"><p>작성자</p></div>
+                <div class = "top_t top_board top_date"><p>작성일</p></div>
+                <div class = "top_t top_board top_hit"><p>조회수</p></div>
+                <div class = "top_t top_board top_up"><p>추천수</p></div>
             </div>
         <c:forEach var="list" items="${list }">
-        <div class = "top_board_wrap">
-                <div class = "top_s top_board top_no"><c:out value="${list.bno }"></c:out></div>
+        <div class = "top_board_wrap1">
+                <div class = "top_s top_board top_no"><p><c:out value="${list.bno }"></c:out></p></div>
                 <div class = "top_s top_board top_title">
-                <a href = "topdetail.do?no=${list.bno }"><c:out value="${list.bcategory }"> </c:out><c:out value="${list.btitle }"></c:out></a></div>
-                <div class = "top_s top_board top_nick"><c:out value="${list.nick }"></c:out></div>
-                <div class = "top_s top_board top_date"><c:out value="${list.bwritedate }"></c:out></div>
-                <div class = "top_s top_board top_hit"><c:out value="${list.bhit }"></c:out></div>
-                <div class = "top_s top_board top_up"><c:out value="${list.bup }"></c:out></div>
+                <p><a href = "topdetail.do?no=${list.bno }"><c:out value="${list.bcategory }"> </c:out><c:out value="${list.btitle }"></c:out></a></p></div>
+                <div class = "top_s top_board top_nick"><p><c:out value="${list.nick }"></c:out></p></div>
+                <div class = "top_s top_board top_date"><p><c:out value="${list.bwritedate }"></c:out></p></div>
+                <div class = "top_s top_board top_hit"><p><c:out value="${list.bhit }"></c:out></p></div>
+                <div class = "top_s top_board top_up"><p><c:out value="${list.bup }"></c:out></p></div>
             </div>
         </c:forEach>
 		</section>
 		<div class = "top_board_paging">
+			<div class = "top_board_paging_no">
 				<c:if test="${startblock>1 }">
                 <a href="toplist.do?curr=${startblock-1}"  aria-label="Previous" class = "top_board_btn">◀</a>
                 </c:if>
@@ -798,8 +1009,9 @@
 				<c:if test="${endblock<totalpage }">
                 <a href="toplist.do?curr=${endblock+1}" aria-label="Next" class = "top_board_btn">▶</a>
                 </c:if>
+           </div>
                 <form class = "top_board_search" method="post" action = "toplist.do">
-                    	<select name = "search">
+                    	<select class = "top_board_search_select" name = "search">
 							<option value = "btitle">글제목</option>
 							<option value = "bcontent">내용</option>
 							<option value = "nick">작성자</option>
@@ -808,9 +1020,7 @@
 					<input class = "top_board_search_btn" type="submit" value="검색">
                 </form>
                 <c:if test="${session != null }">
-						<div>
-							<a href = "topinsert.do?id=${session }">추가</a><br>
-						</div>
+							<a class = "top_board_insert_btn" href = "topinsert.do?id=${session }">추가</a><br>
 					</c:if>
 	            </div>
 </div>
