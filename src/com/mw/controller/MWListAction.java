@@ -53,8 +53,13 @@ public class MWListAction implements Action {
 			endblock=totalpage;
 		}
 		
-		List<MWBoardDTO> list = service.mwList(search, searchtxt, startrow, pagepercount);
+		
+				
+		
+		List<MWBoardDTO> list = service.mwList(search, searchtxt, startrow, pagepercount);		
 		List<MWUpBoardDTO> uplist = service.upMwList();
+		
+				
 		request.setAttribute("list", list);
 		request.setAttribute("uplist", uplist);
 		request.setAttribute("currpage", currpage);

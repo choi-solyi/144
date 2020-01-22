@@ -8,11 +8,22 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
     <style>
+    
+    	#top_wrap{
+   		background-image: url("topboard/img/top_bg.jpg");
+   	
+   		background-size: cover;
+	   }
+	   .top_opacity{
+	   		padding: 40px;
+	   		background-color: rgba(255,255,255,0.4);
+	   }
                 
         .top_update_form{
             width: 1000px;
             margin: 50px auto;
             padding: 40px 80px;
+            background-color : #F6F6F6;
             border: 2px solid silver;
         }
         .top_update_label{
@@ -21,7 +32,8 @@
             margin-top: 10px;
         }
         .top_update_input_title{
-        	height : 30px;
+        	width : 640px;
+        	height: 30px;
         	border: 2px solid silver;
         }
         
@@ -29,8 +41,8 @@
             height: 30px;
         }
         
-        .top_update_input, .top_update_select>option{
-            height: 20px;
+        .top_update_select>option{
+            height: 30px;
         }
         .top_update_content{
 
@@ -102,10 +114,15 @@
 	<c:set var = "dto" value = "${requestScope.dto }"></c:set>
 	<c:set var = "id" value = "${requestScope.id }"></c:set>
 	
+	<div id = "top_wrap">
+	<div class = "top_opacity">
+	
+	
     <div class = "top_insert_wrap">
+    
         <form class = "top_update_form" method = "post" action = "topinsertresult.do">
         <label class = "top_update_label top_update_label_title" for = "title">제목</label>
-        <input class = "top_update_input top_update_input_title" type = "text" name = "title" id = "title" required="required"><br>
+        <input class = "top_update_input top_update_input_title" type = "text" name = "title" id = "title" ><br>
         <label class = "top_update_label top_update_label_category" for = "category">분류</label>
         <select class = "top_update_select" name = "category">
             <option value = "">분류</option>
@@ -120,10 +137,15 @@
         value = '<c:out value="${id }"></c:out>'  readonly ><br>
         <textarea class = "top_update_content" rows="30" cols="100" name = "content" id = "content" required="required"></textarea><br>
         <div class = "top_insert_btn">
-            <input class = "top_update_btn" type = "submit" value = "전송">
-            <input class = "top_update_btn" type = "reset" value = 취소>
+            <input class = "top_update_btn" type = "submit" value = "작성">
+            <!-- <input class = "top_update_btn" type = "reset" value = 취소> -->
+            <a style = "margin-left:40px " class = "top_update_btn" href = "toplist.do?">취소</a><br>
         </div>
+        
         </form>
+        
+    </div>
+    </div>
     </div>
 </body>
 </html>

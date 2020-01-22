@@ -102,7 +102,7 @@ public class MWBoardDAO {
 		sql.append("        ,bup                                  ");
 		sql.append("        from topboard as t join userinfo as u on t.id=u.id   ");
 		sql.append("        where bup > 5                          ");
-		sql.append("        order by bno desc                      ");
+		sql.append("        order by bup desc                      ");
 		sql.append("        ) r1 limit 3 offset 0                  ");
 		List<MWUpBoardDTO> uplist = new ArrayList<>();
 		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
