@@ -182,6 +182,16 @@
     </script>
 
 <style>
+   #top_wrap{
+   		
+   		background-image: url("topboard/img/top_bg.jpg");
+   }
+   .top_opacity{
+   		padding: 40px;
+   		background-color: rgba(255,255,255,0.4);
+   }
+   
+   
     
    #top_wrap a{
         text-decoration : none;
@@ -208,6 +218,7 @@
     .top_section{
         margin: 0px auto;
         width: 1200px;
+        background-color: white;
     }.top_section p{
         padding-top:15px;
     }
@@ -426,6 +437,7 @@
 	border-width:3px;
 	border-style:solid;
 	margin-top:5px;
+	background-color: white;
 }
 
     
@@ -635,7 +647,7 @@
         padding: 30px 0px 1px 0px;
     }
     .top_cname p{
-        line-height: 1;
+        line-height: 0;
     }
     
     .top_champ{
@@ -665,6 +677,7 @@
 <body>
 
 	<div id = "top_wrap">
+	<div class = "top_opacity">
 	<c:set var="list" value="${requestScope.list }"></c:set>
 	<c:set var="currpage" value="${requestScope.currpage }"></c:set>
 	<c:set var="startblock" value="${requestScope.startblock }"></c:set>
@@ -1073,6 +1086,7 @@
 							<a class = "top_board_insert_btn" href = "topinsert.do?id=${session }">추가</a><br>
 					</c:if>
 	            </div>
+	     </div>
 </div>
 </body>
 </html>
