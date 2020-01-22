@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
 import com.mw.dto.MWBoardDTO;
+import com.mw.dto.MWUpBoardDTO;
 import com.mw.service.MWBoardService;
 
 public class MWListAction implements Action {
@@ -41,7 +42,7 @@ public class MWListAction implements Action {
 		MWBoardService service = MWBoardService.getService();
 		
 		int totalcount = service.getCount(search, searchtxt);
-		int pagepercount = 5;
+		int pagepercount = 10;
 		int totalpage = (int)Math.ceil((float)totalcount/pagepercount);
 		int startrow = (currpage-1)*pagepercount;
 				
@@ -53,7 +54,9 @@ public class MWListAction implements Action {
 		}
 		
 		List<MWBoardDTO> list = service.mwList(search, searchtxt, startrow, pagepercount);
+		List<MWUpBoardDTO> uplist = service.upMwList();
 		request.setAttribute("list", list);
+		request.setAttribute("uplist", uplist);
 		request.setAttribute("currpage", currpage);
 		request.setAttribute("startblock", startblock);
 		request.setAttribute("endblock", endblock);

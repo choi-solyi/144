@@ -324,7 +324,9 @@
 					let result="<div class = 'top_content_rep_content'>"
 					result+= "<div class = 'top_content_rep_id'>"+item.nick+" "+"("+item.rwritedate+")"+"</div>";
 					result+= "<div class = 'top_content_rep_rcontent'>"+item.rcontent;
+					//if(session==item.id){
 					result+= "<input class = 'top_content_rep_del' type='button' value='삭제' onclick=del("+item.repno+","+item.bno+")>";
+					//}
 					result+= "</div></div>";
 					$('#top_content_rep').append(result);
 				});
