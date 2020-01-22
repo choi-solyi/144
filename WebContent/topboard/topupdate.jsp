@@ -9,20 +9,34 @@
 <title>Insert title here</title>
 <style>
 
+		#top_wrap{
+   		background-image: url("topboard/img/top_bg.jpg");
+   	
+   		background-size: cover;
+	   }
+	   .top_opacity{
+	   		padding: 40px;
+	   		background-color: rgba(255,255,255,0.4);
+	   }
+
 		.top_update_form{
 			width: 1200px;
             margin: 40px auto 0px auto;
             border : 2px solid silver;
             padding: 40px 80px;
+            background-color: #F6F6F6;
 		}
         .tupdate{
             margin: 5px 0px 5px 20px;
-            height: 25px;
+            height: 30px;
         }
         .tupdate1{
             display: inline-block;
             width: 70px;
             margin: 5px 0px 5px 20px;
+        }
+        .top_update_title{
+        	width: 840px;
         }
         .top_update_nick{
         	margin : 0px
@@ -97,6 +111,8 @@
 <body>
 <c:set var = "dto" value = "${requestScope.dto }"></c:set>
 <div id = "top_update_wrap">
+<div id = "top_wrap">
+<div class = "top_opacity">
 <form class = "top_update_form" method = "post" action = "topupdateresult.do">
 	<input type = "hidden" name = "no" id = "no" value = '<c:out value="${dto.bno }"></c:out>'>
 	<label class = "tupdate1 top_update_titlelabel" for = "title">제목</label>
@@ -117,9 +133,12 @@
     <textarea class = "top_update_content" rows="30" cols="130" name = "content" id = "content"
      required="required"><c:out value="${dto.bcontent }"></c:out></textarea><br>
     <input class = "top_update_updateinput" type = "submit" value = "수정">
-	<input class = "top_update_cancelinput" type = "reset" value = "취소">
+	<!-- <input class = "top_update_cancelinput" type = "reset" value = "취소"> -->
+	<a style = "margin-left:40px " class = "top_update_cancelinput" href = "topdetail.do?no=${dto.bno }">취소</a><br>
 
 </form>
+</div>
+</div>
 </div>
 </body>
 </html>

@@ -14,22 +14,27 @@
         $(document).ready(function(){
             
             $('.img_champ1').on('click', function(){
+            	$('.top_champ').hide();
                 $('.top_champ_inpo').hide();
                 $('.top_board_champ1').show();     
             });
             $('.img_champ2').on('click', function(){
+            	$('.top_champ').hide();
                 $('.top_champ_inpo').hide();
                 $('.top_board_champ2').show();     
             });    
             $('.img_champ3').on('click', function(){
+            	$('.top_champ').hide();
                 $('.top_champ_inpo').hide();
                 $('.top_board_champ3').show();     
             }); 
             $('.img_champ4').on('click', function(){
+            	$('.top_champ').hide();
                 $('.top_champ_inpo').hide();
                 $('.top_board_champ4').show();     
             }); 
             $('.img_champ5').on('click', function(){
+            	$('.top_champ').hide();
                 $('.top_champ_inpo').hide();
                 $('.top_board_champ5').show();     
             }); 
@@ -184,7 +189,6 @@
 <style>
    #top_wrap{
    		background-image: url("topboard/img/top_bg.jpg");
-   	
    		background-size: cover;
    }
    .top_opacity{
@@ -233,6 +237,11 @@
         border-bottom: 2px solid gray;
         
     }
+    
+    .top_board_wrapup{
+    	font-weight: bolder;
+    	border-bottom: 2px solid gray;
+    }
     .top_t{
         font-weight: bolder;
         text-align: center;
@@ -251,7 +260,7 @@
         margin-left: 5px
     }
     .top_title{
-        width: 610px;
+        width: 650px;
     }
     .top_title p{
         margin-bottom: -5px;
@@ -269,7 +278,7 @@
         text-align: center;
     }
     .top_hit{
-        width: 100px;
+        width: 60px;
         text-align: center;
     }
     .top_up{
@@ -681,6 +690,7 @@
 	<div id = "top_wrap">
 	<div class = "top_opacity">
 	<c:set var="list" value="${requestScope.list }"></c:set>
+	<c:set var="uplist" value="${requestScope.uplist }"></c:set>
 	<c:set var="currpage" value="${requestScope.currpage }"></c:set>
 	<c:set var="startblock" value="${requestScope.startblock }"></c:set>
 	<c:set var="endblock" value="${requestScope.endblock }"></c:set>
@@ -1045,6 +1055,17 @@
                 <div class = "top_t top_board top_hit"><p>조회수</p></div>
                 <div class = "top_t top_board top_up"><p>추천수</p></div>
             </div>
+        <c:forEach var="uplist" items="${uplist }">
+        <div class = "top_board_wrapup">
+                <div class = "top_s top_board top_no"><p><c:out value="[추천]"></c:out></p></div>
+                <div class = "top_s top_board top_title">
+                <p><a href = "topdetail.do?no=${uplist.bno }"><c:out value="${uplist.bcategory }"> </c:out><c:out value="${uplist.btitle }"></c:out></a></p></div>
+                <div class = "top_s top_board top_nick"><p><c:out value="${uplist.nick }"></c:out></p></div>
+                <div class = "top_s top_board top_date"><p><c:out value="${uplist.bwritedate }"></c:out></p></div>
+                <div class = "top_s top_board top_hit"><p><c:out value="${uplist.bhit }"></c:out></p></div>
+                <div class = "top_s top_board top_up"><p><c:out value="${uplist.bup }"></c:out></p></div>
+            </div>
+        </c:forEach>
         <c:forEach var="list" items="${list }">
         <div class = "top_board_wrap1">
                 <div class = "top_s top_board top_no"><p><c:out value="${list.bno }"></c:out></p></div>

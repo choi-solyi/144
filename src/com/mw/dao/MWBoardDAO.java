@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.mw.dto.MWBoardDTO;
 import com.mw.dto.MWRepBoardDTO;
+import com.mw.dto.MWUpBoardDTO;
 import com.mysql.cj.protocol.Resultset;
 
 public class MWBoardDAO {
@@ -84,6 +85,51 @@ public class MWBoardDAO {
 		}
 		return list;
 	}
+	
+	public List<MWUpBoardDTO> mwBoardUpSelect(Connection conn) throws SQLException {
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select r1.* from (                           ");
+		sql.append(" select                                       ");
+		sql.append("         bno                                  ");
+		sql.append("        ,bcategory                            ");
+		sql.append("        ,btitle                               ");
+		sql.append("        ,u.nick                               ");
+		sql.append("        ,t.id                                 ");
+		sql.append("        ,bcontent                             ");
+		sql.append("        ,date_format(sysdate(), '%Y-%m-%d') as bwritedate    ");
+		sql.append("        ,bhit                                 ");
+		sql.append("        ,bup                                  ");
+		sql.append("        from topboard as t join userinfo as u on t.id=u.id   ");
+		sql.append("        where bup > 5                          ");
+		sql.append("        order by bup desc                      ");
+		sql.append("        ) r1 limit 3 offset 0                  ");
+		List<MWUpBoardDTO> uplist = new ArrayList<>();
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+			) {
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				MWUpBoardDTO dto = new MWUpBoardDTO();
+				
+				dto.setBno(rs.getInt("bno"));
+				dto.setBcategory(rs.getString("bcategory"));
+				dto.setBtitle(rs.getString("btitle"));
+				dto.setId(rs.getString("id"));
+				dto.setBwritedate(rs.getString("bwritedate"));
+				dto.setBhit(rs.getInt("bhit"));
+				dto.setBup(rs.getInt("bup"));
+				dto.setNick(rs.getString("nick"));
+				
+				uplist.add(dto);
+				
+			}
+			
+		}
+		return uplist;
+	}
+	
+	
 	public void mwInsert(Connection conn, MWBoardDTO dto) throws SQLException {
 		PreparedStatement pstmt = null;
 		StringBuilder sql = new StringBuilder();
@@ -340,4 +386,5 @@ public class MWBoardDAO {
 		}
 		
 	}
+	
 }

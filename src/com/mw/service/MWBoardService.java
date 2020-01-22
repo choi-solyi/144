@@ -13,6 +13,7 @@ import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
 import com.mw.dto.MWBoardDTO;
 import com.mw.dto.MWRepBoardDTO;
+import com.mw.dto.MWUpBoardDTO;
 
 import oracle.jdbc.driver.DBConversion;
 
@@ -55,6 +56,32 @@ public class MWBoardService {
 		}
 		
 		return list;
+	}
+	
+	public List<MWUpBoardDTO> upMwList() {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		
+		List<MWUpBoardDTO> uplist = new ArrayList<>();
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			MWBoardDAO dao = MWBoardDAO.getDAO();
+			
+			uplist = dao.mwBoardUpSelect(conn);
+						
+			conn.commit();
+		}
+		catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(Exception e2) {}
+		}
+		finally {
+			if(conn!=null) try{conn.close();} catch(Exception e) {}
+
+		}
+		
+		return uplist;
 	}
 
 	public void mwInsert(MWBoardDTO dto) {
@@ -261,6 +288,10 @@ public class MWBoardService {
 		}
 		
 	}
+
+	
+
+	
 
 	
 

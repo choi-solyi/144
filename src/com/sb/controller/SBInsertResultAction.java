@@ -44,10 +44,12 @@ public class SBInsertResultAction implements Action {
 		dto.setBimg(file);
 		
 		int r=service.sbInsert(dto);
+	   
+		request.setAttribute("re", r);
 		
 		
 		ForwardAction f = new ForwardAction();
-		f.setForward(false);
+		f.setForward(true);
 		f.setUrl("sblist.do");
 		
 		return f;
