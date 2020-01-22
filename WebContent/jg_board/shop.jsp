@@ -45,7 +45,7 @@
    	<c:set var="dto" value="${requestScope.dto }" />
    
    <div class="cpinfo">
-<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="${dto.nick }님" data-content="　현재　 ${dto.cp }CP 보유중!　">내 CP 확인하기</button>
+<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="${dto.nick }님" data-content=" 현재 ${dto.cp } CP 보유중!　">내 CP 확인하기</button>
    
 
    </div>
