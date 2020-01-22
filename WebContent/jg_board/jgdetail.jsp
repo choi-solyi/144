@@ -374,9 +374,8 @@ function delrep(repno, bno){
 																+ '); class="btn btn-success btndel" value="삭제">';
 														rep += '<input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정">';
 													}
-													rep += "</div><div class='card-body text-success'><h5 class='card-title'>"
-															+ item.nick
-															+ "</h5>";
+													rep += "</div><div class='card-body text-success'><h5 class='card-title' style='text-align:center;'>"
+															+ item.nick +"<br><small> ( "+ item.rwritedate + " )</h5>";
 													rep += "<p class='card-text'>"
 															+ item.rcontent
 															+ "</p>	</div></div>";
@@ -392,9 +391,8 @@ function delrep(repno, bno){
 																+ '); class="btn btn-info btndel" value="삭제"> ';
 														rep += '<input type="submit" onclick=update();" class="btn btn-info btnupd" value="수정">';
 													}
-													rep += "</div><div class='card-body text-info'><h5 class='card-title'>"
-															+ item.nick
-															+ "</h5>";
+													rep += "</div><div class='card-body text-info'><h5 class='card-title'  style='text-align:center;'>"
+															+ item.nick+"<br><small> ( "+ item.rwritedate + " )</h5>";
 													rep += "<p class='card-text'>"
 															+ item.rcontent
 															+ "</p>	</div></div>";
@@ -411,9 +409,8 @@ function delrep(repno, bno){
 																+ '); class="btn btn-dark btndel" value="삭제"> ';
 														rep += '<input type="submit" onclick=update();" class="btn btn-dark btnupd" value="수정">';
 													}
-													rep += "</div><div class='card-body text-dark'><h5 class='card-title'>"
-															+ item.nick
-															+ "</h5>";
+													rep += "</div><div class='card-body text-dark'><h5 class='card-title'  style='text-align:center;'>"
+															+ item.nick+"<br><small> ( "+ item.rwritedate + " )</h5>";
 													rep += "<p class='card-text'>"
 															+ item.rcontent
 															+ "</p>	</div></div>";

@@ -73,4 +73,29 @@ public class UserService {
 		}	
 		return salt;
 	}
+	public UserDTO userinfo(String ssid) {
+		UserDAO dao = UserDAO.getDAO();
+		DBConn DBC = DBConn.getDB();
+		Connection conn = null;
+		
+		UserDTO dto = new UserDTO();
+		try {
+			conn=DBC.getConn();
+			conn.setAutoCommit(false);
+			
+			dto = dao.userinfo(conn, ssid);
+
+			System.out.println("get mypage 2222222");
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try{conn.rollback();}catch(SQLException rollback) {}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		
+		
+		
+		return dto;
+	}
 }

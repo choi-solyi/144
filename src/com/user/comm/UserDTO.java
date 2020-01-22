@@ -8,7 +8,16 @@ public class UserDTO {
 	private String salt;
 	private String line;
 	private String tel;
+	private int cp;
 	
+	
+	
+	public int getCp() {
+		return cp;
+	}
+	public void setCp(int cp) {
+		this.cp = cp;
+	}
 	public String getLine() {
 		return line;
 	}
