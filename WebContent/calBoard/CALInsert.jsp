@@ -5,12 +5,21 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<style>
+.jumbotron {
+margin-bottom: 20px;
+background-image: url("calBoard/calupload/calboard.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+color: white;
+}
+</style>
 </head>
 <body>
 	<div class="container mt-5">
 
-		<div class="jumbotron">
-			<h2>대회 일정</h2>
+		<div class="jumbotron text-center">
+		 <h1 class="display-4">대회 일정</h1>
 		</div>
 
 		<form method="post" action="EBinsertresult.do" enctype="multipart/form-data">
@@ -33,6 +42,7 @@
 			<label for="uploadfile" class="col-sm-2 control-label">이미지</label>
 			<div class="col-sm-3">
 				<input type="file" name="uploadfile" id="uploadfile">
+			</div>
 			</div>
 			
 
