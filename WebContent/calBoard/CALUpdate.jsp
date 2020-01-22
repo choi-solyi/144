@@ -18,9 +18,9 @@ color: white;
 </style>
 </head>
 <body>
-	<div class="container mt-5 text-center">
+	<div class="container mt-5">
 
-		<div class="jumbotron">
+		<div class="jumbotron text-center">
 		 <h1 class="display-4">대회 일정</h1>
 		</div>
 		<form method="post" action="EBupdateresult.do">
