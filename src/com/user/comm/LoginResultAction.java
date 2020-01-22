@@ -46,7 +46,7 @@ public class LoginResultAction implements Action {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(60*30); //30min.
-			f.setForward(true);
+			f.setForward(false);
 			f.setUrl("toplist.do");
 					
 		}else if(result ==2){
@@ -56,35 +56,35 @@ public class LoginResultAction implements Action {
 
 			System.out.println(session.getAttribute("id"));
 			
-			f.setForward(true);
+			f.setForward(false);
 			f.setUrl("jglist.do");
 		}else if(result ==3){
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(60*30); //30min.
 			
-			f.setForward(true);
+			f.setForward(false);
 			f.setUrl("dylist.do");
 		}else if(result ==4){
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(60*30); //30min.
 			
-			f.setForward(true);
+			f.setForward(false);
 			f.setUrl("JWlist.do");
 		}else if(result ==5){
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(60*30); //30min.
 			
-			f.setForward(true);
+			f.setForward(false);
 			f.setUrl("sblist.do");
 		}else if(result ==6){
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			session.setMaxInactiveInterval(60*30); //30min.
 			
-			f.setForward(true);
+			f.setForward(false);
 			f.setUrl("EBlist.do");
 		}else{
 			f.setForward(false);
