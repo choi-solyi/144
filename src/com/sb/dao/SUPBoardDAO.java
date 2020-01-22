@@ -85,14 +85,14 @@ public class SUPBoardDAO {
 		
 	}
 
-	public void sbInsert(Connection conn, SUPBoardDTO dto) throws SQLException {
+	public int sbInsert(Connection conn, SUPBoardDTO dto) throws SQLException {
 		
 		StringBuilder sql = new StringBuilder();
 		PreparedStatement pstmt = null;
 		sql.append(" insert into supboard(bno,bcategory,btitle,bcontent,id,bwritedate,bimg,bhit) ");
 		sql.append(" values( null,?,?,?,?,now(),?,0 ) ");
 		
-		
+		int r=0;
 		
 		try {
 			pstmt= conn.prepareStatement(sql.toString());
@@ -102,12 +102,12 @@ public class SUPBoardDAO {
 			pstmt.setString(4, dto.getId());
 			pstmt.setString(5, dto.getBimg());
 			
-			pstmt.executeUpdate();
+			 r=pstmt.executeUpdate();
 			
 		}finally {
 			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
 		}
-		
+		return r;
 		
 	}
 

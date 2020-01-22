@@ -98,4 +98,31 @@ public class UserService {
 		
 		return dto;
 	}
+	public UserDTO payment(String id, int mdcode, String mdname, int price) {
+		UserDAO dao = UserDAO.getDAO();
+		DBConn DBC = DBConn.getDB();
+		Connection conn = null;
+		
+		UserDTO dto = new UserDTO();
+		try {
+			conn=DBC.getConn();
+			conn.setAutoCommit(false);
+			
+			//포인트 차감 기능
+			dao.payment(conn, id, price);
+			
+			//포인트 차감 후 cp값 얻어오기
+			dto = dao.userinfo(conn, id);
+			System.out.println("get mypage 2222222");
+			
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try{conn.rollback();}catch(SQLException rollback) {}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		return dto;
+	    }
+	
 }

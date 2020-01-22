@@ -27,6 +27,7 @@ public class MWRepAddAction implements Action {
 		rdto.setNick(nick);
 		
 		System.out.println(rdto.getBno());
+		System.out.println(rdto.getNick());
 		
 		MWBoardService service = MWBoardService.getService();
 		

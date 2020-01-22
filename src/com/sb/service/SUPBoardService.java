@@ -48,18 +48,18 @@ public class SUPBoardService {
 		return list;
 	}
 
-	public void sbInsert(SUPBoardDTO dto) {
+	public int sbInsert(SUPBoardDTO dto) {
 		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		
-		
+		int r=0;
 		
 		
 		try {
 			conn=db.getConn();
 			conn.setAutoCommit(false);
 			SUPBoardDAO dao = SUPBoardDAO.sbGetBoardDAO();
-			dao.sbInsert(conn,dto);
+			 r=dao.sbInsert(conn,dto);
 			
 			conn.commit();
 			
@@ -71,7 +71,7 @@ public class SUPBoardService {
 		}finally {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
-		
+		return r;
 		
 	}
 
