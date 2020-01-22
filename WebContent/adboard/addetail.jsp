@@ -13,10 +13,26 @@
 	}
 	
 	function del(repno, bno){
-		location.href="JWdelrep.do?repno="+repno+"&bno="+bno
+		//location.href=
+		$.ajax({
+			url : "JWdelrep.do?"
+			,data : {'repno' : repno , 'bno' : bno}
+			,method : 'post'
+			,dataType : 'post'
+			,success : function(data) {
+				console.log(data);
+				$('#replist').empty();
+				replist();
+			}
+			,error : function(e) {
+				console.log('error',e);
+				$('#replist').empty();
+				replist();
+			}
+		})
+		
 	}
 	var upcheck=0;
-	
 	function up(bno){
 		upcheck=upcheck+1;
 		if(upcheck>1)
@@ -38,6 +54,7 @@
 	} 
 	
 	function replist(){
+		
 		let bno = ${dto.bno}
 		let id='${sessionScope.id}';
 		$.ajax({
@@ -49,6 +66,7 @@
 				console.log(arr);
 				console.log(id);
 				$('#replist').append("댓글 수 : "+arr.length);
+				
 				 $.each(arr, function(index, repdto) {
 					 let repboard ="";
 					 repboard = "<li class='list-group-item list-group-item-action'" 
@@ -62,6 +80,7 @@
 						repboard+="<input class='btn btn-secondary' type='button' value='댓글삭제' onclick='del("+repdto.repno+","+repdto.bno+")'></div>"	 
 						  }
 					  repboard+="</li>"
+					 
 					 $('#replist').append(repboard);
 				}); 
 			}
@@ -116,7 +135,7 @@ img {
 				<div class="input-group">
 									
 					<textarea class="form-control" rows="3" autofocus="autofocus"
-						maxlength="100" name="rcontent" id="rcontent" placeholder="저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시물은 이용약관 및 관련 법률에 의해 제재를 받을 수 있습니다. 건전한 토론문화와 양질의 댓글 문화를 위해, 타인에게 불쾌감을 주는 욕설 또는 특정 계층/민족, 종교 등을 비하하는 단어들은 표시가 제한됩니다."></textarea>
+						maxlength="100" name="rcontent" id="rcontent" placeholder="저작권 등 다른 사람의 권리를 침해하거나 명예를 훼손하는 게시물은 이용약관 및 관련 법률에 의해 제재를 받을 수 있습니다. 건전한 토론문화와 양질의 댓글 문화를 위해, 타인에게 불쾌감을 주는 욕설 또는 특정 계층/민족, 종교 등을 비하하는 단어들은 표시가 제한됩니다." required="required"></textarea>
 					<div class="input-group-append">
 						<input type="submit" class="btn btn-secondary p-3" onclick="send()" value="댓글작성">
 					</div>

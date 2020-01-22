@@ -66,7 +66,7 @@
 					<div class="card-body" style="text-align: center;">
 						<h5 class="card-title">귀욤귀욤 DJ 소나 피규어</h5>
 						<p class="card-text ">
-							<big class="text-muted"><b style="color: dodgerblue;">70,000원</b></big>
+							<big class="text-muted"><b style="color: dodgerblue;">70,000 CP</b></big>
 						</p>
 					</div>
 				</a>
@@ -78,7 +78,7 @@
 					<div class="card-body" style="text-align: center;">
 						<h5 class="card-title">존멋 KDA 아칼리 스태츄</h5>
 						<p class="card-text">
-							<big class="text-muted"><b style="color: dodgerblue">120,000원</b></big>
+							<big class="text-muted"><b style="color: dodgerblue">120,000 CP</b></big>
 						</p>
 					</div>
 				</a>
@@ -90,7 +90,7 @@
 					<div class="card-body" style="text-align: center;">
 						<h5 class="card-title">귀여운 티모 피규어^ㅗ^</h5>
 						<p class="card-text">
-							<big class="text-muted"><b style="color: dodgerblue">7,000원</b></big>
+							<big class="text-muted"><b style="color: dodgerblue">7,000 CP</b></big>
 						</p>
 					</div>
 				</a>

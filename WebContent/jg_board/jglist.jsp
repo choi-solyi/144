@@ -108,7 +108,6 @@
 	width: 1400px;
 	border: 1px solid black;
 	margin: 0px auto 30px;
-	padding: 20px;
 	border-radius: 20px;
 	font-size: 2.2em;
 	font-weight: 600;
@@ -119,8 +118,11 @@
 }
 
 .jgboarddiv {
-	margin: 30px auto;
+	margin: 0px auto;
 	width: 1400px;
+	
+	position:relative;
+	top:-100px;
 }
 
 .jgboardTitle {
@@ -201,9 +203,6 @@
 	width:60px;
 	
 }
-	
-
-
 .allpaging{
 	width: 300px;
 	margin : 10px auto;
@@ -237,11 +236,6 @@ if (session.getAttribute("id") == null) {
 		<p class="imglines">
 			<I> "이제 고통을 안겨줄 새로운 녀석을 찾아야겠군."</I>
 		</p>
-
-		<div class="gesipantitle">
-			<p class="titles">정글 게시판</p>
-		</div>
-
 		<!-- 상단이미지 끝  -->
 		<!-- 글번호-카테-제목[count]-닉네임-작성일-조회수 -->
 

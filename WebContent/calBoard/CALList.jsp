@@ -20,12 +20,9 @@ a {
 .jumbotron {
 margin-bottom: 20px;
 background-image: url("calBoard/calupload/calboard.jpg");
-background-position: 0% 0%;
 background-size: cover;
 background-repeat: no-repeat;
 color: white;
-text-shadow: white 2px 2px 2	px;
-
 }
 
 </style>
@@ -34,10 +31,10 @@ text-shadow: white 2px 2px 2	px;
 	<div class="container mt-5 text-center">
 	
 		<div class="jumbotron">
-		<img src="">
 		 <h1 class="display-4">대회 일정</h1>
 		</div>
-		<div class="m-20">
+		
+		<div class="mb-4">	
 		 <jsp:include page="CalTest.jsp"/>
 		</div>
 				

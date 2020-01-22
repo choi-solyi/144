@@ -31,7 +31,7 @@ public class MWBoardService {
 		return service;
 	}
 
-	public List<MWBoardDTO> mwList(String search, String searchtxt, int startrow, int endrow) {
+	public List<MWBoardDTO> mwList(String search, String searchtxt, int startrow, int pagepercount) {
 		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		
@@ -41,7 +41,7 @@ public class MWBoardService {
 			conn.setAutoCommit(false);
 			MWBoardDAO dao = MWBoardDAO.getDAO();
 			
-			list = dao.mwBoardSelect(conn, search, searchtxt, startrow, endrow);
+			list = dao.mwBoardSelect(conn, search, searchtxt, startrow, pagepercount);
 						
 			conn.commit();
 		}
@@ -180,13 +180,18 @@ public class MWBoardService {
 			conn.setAutoCommit(false);
 			MWBoardDAO dao = MWBoardDAO.getDAO();
 			count = dao.mwCount(conn, search, searchtxt);
-			
+			System.out.println("COUNT!!!: "+count);
 			conn.commit();
 		}
 		catch(NamingException | SQLException e) {
 			System.out.println(e);
 			try {conn.rollback();} catch(SQLException e2) {};
 		}
+		finally {
+			if(conn!=null) try{conn.close();} catch(Exception e) {}
+
+		}
+		
 		return count;
 	}
 

@@ -110,6 +110,9 @@
 	margin: 0 auto !important;
 	width: 1200px !important;
 	background-color: rgb(250, 250, 250, 0.7);
+	position:relative;
+	top:-100px;
+
 }
 
 .card-title {
@@ -176,6 +179,7 @@
 .alert a {
 	text-decoration: none;
 }
+
 </style>
 
 <script>
@@ -214,9 +218,6 @@ function delrep(repno, bno){
 			<I>"이 여왕님의 지배를 받는 무한한 영광을 내려주지."</I>
 		</p>
 
-		<div class="gesipantitle">
-			<p class="titles">정글 게시판</p>
-		</div>
 	</article>
 	<!-- 상단이미지 끝  -->
 
@@ -245,8 +246,8 @@ function delrep(repno, bno){
 		<div class="card-body">
 			<h5 class="card-title" style="padding: 20px;">${dto.btitle}<%-- <%=dto.getBtitle()%> --%>
 			</h5>
-			<p class="card-text" style="padding: 20px;">${dto.bcontent}<%-- <%=dto.getBcontent()%> --%>
-			</p>
+			<pre class="card-text" style="padding: 20px; white-space: pre-wrap;">${dto.bcontent}<%-- <%=dto.getBcontent()%> --%>
+			</pre>
 
 			<a href="jglist.do" class="btn btn-success btnsol">목록 보기</a>
 
@@ -351,6 +352,9 @@ function delrep(repno, bno){
 	<!-- 댓글 목록 보기 -->
 	<div id="replist"
 		style="margin: 10px auto; width: 1220px; padding: 5px;"></div>
+		
+		
+
 	<!-- 	<input type="submit" onclick="update();" class="btn btn-success" value="수정">
 	<input type="submit" onclick="delete();" class="btn btn-success" value="삭제"> 
   -->
