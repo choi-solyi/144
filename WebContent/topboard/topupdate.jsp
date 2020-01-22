@@ -58,7 +58,7 @@
     <textarea class = "top_update_content" rows="30" cols="161" name = "content" id = "content"
      required="required"><c:out value="${dto.bcontent }"></c:out></textarea><br>
     <input class = "top_update_updateinput" type = "submit" value = "수정">
-	<input class = "top_update_cancelinput" type = "reset" value = "취소">
+	<input class = "top_update_cancelinput" type = "reset" value = "취소합니다">
 
 </form>
 </div>

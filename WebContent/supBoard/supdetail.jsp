@@ -20,6 +20,14 @@ ul li {
 .bg1 {
 	width: 470px;
 }
+.subinlink:link,.subinlink:active,.subinlink:visited{
+	text-decoration:none;
+	border:1px solid black;
+	border-radius: 5px;
+	color:black;
+	padding:3px 5px;
+}
+
 </style>
 
 <script>
@@ -137,7 +145,7 @@ ul li {
 				<button type="button" onclick="send()" class="btn btn-outline-dark">등록</button>
 			</div>
 			</div>
-
+		
 		</form>
 		<script>
 	
@@ -158,19 +166,32 @@ ul li {
 				success : function(data) {
 
 					$.each(data, function(index, item) {
-						let result = "<tr>";
-						result += "<th>" + item.nick + "(" + item.rwritedate
-								+ ")" + "</th>";
-						result += "<th>";
-						if (ssid == item.id) {
-							result += "<a href=" + "sbdeleterep.do?repno="
-									+ item.repno + "&bno=" + item.bno;
-							result += ">" + "삭제</a>";
+						
+						
+						
+						
+						
+						let result="<tr style='margin:30px 0px 0px 0px;'>";
+						 
+						result+="<td style='background-color:#e0e0e0; padding: 10px 20px;'>"+item.nick+"("+item.rwritedate+")"+"</td>";
+						
+						if(ssid==item.id){
+							result+="<td  style='border-bottom:1px solid #dee2e6; background-color:#e0e0e0; text-align:center;'>";
+							result+="<a class='subinlink' href="+"sbdeleterep.do?repno="+item.repno+"&bno="+item.bno+">"+"삭제</a></td>";
+					
 						}
-						result += "</th></tr>";
 
-						result += "<tr><th>" + item.rcontent + "</th>";
-						result += "</tr>";
+						else{
+							result+="<td  style='border-bottom:1px solid #dee2e6; background-color:#e0e0e0; text-align:center;' ></td>";
+							
+					
+						}
+						result+="<tr>";
+						result+="<td>"+item.rcontent;
+						result+="</td></tr>";
+						
+					 
+						 
 
 						$('#represult').append(result);
 					});
@@ -186,15 +207,16 @@ ul li {
 
 
 
-		<table class="table" style="margin: 0 auto;">
-			<thead id="represult">
-
-			</thead>
+		<table class="table" style="margin:30px 0px 0px 0px;">
+			<tbody id="represult">
+				
+			</tbody>
+			
 
 		</table>
 		
-		<div style="padding: 50px;"></div>
-		<div class="input-group" style="width:500px;  margin-left:350px;">
+		
+		<div class="input-group" style="width:500px;  margin-left:350px; margin-bottom:150px;">
 		
 		<input type="text" class="form-control" placeholder="소환사명을 입력하세요">
 		<div class="input-group-btn">
