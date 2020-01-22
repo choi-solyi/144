@@ -16,10 +16,13 @@
 .nav-item {
 	padding: 0px 5px;
 }
+.nav-item:hover{
+	color: #edd232 !important;
+}
 
 /*HOME 버튼 색상*/
 .navbar-light .navbar-brand {
-	color: #f6ff8e;
+	color: #f6ff8e ;
 }
 
 /* menu 버튼 색상*/
@@ -52,7 +55,12 @@
 }
 
 .navcolor a:link, .navcolor a:active {
-	color: white !important;
+	color: black;
+}
+
+.navcolor a:hover{
+	color: #edd232 !important;
+	
 }
 
 .navcolor a {
@@ -70,8 +78,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light navcolor"
 		style="background-color: #255ad4;">
-		<a class="navbar-brand" href="#"><b style="font-size: 1.2em;">롤
-				링</b></a>
+		<a class="navbar-brand" href="#" style="padding:0px;"><img src="http://choisolyi.dothome.co.kr/lol/img/logo.png" style="width:55px; padding:0px; margin:0px;"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -84,7 +91,7 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false" style="color: white;"> POSITION </a>
+					aria-expanded="false" style="color: white; !important"> POSITION </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						
 						<a class="dropdown-item" href="toplist.do">TOP</a> 
@@ -96,20 +103,7 @@
 						<a class="dropdown-item" href="mypage.do?id=${sessionScope.id}">마이 페이지</a>
 						<a class="dropdown-item" href="logout.jsp">로그아웃</a>
 					</div></li>
-				<!--  
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link3</a>
-                </li>
-               
-              <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>-->
+				
 			</ul>
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="EBlist.do"
