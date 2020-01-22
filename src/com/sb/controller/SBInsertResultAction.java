@@ -43,7 +43,7 @@ public class SBInsertResultAction implements Action {
 		dto.setId(id);
 		dto.setBimg(file);
 		
-		service.sbInsert(dto);
+		int r=service.sbInsert(dto);
 		
 		
 		ForwardAction f = new ForwardAction();

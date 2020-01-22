@@ -27,7 +27,8 @@
 
 </style>
 <script>
-
+	
+	
 
 </script>
 	
@@ -43,6 +44,8 @@
 	<c:set var="search" value="${requestScope.search}"></c:set>
 	<c:set var="txtsearch" value="${requestScope.txtsearch}"></c:set>
 	<c:set var="rcount" value="${requestScope.rcount }"/>
+	
+	
 	
 	<div class="bg">
 			<img src=supBoard/img/sup1.jpg class="bg1">
