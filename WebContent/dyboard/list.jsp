@@ -172,8 +172,7 @@
 								<div class="dy_bhit">
 									<c:out value="${list.bhit }" />
 								</div> <c:if test="${sessionScope.id == list.id }">
-									<a href="dydelete.do?bno=${list.bno }"><input type="button"
-										id="dy_delbtn" value="삭제"></a>
+									<a href="dydelete.do?bno=${list.bno }"><input type="button" id="dy_delbtn" value="삭제"></a>
 								</c:if>
 							</li>
 							<br>
