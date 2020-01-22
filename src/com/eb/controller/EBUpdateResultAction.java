@@ -22,6 +22,8 @@ public class EBUpdateResultAction implements Action {
 		String bcaldate=request.getParameter("bcaldate");
 		String bcontent=request.getParameter("bcontent");
 		
+		
+		
 		CalBoardService serviece=CalBoardService.getService();
 		CalBoardDTO dto=new CalBoardDTO();
 		dto.setBno(bno);

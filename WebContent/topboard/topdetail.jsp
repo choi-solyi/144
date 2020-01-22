@@ -118,6 +118,10 @@
         .top_rep_content{
             margin-bottom: 30px;
         }
+        
+        .top_content_rep_id, .top_content_rep_rcontent{
+			display : none;
+		}
     
     </style>
 
@@ -193,7 +197,7 @@
 				
 				$.each(data,function(index,item){
 					let result="<div class = 'top_content_rep_content'>"
-					result+= "<div class = 'top_content_rep_id'>닉네임 : "+item.nick+"</div>";
+					result+= "<div class = 'top_content_rep_id'>"+item.nick+"</div>";
 					result+= "<div class = 'top_content_rep_rcontent'>"+item.rcontent;
 					console.log(item.repno);
 					result+= "<input class = 'top_content_rep_del' type='button' value='삭제' onclick=del("+item.repno+","+item.bno+")>";
@@ -208,7 +212,6 @@
 			}
 			
 		});
-
 	
 
 </script>

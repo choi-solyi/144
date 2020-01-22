@@ -20,9 +20,12 @@ public class EBAddRepAction implements Action {
 		
 		int bno=Integer.parseInt(request.getParameter("bno"));
 		String rcontent=request.getParameter("rcontent");
+	
 		CalSubBoardDTO dto=new CalSubBoardDTO();
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
+		
+		
 		
 		dto.setId(id);
 		dto.setBno(bno);
