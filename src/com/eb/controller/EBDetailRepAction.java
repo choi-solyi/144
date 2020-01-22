@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -54,6 +55,8 @@ public class EBDetailRepAction extends HttpServlet {
 		CalBoardService service=CalBoardService.getService();
 		List<CalSubBoardDTO> list=service.subDetail(bno);
 		
+		
+		
 		JSONArray arr=new JSONArray();
 		for(CalSubBoardDTO dto:list )
 		{
@@ -63,6 +66,7 @@ public class EBDetailRepAction extends HttpServlet {
 			o.put("rwritedate", dto.getRwritedate());
 			o.put("id", dto.getId());
 			o.put("bno", dto.getBno());
+			o.put("nick", dto.getNick());
 			arr.add(o);
 		}
 		response.setContentType("apllication/json;charset=utf-8");

@@ -22,8 +22,11 @@
             width: 70px;
             margin: 5px 0px 5px 20px;
         }
+        .top_update_nick{
+        	margin : 0px
+        }
         .top_update_content{
-            margin: 10px 0px 0px 20px;
+            margin: 0px 0px 0px 20px;
         }
         .top_update_updateinput, .top_update_cancelinput{
             width: 80px;
@@ -52,13 +55,12 @@
 		<option value = "[토론]">토론</option>
 		<option value = "[공지]">공지</option>
     </select><br>
-    <label class = "tupdate1 top_update_nicklabel" for = "nick">작성자</label>
-    <input class = "tupdate top_update_nick" type = "text" name = "nick" id = "nick" 
+    <input class = "tupdate top_update_nick" type = "hidden" name = "nick" id = "nick" 
     value = '<c:out value="${dto.id }"></c:out>' required="required"><br>
     <textarea class = "top_update_content" rows="30" cols="161" name = "content" id = "content"
      required="required"><c:out value="${dto.bcontent }"></c:out></textarea><br>
     <input class = "top_update_updateinput" type = "submit" value = "수정">
-	<input class = "top_update_cancelinput" type = "reset" value = "취소합니다">
+	<input class = "top_update_cancelinput" type = "reset" value = "취소">
 
 </form>
 </div>

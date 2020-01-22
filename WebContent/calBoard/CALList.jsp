@@ -16,15 +16,31 @@ a {
 	text-decoration: none;
 	color: black;
 }
+
+.jumbotron {
+margin-bottom: 20px;
+background-image: url("calBoard/calupload/calboard.jpg");
+background-position: 0% 0%;
+background-size: cover;
+background-repeat: no-repeat;
+color: white;
+text-shadow: white 2px 2px 2	px;
+
+}
+
 </style>
 </head>
 <body>
 	<div class="container mt-5 text-center">
-
+	
 		<div class="jumbotron">
-			<h1>대회 일정</h1>
+		<img src="">
+		 <h1 class="display-4">대회 일정</h1>
 		</div>
-		
+		<div class="m-20">
+		 <jsp:include page="CalTest.jsp"/>
+		</div>
+				
 		<!-- 보더 -->
 		<div class="row border bg-light py-2 px-lg-4 font-weight-bold m-0">
 			<div class="col-md-2">번호</div>
@@ -33,7 +49,6 @@ a {
 			<div class="col-md-2">조회수</div>
 			<div class="col-md-2">추천</div>
 		</div>
-
 		<c:forEach items="${requestScope.list}" var="index">
 			<div
 				class="row border-bottom py-1 px-lg-4 list-group-item-action m-0">

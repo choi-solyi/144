@@ -12,8 +12,8 @@ integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28an
 crossorigin="anonymous">
 
 </head>
-<!-- 댓글 script -->
 <script>
+<!-- 댓글 script -->
 	function send() { //댓글 작성 insert
 		if (document.rep.rcontent.value != "")
 			document.rep.submit();
@@ -34,15 +34,17 @@ crossorigin="anonymous">
 									},
 									dataType : 'json',
 									success : function(data) {
+										$('#result').append("("+data.length+")");
+									
 										$.each(data, function(index, item) {
 											let result ='<table class="table table-hover table-sm" style="table-layout:fixed"><tbody><tr class="re">';
-											result +='<td width="10%">'+item.repno+'</td>';
-											result +='<td width="20%">'+item.id+'</td>';
+											result +='<td width="10%">'+(1+index)+'</td>';
+											result +='<td width="20%">'+item.nick+'</td>';
 											result +='<td width="50%">'+item.rcontent+'</td>';
 											result +='<td width="15%">'+item.rwritedate+'</td>';
 											result += "<td><input type='button' class='btn btn-outline-primary btn-sm' value='x' onclick=del("+ item.repno+ ","+ item.bno+ ")></td>";
 											result += "</tr></tbody></table>";
-										    $('#result').append(result);
+										    $('#result').append(result).css('text-align','right');
 														});
 													}
 									,error : function(data) {
@@ -97,6 +99,7 @@ crossorigin="anonymous">
 			<form method="post" action="EBaddrep.do" name="rep">
 				<div class="input-group mb-3">
 					<input type="hidden" name="bno" value="${dto.bno}">
+					
 					<textarea class="form-control" name="rcontent"></textarea>
 					<div class="input-group-append">
 						<input class="input-group btn btn-outline-primary " type="button" onclick="send()" value="추가">
