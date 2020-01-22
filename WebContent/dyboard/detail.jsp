@@ -9,23 +9,35 @@
 <style>
 #dydetailwrap {
 	border: 1px solid black;
-	width: 80%;
+	width: 70%;
 	text-align: center;
-	margin-top: 50px;
+	margin: 50px auto;
+}
+#dydetailhead {
+	
+	background-color : orange;
+	padding: 10px;
 }
 
-#dydetailhead div {
-	display: inline-block;
-}
-
-#nick, #category, #bhit, #repnum {
+#nick, #category, #bhit, #repnum{
 	width: 10%;
-	height: 60px;
-	border: 1px solid black;
+	height: 40px;
+	display: inline-block;
+	margin : 0px 10px;
+	padding : 7px;
+	background-color : #007bff;
+	color : white;
+	border-radius : 10px;
 }
 
 #title {
 	width: 50%;
+	height: 60px;
+	display: inline-block;
+	margin : 0px auto;
+	padding : 17px;
+	color : white;
+	font-size: 20px;
 }
 
 #deleteboard, #updateboard {
@@ -55,10 +67,30 @@
     border: 1px solid black;
     text-align:left;
 }
+#updateboard{
+	float: left;
+	position : relative;
+	left : 250px;
+}
+#deleteboard{
+	float: right;
+	position : relative;
+	right : 250px;
+}
 #deleterepboard{
        display: inline-block;
        margin: 10px 0 10px 20%;
-}  	
+       float : right;
+}
+#dy_repwritebox{
+	background-color: rgb(46, 204, 113);
+}
+#dy_repwritebox textarea{
+	width: 80%;
+
+}
+
+
 </style>
 </head>
 <body>
@@ -75,7 +107,7 @@
 				<c:out value="${dto.btitle}" />
 			</div>
 			<div id="bhit">
-				<c:out value="${dto.bhit}" />
+				<c:out value="조회수  : ${dto.bhit}" />
 			</div>
 			<div id="repnum">댓글(00)</div>
 		</div>
@@ -84,25 +116,25 @@
 		</div>
 		<c:if test="${sessionScope.id == dto.id }">
 			<div id="updateboard">
-				<a href="dyupdate.do?bno=${dto.bno}"> <input type="button"
-					value="수정"></a>
+				<a class="btn btn-warning" href="dyupdate.do?bno=${dto.bno}" role="button">수정</a>
 			</div>
 			<div id="deleteboard">
-				<a href="dydelete.do?bno=${dto.bno}"> <input type="button"
-					value="삭제"></a>
+				<a class="btn btn-danger" href="dydelete.do?bno=${dto.bno}" role="button">삭제</a>
 			</div>
 		</c:if>
-		<br> <a href="dylist.do"><input type="button" value="목록으로"></a>
+		<br>
+		<br> <a class="btn btn-primary" href="dylist.do" role="button">목록으로</a>
+		
 	<div id="dy_repwrap">
 		<div id="dy_repwritebox">
 			<form method="post" action="dyaddrep.do">
 				<div id="repwriter" >작성자 : <c:out value="${sessionScope.id}"/></div>  
 				<br>
-				<textarea rows="5" cols="100" name="repcontent" id="reptextarea" placeholder="댓글을 입력하세요"></textarea>
+				<textarea  rows="5" cols="200" name="repcontent" id="reptextarea" placeholder="댓글을 입력하세요"></textarea>
 				
 				<input type="hidden" name="bno" value="${dto.bno }">
 				<input type="hidden" name="repwriter" value="${sessionScope.id }">
-				<input type="submit" value="등록">
+				<input class="btn btn-primary" type="submit" value="등록">
 			</form>
 			<form>
 				<input type="hidden" name="bno" value="${dto.bno }">
@@ -130,7 +162,7 @@
 					result +=item.nick + "<br>" ;
 					result +=item.rwritedate;
 					if(ssid == item.id){
-						result+= "<a href = " + "dyrepdelete.do?repno=" 
+						result+= "<a href = " +"class="+"btn btn-danger"+"dyrepdelete.do?repno=" 
 								+ item.repno +"&bno=" + item.bno;
 						result+= ">" +"삭제 </a>";
 					}

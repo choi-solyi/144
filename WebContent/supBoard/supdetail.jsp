@@ -98,7 +98,7 @@ ul li {
 				
 				<pre>${dto.bcontent}</pre>
 				
-				<img src="supBoard/upload/${file1}" alt="${file1 }">
+				
 				
 				
 			</div>
@@ -187,7 +187,7 @@ ul li {
 					
 						}
 						result+="<tr>";
-						result+="<td>"+item.rcontent;
+						result+="<td >"+item.rcontent;
 						result+="</td></tr>";
 						
 					 
@@ -215,16 +215,16 @@ ul li {
 
 		</table>
 		
-		
+		<form method="post" action="opgg.do">
 		<div class="input-group" style="width:500px;  margin-left:350px; margin-bottom:150px;">
 		
-		<input type="text" class="form-control" placeholder="소환사명을 입력하세요">
+		<input type="text" class="form-control" placeholder="소환사명을 입력하세요" name="summoner" id="summoner">
 		<div class="input-group-btn">
-			<button class="btn btn-default" type="button">전적검색</button>
+			<button class="btn btn-default" type="submit">전적검색</button>
 		</div>
 		
 	</div>
-
+	</form>
 	</div>
 
 

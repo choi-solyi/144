@@ -6,6 +6,7 @@ public class CalSubBoardDTO {
 	private String rwritedate;
 	private int bno;
 	private String id;
+	private String nick;
 	public int getRepno() {
 		return repno;
 	}
@@ -35,6 +36,12 @@ public class CalSubBoardDTO {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 	@Override
 	public String toString() {

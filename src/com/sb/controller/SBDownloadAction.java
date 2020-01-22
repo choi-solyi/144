@@ -44,7 +44,7 @@ public class SBDownloadAction extends HttpServlet {
 		doReq(request, response);
 	}
 	private void doReq(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
-		HttpSession session = request.getSession();	
+			
 		
 		
 		String f=request.getParameter("file");

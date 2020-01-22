@@ -15,67 +15,98 @@
 }
 
 #dy_bgimg {
-	border: 1px solid black;
+	
 	width: 100%;
-	height: 450px;
-	background-image: ;
+	height: 40%;
+	background-image: url(dyboard/img/main01.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 	text-align: center;
+    border: none;
+    margin: 0px;
+    padding: 0px;    
 }
 
 #dy_bgimg p {
+    padding-top: 30px;
 	font-size: 40px;
+    margin: 0px;
+    color: white;
+    
+    
 }
 
 #dy_bgimg div {
-	font-size: 200px;
+	font-size: 250px;
+    color: white;
+    margin: 30px auto;
+    position: relative;
+    right: 25px;
 }
 
 #dy_champwords {
 	text-align: center;
 	font-size: 40px;
-	margin: 10px;
+	margin: 10px auto;
+    background-color: lightgrey;
+    color: white;
+    width: 80%;
+    
+    
 }
-
-#dy_boardhead {
+#boardwrap{
 	border: 1px solid black;
-	width: 1020px;
-	height: 50px;
-	margin: 0px auto;
-	text-align: center;
 }
-
-#dy_boardhead div {
-	display: inline-block;
-	margin-top: 15px;
-}
-
-.dy_bno {
-	width: 10%;
-}
-
-.dy_btitle {
-	width: 40%;
-}
-
-.dy_nick {
-	width: 20%;
-}
-
-.dy_bwritedate {
-	width: 10%;
-}
-
-.dy_bhit {
-	width: 10%;
-}
-
-#dy_write {
-	display: inline-block; position : relative;
-	left: 30%;
-	position: relative;
-}
-#searchbar{
+#dy_boardheader {
 	
+	background-color : dodgerblue;
+	color : white;
+	width: 70%;
+	margin :0px auto;
+	text-align : center;
+}
+#dy_boardheader ul {
+	margin : 0px;
+	padding : 0px;
+}
+
+#dy_boardheader ul li{
+	list-style : none;
+	display: inline-block;
+	margin: 0px 1%;
+	padding : 20px;
+}
+#dy_boardlist{
+	color:black;
+	width:70%;
+	margin : 0px auto;
+	text-align : center;
+}
+#dy_boardlist ul {
+	margin : 0px;
+	padding : 0px;
+}
+#dy_boardlist ul li {
+	list-style:none;
+}
+#dy_boardlist ul li div{
+	background-color : whitesmoke;
+	list-style : none;
+	display : inline-block;
+	margin : 0px;
+	padding : 20px;
+	width: 15%;
+}
+#dy_eachlist{
+	
+	width:70%;
+	margin : 0px auto;
+}
+
+
+#dy_paging{
+	margin : 0px auto;
 }
 </style>
 
@@ -95,48 +126,45 @@
 			<p>우리는 승패의 중심</p>
 			<div>MID</div>
 		</div>
-		<p id="dy_champwords">"챔피언 대사"</p>
+		<p id="dy_champwords">"경외하라. 난 섬기는 이 없는 암살자다."</p>
 		<!-- 게시판  -->
 		<div id="boardwrap">
-
-			<div id="dy_boardhead">
-				<div class="dy_bno">번호</div>
-				<div class="dy_btitle">제목</div>
-				<div class="dy_nick">작성자</div>
-				<div class="dy_bwritedate">작성일</div>
-				<div class="dy_bhit">조회</div>
-
-				<c:forEach var="list" items="${list }">
-					<div class="dy_bno">
-						<c:out value="${list.bno }" />
+		
+			<div id="dy_boardheader">
+				<ul>
+					<li class="dy_bno">번호</li>
+					<li class="dy_bcategory">카테고리</li>
+					<li class="dy_btitle">제목</li>
+					<li class="dy_nick">작성자</li>
+					<li class="dy_bwritedate">작성일</li>
+					<li class="dy_bhit">조회</li>
+				</ul>
+				</div>
+			<div id="dy_boardlist">
+				<ul>
+					<div id="eachlist">
+						<c:forEach var="list" items="${list }">
+							<li>
+								<div class="dy_bno"><c:out value="${list.bno }" /></div>
+								<div class="dy_bcategory"><c:out value="${list.bcategory }" /></div>
+								<div class="dy_btitle"><a href="dydetail.do?bno=${list.bno}"><c:out value="${list.btitle }" /></a></div>
+								<div class="dy_nick"><c:out value="${list.nick }" /></div>
+								<div class="dy_bwritedate"><c:out value="${list.bwritedate }" /></div>
+								<div class="dy_bhit"><c:out value="${list.bhit }" /></div>
+								<c:if test="${sessionScope.id == list.id }">
+									<a href="dydelete.do?bno=${list.bno }"><input type="button" id="dy_delbtn" value="삭제"></a>
+								</c:if>
+							</li>
+						</c:forEach>
 					</div>
-					<div class="dy_btitle">
-						<a href="dydetail.do?bno=${list.bno}"><c:out
-								value="${list.btitle }" /></a>
-					</div>
-					<div class="dy_nick">
-						<c:out value="${list.nick }" />
-					</div>
-					<div class="dy_bwritedate">
-						<c:out value="${list.bwritedate }" />
-					</div>
-					<div class="dy_bhit">
-						<c:out value="${list.bhit }" />
-					</div>
-
-					<c:if test="${sessionScope.id == list.id }">
-						<div>
-							<a href="dydelete.do?bno=${list.bno }"> <input type="button"
-								value="삭제"></a>
-						</div>
-					</c:if>
-
-				</c:forEach>
+				</ul>
+			</div>
 				<br> <br> <br>
 <!-- test -->
 				
 
 <!-- 페이징 -->
+			
 				<c:if test ="${startblock>1}">
 					<a href="dylist.do?curr=${startblock-1}" aria-label="Previous">이전</a>
 				</c:if>
@@ -155,6 +183,7 @@
 				<c:if test = "${endblock < totalpage }">
 					<a href="dylist.do?curr=${endblock+1}" aria-label="next">다음</a>
 				</c:if>
+		
 <!-- 검색 -->
 				<form action="dylist.do" method="post">
 					<select name="searh">
@@ -167,7 +196,7 @@
 				</form>
 <!-- 글쓰기 버튼 -->
 					<a href="dyinsert.do"><input type="button" name="write" id="dy_write" value="글쓰기"></a>
-			</div>
+		
 		</div>
 
 	</div>
