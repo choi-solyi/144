@@ -1,24 +1,23 @@
-package com.sy.controller;
+package com.user.comm;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
-import com.user.comm.UserDTO;
-import com.user.comm.UserService;
+import com.mysql.cj.Session;
 
-public class SYShopdoAction implements Action {
+public class MypageAction implements Action {
 
 	@Override
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 
-	String ssid = request.getParameter("id");
+		String ssid = request.getParameter("id");
 		
 
 		System.out.println(ssid);
@@ -36,17 +35,12 @@ public class SYShopdoAction implements Action {
 		
 		ForwardAction f = new ForwardAction();
 		f.setForward(true);
-		f.setUrl("main.jsp?page=jg_board/shop.jsp");
+		f.setUrl("main.jsp?page=mypage.jsp");
 
 		
 		return f;
 		
 		
-/*		ForwardAction f = new ForwardAction();
-		
-		f.setForward(true);
-		f.setUrl("main.jsp?page=jg_board/shop.jsp");
-		return f;*/
 	}
 
 }

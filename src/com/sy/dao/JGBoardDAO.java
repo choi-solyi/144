@@ -189,8 +189,8 @@ public class JGBoardDAO {
 	public void addRep(Connection conn, int bno, JGRepBoardDTO rdto) throws SQLException {
 		PreparedStatement pstmt=null;
 		StringBuilder sql = new StringBuilder();
-		sql.append(" insert into jgrepboard(repno, rcontent, rwritedate, bno, id) ");
-		sql.append(" values(NULL, ?, now(), ?, ?) ");
+		sql.append(" insert into jgrepboard(repno, rcontent, rwritedate, bno, id ) ");
+		sql.append(" values(NULL, ?, now(), ?, ?, ) ");
 
 		try {
 			pstmt = conn.prepareStatement(sql.toString());

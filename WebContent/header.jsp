@@ -93,6 +93,7 @@
 						<a class="dropdown-item" href="JWlist.do">AD</a> 
 						<a class="dropdown-item" href="sblist.do">SUP</a>
 						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="mypage.do?id=${sessionScope.id}">마이 페이지</a>
 						<a class="dropdown-item" href="logout.jsp">로그아웃</a>
 					</div></li>
 				<!--  
@@ -113,7 +114,7 @@
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="EBlist.do"
 					style="color: white;"> 대회 일정</a></li>
-				<li class="nav-item"><a class="nav-link" href="shop.do"
+				<li class="nav-item"><a class="nav-link" href="shop.do?id=${sessionScope.id}"
 					style="color: white;">쇼핑</a></li>
 				<!--    <li class="nav-item">
                     <a class="nav-link" href="#">Link3</a>
