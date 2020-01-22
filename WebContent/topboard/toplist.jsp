@@ -183,8 +183,9 @@
 
 <style>
    #top_wrap{
-   		
    		background-image: url("topboard/img/top_bg.jpg");
+   	
+   		background-size: cover;
    }
    .top_opacity{
    		padding: 40px;
@@ -232,6 +233,11 @@
         border-bottom: 2px solid gray;
         
     }
+    
+    .top_board_wrapup{
+    	font-weight: bolder;
+    	border-bottom: 2px solid gray;
+    }
     .top_t{
         font-weight: bolder;
         text-align: center;
@@ -245,12 +251,12 @@
         display: inline-block;
     }
     .top_no{
-        width: 50px;
+        width: 120px;
         text-align: center;
         margin-left: 5px
     }
     .top_title{
-        width: 750px;
+        width: 650px;
     }
     .top_title p{
         margin-bottom: -5px;
@@ -272,7 +278,7 @@
         text-align: center;
     }
     .top_up{
-        width: 60px;
+        width: 100px;
         text-align: center;
     }
     
@@ -284,6 +290,7 @@
     
     .top_board_paging{
         width: 1200px;
+        padding : 0px 20px;
         margin: 20px auto 50px;
         
     }
@@ -679,6 +686,7 @@
 	<div id = "top_wrap">
 	<div class = "top_opacity">
 	<c:set var="list" value="${requestScope.list }"></c:set>
+	<c:set var="uplist" value="${requestScope.uplist }"></c:set>
 	<c:set var="currpage" value="${requestScope.currpage }"></c:set>
 	<c:set var="startblock" value="${requestScope.startblock }"></c:set>
 	<c:set var="endblock" value="${requestScope.endblock }"></c:set>
@@ -1043,6 +1051,17 @@
                 <div class = "top_t top_board top_hit"><p>조회수</p></div>
                 <div class = "top_t top_board top_up"><p>추천수</p></div>
             </div>
+        <c:forEach var="uplist" items="${uplist }">
+        <div class = "top_board_wrapup">
+                <div class = "top_s top_board top_no"><p><c:out value="[추천]"></c:out></p></div>
+                <div class = "top_s top_board top_title">
+                <p><a href = "topdetail.do?no=${uplist.bno }"><c:out value="${uplist.bcategory }"> </c:out><c:out value="${uplist.btitle }"></c:out></a></p></div>
+                <div class = "top_s top_board top_nick"><p><c:out value="${uplist.nick }"></c:out></p></div>
+                <div class = "top_s top_board top_date"><p><c:out value="${uplist.bwritedate }"></c:out></p></div>
+                <div class = "top_s top_board top_hit"><p><c:out value="${uplist.bhit }"></c:out></p></div>
+                <div class = "top_s top_board top_up"><p><c:out value="${uplist.bup }"></c:out></p></div>
+            </div>
+        </c:forEach>
         <c:forEach var="list" items="${list }">
         <div class = "top_board_wrap1">
                 <div class = "top_s top_board top_no"><p><c:out value="${list.bno }"></c:out></p></div>
@@ -1055,6 +1074,7 @@
             </div>
         </c:forEach>
 		</section>
+		
 		<div class = "top_board_paging">
 			<div class = "top_board_paging_no">
 				<c:if test="${startblock>1 }">

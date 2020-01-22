@@ -13,6 +13,7 @@ import org.apache.tomcat.dbcp.dbcp2.SQLExceptionList;
 
 import com.mw.dto.MWBoardDTO;
 import com.mw.dto.MWRepBoardDTO;
+import com.mw.dto.MWUpBoardDTO;
 
 import oracle.jdbc.driver.DBConversion;
 
@@ -31,7 +32,7 @@ public class MWBoardService {
 		return service;
 	}
 
-	public List<MWBoardDTO> mwList(String search, String searchtxt, int startrow, int endrow) {
+	public List<MWBoardDTO> mwList(String search, String searchtxt, int startrow, int pagepercount) {
 		DBConn db = DBConn.getDB();
 		Connection conn = null;
 		
@@ -41,7 +42,7 @@ public class MWBoardService {
 			conn.setAutoCommit(false);
 			MWBoardDAO dao = MWBoardDAO.getDAO();
 			
-			list = dao.mwBoardSelect(conn, search, searchtxt, startrow, endrow);
+			list = dao.mwBoardSelect(conn, search, searchtxt, startrow, pagepercount);
 						
 			conn.commit();
 		}
@@ -55,6 +56,32 @@ public class MWBoardService {
 		}
 		
 		return list;
+	}
+	
+	public List<MWUpBoardDTO> upMwList() {
+		DBConn db = DBConn.getDB();
+		Connection conn = null;
+		
+		List<MWUpBoardDTO> uplist = new ArrayList<>();
+		try {
+			conn = db.getConn();
+			conn.setAutoCommit(false);
+			MWBoardDAO dao = MWBoardDAO.getDAO();
+			
+			uplist = dao.mwBoardUpSelect(conn);
+						
+			conn.commit();
+		}
+		catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try {conn.rollback();} catch(Exception e2) {}
+		}
+		finally {
+			if(conn!=null) try{conn.close();} catch(Exception e) {}
+
+		}
+		
+		return uplist;
 	}
 
 	public void mwInsert(MWBoardDTO dto) {
@@ -180,13 +207,18 @@ public class MWBoardService {
 			conn.setAutoCommit(false);
 			MWBoardDAO dao = MWBoardDAO.getDAO();
 			count = dao.mwCount(conn, search, searchtxt);
-			
+			System.out.println("COUNT!!!: "+count);
 			conn.commit();
 		}
 		catch(NamingException | SQLException e) {
 			System.out.println(e);
 			try {conn.rollback();} catch(SQLException e2) {};
 		}
+		finally {
+			if(conn!=null) try{conn.close();} catch(Exception e) {}
+
+		}
+		
 		return count;
 	}
 
@@ -256,6 +288,8 @@ public class MWBoardService {
 		}
 		
 	}
+
+	
 
 	
 

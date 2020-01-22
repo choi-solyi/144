@@ -6,12 +6,22 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<style>
+
+.jumbotron {
+margin-bottom: 20px;
+background-image: url("calBoard/calupload/calboard.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+color: white;
+}
+</style>
 </head>
 <body>
 	<div class="container mt-5">
 
-		<div class="jumbotron">
-			<h2>대회 일정</h2>
+		<div class="jumbotron text-center">
+		 <h1 class="display-4">대회 일정</h1>
 		</div>
 		<form method="post" action="EBupdateresult.do">
 
@@ -37,10 +47,7 @@
 						class="form-control" value="${dto.bcaldate}">
 				</div>
 			</div>
-			<!-- 			
-			<li><label for="bimg">파일첨부</label>
-				<input type="file" name="bimg" id="bimg"></li>
--->
+
 			<div class="form-group">
 				<label for="bcontent" class="col-sm-2 control-label">내용</label>
 				<div class="col-sm-12">

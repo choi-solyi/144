@@ -27,11 +27,19 @@
 
 </style>
 
+<script>
 	
+	if(${re>0}){
+		alert('작성완료. 10cp가 적립되었습니다.');
+	}
+	
+
+</script>
 	
 
 </head>
 <body>
+	
 	<c:set var="list" value="${requestScope.list }" />
 	<c:set var="currpage" value="${requestScope.currpage}"></c:set>
 	<c:set var="startblock" value="${requestScope.startblock}"></c:set>
@@ -40,6 +48,10 @@
 	<c:set var="search" value="${requestScope.search}"></c:set>
 	<c:set var="txtsearch" value="${requestScope.txtsearch}"></c:set>
 	<c:set var="rcount" value="${requestScope.rcount }"/>
+	<c:set var="re" value="${requestScope.re }"/>
+	
+	
+	
 	
 	
 	
