@@ -37,7 +37,10 @@ text-shadow: white 2px 2px 2	px;
 		<img src="">
 		 <h1 class="display-4">대회 일정</h1>
 		</div>
-		
+		<div class="m-20">
+		 <jsp:include page="CalTest.jsp"/>
+		</div>
+				
 		<!-- 보더 -->
 		<div class="row border bg-light py-2 px-lg-4 font-weight-bold m-0">
 			<div class="col-md-2">번호</div>
@@ -46,7 +49,6 @@ text-shadow: white 2px 2px 2	px;
 			<div class="col-md-2">조회수</div>
 			<div class="col-md-2">추천</div>
 		</div>
-
 		<c:forEach items="${requestScope.list}" var="index">
 			<div
 				class="row border-bottom py-1 px-lg-4 list-group-item-action m-0">
