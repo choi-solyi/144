@@ -6,6 +6,11 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<link rel="stylesheet" 
+href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
+integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+crossorigin="anonymous">
+
 </head>
 <!-- 댓글 script -->
 <script>
@@ -63,11 +68,11 @@
 		</div>
 		<!-- 날짜, 조회수, 추천 -->
 		<div class="row border-bottom py-2 px-lg-3 m-0">
-			<div class="col-md-2">날짜</div>
+			<div class="col-md-2"><i class="far fa-calendar-alt"></i></div>
 			<div class="col-md-2">${dto.bcaldate}</div>
-			<div class="col-md-2">조회수</div>
+			<div class="col-md-2"><i class="fas fa-eye"></i></div>
 			<div class="col-md-2">${dto.bhit}</div>
-			<div class="col-md-2">추천</div>
+			<div class="col-md-2"><i class="far fa-thumbs-up"></i></div>
 			<div class="col-md-2">${dto.bup}</div>
 		</div>
 
@@ -77,7 +82,6 @@
 				<img alt="이미지" src="calBoard/calupload/${dto.bimg}">
 			</c:if>
 			<div class="text-left">${dto.bcontent}</div>
-			<div>${dto.id }</div>
 		</div>
 
 		<!-- 목록으로, 수정, 삭제 -->
@@ -87,7 +91,7 @@
 				href="EBdelete.do?bno=${dto.bno}" class="btn btn-primary p-2">삭제</a>
 		</div>
 
-		${dto.bno}
+		
 		<!-- 댓글 -->
 		<c:if test="${sessionScope.id ne null}">
 			<form method="post" action="EBaddrep.do" name="rep">
