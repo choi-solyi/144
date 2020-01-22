@@ -98,4 +98,38 @@ public class UserDAO {
 		}
 		return salt;
 	}
+	public UserDTO userinfo(Connection conn, String ssid) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select id, nick, name, line, tel, cp ");
+		sql.append(" from userinfo ");
+		sql.append(" where id = ? ");
+		ResultSet rs = null;
+		
+		UserDTO dto = new UserDTO();
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			pstmt.setString(1, ssid);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String ddd = rs.getString("id");
+				System.out.println(ddd);
+				
+				dto.setId(ddd);
+				dto.setName(rs.getString("name"));
+				dto.setNick(rs.getString("nick"));
+				dto.setLine(rs.getString("line"));
+				dto.setTel(rs.getString("tel"));
+				dto.setCp(rs.getInt("cp"));
+				
+
+				System.out.println("get mypage 3333");
+				System.out.println(ssid);
+				System.out.println("get mypage 4444");
+				
+			}
+		}finally {
+			if(rs!=null) try { rs.close(); } catch(SQLException e) {}
+		}
+		return dto;
+	}
 }

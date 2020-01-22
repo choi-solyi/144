@@ -29,6 +29,7 @@ public class JWBoardService {
 		try {
 			conn = DBC.getConn();
 			list = dao.List(conn, startrow, endrow, search, searchtxt);
+			list = dao.repcount(conn, list, startrow, endrow, search, searchtxt);
 		}catch(SQLException | NamingException e) {
 			System.out.println(e);
 		}finally {
@@ -53,6 +54,7 @@ public class JWBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
+	
 	public JWBoardDTO Detail(String bno) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDTO dto = new JWBoardDTO();
@@ -72,6 +74,7 @@ public class JWBoardService {
 		}
 		return dto;
 	}
+	
 	public void Delete(String bno) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
@@ -89,6 +92,7 @@ public class JWBoardService {
 			if(conn!=null) try{conn.close();} catch(SQLException e) {}
 		}
 	}
+	
 	public void Update(JWBoardDTO dto) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
@@ -106,6 +110,7 @@ public class JWBoardService {
 			if(conn!=null) try{conn.close();} catch(SQLException e) {}
 		}
 	}
+	
 	public int Totalcount(String search, String searchtxt) {
 		int Totalcount = 0;
 		DBConn DBC = DBConn.getDB();
@@ -122,6 +127,7 @@ public class JWBoardService {
 		}
 		return Totalcount;
 	}
+	
 	public void Uphit(String bno) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
@@ -155,6 +161,7 @@ public class JWBoardService {
 		}
 		return list;
 	}
+	
 	public void adAddRep(JWRepBoardDTO dto) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
@@ -171,6 +178,7 @@ public class JWBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
+	
 	public void adDelRep(String repno) {
 		DBConn DBC = DBConn.getDB();
 		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
@@ -179,6 +187,23 @@ public class JWBoardService {
 			conn=DBC.getConn();
 			conn.setAutoCommit(false);
 			dao.adDelRep(conn, repno);
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try{conn.rollback();} catch(SQLException rollback) {System.out.println(rollback);}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+	}
+	
+	public void adUpRep(String bno) {
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		try{
+			conn=DBC.getConn();
+			conn.setAutoCommit(false);
+			dao.adUpRep(conn, bno);
 			conn.commit();
 		}catch(SQLException | NamingException e) {
 			System.out.println(e);

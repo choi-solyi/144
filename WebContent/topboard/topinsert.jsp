@@ -21,7 +21,7 @@
             height: 20px;
         }
         .top_update_content{
-            margin: 20px 0px ;
+            margin: 0px 20px ;
         }
         .top_update_btn{
             width: 80px;
@@ -52,8 +52,7 @@
 		<option value = "[토론]">토론</option>
 		<option value = "[공지]">공지</option>
 	</select><br>
-	<label class = "top_update_label top_update_lable_nick" for = "id">작성자</label>
-	<input class = "top_update_input top_update_input_id" type = "text" name = "id" id = "id"
+	<input class = "top_update_input top_update_input_id" type = "hidden" name = "id" id = "id"
 	value = '<c:out value="${id }"></c:out>'  readonly ><br>
 	<textarea class = "top_update_content" rows="30" cols="100" name = "content" id = "content" required="required"></textarea><br>
 	<input class = "top_update_btn" type = "submit" value = "전송">

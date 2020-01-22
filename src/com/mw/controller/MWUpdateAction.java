@@ -17,6 +17,9 @@ public class MWUpdateAction implements Action {
 	public ForwardAction execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int no = Integer.parseInt(request.getParameter("no"));
+		
+		System.out.println(no);
+		
 		MWBoardService service = MWBoardService.getService();
 		MWBoardDTO dto = service.mwDetail(no);
 		request.setAttribute("dto", dto);

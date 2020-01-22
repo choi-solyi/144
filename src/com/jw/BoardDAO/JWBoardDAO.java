@@ -30,8 +30,8 @@ public class JWBoardDAO {
 				sql.append(" where btitle like ? ");
 			else if(search.equals("bcontent"))
 				sql.append(" where bcontent like ? ");
-			else if(search.equals("id"))
-				sql.append(" where id like ? ");
+			else if(search.equals("nick"))
+				sql.append(" where nick like ? ");
 		}
 		sql.append(" order by bno desc        ");
 		sql.append(" limit ?, ?               ");
@@ -127,7 +127,7 @@ public class JWBoardDAO {
 
 	public void Update(Connection conn, JWBoardDTO dto) throws SQLException
 	{
-		System.out.println(dto);
+		System.out.println("Update : "+dto);
 		StringBuilder sql = new StringBuilder();
 		sql.append(" update adboard          ");
 		sql.append("   set btitle    = ?     ");
@@ -147,15 +147,16 @@ public class JWBoardDAO {
 		int Totalcount = 0;
 		StringBuilder sql = new StringBuilder();
 		ResultSet rs = null;
-		sql.append(" select count(*) from adboard     ");
+		sql.append(" select count(*) from adboard a    ");
+		sql.append(" join userinfo u on a.id = u.id    ");
 		if(!(search.equals(""))&&!(searchtxt.equals("")))
 		{
 			if(search.equals("btitle"))
 				sql.append(" where btitle like ? ");
 			else if(search.equals("bcontent"))
 				sql.append(" where bcontent like ? ");
-			else if(search.equals("id"))
-				sql.append(" where id like ? ");
+			else if(search.equals("nick"))
+				sql.append(" where nick like ? ");
 		}
 		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
 			if(!(search.equals(""))&&!(searchtxt.equals("")))
@@ -168,7 +169,7 @@ public class JWBoardDAO {
 				Totalcount = rs.getInt(1);
 			}
 		}
-		System.out.println(Totalcount);
+		System.out.println("Totalcount : "+Totalcount);
 		return Totalcount;
 	}
 	
@@ -203,7 +204,7 @@ public class JWBoardDAO {
 				dto.setRepno(rs.getInt("repno"));
 				dto.setRwritedate(rs.getString("rwritedate"));
 				list.add(dto);
-				System.out.println(dto);
+				System.out.println("listRep : "+dto);
 			}
 		}
 		return list;
@@ -228,5 +229,59 @@ public class JWBoardDAO {
 			pstmt.setString(1, repno);
 			pstmt.executeUpdate();
 		}
+	}
+	public void adUpRep(Connection conn, String bno) throws SQLException{
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update adboard set bup = bup+1     ");
+		sql.append("   where bno     =  ?               ");
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			pstmt.setString(1, bno);
+			pstmt.executeUpdate();
+		}
+	}
+	
+	public List<JWBoardDTO> repcount(Connection conn, List<JWBoardDTO> list, int startrow,
+			int endrow, String search, String searchtxt) {
+		StringBuilder sql = new StringBuilder();
+		ResultSet rs = null;
+		
+		sql.append(" select count(r.bno) from adrepboard r          ");
+		sql.append(" right join adboard b on r.bno = b.bno          ");
+		if(!(search.equals(""))&&!(searchtxt.equals("")))
+		{
+			if(search.equals("btitle"))
+				sql.append(" where btitle like ? ");
+			else if(search.equals("bcontent"))
+				sql.append(" where bcontent like ? ");
+			else if(search.equals("id"))
+				sql.append(" where id like ? ");
+		}
+		sql.append(" group by b.bno             ");
+		sql.append(" order by b.bno desc        ");
+		sql.append(" limit ?, ?               ");
+		try(PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+			if(!(search.equals(""))&&!(searchtxt.equals("")))
+			{
+				pstmt.setString(1, "%"+searchtxt+"%");
+				pstmt.setInt(2, startrow);
+				pstmt.setInt(3, endrow);
+			}else {
+			pstmt.setInt(1, startrow);
+			pstmt.setInt(2, endrow);
+			}
+			rs = pstmt.executeQuery();
+
+			for(JWBoardDTO index : list)
+			{
+				rs.next();
+				index.setRepcount(rs.getInt(1));
+			}
+		}catch(SQLException e) {
+			System.out.println(e);
+		}finally { 
+			if(rs!=null) try {rs.close();} catch(SQLException e) {}
+		}
+		System.out.println(list);
+		return list;
 	};
 }
