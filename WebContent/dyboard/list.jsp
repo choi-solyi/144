@@ -15,104 +15,112 @@
 }
 
 #dy_bgimg {
-	
 	width: 100%;
 	height: 40%;
 	background-image: url(dyboard/img/main01.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
 	text-align: center;
-    border: none;
-    margin: 0px;
-    padding: 0px;    
+	border: none;
+	margin: 0px;
+	padding: 0px;
 }
 
 #dy_bgimg p {
-    padding-top: 30px;
+	padding-top: 30px;
 	font-size: 40px;
-    margin: 0px;
-    color: white;
-    
-    
+	margin: 0px;
+	color: white;
 }
 
 #dy_bgimg div {
 	font-size: 250px;
-    color: white;
-    margin: 30px auto;
-    position: relative;
-    right: 25px;
+	color: white;
+	margin: 30px auto;
+	position: relative;
+	right: 25px;
 }
 
 #dy_champwords {
 	text-align: center;
 	font-size: 40px;
 	margin: 10px auto;
-    background-color: lightgrey;
-    color: white;
-    width: 80%;
-    
-    
-}
-#boardwrap{
-	border: 1px solid black;
-}
-#dy_boardheader {
-	
-	background-color : dodgerblue;
-	color : white;
-	width: 70%;
-	margin :0px auto;
-	text-align : center;
-}
-#dy_boardheader ul {
-	margin : 0px;
-	padding : 0px;
+	background-color: lightgrey;
+	color: white;
+	width: 80%;
 }
 
-#dy_boardheader ul li{
-	list-style : none;
+#boardwrap {
+	/* border: 1px solid black; */
+}
+
+#dy_boardheader {
+	background-color: dodgerblue;
+	color: white;
+	width: 70%;
+	margin: 0px auto;
+	text-align: center;
+}
+
+#dy_boardheader ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+#dy_boardheader ul li {
+	list-style: none;
 	display: inline-block;
 	margin: 0px 1%;
-	padding : 20px;
+	padding: 20px;
 }
-#dy_boardlist{
-	color:black;
-	width:70%;
-	margin : 0px auto;
-	text-align : center;
+
+#dy_boardlist {
+	color: black;
+	width: 70%;
+	margin: 0px auto;
+	text-align: center;
 }
+
 #dy_boardlist ul {
-	margin : 0px;
-	padding : 0px;
+	margin: 0px;
+	padding: 0px;
 }
+
 #dy_boardlist ul li {
-	list-style:none;
+	list-style: none;
 }
-#dy_boardlist ul li div{
-	background-color : whitesmoke;
-	list-style : none;
-	display : inline-block;
-	margin : 0px;
-	padding : 20px;
+
+#dy_boardlist ul li div {
+	background-color: whitesmoke;
+	list-style: none;
+	display: inline-block;
+	margin: 0px;
+	padding: 20px;
 	width: 15%;
 }
-#dy_eachlist{
-	
-	width:70%;
-	margin : 0px auto;
+
+#dy_eachlist {
+	width: 70%;
+	margin: 0px auto;
 }
 
-
-#dy_paging{
+#pagingwrap {
+	
+	width: 100px;
+	margin: 0px auto;
+}
+#searchwrap{
+	
+	width : 400px;
 	margin : 0px auto;
+	
 }
 </style>
 
 </head>
 <body>
-	<c:set var="list" value = "${requestScope.list }"/>
+	<c:set var="list" value="${requestScope.list }" />
 	<c:set var="currpage" value="${requestScope.currpage }" />
 	<c:set var="startblock" value="${requestScope.startblock }" />
 	<c:set var="endblock" value="${requestScope.endblock }" />
@@ -129,7 +137,7 @@
 		<p id="dy_champwords">"경외하라. 난 섬기는 이 없는 암살자다."</p>
 		<!-- 게시판  -->
 		<div id="boardwrap">
-		
+
 			<div id="dy_boardheader">
 				<ul>
 					<li class="dy_bno">번호</li>
@@ -139,66 +147,87 @@
 					<li class="dy_bwritedate">작성일</li>
 					<li class="dy_bhit">조회</li>
 				</ul>
-				</div>
+			</div>
 			<div id="dy_boardlist">
 				<ul>
 					<div id="eachlist">
 						<c:forEach var="list" items="${list }">
 							<li>
-								<div class="dy_bno"><c:out value="${list.bno }" /></div>
-								<div class="dy_bcategory"><c:out value="${list.bcategory }" /></div>
-								<div class="dy_btitle"><a href="dydetail.do?bno=${list.bno}"><c:out value="${list.btitle }" /></a></div>
-								<div class="dy_nick"><c:out value="${list.nick }" /></div>
-								<div class="dy_bwritedate"><c:out value="${list.bwritedate }" /></div>
-								<div class="dy_bhit"><c:out value="${list.bhit }" /></div>
-								<c:if test="${sessionScope.id == list.id }">
-									<a href="dydelete.do?bno=${list.bno }"><input type="button" id="dy_delbtn" value="삭제"></a>
+								<div class="dy_bno">
+									<c:out value="${list.bno }" />
+								</div>
+								<div class="dy_bcategory">
+									<c:out value="${list.bcategory }" />
+								</div>
+								<div class="dy_btitle">
+									<a href="dydetail.do?bno=${list.bno}"><c:out
+											value="${list.btitle }" /></a>
+								</div>
+								<div class="dy_nick">
+									<c:out value="${list.nick }" />
+								</div>
+								<div class="dy_bwritedate">
+									<c:out value="${list.bwritedate }" />
+								</div>
+								<div class="dy_bhit">
+									<c:out value="${list.bhit }" />
+								</div> <c:if test="${sessionScope.id == list.id }">
+									<a href="dydelete.do?bno=${list.bno }"><input type="button"
+										id="dy_delbtn" value="삭제"></a>
 								</c:if>
 							</li>
+							<br>
 						</c:forEach>
 					</div>
 				</ul>
 			</div>
-				<br> <br> <br>
-<!-- test -->
-				
-
-<!-- 페이징 -->
+			<br> <br> <br>
 			
-				<c:if test ="${startblock>1}">
-					<a href="dylist.do?curr=${startblock-1}" aria-label="Previous">이전</a>
-				</c:if>
+			<!-- test -->
+			
+			
 
-				<c:forEach var="i" begin="${startblock}" end="${endblock }" step="1">
-					<c:if test="${currpage==i }">
-						<c:out value="${i }" />
-					</c:if>
-					<c:if test="${currpage!=i }">
-						<a
-							href="dylist.do?curr=${i}&search=${search}&txtsearch=${txtsearch}">${i}</a>
-					</c:if>
-
-				</c:forEach>
+			<!-- 페이징 -->
+			
+			
+			<div id="pagingwrap">
+				<nav aria-label="Page navigation example">
+				<ul class="pagination">
 				
-				<c:if test = "${endblock < totalpage }">
-					<a href="dylist.do?curr=${endblock+1}" aria-label="next">다음</a>
+				<c:if test="${startblock>1}">
+					<li class="page-item"><a class="page-link" href="dylist.do?curr=${startblock-1}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+				</c:if>	
+				
+				<c:forEach var="i" begin="${startblock}" end="${endblock }" step="1">
+					<c:if test="${currpage==i }"><li class="page-item"><a class="page-link" href="#"><c:out value="${i }" /></a></li></c:if>
+					<c:if test="${currpage!=i }"><li class="page-item"><a class="page-link" href="dylist.do?curr=${i}&search=${search}&txtsearch=${txtsearch}">${i} </a></li></c:if>
+				</c:forEach>	
+					
+				<c:if test="${endblock < totalpage }">	
+					<li class="page-item"><a class="page-link" href="dylist.do?curr=${endblock+1}" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a></li>
 				</c:if>
+				</ul>
+			</nav>
+			</div>
 		
-<!-- 검색 -->
+		
+				<!-- 검색 -->
+			<div id="searchwrap">
 				<form action="dylist.do" method="post">
-					<select name="searh">
+					<select name="search">
 						<option value="btitle">제목</option>
 						<option value="bcontent">내용</option>
 						<option value="nick">작성자</option>
 					</select> 
-					<input type="text" name="txtsearch" id="searchbar"> <input type="submit" value="검색">
-
+					<input type="text" name="txtsearch" id="searchbar"> 
+					<input type="submit" value="검색">
+				<!-- 글쓰기 버튼 -->
+				<a href="dyinsert.do"><input type="button" name="write"
+					id="dy_write" value="글쓰기"></a>
 				</form>
-<!-- 글쓰기 버튼 -->
-					<a href="dyinsert.do"><input type="button" name="write" id="dy_write" value="글쓰기"></a>
-		
-		</div>
-
-	</div>
+			</div>
+			<!-- PAGINGWRAP -->
+		</div><!-- BOARDWRAP -->
+	</div><!--MIDBOARDWRAP  -->
 </body>
 </html>
