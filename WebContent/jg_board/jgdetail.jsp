@@ -394,7 +394,6 @@ function delrep(repno, bno){
 															+ ','
 															+ item.bno
 															+ '); class="btn btn-success btndel" value="삭제">';
-													rep += '<input type="submit" onclick=update();" class="btn btn-success btnupd" value="수정">';
 												}
 												rep += "</div><div class='card-body text-success'><h5 class='card-title' style='text-align:center;'>"
 														+ item.nick
@@ -414,7 +413,6 @@ function delrep(repno, bno){
 															+ ','
 															+ item.bno
 															+ '); class="btn btn-info btndel" value="삭제"> ';
-													rep += '<input type="submit" onclick=update();" class="btn btn-info btnupd" value="수정">';
 												}
 												rep += "</div><div class='card-body text-info'><h5 class='card-title'  style='text-align:center;'>"
 														+ item.nick
@@ -435,7 +433,6 @@ function delrep(repno, bno){
 															+ ','
 															+ item.bno
 															+ '); class="btn btn-dark btndel" value="삭제"> ';
-													rep += '<input type="submit" onclick=update();" class="btn btn-dark btnupd" value="수정">';
 												}
 												rep += "</div><div class='card-body text-dark'><h5 class='card-title'  style='text-align:center;'>"
 														+ item.nick

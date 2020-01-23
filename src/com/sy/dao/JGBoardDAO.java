@@ -483,12 +483,9 @@ public class JGBoardDAO {
 				System.out.println(rs.getInt("bno"));
 				System.out.println(rs.getString("btitle"));
 			}
-			System.out.println("--------------sdfafsadfsdfsdafasfdsf----------------");
 		}finally {
 			if( pstmt!=null ) try { pstmt.close(); } catch(SQLException e) {}
-
 		}
-		
 		return dto;
 	}
 }
