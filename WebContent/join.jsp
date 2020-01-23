@@ -7,13 +7,41 @@
 <title>Insert title here</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <!-- Bootstrap CSS -->
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-
+<script>
+/* $(document).ready(function() {
+	$('#id').keyup(function() {
+		//alert($('#id').val());
+		//let idck = $('#id').val();
+		/* $.ajax({
+			url : 'JWidck.do'
+			,data : {'id' : idck}
+			,method : 'post'
+			,success : function(data) {
+				alert('성공');
+				//$('#boardup').val('추천'+'+${dto.bup+1}')
+			}
+			,error : function(e) {
+				console.log(e);
+				alert('실패');
+			}
+		}); */
+		
+		
+		/* let replength = $('#rcontent').val().length;
+		$('#replength').empty();
+		$('#replength').append(replength+"/100"); */
+	});
+});
+ */
+</script>
 <style>
 #left {
 	background-image:
@@ -97,7 +125,7 @@
 				</div>
 				<div class="input-group row justify-content-center mt-0 mb-2">
 					<div class="col-5">
-						<input class="form-control" type="email" name="id"
+						<input class="form-control" type="email" name="id" id="id"
 							required="required" autofocus="autofocus">
 					</div>
 				</div>

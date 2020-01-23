@@ -15,7 +15,7 @@
 	function del(repno, bno){
 		//location.href=
 		$.ajax({
-			url : "JWdelrep.do?"
+			url : "JWdelrep.do"
 			,data : {'repno' : repno , 'bno' : bno}
 			,method : 'post'
 			,dataType : 'post'
@@ -152,6 +152,6 @@ img {
 					<a class="btn btn-secondary" href="JWdelete.do?bno=${dto.bno}">글삭제</a>
 				</c:if></li>
 		</ul>
-	</div>
+	</div>	
 </body>
 </html>

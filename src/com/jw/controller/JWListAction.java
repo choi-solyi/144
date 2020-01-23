@@ -57,6 +57,7 @@ public class JWListAction implements Action{
 		request.setAttribute("pagecount", pagecount);
 		request.setAttribute("search",search);
 		request.setAttribute("searchtxt",searchtxt);
+		request.setAttribute("currpage",currpage);
 		List<JWBoardDTO> list = service.List(startrow, pagesize, search, searchtxt);
 		request.setAttribute("list", list);
 		f.setForward(true);
