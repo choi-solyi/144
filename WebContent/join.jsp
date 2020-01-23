@@ -16,31 +16,6 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 <script>
-/* $(document).ready(function() {
-	$('#id').keyup(function() {
-		//alert($('#id').val());
-		//let idck = $('#id').val();
-		/* $.ajax({
-			url : 'JWidck.do'
-			,data : {'id' : idck}
-			,method : 'post'
-			,success : function(data) {
-				alert('성공');
-				//$('#boardup').val('추천'+'+${dto.bup+1}')
-			}
-			,error : function(e) {
-				console.log(e);
-				alert('실패');
-			}
-		}); */
-		
-		
-		/* let replength = $('#rcontent').val().length;
-		$('#replength').empty();
-		$('#replength').append(replength+"/100"); */
-	});
-});
- */
 </script>
 <style>
 #left {
