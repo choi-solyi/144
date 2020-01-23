@@ -11,7 +11,7 @@
 	background-image: url(dyboard/img/갈리오.jpg);
 	background-color: #ffffff;
     background-color: rgba( 255, 255, 255, 0.5 );
-    
+    margin : 0;
 }
 
 #dydetailwrap {
@@ -110,22 +110,34 @@
 	right : 225px;
  	font-weight : 900px;
 }
-#dy_replist span{
+/* #dy_replist span{
 	font-size : 20px;
 	position : relative; 
 	left : 50px;
+	bottom : 40px;
 	
+} */
+#rwritedate{
+	margin-left : 10px;
+}
+#rcontent{
+	font-size : 20px;
+	position : relative; 
+	left : 50px;
+	bottom : 40px;
 }
 #dy_replist a{
 	position : relative;
-	left : 520px;
-	bottom : 20px;
+	left : 540px;
+	bottom : 10px;
 }
 #dy_replist p{
 	margin : 0px; 
 	position : relative;
 	left : 20px;
+	font-size : 40px;
 }
+
 
 </style>
 </head>
@@ -197,13 +209,13 @@
 					
 					let result = "<div id='dy_replist'>" ;
 					result +="<p>" + item.nick + "</p>";
-					result +="("+item.rwritedate +")";
+					result +="<span id='rwritedate'>"+"("+item.rwritedate +")"+"</span>";
 					
-					result +="<span>" + item.rcontent +"</span>" ;
+					result +="<span id='rcontent'>" + item.rcontent +"</span>" ;
 					if(ssid == item.id){
-						result+= "<a href = " +"class="+"btn btn-danger"+"dyrepdelete.do?repno=" 
+						result+= "<a class='btn btn-danger' href = " +"class="+"btn btn-danger"+"dyrepdelete.do?repno=" 
 								+ item.repno +"&bno=" + item.bno;
-						result+= ">" +"삭제 </a>" + "</div>";
+						result+= ">" +"삭제 </a>"+ "</div>";
 					}
 				$('#dy_replistwrap').append(result);	
 				});
