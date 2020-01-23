@@ -212,4 +212,22 @@ public class JWBoardService {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}
 		}
 	}
+	public int JoinIdCk(String id) {
+		DBConn DBC = DBConn.getDB();
+		JWBoardDAO dao = JWBoardDAO.getBoardDAO();
+		Connection conn = null;
+		int ck=0;
+		try{
+			conn=DBC.getConn();
+			conn.setAutoCommit(false);
+			ck= dao.JoinIdCk(conn, id);
+			conn.commit();
+		}catch(SQLException | NamingException e) {
+			System.out.println(e);
+			try{conn.rollback();} catch(SQLException rollback) {System.out.println(rollback);}
+		}finally {
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}
+		}
+		return ck;
+	}
 }

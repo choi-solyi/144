@@ -283,5 +283,24 @@ public class JWBoardDAO {
 		}
 		System.out.println(list);
 		return list;
-	};
+	}
+	public int JoinIdCk(Connection conn, String id) throws SQLException{
+		int ck = 0;
+		StringBuilder sql = new StringBuilder();
+		ResultSet rs = null;
+		sql.append(" select count(*)                  ");
+		sql.append(" from userinfo                    ");
+		sql.append("   where id = ?                   ");
+
+		try (PreparedStatement pstmt = conn.prepareStatement(sql.toString())){
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				ck = rs.getInt(1);
+			}
+		}
+		System.out.println("ck : "+ck);
+		return ck;
+	}
 }
