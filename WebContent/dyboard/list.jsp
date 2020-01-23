@@ -100,6 +100,9 @@
 	padding: 20px;
 	width: 15%;
 }
+.dy_btitle{
+	
+}
 
 #dy_eachlist {
 	width: 70%;

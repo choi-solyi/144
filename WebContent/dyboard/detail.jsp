@@ -127,9 +127,9 @@
 	bottom : 40px;
 }
 #dy_replist a{
+	float : right;
 	position : relative;
-	left : 540px;
-	bottom : 10px;
+	bottom : 8px;
 }
 #dy_replist p{
 	margin : 0px; 
@@ -213,7 +213,7 @@
 					
 					result +="<span id='rcontent'>" + item.rcontent +"</span>" ;
 					if(ssid == item.id){
-						result+= "<a class='btn btn-danger' href = " +"class="+"btn btn-danger"+"dyrepdelete.do?repno=" 
+						result+= "<a class='btn btn-danger'"+" href = "+"dyrepdelete.do?repno=" 
 								+ item.repno +"&bno=" + item.bno;
 						result+= ">" +"ªË¡¶ </a>"+ "</div>";
 					}
