@@ -21,14 +21,14 @@ public class DYBoardDAO {
 	public List<DYBoardDTO> dylist(Connection conn, int startrow, int endrow, String search, String txtsearch) throws SQLException {
 		// TODO Auto-generated method stub
 		StringBuilder sql = new StringBuilder();
-		sql.append(" select         bno                                ");
-		sql.append("               ,btitle                             ");
-		sql.append("               ,bwritedate                         ");
-		sql.append("               ,bcategory                          ");
-		sql.append("               ,bhit                               ");
-		sql.append("               ,u.nick                             ");
-		sql.append("               ,m.id                               ");
-		sql.append(" from midboard as m join userinfo as u             ");
+		sql.append(" select         bno                                         ");
+		sql.append("               ,btitle                                      ");
+		sql.append("               ,date_format(now(),'%Y-%m-%d') as bwritedate ");
+		sql.append("               ,bcategory                                   ");
+		sql.append("               ,bhit                                        ");
+		sql.append("               ,u.nick                                      ");
+		sql.append("               ,m.id                                        ");
+		sql.append(" from midboard as m join userinfo as u                      ");
 		sql.append(" on m.id = u.id                    ");
 		
 		if(!search.equals("") && !(txtsearch.equals("")))

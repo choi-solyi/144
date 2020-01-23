@@ -7,11 +7,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <style>
+#entirewrap{
+	background-image: url(dyboard/img/갈리오.jpg);
+	background-color: #ffffff;
+    background-color: rgba( 255, 255, 255, 0.5 );
+    
+}
+
 #dydetailwrap {
-	border: 1px solid black;
 	width: 70%;
 	text-align: center;
-	margin: 50px auto;
+	margin: 0px auto;
 }
 #dydetailhead {
 	
@@ -46,15 +52,16 @@
 
 #dycontent {
 	border: 1px solid black;
-	width: 70%;
+	width: 100%;
 	height: 500px;
 	margin: 20px auto;
 	text-align: left;
 	padding: 30px;
+	background-color : white;
+	
 }
 
 #dy_repwritebox{
-	border : 1px solid black;
 	width : 70%; height : 200px;
 	margin : 10px auto;
 }
@@ -64,9 +71,11 @@
 #dy_replist{
     width: 70%; 
     margin: 10px auto;
-    border: 1px solid black;
     text-align:left;
+    background-color : white;
 }
+
+
 #updateboard{
 	float: left;
 	position : relative;
@@ -89,12 +98,40 @@
 	width: 80%;
 
 }
-
+#dy_repsubmit{
+	position : relative;
+	bottom : 20px;
+	left : 20px;
+}
+#repwriter{
+	color : white;
+	position : relative;
+	top : 10px;
+	right : 225px;
+ 	font-weight : 900px;
+}
+#dy_replist span{
+	font-size : 20px;
+	position : relative; 
+	left : 50px;
+	
+}
+#dy_replist a{
+	position : relative;
+	left : 520px;
+	bottom : 20px;
+}
+#dy_replist p{
+	margin : 0px; 
+	position : relative;
+	left : 20px;
+}
 
 </style>
 </head>
 <body>
 	<c:set var="dto" value="${requestScope.dto }"/>
+<div id="entirewrap">
 	<div id="dydetailwrap">
 		<div id="dydetailhead">
 			<div id="nick">
@@ -128,13 +165,13 @@
 	<div id="dy_repwrap">
 		<div id="dy_repwritebox">
 			<form method="post" action="dyaddrep.do">
-				<div id="repwriter" >작성자 : <c:out value="${sessionScope.id}"/></div>  
+				<div id="repwriter" >작성자 ID : <c:out value="${sessionScope.id}"/></div>  
 				<br>
 				<textarea  rows="5" cols="200" name="repcontent" id="reptextarea" placeholder="댓글을 입력하세요"></textarea>
 				
 				<input type="hidden" name="bno" value="${dto.bno }">
 				<input type="hidden" name="repwriter" value="${sessionScope.id }">
-				<input class="btn btn-primary" type="submit" value="등록">
+				<input id="dy_repsubmit" class="btn btn-primary" type="submit" value="등록">
 			</form>
 			<form>
 				<input type="hidden" name="bno" value="${dto.bno }">
@@ -159,15 +196,15 @@
 				$.each(data, function(index, item) {
 					
 					let result = "<div id='dy_replist'>" ;
-					result +=item.nick + "<br>" ;
-					result +=item.rwritedate;
+					result +="<p>" + item.nick + "</p>";
+					result +="("+item.rwritedate +")";
+					
+					result +="<span>" + item.rcontent +"</span>" ;
 					if(ssid == item.id){
 						result+= "<a href = " +"class="+"btn btn-danger"+"dyrepdelete.do?repno=" 
 								+ item.repno +"&bno=" + item.bno;
-						result+= ">" +"삭제 </a>";
+						result+= ">" +"삭제 </a>" + "</div>";
 					}
-					result += "<br>" + item.rcontent + "</div>";
-					
 				$('#dy_replistwrap').append(result);	
 				});
 			}
@@ -181,9 +218,8 @@
 	<div id="dy_replistwrap">
 	 
 	 </div>
-	
-	
+	<br><br><br>
 	</div> <!-- detailwrap -->
-
+</div>
 </body>
 </html>

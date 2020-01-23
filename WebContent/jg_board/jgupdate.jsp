@@ -151,11 +151,11 @@
 		JGBoardService service = JGBoardService.getService();
 		JGBoardDTO dto = service.detail(bno);
 	%>
-	
+	<c:set var="dto" value="${requestScope.dto }"/>
 	<form action="jgupdateresult.do" method="post" class="formsize">
 		<div class="form-group">
 			<label for="nick">작성자</label> 
-			<input type="text" class="form-control"	name="nick" id="nick" value="abc" 	readonly="readonly">
+			<input type="text" class="form-control"	name="nick" id="nick" value="${dto.nick }" 	readonly="readonly">
 			<input type="hidden" name="bno" id="bno" value="<%=bno %>">
 		</div>
 

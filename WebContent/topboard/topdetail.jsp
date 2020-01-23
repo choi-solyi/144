@@ -10,6 +10,16 @@
 <script src=https://code.jquery.com/jquery-3.4.1.min.js></script>
 
 <style>
+
+		#top_wrap{
+		   		background-image: url("topboard/img/top_bg.jpg");
+		   	
+		   		background-size: cover;
+		   }
+		   .top_opacity{
+		   		padding: 40px;
+		   		background-color: rgba(255,255,255,0.4);
+		   }
         .top_content_header{
             margin: 40px auto;
             width: 1200px;
@@ -49,7 +59,8 @@
             width : 100px;
         }
         .top_bcontent{
-            margin-left: 40px;
+            padding: 0px 0px 40px 40px;
+            background-color: white;
         }
         .top_content_category{
         	float:right;
@@ -147,7 +158,10 @@
         
         #top_content_rep{
             width: 1200px;
-            margin: 40px auto;
+            margin: 0px auto;
+            padding : 40px 0px;
+            background-color: white;
+            
 
         }
         .top_content_rep_title{
@@ -176,6 +190,7 @@
         .top_rep_form{
             width: 1200px;
             margin: 0px auto;
+            background-color: white;
         }
         
         /* .top_rep_nick{
@@ -184,11 +199,12 @@
         } */
         
         .top_rep_content{
-            margin: -30px 0px 30px 0px;
+        	display : inline-block;
+            margin: -20px 0px 0px 40px;
         }
         
         .top_content_rep_id, .top_content_rep_rcontent{
-			display : none;
+			
 		}
 		
 
@@ -255,6 +271,8 @@
 <c:set var = "dto" value = "${requestScope.dto }"></c:set>
 <c:set var = "session" value="${sessionScope.id }" />
 <div id = "top_content_wrap">
+<div id = "top_wrap">
+	<div class = "top_opacity">
 
 	<header class = "top_content_header">
             
@@ -270,9 +288,8 @@
                 <div class = "tcontent top_content_category"><c:out value = "${dto.bcategory }"></c:out></div>
                 <div class = "tcontent top_content_title"><c:out value = "${dto.btitle }"></c:out></div><br>
                 <div class = "tcontent top_content_content"><c:out value = "${dto.bcontent }"></c:out></div><br>
-                
+                <a class = "top_link_up" href = "topup.do?no=${dto.bno }">추천</a><br>
                 <c:if test="${session == dto.id }">
-					<a class = "top_link_up" href = "topup.do?no=${dto.bno }">추천</a><br>
 					<a class = "top_link_update" href = "topupdate.do?no=${dto.bno }">수정</a>
                 	<a class = "top_link_del" href = "topdelete.do?no=${dto.bno }">삭제</a>
 				</c:if>
@@ -281,22 +298,26 @@
 				
             </div>
         </section>
-
-		
-</div>
-	<section id = "top_content_rep">
+        
+        <div id = "top_content_rep">
 		<div class = "top_content_rep_title">
-             	댓글
+             	댓글은 작성자에게 큰 힘이 됩니다. 빠샤!
         </div>
-		
-	</section>
+    </div>
+	
 	
 	<form class = "top_rep_form" method = "post" action = "mwrep.do" name = "frm">
         	<input type = "hidden" name = "no" value = "${dto.bno}">
         	<input type = "hidden" class = "top_rep_nick" type = "text" name = "nick" name = "nick" value = "${session }"><br>
-	        <textarea class = "top_rep_content" rows="7" cols="168" name = "content"></textarea><br>
+	        <textarea class = "top_rep_content" rows="7" cols="145" name = "content"></textarea>
 	        <input class = "top_rep_btn" type = "button" onclick = "send()" value = "추가">
     </form>
+
+		
+</div>
+</div>
+</div>
+	
 
 
 <script>
@@ -323,13 +344,13 @@
 				
 				$.each(data,function(index,item){
 					let result="<div class = 'top_content_rep_content'>"
-					result+= "<div class = 'top_content_rep_id'>"+item.nick+"</div>";
+					result+= "<div class = 'top_content_rep_id'>"+item.nick+" "+"("+item.rwritedate+")"+"</div>";
 					result+= "<div class = 'top_content_rep_rcontent'>"+item.rcontent;
-					console.log(item.repno);
+					//if(session==item.id){
 					result+= "<input class = 'top_content_rep_del' type='button' value='삭제' onclick=del("+item.repno+","+item.bno+")>";
+					//}
 					result+= "</div></div>";
-					
-					$('top_content_rep').append(result);
+					$('#top_content_rep').append(result);
 				});
 				
 			}

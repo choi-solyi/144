@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
 import com.mw.dto.MWBoardDTO;
+import com.mw.dto.MWUpBoardDTO;
 import com.mw.service.MWBoardService;
 
 public class MWListAction implements Action {
@@ -28,8 +29,8 @@ public class MWListAction implements Action {
 		String search = request.getParameter("search");
 		String searchtxt = request.getParameter("searchtxt");
 		
-		System.out.println(search);
-		System.out.println(searchtxt);
+		System.out.println("AAA"+search);
+		System.out.println("AAA"+searchtxt);
 		
 		if(search == null) {
 			search = "";
@@ -41,14 +42,10 @@ public class MWListAction implements Action {
 		MWBoardService service = MWBoardService.getService();
 		
 		int totalcount = service.getCount(search, searchtxt);
-		int pagepercount = 5;
+		int pagepercount = 10;
 		int totalpage = (int)Math.ceil((float)totalcount/pagepercount);
 		int startrow = (currpage-1)*pagepercount;
-		int endrow = startrow+pagepercount;
-		if(endrow>totalcount) {
-			endrow=totalcount;
-		}
-		
+				
 		int blockcount = 5;
 		int startblock = (currpage-1)/blockcount*blockcount+1;
 		int endblock = startblock+blockcount-1;
@@ -56,14 +53,21 @@ public class MWListAction implements Action {
 			endblock=totalpage;
 		}
 		
-		List<MWBoardDTO> list = service.mwList(search, searchtxt, startrow, endrow);
+		
+				
+		
+		List<MWBoardDTO> list = service.mwList(search, searchtxt, startrow, pagepercount);		
+		List<MWUpBoardDTO> uplist = service.upMwList();
+		
+				
 		request.setAttribute("list", list);
+		request.setAttribute("uplist", uplist);
 		request.setAttribute("currpage", currpage);
 		request.setAttribute("startblock", startblock);
 		request.setAttribute("endblock", endblock);
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("search", search);
-		request.setAttribute("txtsearch", searchtxt);
+		request.setAttribute("searchtxt", searchtxt);
 		ForwardAction f = new ForwardAction();
 		f.setForward(true);
 		f.setUrl("/main.jsp?page=topboard/toplist.jsp");

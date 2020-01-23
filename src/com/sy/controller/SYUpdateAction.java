@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lol.comm.Action;
 import com.lol.comm.ForwardAction;
+import com.sy.dto.JGBoardDTO;
+import com.sy.service.JGBoardService;
 
 public class SYUpdateAction implements Action {
 
@@ -21,6 +23,14 @@ public class SYUpdateAction implements Action {
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		request.setAttribute("bno", bno);
 		
+		JGBoardService service = JGBoardService.getService();
+		
+		JGBoardDTO dto = new JGBoardDTO();
+		
+		dto = service.detail(bno);
+		
+		
+		request.setAttribute("dto", dto);
 		ForwardAction f = new ForwardAction();
 		
 		f.setForward(true);

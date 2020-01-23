@@ -319,7 +319,7 @@ function delrep(repno, bno){
 		<form method="post" action="jgaddrep.do" name="frm"
 			class="was-validated">
 			<div class="form-group">
-				<label for="disabledTextInput">닉네임</label> <input type="text"
+				<label for="disabledTextInput">아이디</label> <input type="text"
 					id="id" class="form-control" name="id" placeholder="자동 입력"
 					value="${sessionScope.id}" readonly="readonly">
 			</div>
