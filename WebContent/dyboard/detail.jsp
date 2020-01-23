@@ -17,7 +17,7 @@
 #dydetailwrap {
 	width: 70%;
 	text-align: center;
-	margin: 50px auto;
+	margin: 0px auto;
 }
 #dydetailhead {
 	
@@ -218,7 +218,7 @@
 	<div id="dy_replistwrap">
 	 
 	 </div>
-	
+	<br><br><br>
 	</div> <!-- detailwrap -->
 </div>
 </body>

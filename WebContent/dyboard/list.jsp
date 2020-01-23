@@ -71,7 +71,7 @@
 #dy_boardheader ul li {
 	list-style: none;
 	display: inline-block;
-	margin: 0px 1%;
+	margin: 0px 45px;
 	padding: 20px;
 }
 
@@ -89,6 +89,7 @@
 
 #dy_boardlist ul li {
 	list-style: none;
+	margin : 0px;
 }
 
 #dy_boardlist ul li div {
@@ -116,6 +117,7 @@
 	margin : 0px auto;
 	
 }
+
 </style>
 
 </head>
